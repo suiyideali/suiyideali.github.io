@@ -4,13 +4,19 @@
   
   
   <entry>
-    <title>Mochazz</title>
-    <link href="/2023/04/19/Mochazz/"/>
-    <url>/2023/04/19/Mochazz/</url>
+    <title>开端</title>
+    <link href="/2023/04/20/%E5%BC%80%E7%AB%AF/"/>
+    <url>/2023/04/20/%E5%BC%80%E7%AB%AF/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="Hello-blog"><a href="#Hello-blog" class="headerlink" title="Hello blog"></a>Hello blog</h1><p>很早之前就想搭建一个博客，写一点东西，后续博客更新内容如下：</p><ul><li>网络安全</li><li>渗透测试</li><li>甲方安全</li><li>代码</li><li>杂谈</li><li>日常生活</li></ul><p>后续随缘更新…..</p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>杂谈</tag>
+      
+    </tags>
     
   </entry>
   
