@@ -1,0 +1,776 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mochazz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一 、Go 语言的字符类型字符类型在工作中也会非常频繁地用到，是一个非常重要的数据类型。这里主要介绍 Go 语言中处理字符和字符串的数据类型 1.1 字符和字符串类型   序号 类型 说明    1 byte uint8 类型的别名，同等于 uint8。一般用于表示 ASCII 字符，即只能操作简单的字符，不支持中文操作。   2 rune int32 类型的别名，同等于 int32。一般用于表示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言基础学习(一)">
+<meta property="og:url" content="https://suiyideali.github.io/2023/04/21/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/index.html">
+<meta property="og:site_name" content="Mochazz&#39;blog">
+<meta property="og:description" content="一 、Go 语言的字符类型字符类型在工作中也会非常频繁地用到，是一个非常重要的数据类型。这里主要介绍 Go 语言中处理字符和字符串的数据类型 1.1 字符和字符串类型   序号 类型 说明    1 byte uint8 类型的别名，同等于 uint8。一般用于表示 ASCII 字符，即只能操作简单的字符，不支持中文操作。   2 rune int32 类型的别名，同等于 int32。一般用于表示">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://suiyideali.github.io/img/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/image-20230421171217768.png">
+<meta property="article:published_time" content="2023-04-21T08:59:43.000Z">
+<meta property="article:modified_time" content="2023-04-23T08:20:19.273Z">
+<meta property="article:author" content="Mochazz">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://suiyideali.github.io/img/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/image-20230421171217768.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Go语言基础学习(一) - Mochazz&#39;blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mochazz&#39;blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Go语言基础学习(一)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mochazz
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-21 16:59" pubdate>
+          2023年4月21日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Go语言基础学习(一)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一-、Go-语言的字符类型"><a href="#一-、Go-语言的字符类型" class="headerlink" title="一 、Go 语言的字符类型"></a>一 、Go 语言的字符类型</h2><p>字符类型在工作中也会非常频繁地用到，是一个非常重要的数据类型。这里主要介绍 Go 语言中处理<strong>字符和字符串</strong>的数据类型</p>
+<h3 id="1-1-字符和字符串类型"><a href="#1-1-字符和字符串类型" class="headerlink" title="1.1 字符和字符串类型"></a>1.1 字符和字符串类型</h3><table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">byte</td>
+<td align="left"><strong>uint8</strong> 类型的别名，同等于 <strong>uint8</strong>。一般用于表示 <strong>ASCII</strong> 字符，即只能操作简单的字符，<strong>不支持中文操作</strong>。</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">rune</td>
+<td align="left"><strong>int32</strong> 类型的别名，同等于 <strong>int32</strong>。一般用于表示 <strong>Unicode</strong> 字符，即可以处理<strong>任何字符</strong>。</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">string</td>
+<td align="left">一个指向 byte 数组的指针，可以为<strong>空字符串</strong>不可为<strong>nil</strong>。</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-代码示例"><a href="#1-2-代码示例" class="headerlink" title="1.2 代码示例"></a>1.2 代码示例</h3><p>使用一段代码来更清晰地解释<code>byte</code>和<code>rune</code>的区别，以及了解这三个类型的关系。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">// 将字符串转化为rune的数组，并替换数组第i个元素为ch</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">str2Rune</span><span class="hljs-params">(str *<span class="hljs-type">string</span>, i <span class="hljs-type">int</span>, ch <span class="hljs-type">rune</span>)</span></span> &#123;<br>	temp := []<span class="hljs-type">rune</span>(*str)<br>	temp[i] = ch<br>	*str = <span class="hljs-type">string</span>(temp)<br>&#125;<br><br><span class="hljs-comment">// 将字符串转换为byte的数组，并替换数组第i个元素为ch</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">str2Byte</span><span class="hljs-params">(str *<span class="hljs-type">string</span>, i <span class="hljs-type">int</span>, ch <span class="hljs-type">byte</span>)</span></span> &#123;<br>	temp := []<span class="hljs-type">byte</span>(*str)<br>	temp[i] = ch<br>	*str = <span class="hljs-type">string</span>(temp)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	str := <span class="hljs-string">&quot;你好 Hello&quot;</span><br>	str1 := <span class="hljs-string">&quot;你好 Hello&quot;</span><br>	str2 := <span class="hljs-string">&quot;你好 Hello&quot;</span><br>	str2Rune(&amp;str, <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;A&#x27;</span>)  <span class="hljs-comment">//将第1个字符替换为A</span><br>	str2Byte(&amp;str1, <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;A&#x27;</span>) <span class="hljs-comment">//将第3个字符替换为A</span><br>	str2Byte(&amp;str2, <span class="hljs-number">7</span>, <span class="hljs-string">&#x27;A&#x27;</span>) <span class="hljs-comment">// 将第7个字符替换为A</span><br>	fmt.Println(<span class="hljs-string">&quot;rune 数组处理中文后: &quot;</span>, str)<br>	fmt.Println(<span class="hljs-string">&quot;byte 数组处理中文后: &quot;</span>, str1)<br>	fmt.Println(<span class="hljs-string">&quot;byte 数组处理中文后: &quot;</span>, str2)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<p><img src="/../img/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/image-20230421171217768.png" srcset="/img/loading.gif" lazyload alt="byte 和 rune 区别实例输出结果"></p>
+<hr>
+<p><strong>结论</strong></p>
+<ul>
+<li><code>string</code>可以直接转换为<code>rune</code>或者<code>byte</code>的<strong>数组；</strong></li>
+<li><code>rune</code>和<code>byte</code>可以互相转换；</li>
+<li><code>byte</code> 的操作单位是一个<strong>字节</strong>，可以理解为一个英文字符；</li>
+<li><code>rune</code> 的操作单位是一个<strong>字符</strong>，不管这个字符是什么字符。</li>
+</ul>
+<h2 id="二、-Go-语言的强制类型转换"><a href="#二、-Go-语言的强制类型转换" class="headerlink" title="二、 Go 语言的强制类型转换"></a>二、 Go 语言的强制类型转换</h2><p>Go 语言是一种强类型语言，而且没有<strong>隐式转换</strong>。也就是说运算符左右的<strong>变量类型必须一致</strong>，若不一致就会报错。为了使用户更加的容易使用，所以 Go 语言提供了各个类型之间强制类型转换的内置方法。</p>
+<h3 id="2-1-整型和浮点型互相转换"><a href="#2-1-整型和浮点型互相转换" class="headerlink" title="2.1 整型和浮点型互相转换"></a>2.1 整型和浮点型互相转换</h3><p><strong>整型</strong>和<strong>浮点型</strong>变量之间的相互转换相对容易，只需使用强制类型转换标志 <code>type(variable)</code>就好了。需要注意的是，当<strong>高精度</strong>向<strong>低精度</strong>类型转换的时候，会<strong>失真</strong>。即浮点型向整型转换的时候会失去其小数部分。需要<strong>避免这两个类型的互相转换</strong>。</p>
+<p>但是也有无法避免的场景，比如说计算浮点数和整数的和之类的情况中。就要秉持<strong>不失真原则</strong>，将低精度向高精度转换之后进行计算。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-type">int</span> = <span class="hljs-number">10</span>       <span class="hljs-comment">// 声明一个整型变量a 并给 a 赋值为10</span><br>	<span class="hljs-keyword">var</span> b <span class="hljs-type">float32</span> = <span class="hljs-number">3.14</span> <span class="hljs-comment">// 声明一个浮点型变量b 并给 b 赋值为3.14</span><br><br>	fmt.Println(<span class="hljs-string">&quot;整型转换为浮点型: %f\n&quot;</span>, <span class="hljs-type">float32</span>(a)) <span class="hljs-comment">// 将变量 a 强制转换为浮点型变量并打印</span><br>	fmt.Println(<span class="hljs-string">&quot;浮点型转换为整型: %d\n&quot;</span>, <span class="hljs-type">int</span>(b))     <span class="hljs-comment">// 浮点型转为整型会失真</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>最终输出结果为</p>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cos">整型转换为浮点型: <span class="hljs-built_in">%f</span><br> <span class="hljs-number">10</span><br>浮点型转换为整型: <span class="hljs-built_in">%d</span><br> <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<p>可以发现浮点型转为整型时候，3.14 失真了，结果为 3。</p>
+<h3 id="2-2-整形和字符串互相转换"><a href="#2-2-整形和字符串互相转换" class="headerlink" title="2.2 整形和字符串互相转换"></a>2.2 整形和字符串互相转换</h3><p>整型和字符串类型的变量互相转换，需要依靠 Go 语言提供的转换包<code>strconv</code>。字符串转整型需要使用这个包的<code>Atoi(string)</code>方法，整型转字符串则是<code>Itoa(int)</code>。这种转换用得最多的就是给一些对象进行<strong>编号</strong>。比如需要给张三编号为NO.1，你可能需要将1转换为字符串之后与NO.进行拼接。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;strconv&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-type">int</span> = <span class="hljs-number">10</span>      <span class="hljs-comment">// 定义一个整型变量并赋值为 10</span><br>	<span class="hljs-keyword">var</span> b <span class="hljs-type">string</span> = <span class="hljs-string">&quot;10&quot;</span> <span class="hljs-comment">// 定义一个字符串类型变量赋值为 &quot;10&quot;</span><br><br>	fmt.Printf(<span class="hljs-string">&quot;整型转换为字符串：%s\n&quot;</span>, strconv.Itoa(a))<br>	tmp, _ := strconv.Atoi(b)<br>	fmt.Printf(<span class="hljs-string">&quot;字符串转换为整型: %d\n&quot;</span>, tmp)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile">整型转换为字符串：10<br><span class="hljs-section">字符串转换为整型: 10</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-3-浮点型和字符串互相转换"><a href="#2-3-浮点型和字符串互相转换" class="headerlink" title="2.3 浮点型和字符串互相转换"></a>2.3 浮点型和字符串互相转换</h3><p>浮点型和字符串的互相转换没有直接封装好的转换接口了，需要调用<code>strconvs</code>包中稍微底层一点的接口。浮点型转字符串使用<code>FormatFloat(float64,byte,int,int)</code>方法，字符串转换为浮点型则使用<code>ParseFloat(...)</code>方法。因为浮点数在存储过程中容易因为<strong>精度问题而存在误差</strong>，所以有时候会将<strong>浮点数转换为字符串</strong>进行存储。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;strconv&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	f1 := <span class="hljs-number">0.123456789</span><br>	s1 := strconv.FormatFloat(f1, <span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">32</span>)<br>	s2 := strconv.FormatFloat(f1, <span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">64</span>)<br>	s3 := <span class="hljs-string">&quot;0.123456789&quot;</span><br>	f2, _ := strconv.ParseFloat(s3, <span class="hljs-number">64</span>)<br>	f3, _ := strconv.ParseFloat(s3, <span class="hljs-number">32</span>)<br>	fmt.Println(<span class="hljs-string">&quot;将浮点数转换为float32转换为string: &quot;</span>, s2)<br>	fmt.Println(<span class="hljs-string">&quot;将float64转换为string: &quot;</span>, s1)<br>	fmt.Println(<span class="hljs-string">&quot;将string转换为float64: &quot;</span>, f2)<br>	fmt.Println(<span class="hljs-string">&quot;将string转换为float32再强制转换为float54: &quot;</span>, f3)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">将浮点数转换为<span class="hljs-built_in">float</span>32转换为<span class="hljs-built_in">string</span>:  <span class="hljs-number">0.123456789</span><br>将<span class="hljs-built_in">float</span>64转换为<span class="hljs-built_in">string</span>:  <span class="hljs-number">0.12345679</span><br>将<span class="hljs-built_in">string</span>转换为<span class="hljs-built_in">float</span>64:  <span class="hljs-number">0.123456789</span><br>将<span class="hljs-built_in">string</span>转换为<span class="hljs-built_in">float</span>32再强制转换为<span class="hljs-built_in">float</span>54:  <span class="hljs-number">0.12345679104328156</span><br></code></pre></td></tr></table></figure>
+
+<p>Go 语言中各个数据类型的互相强制转换。主要都是依赖与 <code>strconvs</code> 这个第三方包。这个包中还提供了其它很多的转换方法，在做类型转换的时候要注意：<strong>浮点型在转为整型时会失真。</strong></p>
+<h2 id="三、-Go语言的常量"><a href="#三、-Go语言的常量" class="headerlink" title="三、 Go语言的常量"></a>三、 Go语言的常量</h2><p>常量可以理解为是一个存储了不可以改变的值的变量。常量主要用于<strong>特殊值的语义化</strong>，使这些值在更容易维护的情况下不会被程序所修改。Go 语言中声明常量使用的关键字是<code>const</code>。常量的使用非常广泛，比如说圆周率，再比如说一些明确的错误信息等一些容易被<strong>多次使用的值</strong>，一般都会使用常量进行实例化，使其在需要更改时，更容易维护，同时增加代码可读性。</p>
+<h3 id="3-1-常量定义"><a href="#3-1-常量定义" class="headerlink" title="3.1 常量定义"></a>3.1 常量定义</h3><p>常量定义的形式为 <code>const 常量名 常量类型 = 常量值</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-keyword">const</span> c1 <span class="hljs-type">string</span> = <span class="hljs-string">&quot;2023年4月23日&quot;</span><br><span class="hljs-keyword">const</span> c2 = <span class="hljs-string">&quot;2023年4月23日&quot;</span> <span class="hljs-comment">// 和变量一样，常量也可以部使用数据类型直接赋值，其类型和值一致</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	fmt.Println(c1)<br>	fmt.Println(c2)<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-多常量定义"><a href="#3-2-多常量定义" class="headerlink" title="3.2 多常量定义"></a>3.2 多常量定义</h3><h4 id="3-2-1-普通模式"><a href="#3-2-1-普通模式" class="headerlink" title="3.2.1 普通模式"></a>3.2.1 普通模式</h4><p>和 Go 语言的变量一样，常量也可以进行<strong>多常量定义</strong>。定义形式为<code>const 常量名,常量名= 常量值,常量值</code>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main  <br><br><span class="hljs-keyword">import</span> (  <br> <span class="hljs-string">&quot;fmt&quot;</span>  <br>)  <br><br><span class="hljs-keyword">const</span> c1, c2 = <span class="hljs-string">&quot;2020年3月8日&quot;</span>, <span class="hljs-string">&quot;2020年3月9日&quot;</span>  <br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br> fmt.Println(c1)  <br> fmt.Println(c2)  <br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">2023</span>年<span class="hljs-number">4</span>月<span class="hljs-number">23</span>日<br><span class="hljs-attribute">2023</span>年<span class="hljs-number">4</span>月<span class="hljs-number">23</span>日<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-2-2-特殊方式"><a href="#3-2-2-特殊方式" class="headerlink" title="3.2.2 特殊方式"></a>3.2.2 特殊方式</h4><p>在常量的使用中，Go 语言还提供了一种特殊的多常量定义方式——<code>const()</code>。这种定义方式也是比较推荐的常量使用方式。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-keyword">const</span> (<br>	c1 = <span class="hljs-string">&quot;2020年3月8日&quot;</span><br>	c2 = <span class="hljs-string">&quot;2020年3月9日&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	fmt.Println(c1)<br>	fmt.Println(c2)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">2020</span>年<span class="hljs-number">3</span>月<span class="hljs-number">8</span>日<br><span class="hljs-attribute">2020</span>年<span class="hljs-number">3</span>月<span class="hljs-number">9</span>日<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="category-chain-item">Go语言</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Go/">#Go</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Go语言基础学习(一)</div>
+      <div>https://suiyideali.github.io/2023/04/21/Go语言基础学习(一)/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mochazz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月21日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年4月23日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/" title="让Chatgpt帮我写代码(一)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">让Chatgpt帮我写代码(一)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/" title="chatgpt及其大语言模型(LLM)应用">
+                        <span class="hidden-mobile">chatgpt及其大语言模型(LLM)应用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
