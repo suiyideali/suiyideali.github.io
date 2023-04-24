@@ -16,15 +16,15 @@
   <meta name="author" content="Mochazz">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、 Go 语言中代替枚举的办法">
+    <meta name="description" content="Go语言中代替枚举的办法枚举类型用于声明一组命名的常量，当一个变量有几种可能的取值时，可以将它定义为枚举类型。在 Go 语言中，并没有提供枚举类型，但是枚举类型又是开发过程中非常重要的数据类型。因为它可以事先定义一组有效的值，可以有效地防止用户提交无效数据，抽象到业务场景中就是我们平时网页上遇到的下拉框，或者我们选择快递地址时的省市信息，均为枚举类型的用武之地。所以在 Go 语言中对常量进行了一定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go语言基础学习(二)">
 <meta property="og:url" content="https://suiyideali.github.io/2023/04/23/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/index.html">
 <meta property="og:site_name" content="Mochazz&#39;blog">
-<meta property="og:description" content="一、 Go 语言中代替枚举的办法">
+<meta property="og:description" content="Go语言中代替枚举的办法枚举类型用于声明一组命名的常量，当一个变量有几种可能的取值时，可以将它定义为枚举类型。在 Go 语言中，并没有提供枚举类型，但是枚举类型又是开发过程中非常重要的数据类型。因为它可以事先定义一组有效的值，可以有效地防止用户提交无效数据，抽象到业务场景中就是我们平时网页上遇到的下拉框，或者我们选择快递地址时的省市信息，均为枚举类型的用武之地。所以在 Go 语言中对常量进行了一定">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-23T09:01:54.000Z">
-<meta property="article:modified_time" content="2023-04-23T09:05:30.801Z">
+<meta property="article:modified_time" content="2023-04-24T14:19:39.024Z">
 <meta property="article:author" content="Mochazz">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
@@ -239,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          14 字
+          7k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
         
-          1 分钟
+          59 分钟
         
       </span>
     
@@ -293,7 +293,217 @@
             
               <div class="markdown-body">
                 
-                <h2 id="一、-Go-语言中代替枚举的办法"><a href="#一、-Go-语言中代替枚举的办法" class="headerlink" title="一、 Go 语言中代替枚举的办法"></a>一、 Go 语言中代替枚举的办法</h2>
+                <h2 id="Go语言中代替枚举的办法"><a href="#Go语言中代替枚举的办法" class="headerlink" title="Go语言中代替枚举的办法"></a>Go语言中代替枚举的办法</h2><p><strong>枚举类型</strong>用于声明一组命名的常量，当一个变量有几种可能的取值时，可以将它定义为<strong>枚举类型</strong>。在 Go 语言中，并没有提供<strong>枚举类型</strong>，但是枚举类型又是开发过程中非常重要的数据类型。因为它可以事先定义一组<strong>有效的值</strong>，可以有效地防止用户提交无效数据，抽象到业务场景中就是我们平时网页上遇到的<strong>下拉框</strong>，或者我们选择快递地址时的<strong>省市信息</strong>，均为枚举类型的用武之地。所以在 Go 语言中对常量进行了一定的<strong>扩展</strong>，使其可以完美地替代枚举类型。</p>
+<h3 id="1-常量中的iota"><a href="#1-常量中的iota" class="headerlink" title="1. 常量中的iota"></a>1. 常量中的iota</h3><p>为了使常量可以更好地替代枚举类型，Go 语言提供了一个<code>iota</code>关键字。使用<code>iota</code>初始化常量，可以生成一组规则类似的常量，但是不用每个常量都写一遍表达式。在一个<code>const()</code>表达式中，从<code>iota</code>开始的常量会被<strong>置为0</strong>，向后每个常量的值为<strong>前一个</strong>常量的值<strong>加一</strong>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-keyword">type</span> Weekday <span class="hljs-type">int</span> <span class="hljs-comment">//自定义一个星期类型，作为枚举类型</span><br><br><span class="hljs-keyword">const</span> (<br>	Sun Weekday = <span class="hljs-literal">iota</span><br>	Mon<br>	Tues<br>	Wed<br>	Thur<br>	Fri<br>	Sat<br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;Sun :&quot;</span>, Sun)<br>	fmt.Println(<span class="hljs-string">&quot;Mon :&quot;</span>, Mon)<br>	fmt.Println(<span class="hljs-string">&quot;Tues:&quot;</span>, Tues)<br>	fmt.Println(<span class="hljs-string">&quot;Wed :&quot;</span>, Wed)<br>	fmt.Println(<span class="hljs-string">&quot;Thur:&quot;</span>, Thur)<br>	fmt.Println(<span class="hljs-string">&quot;Fri :&quot;</span>, Fri)<br>	fmt.Println(<span class="hljs-string">&quot;Sat :&quot;</span>, Sat)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>执行结果</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Sun</span> : <span class="hljs-number">0</span><br><span class="hljs-attribute">Mon</span> : <span class="hljs-number">1</span><br><span class="hljs-attribute">Tues</span>: <span class="hljs-number">2</span><br><span class="hljs-attribute">Wed</span> : <span class="hljs-number">3</span><br><span class="hljs-attribute">Thur</span>: <span class="hljs-number">4</span><br><span class="hljs-attribute">Fri</span> : <span class="hljs-number">5</span><br><span class="hljs-attribute">Sat</span> : <span class="hljs-number">6</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-将枚举值转换为字符串"><a href="#2-将枚举值转换为字符串" class="headerlink" title="2. 将枚举值转换为字符串"></a>2. 将枚举值转换为字符串</h3><p>使用<code>iota</code>是可以使用 Go 语言的常量代替枚举类型，但是由于输出值均为阿拉伯数字，给调试和辨识造成了一定的困难。为了解决这一问题，Go 语言还提供了使常量枚举值输出为字符串的办法。需要我们手动构造一个使用枚举类型输出字符串的方法。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-keyword">type</span> Weekday <span class="hljs-type">int</span> <span class="hljs-comment">//自定义一个星期类型，作为枚举类型</span><br><br><span class="hljs-keyword">const</span> (<br>    Sun Weekday = <span class="hljs-literal">iota</span><br>    Mon<br>    Tues<br>    Wed<br>    Thur<br>    Fri<br>    Sat<br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(w Weekday)</span></span> String() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">switch</span> w &#123;<br>    <span class="hljs-keyword">case</span> Sun:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Sun&quot;</span><br>    <span class="hljs-keyword">case</span> Mon:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Mon&quot;</span><br>    <span class="hljs-keyword">case</span> Tues:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Tues&quot;</span><br>    <span class="hljs-keyword">case</span> Wed:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Wed&quot;</span><br>    <span class="hljs-keyword">case</span> Thur:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Thur&quot;</span><br>    <span class="hljs-keyword">case</span> Fri:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Fri&quot;</span><br>    <span class="hljs-keyword">case</span> Sat:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Sat&quot;</span><br>    &#125;<br>    <span class="hljs-comment">//不存在的枚举类型就返回&quot;N/A&quot;</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;N/A&quot;</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;Sun :&quot;</span>, Sun)<br>    fmt.Println(<span class="hljs-string">&quot;Mon :&quot;</span>, Mon)<br>    fmt.Println(<span class="hljs-string">&quot;Tues:&quot;</span>, Tues)<br>    fmt.Println(<span class="hljs-string">&quot;Wed :&quot;</span>, Wed)<br>    fmt.Println(<span class="hljs-string">&quot;Thur:&quot;</span>, Thur)<br>    fmt.Println(<span class="hljs-string">&quot;Fri :&quot;</span>, Fri)<br>    fmt.Println(<span class="hljs-string">&quot;Sat :&quot;</span>, Sat)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Go语言中的运算符"><a href="#Go语言中的运算符" class="headerlink" title="Go语言中的运算符"></a>Go语言中的运算符</h2><h3 id="1-语言的赋值运算符"><a href="#1-语言的赋值运算符" class="headerlink" title="1. 语言的赋值运算符"></a>1. 语言的赋值运算符</h3><p>Go语言赋值运算符如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">结合性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将左边的实体赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">+&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>加运算之后</strong>赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">-&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>减运算之后</strong>赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">*&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>乘运算之后</strong>赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">&#x2F;&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>除运算之后</strong>赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">%&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>取余运算之后</strong>赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">&gt;&gt;&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>右位移运算之后</strong>赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">&lt;&lt;&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>左位移运算之后</strong>赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">&amp;&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>与运算之后</strong>赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">|&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>或运算之后</strong>赋值给右边的变量</td>
+</tr>
+<tr>
+<td align="left">^&#x3D;</td>
+<td align="left"><strong>从右到左</strong></td>
+<td align="left">将右边的变量与左边的实体进行<strong>异或运算之后</strong>赋值给右边的变量</td>
+</tr>
+</tbody></table>
+<p>代码示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">var</span> a = <span class="hljs-number">28</span><br>    <span class="hljs-keyword">var</span> b = <span class="hljs-number">99</span><br>    a = b<br>    fmt.Println(<span class="hljs-string">&quot;  a = b :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    a += b<br>    fmt.Println(<span class="hljs-string">&quot; a += b :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    a -= b<br>    fmt.Println(<span class="hljs-string">&quot; a -= b :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    a *= b<br>    fmt.Println(<span class="hljs-string">&quot; a *= b :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    a /= <span class="hljs-number">2</span><br>    fmt.Println(<span class="hljs-string">&quot; a /= 2 :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    b %= <span class="hljs-number">1</span><br>    fmt.Println(<span class="hljs-string">&quot; b %= 1 :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    a &amp;= b<br>    fmt.Println(<span class="hljs-string">&quot; a &amp;= b :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    a |= b<br>    fmt.Println(<span class="hljs-string">&quot; a |= b :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    a ^= b<br>    fmt.Println(<span class="hljs-string">&quot; a ^= b :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    a &gt;&gt;= <span class="hljs-number">2</span><br>    fmt.Println(<span class="hljs-string">&quot;a &gt;&gt;= 2 :&quot;</span>, a)<br>    a = <span class="hljs-number">28</span><br>    b &lt;&lt;= <span class="hljs-number">1</span><br>    fmt.Println(<span class="hljs-string">&quot;b &lt;&lt;= 1 :&quot;</span>, a)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-优先级"><a href="#2-优先级" class="headerlink" title="2. 优先级"></a>2. 优先级</h3><p>下表为各运算符的优先级示图，优先级<strong>从高到低</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="left">优先级</th>
+<th align="left">类别</th>
+<th align="left">运算符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">括号运算符</td>
+<td align="left">()</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">单目运算符</td>
+<td align="left">！、++、–</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">算数运算符</td>
+<td align="left">*、&#x2F;、%</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">+、-</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">位移运算符</td>
+<td align="left">&gt;&gt;、&lt;&lt;</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">关系运算符</td>
+<td align="left">&lt;、&lt;&#x3D;、&gt;、&gt;&#x3D;</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">&#x3D;&#x3D;、!&#x3D;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">按位与</td>
+<td align="left">&amp;</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">按位异或</td>
+<td align="left">^</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left">按位或</td>
+<td align="left">|</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left">逻辑与</td>
+<td align="left">&amp;&amp;</td>
+</tr>
+<tr>
+<td align="left">12</td>
+<td align="left">逻辑或</td>
+<td align="left">||</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left">赋值运算符</td>
+<td align="left">&#x3D;、+&#x3D;、-&#x3D;、*&#x3D;、&#x2F;&#x3D;、 %&#x3D;、 &gt;&#x3D;、 &lt;&lt;&#x3D;、&amp;&#x3D;、^&#x3D;、|&#x3D;</td>
+</tr>
+</tbody></table>
+<h2 id="Go语言的分支语句"><a href="#Go语言的分支语句" class="headerlink" title="Go语言的分支语句"></a>Go语言的分支语句</h2><h3 id="1-If…else"><a href="#1-If…else" class="headerlink" title="1. If…else"></a>1. If…else</h3><p>在 Go 语言中 <strong>if</strong> 关键字的作用和其它大部分语言相同，是用于测试某个布尔表达式或布尔值是否为真的。若为真则执行 if 之后 <code>&#123;&#125;</code> 中的语句，否则跳过这些语句。如果存在第二个分支，则需要使用 <strong>else</strong> 关键字，还需要增加分支的话就需要使用 <strong>else if</strong> 关键字了。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	a := <span class="hljs-number">10</span><br>	<span class="hljs-keyword">if</span> a &gt; <span class="hljs-number">10</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;a大于10&quot;</span>)<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> a &lt; <span class="hljs-number">0</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;a小于0&quot;</span>)<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;a的值是&quot;</span>, a)<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>在 Go 语言中，<strong>if</strong> 后的条件表达式，还有一种特别的写法，可以在条件表达式之前写一个赋值表达式。</p>
+<p><strong>if…else</strong> 的特殊用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">if</span> a := <span class="hljs-number">10</span>; a &gt; <span class="hljs-number">10</span> &#123; <span class="hljs-comment">//赋值表达式和条件表达式之间用;隔开</span><br>		fmt.Println(<span class="hljs-string">&quot;a大于10&quot;</span>)<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;a的值是&quot;</span>, a)<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-switch…case"><a href="#2-switch…case" class="headerlink" title="2. switch…case"></a>2. switch…case</h3><p>Go 语言对 <strong>switch…case</strong> 的功能进行了扩展，它变得更加的通用。<strong>switch</strong> 之后可以什么都不带。<strong>case</strong>也无需是一个固定值，也可以是一个布尔表达式，而且每一个 case 都是一个 <strong>独立的代码块</strong>，执行完了之后<strong>立刻跳出</strong> switch，不需要使用 <strong>break</strong>。所以可以把 <strong>if…else</strong> 完美的改写成 <strong>switch…case</strong> 的形式。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	a := <span class="hljs-string">&quot;A&quot;</span><br>	<span class="hljs-keyword">switch</span> a &#123;<br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>:<br>		fmt.Println(<span class="hljs-string">&quot;分数区间为90~100&quot;</span>)<br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>:<br>		fmt.Println(<span class="hljs-string">&quot;分数区间为70～89&quot;</span>)<br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>:<br>		fmt.Println(<span class="hljs-string">&quot;分数区间为0~70&quot;</span>)<br>	<span class="hljs-keyword">default</span>:<br>		fmt.Println(<span class="hljs-string">&quot;错误的评分&quot;</span>)<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>switch…case</strong> Go 语言中的新用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	a := <span class="hljs-number">50</span><br>	<span class="hljs-keyword">switch</span> &#123;<br>	<span class="hljs-keyword">case</span> a &lt; <span class="hljs-number">60</span>:<br>		fmt.Println(<span class="hljs-string">&quot;不及格&quot;</span>)<br>	<span class="hljs-keyword">case</span> a &lt; <span class="hljs-number">80</span>:<br>		fmt.Println(<span class="hljs-string">&quot;良好&quot;</span>)<br>	<span class="hljs-keyword">case</span> a &lt;= <span class="hljs-number">100</span>:<br>		fmt.Println(<span class="hljs-string">&quot;优秀&quot;</span>)<br>	<span class="hljs-keyword">default</span>:<br>		fmt.Println(<span class="hljs-string">&quot;分数最多为100分&quot;</span>)<br>	&#125;<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="Go语言的循环语句"><a href="#Go语言的循环语句" class="headerlink" title="Go语言的循环语句"></a>Go语言的循环语句</h2><p>在 Go 语言中减少了循环语句的关键字，仅有一个 <strong>for</strong> 关键字。但是并没有减少其功能，而且它更是兼容了其它语言中的<strong>while</strong>关键字的用法，甚至更强大。</p>
+<h3 id="1-for循环语句"><a href="#1-for循环语句" class="headerlink" title="1. for循环语句"></a>1. for循环语句</h3><h4 id="1-1-普通用法"><a href="#1-1-普通用法" class="headerlink" title="1.1 普通用法"></a>1.1 普通用法</h4><p>在 Go 语言中，for 循环之后一样可以跟三个语句</p>
+<p><strong>单次表达式；条件表达式；末尾循环体</strong></p>
+<p>但是它不需要使用<code>()</code>来包裹这三个表达式，写法上更加的简洁。同时它也和其它语言一样，可以任意省略这三个表达式。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">for</span> a := <span class="hljs-number">0</span>; a &lt; <span class="hljs-number">10</span>; a++ &#123;<br>		fmt.Println(a)<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>省略<strong>单次表达式</strong>代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   a := <span class="hljs-number">0</span><br>   <span class="hljs-keyword">for</span> ; a &lt; <span class="hljs-number">10</span>; a++ &#123; <span class="hljs-comment">//表达式可以省略，但是;不能省略</span><br>      fmt.Println(a)<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="1-2-代替-while-的用法"><a href="#1-2-代替-while-的用法" class="headerlink" title="1.2 代替 while 的用法"></a>1.2 代替 while 的用法</h4><p>在其它大部分语言中 <strong>for</strong> 循环中省略<strong>单次表达式</strong>和<strong>末尾循环体</strong>其实就和其它语句中的 <strong>while</strong> 用法一致了。所以在 Go 语言中，直接使用省去<strong>单次表达式</strong>和<strong>末尾循环体</strong>的 <strong>for</strong> 循环语句来代替 <strong>while</strong> 的用法，为了简便代码书写，Go 语言中 for 循环语句在省去<strong>单次表达式</strong>和<strong>末尾循环体</strong>时，可以不写分号。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	a := <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> a &lt; <span class="hljs-number">10</span> &#123; <span class="hljs-comment">//和其他语言中的while(a&lt;10)一致</span><br>		fmt.Println(a)<br>		a++<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-for-语言中的break-和-continue"><a href="#2-for-语言中的break-和-continue" class="headerlink" title="2. for 语言中的break 和 continue"></a>2. for 语言中的break 和 continue</h3><p>在我们的生产环境中，经常需要用到死循环的场景。所以在 Go 语言中新增了一个 <strong>for</strong> 关键字死循环的用法，让程序员不用写无聊的 <code>for(;;)&#123;&#125;</code>和<code>do&#123;&#125; while(1)</code>。同时可以使用 <strong>break</strong> 和 <strong>continue</strong> 来控制循环。</p>
+<p><strong>break</strong> 和 <strong>continue</strong> 的逻辑和语法类似</p>
+<h4 id="2-1-break跳出单层死循环"><a href="#2-1-break跳出单层死循环" class="headerlink" title="2.1  break跳出单层死循环"></a>2.1  break跳出单层死循环</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   a := <span class="hljs-number">0</span><br>   <span class="hljs-keyword">for</span> &#123; <span class="hljs-comment">//死循环的写法就是省略 单次表达式; 条件表达式; 末尾循环体</span><br>      fmt.Println(a)<br>      a++<br>      <span class="hljs-keyword">if</span> a &gt;= <span class="hljs-number">10</span> &#123;<br>         <span class="hljs-keyword">break</span> <span class="hljs-comment">//跳出死循环</span><br>      &#125;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-2-break跳出多层死循环"><a href="#2-2-break跳出多层死循环" class="headerlink" title="2.2 break跳出多层死循环"></a>2.2 break跳出多层死循环</h4><p>在其它语言中，你很难去控制跳出循环的层数，在 Go 语言中提供了一种<code>break LOOP</code>的写法，可以使循环跳出到 LOOP 所在的位置。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   a := <span class="hljs-number">0</span><br>LOOP:<br>   <span class="hljs-keyword">for</span> &#123;<br>      <span class="hljs-keyword">for</span> &#123;<br>         fmt.Println(a)<br>         a++<br>         <span class="hljs-keyword">if</span> a &gt;= <span class="hljs-number">10</span> &#123;<br>            <span class="hljs-keyword">break</span> LOOP <span class="hljs-comment">//跳出循环至LOOP所在的层级</span><br>         &#125;<br>      &#125;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Go语言的通道"><a href="#Go语言的通道" class="headerlink" title="Go语言的通道"></a>Go语言的通道</h2><p>Go 语言中有一个特殊的类型 <code>chan</code>，这是在 Go 语言的多线程操作中非常重要的一个数据类型。它的一般用于<strong>线程之间的数据传输</strong>，所以这个操作类型叫做 “ <strong>通道 (channel)</strong>“。</p>
+<h3 id="1-通道的声明和定义"><a href="#1-通道的声明和定义" class="headerlink" title="1. 通道的声明和定义"></a>1. 通道的声明和定义</h3><p>通道可以理解为一种特殊的<strong>变量</strong>，所以它的声明和其它变量的声明并没有太大的区别，声明通道变量的写法如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> c <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span> <span class="hljs-comment">//声明一个存放int类型数据的通道</span><br></code></pre></td></tr></table></figure>
+
+<p>但是它声明之后并<strong>不能直接使用</strong>，需要使用内置函数 <code>make()</code> 来创建一下通道变量才可以使用：</p>
+<blockquote>
+<p>由于 chan 的底层是一个指针，在 Go 语言中指针初始值为空，是需要实例化的。make 就是实例化了 chan。</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> c <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span> <span class="hljs-comment">//声明一个存放int类型数据的通道</span><br>c = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">1</span>) <span class="hljs-comment">//创建一个长度为1的通道</span><br></code></pre></td></tr></table></figure>
+
+<p>在这种情况下最好使用<code>:=</code> 来同时声明和创建：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">c := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">1</span>) <span class="hljs-comment">//声明并创建一个存放int类型数据的通道</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-通道的使用"><a href="#2-通道的使用" class="headerlink" title="2. 通道的使用"></a>2. 通道的使用</h3><p>在 Go 语言中，使用 <code>&lt;-</code> 符号来向通道中塞取数据。放在通道右边 <code>chan &lt;-</code>，就是塞数据，放在通道左边 <code>&lt;- chan</code> ，就是取数据。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   c := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">1</span>)<br>   c &lt;- <span class="hljs-number">10</span>  <span class="hljs-comment">//将10塞入通道中</span><br>   i := &lt;-c <span class="hljs-comment">//将10从通道中取出，并赋值给变量i</span><br>   fmt.Println(i)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-通道结合-select-流程控制"><a href="#3-通道结合-select-流程控制" class="headerlink" title="3. 通道结合 select 流程控制"></a>3. 通道结合 select 流程控制</h3><p>在 Go 语言中为了更方便的利用通道的功能，提供了一个仅用于通道的流程控制语句：<code>select...case</code>。使用这个语句可以同时监听数个通道，非常适合用于并发时的进程调度，或者模块之间的解耦合。下面通过一个简单的例子来了解一下 <code>select...case</code> 语句。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   c := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">1</span>)<br><br>   <span class="hljs-keyword">for</span> a := <span class="hljs-number">0</span>; a &lt; <span class="hljs-number">2</span>; a++ &#123;<br>      <span class="hljs-keyword">select</span> &#123;<br>      <span class="hljs-keyword">case</span> i := &lt;-c:<br>         fmt.Println(<span class="hljs-string">&quot;从通道中取出&quot;</span>, i)<br>      <span class="hljs-keyword">case</span> c &lt;- <span class="hljs-number">10</span>:<br>         fmt.Println(<span class="hljs-string">&quot;将 10 塞入通道中&quot;</span>)<br>      &#125;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>select 语句和 switch 语句一样，case 都只会执行一个，然后立刻跳出语句。</p>
+<h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><p><a target="_blank" rel="noopener" href="http://www.imooc.com/wiki/golesson/">http://www.imooc.com/wiki/golesson/</a></p>
+
                 
               </div>
             
@@ -357,7 +567,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年4月23日</div>
+          <div>2023年4月24日</div>
         </div>
       
       
