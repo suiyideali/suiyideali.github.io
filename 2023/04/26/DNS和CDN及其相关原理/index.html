@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/suiyideali.github.io/img/fco.jpg">
-  <link rel="icon" href="/suiyideali.github.io/img/fco.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="DNS1. 什么是DNSDNS （Domain Name System 的缩写）是一个分布式数据库，它将域名映射到与之关联的IP地址。DNS使得人们可以使用易于记忆的域名访问网站或其他网络服务，而不是使用长长的IP地址。例如，通过DNS，您可以使用”cyberzone.cloud“而不是“185.199.111.153”来访问本博客。 DNS通常由域名注册商或Internet服务提供商提供。 2.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DNS和CDN及其相关原理">
-<meta property="og:url" content="https://suiyideali.github.io/suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:url" content="https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="Mochazz&#39;blog">
 <meta property="og:description" content="DNS1. 什么是DNSDNS （Domain Name System 的缩写）是一个分布式数据库，它将域名映射到与之关联的IP地址。DNS使得人们可以使用易于记忆的域名访问网站或其他网络服务，而不是使用长长的IP地址。例如，通过DNS，您可以使用”cyberzone.cloud“而不是“185.199.111.153”来访问本博客。 DNS通常由域名注册商或Internet服务提供商提供。 2.">
 <meta property="og:locale" content="zh_CN">
@@ -63,12 +63,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/suiyideali.github.io/css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/suiyideali.github.io/css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/suiyideali.github.io/css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -77,15 +77,15 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"suiyideali.github.io","root":"/suiyideali.github.io/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/suiyideali.github.io/local-search.xml"};
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/suiyideali.github.io/js/utils.js" ></script>
-  <script  src="/suiyideali.github.io/js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -102,7 +102,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/suiyideali.github.io/">
+    <a class="navbar-brand" href="/">
       <strong>Mochazz&#39;blog</strong>
     </a>
 
@@ -121,7 +121,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/suiyideali.github.io/">
+              <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -133,7 +133,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/suiyideali.github.io/archives/">
+              <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -145,7 +145,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/suiyideali.github.io/categories/">
+              <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -157,7 +157,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/suiyideali.github.io/tags/">
+              <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -169,7 +169,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/suiyideali.github.io/about/">
+              <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于我</span>
               </a>
@@ -181,7 +181,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/suiyideali.github.io/links/">
+              <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -211,7 +211,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/suiyideali.github.io/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -304,7 +304,7 @@
 <h3 id="2-DNS查询过程"><a href="#2-DNS查询过程" class="headerlink" title="2. DNS查询过程"></a>2. DNS查询过程</h3><p>使用 <strong>dig</strong> 显示整个域名的查询过程</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig mochazz.cloud<br></code></pre></td></tr></table></figure>
 
-<p><img src="/suiyideali.github.io/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427205517356.png" srcset="/suiyideali.github.io/img/loading.gif" lazyload alt="ding mochazz.cloud"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427205517356.png" srcset="/img/loading.gif" lazyload alt="ding mochazz.cloud"></p>
 <p>其中：</p>
 <ul>
 <li><p>查询参数和统计</p>
@@ -351,11 +351,11 @@
 
 
 
-<p><img src="/suiyideali.github.io/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427213515688.png" srcset="/suiyideali.github.io/img/loading.gif" lazyload alt="分级查询"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427213515688.png" srcset="/img/loading.gif" lazyload alt="分级查询"></p>
 <p><code>dig</code>命令的<code>+trace</code>参数可以显示DNS的整个分级查询过程。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig +trace www.mochazz.cloud<br></code></pre></td></tr></table></figure>
 
-<p><img src="/suiyideali.github.io/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427214910938.png" srcset="/suiyideali.github.io/img/loading.gif" lazyload alt="dig +trace www.mochazz.cloud"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427214910938.png" srcset="/img/loading.gif" lazyload alt="dig +trace www.mochazz.cloud"></p>
 <ul>
 <li><p>列出根域名<code>.</code>的所有NS记录，即所有根域名服务器</p>
 <p>根据内置的根域名服务器IP地址，DNS服务器向所有这些IP地址发出查询请求，询问<code>mochazz.cloud</code>的顶级域名服务器<code>cloud.</code>的NS记录。最先回复的根域名服务器将被缓存，以后只向这台服务器发请求。</p>
@@ -417,7 +417,7 @@
 <h2 id="CND"><a href="#CND" class="headerlink" title="CND"></a>CND</h2><h3 id="1-什么是CND"><a href="#1-什么是CND" class="headerlink" title="1. 什么是CND"></a>1. 什么是CND</h3><p>CDN全称叫做“Content Delivery Network”，中文叫<strong>内容分发网络</strong>。</p>
 <p>将源站内容分发至最接近用户的节点，使用户可就近取得所需内容，提高用户访问的响应速度和成功率。解决因分布、带宽、服务器性能带来的访问延迟问题，适用于站点加速、点播、直播等场景。</p>
 <h3 id="2-原理分析"><a href="#2-原理分析" class="headerlink" title="2. 原理分析"></a>2. 原理分析</h3><p>如图</p>
-<p><img src="/suiyideali.github.io/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230505222258753.png" srcset="/suiyideali.github.io/img/loading.gif" lazyload alt="CDN简单原理图"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230505222258753.png" srcset="/img/loading.gif" lazyload alt="CDN简单原理图"></p>
 <p>通过域名解析IP分析</p>
 <ol>
 <li>当用户点击网站页面上的内容URL，经过本地DNS系统解析，DNS 系统会最终将域名的解析权交给 <a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/CNAME_record">CNAME</a> 指向的 CDN 专用 DNS 服务器。</li>
@@ -452,7 +452,7 @@
 <p>这种举动在被封锁的站点与无害站点为同一个大型服务提供商时较为可行，例如由<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/CDN">内容分发网络</a>提供的服务。此时审查者通常很难区分被伪装流量与合法流量的特点，迫使审查者选择放行所有看似无害的流量，或者选择彻底封锁此域的流量。而彻底封锁可能带来显著的附加损害。</p>
 <p>简言之，利用该技术，可以让受控端以为程序是在和一个高信誉域名通信，但实际上却是在和C2服务器进行通信。</p>
 <h4 id="1-2-技术原理"><a href="#1-2-技术原理" class="headerlink" title="1.2 技术原理"></a>1.2 技术原理</h4><p>Domain Fronting 的技术原理图如下</p>
-<p><img src="/suiyideali.github.io/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230513221125910.png" srcset="/suiyideali.github.io/img/loading.gif" lazyload alt="域前置技术原理"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230513221125910.png" srcset="/img/loading.gif" lazyload alt="域前置技术原理"></p>
 <p>Domain Fronting 的核心技术是 <code>CDN</code>。</p>
 <p>一般情况下，1台 CDN 会同时负责多个网站的加速服务。</p>
 <p>如果访问的两个网站（a.com 和 b.com）都是由同1台 CDN 服务器（1.1.1.1）进行加速服务，那么当使用浏览器访问这两个域名时，浏览器实际上访问的都是 1.1.1.1 这台 CDN 服务器，但是在浏览器访问的域名有可能是 a.com 也可能是 b.com，所以必须要在和 1.1.1.1 这台 CDN 服务器通信时，在 HTTP 请求包的 Host 头中填入需要访问的域名，CDN 才会知道访问的是哪一个域名后才能返回对应域名的内容。</p>
@@ -478,7 +478,7 @@
     
       <span class="category-chain">
         
-  <a href="/suiyideali.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
   
   
 
@@ -493,7 +493,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/suiyideali.github.io/tags/DNS-CDN/">#DNS CDN</a>
+        <a href="/tags/DNS-CDN/">#DNS CDN</a>
       
     </div>
   
@@ -506,7 +506,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>DNS和CDN及其相关原理</div>
-      <div>https://suiyideali.github.io/suiyideali.github.io/2023/04/26/DNS和CDN及其相关原理/</div>
+      <div>https://suiyideali.github.io/2023/04/26/DNS和CDN及其相关原理/</div>
     </div>
     <div class="license-meta">
       
@@ -555,7 +555,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/suiyideali.github.io/2023/04/28/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%89)/" title="Go语言基础学习(三)">
+                      <a href="/2023/04/28/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%89)/" title="Go语言基础学习(三)">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Go语言基础学习(三)</span>
                         <span class="visible-mobile">上一篇</span>
@@ -565,7 +565,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/suiyideali.github.io/2023/04/25/Python%E5%B8%B8%E7%94%A8%E6%A0%87%E5%87%86%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="Python常用标准库学习">
+                      <a href="/2023/04/25/Python%E5%B8%B8%E7%94%A8%E6%A0%87%E5%87%86%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="Python常用标准库学习">
                         <span class="hidden-mobile">Python常用标准库学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -719,8 +719,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/suiyideali.github.io/js/events.js" ></script>
-<script  src="/suiyideali.github.io/js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -742,7 +742,7 @@
 
 
   
-    <script  src="/suiyideali.github.io/js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -841,7 +841,7 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/suiyideali.github.io/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
@@ -851,7 +851,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/suiyideali.github.io/js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   
