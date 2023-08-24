@@ -16,35 +16,33 @@
   <meta name="author" content="Mochazz">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 缘由因为最近想打一打HTB，但是发现国内访问HTB太慢，因此有了本篇文章并且直接解决kali科学上网。 2. 环境准备 Kali Linux（方便打靶）  Clash （需要自行下载）  openvpn （Kali自带）   3. 解决步骤3.1 配置Clash下载clash： https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases&#x2F;  下载对应的版本后，给c">
+    <meta name="description" content="缘由最近在忙着 PMP 考试，许久没更新博客了，写了一片博客通过 hexo 发布到 Github 上发现页面成空白页了 发现主页只剩下html 、head、body 但通过 1hexo s 又发现本地又有数据 问题排查在网上搜了下，发现有不少朋友跟我有相似问题 网上导致这种情况有：  nodejs 版本问题导致 public 文件夹中的 index. html 为 0Kb   2. Hexo 与">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kali 配置clash">
-<meta property="og:url" content="https://suiyideali.github.io/2023/08/24/kali-%E9%85%8D%E7%BD%AEclash/index.html">
+<meta property="og:title" content="hexo部署后是空白页的玄学问题">
+<meta property="og:url" content="https://suiyideali.github.io/2023/08/25/hexo%E9%83%A8%E7%BD%B2%E5%90%8E%E6%98%AF%E7%A9%BA%E7%99%BD%E9%A1%B5%E7%9A%84%E7%8E%84%E5%AD%A6%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Mochazz&#39;blog">
-<meta property="og:description" content="1. 缘由因为最近想打一打HTB，但是发现国内访问HTB太慢，因此有了本篇文章并且直接解决kali科学上网。 2. 环境准备 Kali Linux（方便打靶）  Clash （需要自行下载）  openvpn （Kali自带）   3. 解决步骤3.1 配置Clash下载clash： https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases&#x2F;  下载对应的版本后，给c">
+<meta property="og:description" content="缘由最近在忙着 PMP 考试，许久没更新博客了，写了一片博客通过 hexo 发布到 Github 上发现页面成空白页了 发现主页只剩下html 、head、body 但通过 1hexo s 又发现本地又有数据 问题排查在网上搜了下，发现有不少朋友跟我有相似问题 网上导致这种情况有：  nodejs 版本问题导致 public 文件夹中的 index. html 为 0Kb   2. Hexo 与">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738747.png">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738778.png">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738786.png">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738792.png">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738811.png">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738819.png">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738170.png">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738201.png">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738229.png">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738272.png">
-<meta property="article:published_time" content="2023-08-24T09:36:44.000Z">
-<meta property="article:modified_time" content="2023-08-24T09:38:57.484Z">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100871.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100898.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100221.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100503.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100821.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100213.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100542.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100924.png">
+<meta property="article:published_time" content="2023-08-24T16:58:25.000Z">
+<meta property="article:modified_time" content="2023-08-24T17:03:42.759Z">
 <meta property="article:author" content="Mochazz">
-<meta property="article:tag" content="kali clash">
+<meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738747.png">
+<meta name="twitter:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100871.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>kali 配置clash - Mochazz&#39;blog</title>
+  <title>hexo部署后是空白页的玄学问题 - Mochazz&#39;blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -222,7 +220,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="kali 配置clash"></span>
+            <span id="subtitle" data-typed-text="hexo部署后是空白页的玄学问题"></span>
           
         </div>
 
@@ -238,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-24 17:36" pubdate>
-          2023年8月24日 下午
+        <time datetime="2023-08-25 00:58" pubdate>
+          2023年8月25日 凌晨
         </time>
       </span>
     
@@ -250,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          761 字
+          885 字
         
       </span>
     
@@ -261,7 +259,7 @@
         
         
         
-          7 分钟
+          8 分钟
         
       </span>
     
@@ -299,55 +297,39 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">kali 配置clash</h1>
+            <h1 style="display: none">hexo部署后是空白页的玄学问题</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="1-缘由"><a href="#1-缘由" class="headerlink" title="1. 缘由"></a>1. 缘由</h2><p>因为最近想打一打HTB，但是发现国内访问HTB太慢，因此有了本篇文章并且直接解决kali科学上网。</p>
-<h2 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2. 环境准备"></a>2. 环境准备</h2><ul>
-<li><p>Kali Linux（方便打靶）</p>
-</li>
-<li><p>Clash （需要自行下载）</p>
-</li>
-<li><p>openvpn （Kali自带）</p>
-</li>
-</ul>
-<h2 id="3-解决步骤"><a href="#3-解决步骤" class="headerlink" title="3. 解决步骤"></a>3. 解决步骤</h2><h3 id="3-1-配置Clash"><a href="#3-1-配置Clash" class="headerlink" title="3.1 配置Clash"></a>3.1 配置Clash</h3><p>下载clash：</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases/">https://github.com/Dreamacro/clash/releases/</a></p>
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738747.png" srcset="/img/loading.gif" lazyload alt="image-20230824163539279"></p>
-<p>下载对应的版本后，给clash权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x clash<br></code></pre></td></tr></table></figure>
+                <h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>最近在忙着 PMP 考试，许久没更新博客了，写了一片博客通过 hexo 发布到 Github 上发现页面成空白页了</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100871.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>发现主页只剩下<br>html 、head、body<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100898.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>但通过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo s<br></code></pre></td></tr></table></figure>
+<p>又发现本地又有数据<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100221.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h1><p>在网上搜了下，发现有不少朋友跟我有相似问题<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100503.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>网上导致这种情况有：</p>
+<ol>
+<li>nodejs 版本问题导致 public 文件夹中的 index. html 为 0Kb</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100821.png" srcset="/img/loading.gif" lazyload alt="image.png"><br> 2. Hexo 与 node 的版本不兼容，要么 node 过高，要么 hexo 过低</p>
+<p>但我 hexo 和 node 的版本一直没升级过，应该不存在版本不兼容问题，而且为 public 下没有 0kb 文件<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100213.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ol start="3">
+<li>找到个跟我一样问题的<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100542.png" srcset="/img/loading.gif" lazyload alt="image.png"></li>
+</ol>
+<h2 id="查看-hexo-和-node-版本"><a href="#查看-hexo-和-node-版本" class="headerlink" title="查看 hexo 和 node 版本"></a>查看 hexo 和 node 版本</h2><p>hexo 版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs bash">➜  public hexo -version<br>INFO  Validating config<br>hexo: 6.3.0<br>hexo-cli: 4.3.0<br>os: darwin 22.5.0 13.4.1<br><br>node: 18.16.0<br>acorn: 8.8.2<br>ada: 1.0.4<br>ares: 1.19.0<br>brotli: 1.0.9<br>cldr: 42.0<br>icu: 72.1<br>llhttp: 6.0.10<br>modules: 108<br>napi: 8<br>nghttp2: 1.52.0<br>nghttp3: 0.7.0<br>ngtcp2: 0.8.1<br>openssl: 3.0.8+quic<br>simdutf: 3.2.2<br>tz: 2022g<br>undici: 5.21.0<br>unicode: 15.0<br>uv: 1.44.2<br>uvwasi: 0.0.15<br>v8: 10.2.154.26-node.26<br>zlib: 1.2.13<br></code></pre></td></tr></table></figure>
 
+<p>node 版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">➜  blog node -v<br>v18.16.0<br></code></pre></td></tr></table></figure>
 
+<p>版本也能对应上</p>
+<h2 id="使用其他主题"><a href="#使用其他主题" class="headerlink" title="使用其他主题"></a>使用其他主题</h2><p>发现其他主题也是本地部署能够正常使用，部署到Github就是空白页</p>
+<h2 id="网站-404"><a href="#网站-404" class="headerlink" title="网站 404"></a>网站 404</h2><p>因为我配置了域名，所以当我清理掉 github 的域名的 cookie 记录时候，发现页面 404<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308250100924.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>发现这情况，估计是动了 Github 项目的配置了，但又想不起是修改的哪儿，干脆重装吧。</p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>删除 Github 仓库，重建仓库，然后重新上传搞定。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo clean<br>hexo g<br>hexo d<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738778.png" srcset="/img/loading.gif" lazyload alt="image-20230824163744240"></p>
-<p>然后启动clash，让clash自动下载和生成文件，文件的路径在 <strong>&#x2F;root&#x2F;.config&#x2F;clash</strong></p>
-<p>然后删掉自动下载的配置文件，接着开始下载自己的vpn订阅</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /root/.config/clash<br><span class="hljs-built_in">rm</span> config.yaml<br><span class="hljs-built_in">rm</span> Country.mmdb<br>wget -O config.yaml <span class="hljs-string">&quot;此处为你的机场订阅地址&quot;</span><br></code></pre></td></tr></table></figure>
-
-
-
-<p>下载完毕后，然后执行clash，如果提示缺少mmdb，系统会自动下载。如果出现以下连接超时，可以自行去cdn节点下载，然后copy到 &#x2F;root&#x2F;.config&#x2F;clash 里面。</p>
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738786.png" srcset="/img/loading.gif" lazyload alt="image-20230824164234421"></p>
-<p>最终 clash执行成功，访问<a target="_blank" rel="noopener" href="http://clash.razord.top/">http://clash.razord.top</a> </p>
-<p>到UI界面配置相应的节点。<img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738792.png" srcset="/img/loading.gif" lazyload alt="image-20230824164428475"></p>
-<h3 id="3-2-配置浏览器走clash代理"><a href="#3-2-配置浏览器走clash代理" class="headerlink" title="3.2 配置浏览器走clash代理"></a>3.2 配置浏览器走clash代理</h3><p>很简单，下载个插件SwitchyOmega 或者其他浏览器插件，配置好即可</p>
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738811.png" srcset="/img/loading.gif" lazyload alt="image-20230824164537954"></p>
-<p>测试验证：</p>
-<p>google</p>
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738819.png" srcset="/img/loading.gif" lazyload></p>
-<p>查询当前IP</p>
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738170.png" srcset="/img/loading.gif" lazyload alt="image-20230824164714404"></p>
-<h3 id="3-3-让HTB走本地的clash代理"><a href="#3-3-让HTB走本地的clash代理" class="headerlink" title="3.3 让HTB走本地的clash代理"></a>3.3 让HTB走本地的clash代理</h3><p>已经配置好clash后，现在需要让HTB的Openvpn走本地的clash端口，只需要在HTB下载后的ovpn文件添加一条本地代理</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">http-proxy 127.0.0.1 7890<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738201.png" srcset="/img/loading.gif" lazyload alt="image-20230824170926608"></p>
-<p>未走clash代理的延时</p>
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738229.png" srcset="/img/loading.gif" lazyload alt="image-20230824171111352"></p>
-<p>通过clash代理的延时</p>
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308241738272.png" srcset="/img/loading.gif" lazyload alt="image-20230824171208521"></p>
-<p>是否走clash的代理，延迟差别还是挺大的。</p>
 
                 
               </div>
@@ -366,7 +348,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="category-chain-item">网络安全</a>
+  <a href="/categories/%E6%9D%82%E8%B0%88/" class="category-chain-item">杂谈</a>
   
   
 
@@ -381,7 +363,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/kali-clash/">#kali clash</a>
+        <a href="/tags/Hexo/">#Hexo</a>
       
     </div>
   
@@ -393,8 +375,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>kali 配置clash</div>
-      <div>https://suiyideali.github.io/2023/08/24/kali-配置clash/</div>
+      <div>hexo部署后是空白页的玄学问题</div>
+      <div>https://suiyideali.github.io/2023/08/25/hexo部署后是空白页的玄学问题/</div>
     </div>
     <div class="license-meta">
       
@@ -406,13 +388,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年8月24日</div>
+          <div>2023年8月25日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年8月24日</div>
+          <div>2023年8月25日</div>
         </div>
       
       
@@ -443,18 +425,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/25/hexo%E9%83%A8%E7%BD%B2%E5%90%8E%E6%98%AF%E7%A9%BA%E7%99%BD%E9%A1%B5%E7%9A%84%E7%8E%84%E5%AD%A6%E9%97%AE%E9%A2%98/" title="hexo部署后是空白页的玄学问题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">hexo部署后是空白页的玄学问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/30/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E5%9B%9B)/" title="Go语言基础学习(四)">
-                        <span class="hidden-mobile">Go语言基础学习(四)</span>
+                      <a href="/2023/08/24/kali-%E9%85%8D%E7%BD%AEclash/" title="kali 配置clash">
+                        <span class="hidden-mobile">kali 配置clash</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
