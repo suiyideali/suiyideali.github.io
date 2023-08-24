@@ -1,0 +1,931 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/1000.jpg">
+  <link rel="icon" href="/img/1000.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="sheny">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="RISC-VRISC-V 是多个 RV 指令集系列的总称，是一个开源的指令集，它遵循模块化设计理念，核心是一个名为 RV32I 的基础 ISA  RV32I 寄存器   通用寄存器 别名 功能 维护    x0 zero 零寄存器 N&#x2F;A   x1 ra return adress Caller   x2 sp 栈指针 Callee   x3 gp 全局指针    x4 tp 线程指针    x5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RISC-V">
+<meta property="og:url" content="https://shenysec.github.io/2023/04/23/RISC-V/index.html">
+<meta property="og:site_name" content="Shenysec">
+<meta property="og:description" content="RISC-VRISC-V 是多个 RV 指令集系列的总称，是一个开源的指令集，它遵循模块化设计理念，核心是一个名为 RV32I 的基础 ISA  RV32I 寄存器   通用寄存器 别名 功能 维护    x0 zero 零寄存器 N&#x2F;A   x1 ra return adress Caller   x2 sp 栈指针 Callee   x3 gp 全局指针    x4 tp 线程指针    x5">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shenysec.github.io/img/RISC-V/isa6.jpg">
+<meta property="og:image" content="https://shenysec.github.io/img/RISC-V/rv32iisa.jpg">
+<meta property="article:published_time" content="2023-04-23T02:42:26.000Z">
+<meta property="article:modified_time" content="2023-05-11T10:07:10.110Z">
+<meta property="article:author" content="sheny">
+<meta property="article:tag" content="RISC-V">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://shenysec.github.io/img/RISC-V/isa6.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>RISC-V - Shenysec</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"shenysec.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sheny</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/1003.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="RISC-V"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-23 10:42" pubdate>
+          2023年4月23日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          773 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">RISC-V</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年5月11日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="RISC-V"><a href="#RISC-V" class="headerlink" title="RISC-V"></a>RISC-V</h1><p>RISC-V 是多个 RV 指令集系列的总称，是一个开源的指令集，它遵循模块化设计理念，核心是一个名为 RV32I 的基础 ISA </p>
+<h1 id="RV32I-寄存器"><a href="#RV32I-寄存器" class="headerlink" title="RV32I 寄存器"></a>RV32I 寄存器</h1><table>
+<thead>
+<tr>
+<th>通用寄存器</th>
+<th>别名</th>
+<th>功能</th>
+<th>维护</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x0</td>
+<td>zero</td>
+<td>零寄存器</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>x1</td>
+<td>ra</td>
+<td>return adress</td>
+<td>Caller</td>
+</tr>
+<tr>
+<td>x2</td>
+<td>sp</td>
+<td>栈指针</td>
+<td>Callee</td>
+</tr>
+<tr>
+<td>x3</td>
+<td>gp</td>
+<td>全局指针</td>
+<td></td>
+</tr>
+<tr>
+<td>x4</td>
+<td>tp</td>
+<td>线程指针</td>
+<td></td>
+</tr>
+<tr>
+<td>x5</td>
+<td>t0</td>
+<td>临时寄存器or替代链接寄存器</td>
+<td>Caller</td>
+</tr>
+<tr>
+<td>x6-x7</td>
+<td>t1-t2</td>
+<td>临时寄存器</td>
+<td>Caller</td>
+</tr>
+<tr>
+<td>x8</td>
+<td>s0/fp</td>
+<td>保存寄存器</td>
+<td>Callee</td>
+</tr>
+<tr>
+<td>x9</td>
+<td>s1</td>
+<td>保存寄存器</td>
+<td>Callee</td>
+</tr>
+<tr>
+<td>x10-x11</td>
+<td>a0-a1</td>
+<td>函数参数or返回值</td>
+<td>Caller</td>
+</tr>
+<tr>
+<td>x12-17</td>
+<td>a2-a7</td>
+<td>函数参数</td>
+<td>Caller</td>
+</tr>
+<tr>
+<td>x18-x27</td>
+<td>s2-s11</td>
+<td>保存寄存器</td>
+<td>Callee</td>
+</tr>
+<tr>
+<td>x28-x31</td>
+<td>t3-t6</td>
+<td>临时寄存器</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="控制状态寄存器CSR"><a href="#控制状态寄存器CSR" class="headerlink" title="控制状态寄存器CSR"></a>控制状态寄存器CSR</h1><table>
+<thead>
+<tr>
+<th>通用寄存器</th>
+<th>访问属性</th>
+<th>功能</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mvendorid</td>
+<td>R</td>
+<td>厂商ID</td>
+<td></td>
+</tr>
+<tr>
+<td>marchId</td>
+<td>R</td>
+<td>体系结构id</td>
+<td></td>
+</tr>
+<tr>
+<td>mimpid</td>
+<td>R</td>
+<td>特点实现id</td>
+<td></td>
+</tr>
+<tr>
+<td>mhartid</td>
+<td>R</td>
+<td>hart(硬件线程) id</td>
+<td></td>
+</tr>
+<tr>
+<td>misa</td>
+<td>R</td>
+<td>指令集架构信息</td>
+<td></td>
+</tr>
+<tr>
+<td>mcycle/mycycleh</td>
+<td>R</td>
+<td>时钟周期计数器</td>
+<td></td>
+</tr>
+<tr>
+<td>cycle/ycycleh</td>
+<td>R</td>
+<td>时钟周期计数器</td>
+<td></td>
+</tr>
+<tr>
+<td>minstret</td>
+<td>R</td>
+<td>退休指令计数器</td>
+<td></td>
+</tr>
+<tr>
+<td>mstatus</td>
+<td>RW</td>
+<td>状态控制</td>
+<td></td>
+</tr>
+<tr>
+<td>mie</td>
+<td>RW</td>
+<td>中断使能</td>
+<td></td>
+</tr>
+<tr>
+<td>mip</td>
+<td>R</td>
+<td>当前中断pengding位</td>
+<td></td>
+</tr>
+<tr>
+<td>mtvec</td>
+<td>RW</td>
+<td>中断/异常矢量</td>
+<td></td>
+</tr>
+<tr>
+<td>mtval</td>
+<td>RW</td>
+<td>异常和中断的补充信息（如异常指令，非法地址）</td>
+<td></td>
+</tr>
+<tr>
+<td>mscratch</td>
+<td>RW</td>
+<td>提供一个上下文保存寄存器</td>
+<td></td>
+</tr>
+<tr>
+<td>mepc</td>
+<td>RW</td>
+<td>异常程序指针</td>
+<td></td>
+</tr>
+<tr>
+<td>mcause</td>
+<td>R</td>
+<td>异常/中断原因</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="RV32I-基础指令-47"><a href="#RV32I-基础指令-47" class="headerlink" title="RV32I 基础指令(47)"></a>RV32I 基础指令(47)</h1><h2 id="指令格式"><a href="#指令格式" class="headerlink" title="指令格式"></a>指令格式</h2><p>RISC-V ISA 是变长指令结构，但 RV32I 指令是固定长度，一条指令为32个bit，也就是4个字节，有6种指令格式：</p>
+<ul>
+<li> R 类型指令：用于寄存器-寄存器操作</li>
+<li> I 类型指令：用于短立即数和访存 load 操作</li>
+<li> S 类型指令：用于访存 store 操作</li>
+<li> B 类型指令：用于条件跳转操作</li>
+<li> U 类型指令：用于长立即数</li>
+<li> J 类型指令：用于无条件跳转</li>
+</ul>
+<p><img src="/img/RISC-V/isa6.jpg" alt="RV32I的6种指令格式"></p>
+<h2 id="基础指令"><a href="#基础指令" class="headerlink" title="基础指令"></a>基础指令</h2><p><img src="/img/RISC-V/rv32iisa.jpg" alt="RV32I的指令"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9D%82%E5%AD%A6/" class="category-chain-item">杂学</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/RISC-V/">#RISC-V</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>RISC-V</div>
+      <div>https://shenysec.github.io/2023/04/23/RISC-V/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>sheny</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月23日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年5月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/01/nmap/" title="nmap">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">nmap</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/03/CSRF%E4%B8%8ESSRF/" title="CSRF与SSRF">
+                        <span class="hidden-mobile">CSRF与SSRF</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'fluid',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
