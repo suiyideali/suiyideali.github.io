@@ -1,11 +1,21 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mochazz">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="常用方法 三要素法：时间、地点、事件 回溯攻击法：尝试模拟攻击 经验法： 攻击者常用的目录 黑客惯用手法 常见恶意程序特征    应急响应阶段检测阶段→抑制阶段→根除阶段→恢复阶段→溯源阶段 应急排查点 Windows登录记录 命令输入: gpedit.msc   “计算机配置”→“Windows设置”→“安全设置”→“本地策略”→“审核策略”，双击其中的“审核帐户登陆事件”&#x3D;&amp;#x3D">
 <meta property="og:type" content="article">
 <meta property="og:title" content="应急响应初探">
@@ -29,156 +39,274 @@
 <meta property="article:modified_time" content="2023-04-20T15:21:39.123Z">
 <meta property="article:author" content="Mochazz">
 <meta property="article:tag" content="应急响应">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://suiyideali.github.io/img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/1.png">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>应急响应初探</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>应急响应初探 - Mochazz&#39;blog</title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&text=应急响应初探"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&is_video=false&description=应急响应初探"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=应急响应初探&body=Check out this article: https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&name=应急响应初探&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&t=应急响应初探"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">应急响应阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E6%8E%92%E6%9F%A5%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">应急排查点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-number">4.</span> <span class="toc-text">Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E8%AE%B0%E5%BD%95"><span class="toc-number">4.1.</span> <span class="toc-text">登录记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="toc-number">4.2.</span> <span class="toc-text">系统信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%97%95%E8%BF%B9%E6%8E%92%E6%9F%A5"><span class="toc-number">4.3.</span> <span class="toc-text">文件痕迹排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%92%E6%9F%A5"><span class="toc-number">4.4.</span> <span class="toc-text">进程排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90"><span class="toc-number">4.5.</span> <span class="toc-text">日志分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux"><span class="toc-number">5.</span> <span class="toc-text">linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90"><span class="toc-number">5.1.</span> <span class="toc-text">查看用户相关分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF-1"><span class="toc-number">5.2.</span> <span class="toc-text">系统信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%9E%90history"><span class="toc-number">5.2.1.</span> <span class="toc-text">查看分析history</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E9%A1%B9"><span class="toc-number">5.2.2.</span> <span class="toc-text">启动项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.2.3.</span> <span class="toc-text">计划任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B"><span class="toc-number">5.2.4.</span> <span class="toc-text">进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%97%95%E8%BF%B9%E6%8E%92%E6%9F%A5-1"><span class="toc-number">5.2.5.</span> <span class="toc-text">文件痕迹排查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-1"><span class="toc-number">5.2.6.</span> <span class="toc-text">日志分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%81%B6%E6%84%8F%E6%B5%81%E9%87%8F"><span class="toc-number">5.2.7.</span> <span class="toc-text">恶意流量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E6%BC%8F%E6%B4%9E%E5%BA%94%E6%80%A5%E7%AF%87"><span class="toc-number">6.</span> <span class="toc-text">web漏洞应急篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache-Shiro%E6%94%BB%E5%87%BB"><span class="toc-number">7.</span> <span class="toc-text">Apache Shiro攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Weblogic%E6%94%BB%E5%87%BB"><span class="toc-number">8.</span> <span class="toc-text">Weblogic攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E6%9C%AA%E6%8E%88%E6%9D%83"><span class="toc-number">9.</span> <span class="toc-text">Redis未授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">9.1.</span> <span class="toc-text">应急流程：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B0%E8%9D%8E%E4%B8%8E%E5%86%85%E5%AD%98%E9%A9%AC%E6%94%BB%E5%87%BB"><span class="toc-number">10.</span> <span class="toc-text">冰蝎与内存马攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">11.</span> <span class="toc-text">参考</span></a></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        应急响应初探
-    </h1>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
 
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Mochazz</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-04-20T15:00:44.000Z" class="dt-published" itemprop="datePublished">2023-04-20</time>
-        
-      
-    </div>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
-    </div>
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" rel="tag">应急响应</a>
-    </div>
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-    </div>
-  </header>
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a><strong>常用方法</strong></h2><ul>
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mochazz&#39;blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="应急响应初探"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mochazz
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-20 23:00" pubdate>
+          2023年4月20日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          50 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">应急响应初探</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a><strong>常用方法</strong></h2><ul>
 <li>三要素法：时间、地点、事件</li>
 <li>回溯攻击法：尝试模拟攻击</li>
 <li>经验法：<ul>
@@ -189,7 +317,7 @@
 </li>
 </ul>
 <h2 id="应急响应阶段"><a href="#应急响应阶段" class="headerlink" title="应急响应阶段"></a>应急响应阶段</h2><p>检测阶段→抑制阶段→根除阶段→恢复阶段→溯源阶段</p>
-<h2 id="应急排查点"><a href="#应急排查点" class="headerlink" title="应急排查点"></a>应急排查点</h2><p><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/1.png" alt="应急排查点"></p>
+<h2 id="应急排查点"><a href="#应急排查点" class="headerlink" title="应急排查点"></a>应急排查点</h2><p><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/1.png" srcset="/img/loading.gif" lazyload alt="应急排查点"></p>
 <h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a><strong>Windows</strong></h2><h3 id="登录记录"><a href="#登录记录" class="headerlink" title="登录记录"></a>登录记录</h3><ol>
 <li>命令输入: gpedit.msc  </li>
 <li>“计算机配置”→“Windows设置”→“安全设置”→“本地策略”→“审核策略”，双击其中的“审核帐户登陆事件”&#x3D;&#x3D;&gt;审核登录事件–&gt;勾上成功&#x2F;失败–&gt;点击应用–&gt;点击确定</li>
@@ -253,7 +381,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/2.png" alt="tasklist命令"></p>
+<p><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/2.png" srcset="/img/loading.gif" lazyload alt="tasklist命令"></p>
 <ul>
 <li>netstat命令<ul>
 <li>在排查过程中，一般会使用netstat -ano | findstr “ESTABLISHED” 查看目前的网络连接，定位可疑的ESTABLISHED。根据netstat 定位出的pid，再通过tasklist命令进行程序定位</li>
@@ -290,18 +418,18 @@
 </ul>
 </li>
 </ul>
-<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="查看用户相关分析"><a href="#查看用户相关分析" class="headerlink" title="查看用户相关分析"></a>查看用户相关分析</h3><pre><code>  1. useradd userdel 的命令时间变化（stat），以及是否包含可疑信息
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="查看用户相关分析"><a href="#查看用户相关分析" class="headerlink" title="查看用户相关分析"></a>查看用户相关分析</h3><pre><code class="hljs">  1. useradd userdel 的命令时间变化（stat），以及是否包含可疑信息
   2. cat /etc/passwd 分析可以账号，可登录账号
 </code></pre>
-<h3 id="系统信息-1"><a href="#系统信息-1" class="headerlink" title="系统信息"></a>系统信息</h3><h4 id="查看分析history"><a href="#查看分析history" class="headerlink" title="查看分析history"></a>查看分析history</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /root/.bash_history</span><br></pre></td></tr></table></figure>
+<h3 id="系统信息-1"><a href="#系统信息-1" class="headerlink" title="系统信息"></a>系统信息</h3><h4 id="查看分析history"><a href="#查看分析history" class="headerlink" title="查看分析history"></a>查看分析history</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /root/.bash_history<br></code></pre></td></tr></table></figure>
 
-<pre><code>  1. wget远程某主机（域名&amp;IP）的远控文件；
+<pre><code class="hljs">  1. wget远程某主机（域名&amp;IP）的远控文件；
   2. 尝试连接内网某主机（ssh scp），便于分析攻击者意图
   3. 打包某敏感数据或代码，tar zip 类命令
   4. 对系统进行配置，包含命令修改、远控木马类，可找到攻击者关联信息
 </code></pre>
 <h4 id="启动项"><a href="#启动项" class="headerlink" title="启动项"></a>启动项</h4><p>启动项作为恶意病毒的一个常用的驻留手段，以下几个地方可以查找启动项相关的内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/rc.local</span><br><span class="line">/etc/rc.local</span><br><span class="line">rc.local</span><br><span class="line">/etc/init.d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">/etc/init.d/rc.local<br>/etc/rc.local<br>rc.local<br>/etc/init.d<br></code></pre></td></tr></table></figure>
 
 <h4 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h4><ul>
 <li>通过crontab -l 查看当前的任务计划有哪些，也可以指定用户进行查看<ul>
@@ -310,16 +438,16 @@
 </li>
 <li>查看etc目录任务计划相关文件，一般存在计划任务的目录有以下，可以通过浏览下面的计划任务文件的方式来查看计划任务</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /etc/cron*</span><br><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> /etc/cron*<br>crontab -l<br></code></pre></td></tr></table></figure>
 
 <h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><p>使用netstat 网络连接命令，分析可疑端口、可疑IP、可疑PID及程序进程</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -antlp | more</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">netstat -antlp | more<br></code></pre></td></tr></table></figure>
 
 <p>如下图所示，为某恶意程序的外链信息。然后根据pid，利用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> –alh /proc/pid</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> –alh /proc/pid<br></code></pre></td></tr></table></figure>
 
-<p>命令查看其对应的可执行程序<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/3.png" alt="ls –alh /proc/pid"><br>也可以利用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof –p pid</span><br></pre></td></tr></table></figure>
+<p>命令查看其对应的可执行程序<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/3.png" srcset="/img/loading.gif" lazyload alt="ls –alh /proc/pid"><br>也可以利用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsof –p pid<br></code></pre></td></tr></table></figure>
 
 <p>查看pid对应的可执行程序,如果是恶意进程，可以使用kill -9（数字九） 进程的PID值命令来结束进程，如kill -9 2535，然后使用 rm -rf filename 来删除木马，如果root用户都无法删除相关文件，很可能文件被加上了i属性，使用 lsatter filename 命令来查看文件属性，然后使用chattr -i filename 命令来移除i属性继而删除文件；也有的进程因为存在守护进程而无法杀除，可以先把进程挂起，再杀掉守护进程后，再回来把进程杀掉。</p>
 <h4 id="文件痕迹排查-1"><a href="#文件痕迹排查-1" class="headerlink" title="文件痕迹排查"></a>文件痕迹排查</h4><ul>
@@ -329,7 +457,7 @@
 <ul>
 <li>特殊文件</li>
 </ul>
-<p>查找777的权限文件 find &#x2F; *.jsp -perm 777<br>webshell<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/4.png" alt="webshell"><br>查看目标系统命令的修改时间：ls -alt &#x2F;bin</p>
+<p>查找777的权限文件 find &#x2F; *.jsp -perm 777<br>webshell<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/4.png" srcset="/img/loading.gif" lazyload alt="webshell"><br>查看目标系统命令的修改时间：ls -alt &#x2F;bin</p>
 <h4 id="日志分析-1"><a href="#日志分析-1" class="headerlink" title="日志分析"></a>日志分析</h4><p><strong>var&#x2F;log下的具体功能</strong></p>
 <ul>
 <li>&#x2F;var&#x2F;log&#x2F;wtmp 登录进入，退出，数据交换、关机和重启记录</li>
@@ -345,13 +473,13 @@
 <li>&#x2F;var&#x2F;log&#x2F;faillog 记录登录系统不成功的账号信息</li>
 </ul>
 <p><strong>另外</strong></p>
-<pre><code>  - last 为登陆成功日志
+<pre><code class="hljs">  - last 为登陆成功日志
   - lastb为登录失败，可查看是否爆破
   - stat 查看日志创建时间
   - 如果怀疑某个文件为木马控制端，可直接对文件进行调试查看传递信息
 </code></pre>
 <p>strace -p pid #调试进程</p>
-<pre><code>  - history 或 cat ~/.bash_history 查看历史命令，查找痕迹
+<pre><code class="hljs">  - history 或 cat ~/.bash_history 查看历史命令，查找痕迹
 </code></pre>
 <p><strong>入侵者可能会删除机器的日志信息，可以查看日志信息是否还存在或者是否被清空，相关命令示例：</strong><br>root@ahuan:~# ll -h &#x2F;var&#x2F;log&#x2F;*<br>-rw-r–r–  1 root      root               0 Mar  1 06:25 &#x2F;var&#x2F;log&#x2F;alternatives.log<br>-rw-r–r–  1 root      root             283 Feb 25 09:57 &#x2F;var&#x2F;log&#x2F;alternatives.log.1<br>-rw-r–r–  1 root      root             214 Feb 18 11:57 &#x2F;var&#x2F;log&#x2F;alternatives.log.2.gz<br>-rw-r–r–  1 root      root             477 Dec 20 23:29 &#x2F;var&#x2F;log&#x2F;alternatives.log.3.gz<br>-rw-r–r–  1 root      root            2.0K Nov 30 22:56 &#x2F;var&#x2F;log&#x2F;alternatives.log.4.gz</p>
 <h4 id="恶意流量"><a href="#恶意流量" class="headerlink" title="恶意流量"></a>恶意流量</h4><p>netstat -anlpt 查看是否存在恶意流量（通过威胁情报进行判定是否为恶意域名）<br>查找对应流量连接位置<br>ls -al &#x2F;proc&#x2F;PID (根据查到pid进程输入)</p>
@@ -362,12 +490,12 @@
 <p>排查思路，该漏洞都是通过remeberMe进行传入payload，直接对日志shiro进行反编译即可查到相关信息（vps、未公开的利用链，特殊的payload）</p>
 <h2 id="Weblogic攻击"><a href="#Weblogic攻击" class="headerlink" title="Weblogic攻击"></a>Weblogic攻击</h2><p>流量层：可以直接查看到访问地址数据包内payload<br>如CVE-2020-2551(iiop)漏洞主要是通过 JtaTransactionManager 来进行加载 LDAP 协议的内容<br><strong>在日志里显示：</strong><br>Weblogic日志主要分为：Server日志、HTTP日志和DOMAIN日志；</p>
 <p>1、Server日志<br>主要功能：记录Weblogic Server启动至关闭过程中的运行信息和错误信息。<br>日志结构：时间戳、严重程度、子系统、计算机名、服务器名、线程 ID、用户 ID、事务 ID、诊断上下文 ID、原始时间值、消息 ID 和消息文本。<br>2、DOMAIN日志<br>主要功能：记录一个DOMAIN下的各个Weblogic Server的启动至关闭过程中的运行信息和错误信息。<br>日志结构：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">####<span class="tag">&lt;<span class="name">Oct</span> <span class="attr">18</span>, <span class="attr">2018</span> <span class="attr">2:21:11</span> <span class="attr">PM</span> <span class="attr">CST</span>&gt;</span>     &lt;[ACTIVE]ExecuteThread: &#x27;9&#x27; for queue: &#x27;weblogic.kernel.Default (self-tuning)&#x27;&gt; <span class="tag">&lt;&gt;</span> <span class="tag">&lt;&gt;</span> <span class="tag">&lt;&gt;</span> &lt;1539843671288&gt;  </span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html">####<span class="hljs-tag">&lt;<span class="hljs-name">Oct</span> <span class="hljs-attr">18</span>, <span class="hljs-attr">2018</span> <span class="hljs-attr">2:21:11</span> <span class="hljs-attr">PM</span> <span class="hljs-attr">CST</span>&gt;</span>     &lt;[ACTIVE]ExecuteThread: &#x27;9&#x27; for queue: &#x27;weblogic.kernel.Default (self-tuning)&#x27;&gt; <span class="hljs-tag">&lt;&gt;</span> <span class="hljs-tag">&lt;&gt;</span> <span class="hljs-tag">&lt;&gt;</span> &lt;1539843671288&gt;  <br></code></pre></td></tr></table></figure>
 
 <p>iiop协议不会在http请求中有记录，应急主要注意domain日志的记录</p>
 <p>应急流程：<br><strong>t3协议</strong><br>临时处置方式：<br>1.及时更新补丁<br>2.禁用T3协议<br>3.禁止T3端口对外开放, 或者限制可访问T3端口的IP来源<br>漏洞列表：<br>CVE-2017-3248<br>CVE-2018-2628<br>CVE-2018-2893<br>CVE-2019-2890<br>CVE-2020-2555<br><strong>iiop协议</strong><br>临时处置：<br>1.及时更新补丁<br>2.通过 Weblogic 控制台进行关闭 IIOP 协议<br>漏洞列表：<br>CVE-2020-2551</p>
 <h2 id="Redis未授权"><a href="#Redis未授权" class="headerlink" title="Redis未授权"></a>Redis未授权</h2><p>1.写webshell<br>2.写ssh密钥<br>3.写计划任务反弹shell</p>
-<h3 id="应急流程："><a href="#应急流程：" class="headerlink" title="应急流程："></a>应急流程：</h3><p>查看配置信息是否存在异常（根据显示信息可判断是哪种攻击方式）<br>config get *<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/5.png" alt="config get *"><br>写ssh密钥<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/6.png" alt="写ssh密钥"><br>反弹shell<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/7.png" alt="反弹shell"><br>写文件路径<br>查看key信息是否有攻击队特征信息<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/8.png" alt="查看key信息是否有攻击队特征信息"><br>如果发现攻击队正在操作redis，可以使用 monitor命令进行检测<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/8.png" alt="monitor命令进行检测"></p>
+<h3 id="应急流程："><a href="#应急流程：" class="headerlink" title="应急流程："></a>应急流程：</h3><p>查看配置信息是否存在异常（根据显示信息可判断是哪种攻击方式）<br>config get *<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/5.png" srcset="/img/loading.gif" lazyload alt="config get *"><br>写ssh密钥<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/6.png" srcset="/img/loading.gif" lazyload alt="写ssh密钥"><br>反弹shell<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/7.png" srcset="/img/loading.gif" lazyload alt="反弹shell"><br>写文件路径<br>查看key信息是否有攻击队特征信息<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/8.png" srcset="/img/loading.gif" lazyload alt="查看key信息是否有攻击队特征信息"><br>如果发现攻击队正在操作redis，可以使用 monitor命令进行检测<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/8.png" srcset="/img/loading.gif" lazyload alt="monitor命令进行检测"></p>
 <h2 id="冰蝎与内存马攻击"><a href="#冰蝎与内存马攻击" class="headerlink" title="冰蝎与内存马攻击"></a>冰蝎与内存马攻击</h2><ul>
 <li>冰蝎</li>
 </ul>
@@ -375,154 +503,414 @@
 <ul>
 <li>内存马</li>
 </ul>
-<p>攻击特征：没有落地文件通常以 <a target="_blank" rel="noopener" href="http://url.com/xxx/">http://url.com/xxx/</a> (直接以某个文件夹为路径)<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/10.png" alt="内存马"><br><strong>应急思路</strong><br>针对webshell，可直接对web路径下查找动态脚本文件，也可以直接搜索文件内特征值<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/11.png" alt="find / -name *.jsp*"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name *.jsp | xargs grep &quot;pass&quot;</span><br></pre></td></tr></table></figure>
+<p>攻击特征：没有落地文件通常以 <a target="_blank" rel="noopener" href="http://url.com/xxx/">http://url.com/xxx/</a> (直接以某个文件夹为路径)<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/10.png" srcset="/img/loading.gif" lazyload alt="内存马"><br><strong>应急思路</strong><br>针对webshell，可直接对web路径下查找动态脚本文件，也可以直接搜索文件内特征值<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/11.png" srcset="/img/loading.gif" lazyload alt="find / -name *.jsp*"></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">find</span> / -name *.jsp | xargs <span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;pass&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p>（pass为特征值，可以修改。如果返回内容过多可自行修改特征）</p>
-<p><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/12.png" alt="pass特征"><br>对于内存马，虽然现在有各种文章分析如何提取，但最简单的方法还是重启解决问题。<br>如果想知道如何手动清理，请移步至：<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIwMDk1MjMyMg==&mid=2247485680&idx=1&sn=bbd2bd94da7720c6567c462c8559cfdd&scene=21#wechat_redirect">https://mp.weixin.qq.com/s/DRbGeVOcJ8m9xo7Gin45kQ</a><br>修复建议：<br>1.根据漏洞来定，如果是程序漏洞修复即可<br>2.上传漏洞，禁止上传动态脚本文件，采用白名单机制仅允许特定后缀上传</p>
+<p><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/12.png" srcset="/img/loading.gif" lazyload alt="pass特征"><br>对于内存马，虽然现在有各种文章分析如何提取，但最简单的方法还是重启解决问题。<br>如果想知道如何手动清理，请移步至：<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIwMDk1MjMyMg==&mid=2247485680&idx=1&sn=bbd2bd94da7720c6567c462c8559cfdd&scene=21#wechat_redirect">https://mp.weixin.qq.com/s/DRbGeVOcJ8m9xo7Gin45kQ</a><br>修复建议：<br>1.根据漏洞来定，如果是程序漏洞修复即可<br>2.上传漏洞，禁止上传动态脚本文件，采用白名单机制仅允许特定后缀上传</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/DRbGeVOcJ8m9xo7Gin45kQ">https://mp.weixin.qq.com/s/DRbGeVOcJ8m9xo7Gin45kQ</a></li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/w3c7tKfj1Plcbv57Gz8M0g">https://mp.weixin.qq.com/s/w3c7tKfj1Plcbv57Gz8M0g</a></li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/f38CmhZCXPvz5P-c17z-Bw">https://mp.weixin.qq.com/s/f38CmhZCXPvz5P-c17z-Bw</a></li>
 </ol>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="category-chain-item">网络安全</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">#应急响应</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>应急响应初探</div>
+      <div>https://suiyideali.github.io/2023/04/20/应急响应初探/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mochazz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年4月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
-</article>
 
 
 
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/" title="chatgpt及其大语言模型(LLM)应用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">chatgpt及其大语言模型(LLM)应用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/" title="Redis未授权访问初探">
+                        <span class="hidden-mobile">Redis未授权访问初探</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">首页</a></li>
-        
-          <li><a href="/about/">关于</a></li>
-        
-          <li><a href="/archives/">归档</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">应急响应阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E6%8E%92%E6%9F%A5%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">应急排查点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-number">4.</span> <span class="toc-text">Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E8%AE%B0%E5%BD%95"><span class="toc-number">4.1.</span> <span class="toc-text">登录记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="toc-number">4.2.</span> <span class="toc-text">系统信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%97%95%E8%BF%B9%E6%8E%92%E6%9F%A5"><span class="toc-number">4.3.</span> <span class="toc-text">文件痕迹排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%92%E6%9F%A5"><span class="toc-number">4.4.</span> <span class="toc-text">进程排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90"><span class="toc-number">4.5.</span> <span class="toc-text">日志分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux"><span class="toc-number">5.</span> <span class="toc-text">linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90"><span class="toc-number">5.1.</span> <span class="toc-text">查看用户相关分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF-1"><span class="toc-number">5.2.</span> <span class="toc-text">系统信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%9E%90history"><span class="toc-number">5.2.1.</span> <span class="toc-text">查看分析history</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E9%A1%B9"><span class="toc-number">5.2.2.</span> <span class="toc-text">启动项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.2.3.</span> <span class="toc-text">计划任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B"><span class="toc-number">5.2.4.</span> <span class="toc-text">进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%97%95%E8%BF%B9%E6%8E%92%E6%9F%A5-1"><span class="toc-number">5.2.5.</span> <span class="toc-text">文件痕迹排查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-1"><span class="toc-number">5.2.6.</span> <span class="toc-text">日志分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%81%B6%E6%84%8F%E6%B5%81%E9%87%8F"><span class="toc-number">5.2.7.</span> <span class="toc-text">恶意流量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E6%BC%8F%E6%B4%9E%E5%BA%94%E6%80%A5%E7%AF%87"><span class="toc-number">6.</span> <span class="toc-text">web漏洞应急篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache-Shiro%E6%94%BB%E5%87%BB"><span class="toc-number">7.</span> <span class="toc-text">Apache Shiro攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Weblogic%E6%94%BB%E5%87%BB"><span class="toc-number">8.</span> <span class="toc-text">Weblogic攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E6%9C%AA%E6%8E%88%E6%9D%83"><span class="toc-number">9.</span> <span class="toc-text">Redis未授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">9.1.</span> <span class="toc-text">应急流程：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B0%E8%9D%8E%E4%B8%8E%E5%86%85%E5%AD%98%E9%A9%AC%E6%94%BB%E5%87%BB"><span class="toc-number">10.</span> <span class="toc-text">冰蝎与内存马攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">11.</span> <span class="toc-text">参考</span></a></li></ol>
+            
+          </article>
+        </div>
       </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&text=应急响应初探"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&is_video=false&description=应急响应初探"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=应急响应初探&body=Check out this article: https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&title=应急响应初探"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&name=应急响应初探&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/&t=应急响应初探"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
     </div>
 
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2016-2023
-    Mochazz
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
 
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
-    <!-- styles -->
+  </div>
+</div>
 
+    
 
+    
+  </main>
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
 
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
 
-<!-- Baidu Analytics -->
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
 
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

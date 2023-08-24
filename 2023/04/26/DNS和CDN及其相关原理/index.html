@@ -1,11 +1,21 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mochazz">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="DNS1. 什么是DNSDNS （Domain Name System 的缩写）是一个分布式数据库，它将域名映射到与之关联的IP地址。DNS使得人们可以使用易于记忆的域名访问网站或其他网络服务，而不是使用长长的IP地址。例如，通过DNS，您可以使用”cyberzone.cloud“而不是“185.199.111.153”来访问本博客。 DNS通常由域名注册商或Internet服务提供商提供。 2.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DNS和CDN及其相关原理">
@@ -22,188 +32,306 @@
 <meta property="article:modified_time" content="2023-05-22T03:41:29.023Z">
 <meta property="article:author" content="Mochazz">
 <meta property="article:tag" content="DNS CDN">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://suiyideali.github.io/img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427205517356.png">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>DNS和CDN及其相关原理</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>DNS和CDN及其相关原理 - Mochazz&#39;blog</title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2023/04/28/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%89)/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2023/04/25/Python%E5%B8%B8%E7%94%A8%E6%A0%87%E5%87%86%E5%BA%93%E5%AD%A6%E4%B9%A0/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&text=DNS和CDN及其相关原理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&is_video=false&description=DNS和CDN及其相关原理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=DNS和CDN及其相关原理&body=Check out this article: https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&name=DNS和CDN及其相关原理&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&t=DNS和CDN及其相关原理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.</span> <span class="toc-text">DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFDNS"><span class="toc-number">1.1.</span> <span class="toc-text">1. 什么是DNS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-DNS%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2. DNS查询过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9F%9F%E5%90%8D%E7%9A%84%E5%B1%82%E7%BA%A7"><span class="toc-number">1.3.</span> <span class="toc-text">3. 域名的层级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%A0%B9%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">4. 根域名服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-NS-%E8%AE%B0%E5%BD%95%E7%9A%84%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.5.</span> <span class="toc-text">5. NS 记录的查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-DNS%E7%9A%84%E8%AE%B0%E5%BD%95%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.6.</span> <span class="toc-text">6. DNS的记录类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%85%B6%E4%BB%96DNS%E5%B7%A5%E5%85%B7"><span class="toc-number">1.7.</span> <span class="toc-text">7. 其他DNS工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CND"><span class="toc-number">2.</span> <span class="toc-text">CND</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFCND"><span class="toc-number">2.1.</span> <span class="toc-text">1. 什么是CND</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">2.2.</span> <span class="toc-text">2. 原理分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rDNS"><span class="toc-number">3.</span> <span class="toc-text">rDNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%8F%8D%E5%90%91DNS"><span class="toc-number">3.1.</span> <span class="toc-text">1. 反向DNS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-rDNS%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">2. rDNS的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-rDNS%E8%BF%87%E7%A8%8B"><span class="toc-number">3.3.</span> <span class="toc-text">3. rDNS过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%9A%84%E5%AE%89%E5%85%A8%E6%94%BB%E5%87%BB"><span class="toc-number">4.</span> <span class="toc-text">相关的安全攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%9F%E5%89%8D%E7%BD%AE%EF%BC%88Domain-Fronting%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">1. 域前置（Domain Fronting）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9F%9F%E5%89%8D%E7%BD%AE"><span class="toc-number">4.1.1.</span> <span class="toc-text">1.1 什么是域前置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.2.</span> <span class="toc-text">1.2 技术原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        DNS和CDN及其相关原理
-    </h1>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
 
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Mochazz</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-04-26T08:53:29.000Z" class="dt-published" itemprop="datePublished">2023-04-26</time>
-        
-      
-    </div>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
-    </div>
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/DNS-CDN/" rel="tag">DNS CDN</a>
-    </div>
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-    </div>
-  </header>
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><h3 id="1-什么是DNS"><a href="#1-什么是DNS" class="headerlink" title="1. 什么是DNS"></a>1. 什么是DNS</h3><p>DNS （Domain Name System 的缩写）是一个分布式数据库，它将域名映射到与之关联的IP地址。DNS使得人们可以使用易于记忆的域名访问网站或其他网络服务，而不是使用长长的IP地址。例如，通过DNS，您可以使用”<a target="_blank" rel="noopener" href="https://cyberzone.cloud/">cyberzone.cloud</a>“而不是“185.199.111.153”来访问本博客。</p>
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mochazz&#39;blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="DNS和CDN及其相关原理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mochazz
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-26 16:53" pubdate>
+          2023年4月26日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          77 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">DNS和CDN及其相关原理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><h3 id="1-什么是DNS"><a href="#1-什么是DNS" class="headerlink" title="1. 什么是DNS"></a>1. 什么是DNS</h3><p>DNS （Domain Name System 的缩写）是一个分布式数据库，它将域名映射到与之关联的IP地址。DNS使得人们可以使用易于记忆的域名访问网站或其他网络服务，而不是使用长长的IP地址。例如，通过DNS，您可以使用”<a target="_blank" rel="noopener" href="https://cyberzone.cloud/">cyberzone.cloud</a>“而不是“185.199.111.153”来访问本博客。</p>
 <p>DNS通常由域名注册商或Internet服务提供商提供。</p>
 <h3 id="2-DNS查询过程"><a href="#2-DNS查询过程" class="headerlink" title="2. DNS查询过程"></a>2. DNS查询过程</h3><p>使用 <strong>dig</strong> 显示整个域名的查询过程</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig mochazz.cloud</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig mochazz.cloud<br></code></pre></td></tr></table></figure>
 
-<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427205517356.png" alt="ding mochazz.cloud"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427205517356.png" srcset="/img/loading.gif" lazyload alt="ding mochazz.cloud"></p>
 <p>其中：</p>
 <ul>
 <li><p>查询参数和统计</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; mochazz.cloud</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- <span class="string">opcode: QUERY, status: NOERROR, id: 7631</span></span><br><span class="line"><span class="string">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 16</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; mochazz.cloud<br>;; global options: +cmd<br>;; Got answer:<br>;; -&gt;&gt;HEADER&lt;&lt;- <span class="hljs-string">opcode: QUERY, status: NOERROR, id: 7631</span><br><span class="hljs-string">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 16</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>查询内容</p>
 <p>查询域名 **mochazz.cloud **的A记录，即address的记录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;; QUESTION SECTION:</span><br><span class="line">;mochazz.cloud.			IN	A</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">;; QUESTION SECTION:<br>;mochazz.cloud.			IN	A<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>DNS服务器的回答</p>
 <p>询问DNS服务器后，会告诉你 <strong>mochazz.cloud</strong> 有哪些 A 记录，即哪些地址， 其中返回的600室TTL值（Time to live 的缩写），表示缓存时间，即600秒之内不用重新查询。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;; ANSWER SECTION:</span><br><span class="line">mochazz.cloud.		600	IN	A	76.76.21.21</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">;; ANSWER SECTION:<br>mochazz.cloud.		600	IN	A	76.76.21.21<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>NS记录（Name Server的缩写）</p>
 <p>即返回哪些服务器负责管理 <strong>mochazz.cloud</strong>的DNS记录，显示结果有2条，向其中任一台查询就知道域名的地址了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;; AUTHORITY SECTION:</span><br><span class="line">mochazz.cloud.		3600	IN	NS	ns4.dnsv2.com.</span><br><span class="line">mochazz.cloud.		3600	IN	NS	ns3.dnsv2.com.</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">;; AUTHORITY SECTION:<br>mochazz.cloud.		3600	IN	NS	ns4.dnsv2.com.<br>mochazz.cloud.		3600	IN	NS	ns3.dnsv2.com.<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>域名服务器地址</p>
 <p>回复了两个域名服务器的地址</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">;; ADDITIONAL SECTION:</span><br><span class="line">ns3.dnsv2.com.		169800	IN	A	129.211.176.248</span><br><span class="line">ns3.dnsv2.com.		169800	IN	A	183.47.126.189</span><br><span class="line">ns3.dnsv2.com.		169800	IN	A	183.192.164.118</span><br><span class="line">ns3.dnsv2.com.		169800	IN	A	223.166.151.17</span><br><span class="line">ns3.dnsv2.com.		169800	IN	A	1.12.0.29</span><br><span class="line">ns3.dnsv2.com.		169800	IN	A	117.89.178.226</span><br><span class="line">ns4.dnsv2.com.		169658	IN	A	36.155.149.242</span><br><span class="line">ns4.dnsv2.com.		169658	IN	A	61.151.180.45</span><br><span class="line">ns4.dnsv2.com.		169658	IN	A	112.80.181.103</span><br><span class="line">ns4.dnsv2.com.		169658	IN	A	117.89.178.204</span><br><span class="line">ns4.dnsv2.com.		169658	IN	A	120.241.130.40</span><br><span class="line">ns4.dnsv2.com.		169658	IN	A	223.166.151.18</span><br><span class="line">ns4.dnsv2.com.		169658	IN	A	1.12.0.30</span><br><span class="line">ns3.dnsv2.com.		158515	IN	AAAA	2402:4e00:1430:1102:0:9136:2b2f:bf6b</span><br><span class="line">ns4.dnsv2.com.		151805	IN	AAAA	2402:4e00:1020:1264:0:9136:29bb:2f5e</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash">;; ADDITIONAL SECTION:<br>ns3.dnsv2.com.		169800	IN	A	129.211.176.248<br>ns3.dnsv2.com.		169800	IN	A	183.47.126.189<br>ns3.dnsv2.com.		169800	IN	A	183.192.164.118<br>ns3.dnsv2.com.		169800	IN	A	223.166.151.17<br>ns3.dnsv2.com.		169800	IN	A	1.12.0.29<br>ns3.dnsv2.com.		169800	IN	A	117.89.178.226<br>ns4.dnsv2.com.		169658	IN	A	36.155.149.242<br>ns4.dnsv2.com.		169658	IN	A	61.151.180.45<br>ns4.dnsv2.com.		169658	IN	A	112.80.181.103<br>ns4.dnsv2.com.		169658	IN	A	117.89.178.204<br>ns4.dnsv2.com.		169658	IN	A	120.241.130.40<br>ns4.dnsv2.com.		169658	IN	A	223.166.151.18<br>ns4.dnsv2.com.		169658	IN	A	1.12.0.30<br>ns3.dnsv2.com.		158515	IN	AAAA	2402:4e00:1430:1102:0:9136:2b2f:bf6b<br>ns4.dnsv2.com.		151805	IN	AAAA	2402:4e00:1020:1264:0:9136:29bb:2f5e<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>DNS服务器传输的信息</p>
 <p>本机的DNS服务器是192.168.1.1，查询端口是53（DNS服务器的默认端口），以及回应长度是367字节。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">;; Query time: 63 msec</span><br><span class="line">;; SERVER: 192.168.1.1<span class="comment">#53(192.168.1.1)</span></span><br><span class="line">;; WHEN: Thu Apr 27 20:51:49 CST 2023</span><br><span class="line">;; MSG SIZE  rcvd: 367</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">;; Query time: 63 msec<br>;; SERVER: 192.168.1.1<span class="hljs-comment">#53(192.168.1.1)</span><br>;; WHEN: Thu Apr 27 20:51:49 CST 2023<br>;; MSG SIZE  rcvd: 367<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="3-域名的层级"><a href="#3-域名的层级" class="headerlink" title="3. 域名的层级"></a>3. 域名的层级</h3><p>通过查询内容可以知道</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;; QUESTION SECTION:</span><br><span class="line">;mochazz.cloud.			IN	A</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">;; QUESTION SECTION:<br>;mochazz.cloud.			IN	A<br></code></pre></td></tr></table></figure>
 
 <p>查询的是 <strong>mochazz.cloud.</strong> 而不是 <strong>mochazz.cloud</strong> </p>
 <p>根本原因是所有域名的尾部，实际上都有一个根域名，对于所有域名都是一样的，所以平时是省略的。</p>
@@ -212,46 +340,46 @@
 <p>顶级域名的下一级就是次域名（second-level domain，缩写为SLD），这里的次域名为 .mochazz 和 .cyberzone。平时注册域名就是S LD</p>
 <p>次域名的下一级就是主机名（host），比如<a target="_blank" rel="noopener" href="http://www.mochazz.cloud/">www.mochazz.cloud</a> 中主机名就是www。是用户在自己的域里面为服务器分配的名称，是用户可以任意分配的。</p>
 <p>域名的层级结构为</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主机名.次级域名.顶级域名.根域名</span><br><span class="line">host.SLD.TLD.root</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs tex">主机名.次级域名.顶级域名.根域名<br>host.SLD.TLD.root<br></code></pre></td></tr></table></figure>
 
 
 
 <h3 id="4-根域名服务器"><a href="#4-根域名服务器" class="headerlink" title="4. 根域名服务器"></a>4. 根域名服务器</h3><p>DNS服务器根据域名的层级，进行分级查询。</p>
 <p>需要明确的是，每一级域名都有自己的NS记录，NS记录指向该级域名的域名服务器。这些服务器知道下一级域名的各种记录。</p>
 <p>所谓”分级查询”，就是从根域名开始，依次查询每一级域名的NS记录，直到查到最终的IP地址，过程大致如下</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">从&quot;根域名服务器&quot;查到&quot;顶级域名服务器&quot;的NS记录和A记录（IP地址）</span><br><span class="line">从&quot;顶级域名服务器&quot;查到&quot;次级域名服务器&quot;的NS记录和A记录（IP地址）</span><br><span class="line">从&quot;次级域名服务器&quot;查出&quot;主机名&quot;的IP地址</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tex">从&quot;根域名服务器&quot;查到&quot;顶级域名服务器&quot;的NS记录和A记录（IP地址）<br>从&quot;顶级域名服务器&quot;查到&quot;次级域名服务器&quot;的NS记录和A记录（IP地址）<br>从&quot;次级域名服务器&quot;查出&quot;主机名&quot;的IP地址<br></code></pre></td></tr></table></figure>
 
 
 
-<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427213515688.png" alt="分级查询"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427213515688.png" srcset="/img/loading.gif" lazyload alt="分级查询"></p>
 <p><code>dig</code>命令的<code>+trace</code>参数可以显示DNS的整个分级查询过程。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig +trace www.mochazz.cloud</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig +trace www.mochazz.cloud<br></code></pre></td></tr></table></figure>
 
-<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427214910938.png" alt="dig +trace www.mochazz.cloud"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230427214910938.png" srcset="/img/loading.gif" lazyload alt="dig +trace www.mochazz.cloud"></p>
 <ul>
 <li><p>列出根域名<code>.</code>的所有NS记录，即所有根域名服务器</p>
 <p>根据内置的根域名服务器IP地址，DNS服务器向所有这些IP地址发出查询请求，询问<code>mochazz.cloud</code>的顶级域名服务器<code>cloud.</code>的NS记录。最先回复的根域名服务器将被缓存，以后只向这台服务器发请求。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; +trace www.mochazz.cloud</span><br><span class="line">;; global options: +cmd</span><br><span class="line">.			21219	IN	NS	i.root-servers.net.</span><br><span class="line">.			21219	IN	NS	h.root-servers.net.</span><br><span class="line">.			21219	IN	NS	d.root-servers.net.</span><br><span class="line">.			21219	IN	NS	g.root-servers.net.</span><br><span class="line">.			21219	IN	NS	e.root-servers.net.</span><br><span class="line">.			21219	IN	NS	f.root-servers.net.</span><br><span class="line">.			21219	IN	NS	l.root-servers.net.</span><br><span class="line">.			21219	IN	NS	a.root-servers.net.</span><br><span class="line">.			21219	IN	NS	b.root-servers.net.</span><br><span class="line">.			21219	IN	NS	c.root-servers.net.</span><br><span class="line">.			21219	IN	NS	k.root-servers.net.</span><br><span class="line">.			21219	IN	NS	m.root-servers.net.</span><br><span class="line">.			21219	IN	NS	j.root-servers.net.</span><br><span class="line">;; Received 512 bytes from 192.168.1.1<span class="comment">#53(192.168.1.1) in 58 ms</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; +trace www.mochazz.cloud<br>;; global options: +cmd<br>.			21219	IN	NS	i.root-servers.net.<br>.			21219	IN	NS	h.root-servers.net.<br>.			21219	IN	NS	d.root-servers.net.<br>.			21219	IN	NS	g.root-servers.net.<br>.			21219	IN	NS	e.root-servers.net.<br>.			21219	IN	NS	f.root-servers.net.<br>.			21219	IN	NS	l.root-servers.net.<br>.			21219	IN	NS	a.root-servers.net.<br>.			21219	IN	NS	b.root-servers.net.<br>.			21219	IN	NS	c.root-servers.net.<br>.			21219	IN	NS	k.root-servers.net.<br>.			21219	IN	NS	m.root-servers.net.<br>.			21219	IN	NS	j.root-servers.net.<br>;; Received 512 bytes from 192.168.1.1<span class="hljs-comment">#53(192.168.1.1) in 58 ms</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>显示<code>.cloud</code>域名的13条NS记录，同时返回的还有每一条记录对应的IP地址。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cloud.			172800	IN	NS	a.nic.cloud.</span><br><span class="line">cloud.			172800	IN	NS	b.nic.cloud.</span><br><span class="line">cloud.			172800	IN	NS	c.nic.cloud.</span><br><span class="line">cloud.			172800	IN	NS	x.nic.cloud.</span><br><span class="line">cloud.			172800	IN	NS	y.nic.cloud.</span><br><span class="line">cloud.			172800	IN	NS	z.nic.cloud.</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">cloud.			172800	IN	NS	a.nic.cloud.<br>cloud.			172800	IN	NS	b.nic.cloud.<br>cloud.			172800	IN	NS	c.nic.cloud.<br>cloud.			172800	IN	NS	x.nic.cloud.<br>cloud.			172800	IN	NS	y.nic.cloud.<br>cloud.			172800	IN	NS	z.nic.cloud.<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>DNS服务器向这些顶级域名服务器发出查询请求，询问<code>www.mochazz.cloud</code>的次级域名<code>mochazz.cloud.</code>的NS记录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mochazz.cloud.		3600	IN	NS	ns3.dnsv2.com.</span><br><span class="line">mochazz.cloud.		3600	IN	NS	ns4.dnsv2.com.</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mochazz.cloud.		3600	IN	NS	ns3.dnsv2.com.<br>mochazz.cloud.		3600	IN	NS	ns4.dnsv2.com.<br></code></pre></td></tr></table></figure>
 
 <p>上面结果显示<code>mochazz.cloud.</code>有2条NS记录，同时返回的还有每一条NS记录对应的IP地址。</p>
 </li>
 <li><p>DNS服务器向上面这4台NS服务器查询<code>mochazz.cloud.</code>的主机名。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">www.mochazz.cloud.	600	IN	CNAME	cname.vercel-dns.com.</span><br><span class="line">mochazz.cloud.		86400	IN	NS	ns3.dnsv2.com.</span><br><span class="line">mochazz.cloud.		86400	IN	NS	ns4.dnsv2.com.</span><br><span class="line">;; Received 134 bytes from 223.166.151.18<span class="comment">#53(ns4.dnsv2.com) in 12 ms</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">www.mochazz.cloud.	600	IN	CNAME	cname.vercel-dns.com.<br>mochazz.cloud.		86400	IN	NS	ns3.dnsv2.com.<br>mochazz.cloud.		86400	IN	NS	ns4.dnsv2.com.<br>;; Received 134 bytes from 223.166.151.18<span class="hljs-comment">#53(ns4.dnsv2.com) in 12 ms</span><br></code></pre></td></tr></table></figure>
 
 <p>结果显示，<code>www.mochazz.cloud</code>有1条<code>CNAME</code>记录，即这CNAME 都可以访问到网站。最先返回结果的NS服务器是<code>ns4.dnsv2.com</code>，IP地址为<code>223.166.151.18</code>。</p>
 </li>
 </ul>
 <h3 id="5-NS-记录的查询"><a href="#5-NS-记录的查询" class="headerlink" title="5. NS 记录的查询"></a>5. NS 记录的查询</h3><p><code>dig</code>命令可以单独查看每一级域名的NS记录。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig ns cloud</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig ns cloud<br></code></pre></td></tr></table></figure>
 
 <p><code>+short</code>参数可以显示简化的结果。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig +short www.mochazz.cloud</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig +short www.mochazz.cloud<br></code></pre></td></tr></table></figure>
 
 <h3 id="6-DNS的记录类型"><a href="#6-DNS的记录类型" class="headerlink" title="6. DNS的记录类型"></a>6. DNS的记录类型</h3><p>域名与IP之间的对应关系，称为”记录”（record）。根据使用场景，”记录”可以分成不同的类型（type）。</p>
 <p>常见的DNS记录类型如下：</p>
@@ -264,32 +392,32 @@
 </ol>
 <p><code>CNAME</code>记录主要用于域名的内部跳转，为服务器配置提供灵活性，用户感知不到。</p>
 <p>比如:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">╰─$ dig www.mochazz.cloud</span><br><span class="line"></span><br><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; www.mochazz.cloud</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- <span class="string">opcode: QUERY, status: NOERROR, id: 28264</span></span><br><span class="line"><span class="string">;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; OPT PSEUDOSECTION:</span></span><br><span class="line"><span class="string">; EDNS: version: 0, flags:; udp: 4096</span></span><br><span class="line"><span class="string">;; QUESTION SECTION:</span></span><br><span class="line"><span class="string">;www.mochazz.cloud.		IN	A</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; ANSWER SECTION:</span></span><br><span class="line"><span class="string">www.mochazz.cloud.	600	IN	CNAME	cname.vercel-dns.com.</span></span><br><span class="line"><span class="string">cname.vercel-dns.com.	600	IN	A	76.76.21.98</span></span><br><span class="line"><span class="string">cname.vercel-dns.com.	600	IN	A	76.76.21.61</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">╰─$ dig www.mochazz.cloud<br><br>; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; www.mochazz.cloud<br>;; global options: +cmd<br>;; Got answer:<br>;; -&gt;&gt;HEADER&lt;&lt;- <span class="hljs-string">opcode: QUERY, status: NOERROR, id: 28264</span><br><span class="hljs-string">;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1</span><br><span class="hljs-string"></span><br><span class="hljs-string">;; OPT PSEUDOSECTION:</span><br><span class="hljs-string">; EDNS: version: 0, flags:; udp: 4096</span><br><span class="hljs-string">;; QUESTION SECTION:</span><br><span class="hljs-string">;www.mochazz.cloud.		IN	A</span><br><span class="hljs-string"></span><br><span class="hljs-string">;; ANSWER SECTION:</span><br><span class="hljs-string">www.mochazz.cloud.	600	IN	CNAME	cname.vercel-dns.com.</span><br><span class="hljs-string">cname.vercel-dns.com.	600	IN	A	76.76.21.98</span><br><span class="hljs-string">cname.vercel-dns.com.	600	IN	A	76.76.21.61</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
 
 <p>结果显示，<code>www.mochazz.cloud</code>的CNAME记录指向<code>cname.vercel-dns.com</code>。也就是说，用户查询<code>www.mochazz.cloud</code>的时候，实际上返回的是<code>cname.vercel-dns.com</code>的IP地址。这样的好处是，变更服务器IP地址的时候，只要修改<code>cname.vercel-dns.com</code>这个域名就可以了，用户的<code>www.mochazz.cloud</code>域名不用修改。</p>
 <p>由于<code>CNAME</code>记录就是一个替换，所以域名一旦设置<code>CNAME</code>记录以后，就不能再设置其他记录了（比如<code>A</code>记录和<code>MX</code>记录），这是为了防止产生冲突。举例来说，<code>foo.com</code>指向<code>bar.com</code>，而两个域名各有自己的<code>MX</code>记录，如果两者不一致，就会产生问题。由于顶级域名通常要设置<code>MX</code>记录，所以一般不允许用户对顶级域名设置<code>CNAME</code>记录。</p>
 <p><code>PTR</code>记录用于从IP地址反查域名。<code>dig</code>命令的<code>-x</code>参数用于查询<code>PTR</code>记录。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">╰─$ dig -x 185.199.111.153</span><br><span class="line"></span><br><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; -x 185.199.111.153</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- <span class="string">opcode: QUERY, status: NOERROR, id: 38751</span></span><br><span class="line"><span class="string">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; QUESTION SECTION:</span></span><br><span class="line"><span class="string">;153.111.199.185.in-addr.arpa.	IN	PTR</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; ANSWER SECTION:</span></span><br><span class="line"><span class="string">153.111.199.185.in-addr.arpa. 3497 IN	PTR	cdn-185-199-111-153.github.com.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; Query time: 54 msec</span></span><br><span class="line"><span class="string">;; SERVER: 192.168.1.1#53(192.168.1.1)</span></span><br><span class="line"><span class="string">;; WHEN: Thu Apr 27 22:02:13 CST 2023</span></span><br><span class="line"><span class="string">;; MSG SIZE  rcvd: 90</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">╰─$ dig -x 185.199.111.153<br><br>; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; -x 185.199.111.153<br>;; global options: +cmd<br>;; Got answer:<br>;; -&gt;&gt;HEADER&lt;&lt;- <span class="hljs-string">opcode: QUERY, status: NOERROR, id: 38751</span><br><span class="hljs-string">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0</span><br><span class="hljs-string"></span><br><span class="hljs-string">;; QUESTION SECTION:</span><br><span class="hljs-string">;153.111.199.185.in-addr.arpa.	IN	PTR</span><br><span class="hljs-string"></span><br><span class="hljs-string">;; ANSWER SECTION:</span><br><span class="hljs-string">153.111.199.185.in-addr.arpa. 3497 IN	PTR	cdn-185-199-111-153.github.com.</span><br><span class="hljs-string"></span><br><span class="hljs-string">;; Query time: 54 msec</span><br><span class="hljs-string">;; SERVER: 192.168.1.1#53(192.168.1.1)</span><br><span class="hljs-string">;; WHEN: Thu Apr 27 22:02:13 CST 2023</span><br><span class="hljs-string">;; MSG SIZE  rcvd: 90</span><br></code></pre></td></tr></table></figure>
 
 <p>上面结果显示，<code>153.111.199.185</code>这台服务器的域名是<code>cdn-185-199-111-153.github.com</code>。</p>
 <h3 id="7-其他DNS工具"><a href="#7-其他DNS工具" class="headerlink" title="7. 其他DNS工具"></a>7. 其他DNS工具</h3><ul>
 <li><p><strong>host 命令</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">╰─$ host baidu.com</span><br><span class="line">baidu.com has address 110.242.68.66</span><br><span class="line">baidu.com has address 39.156.66.10</span><br><span class="line">baidu.com mail is handled by 20 usmx01.baidu.com.</span><br><span class="line">baidu.com mail is handled by 20 mx1.baidu.com.</span><br><span class="line">baidu.com mail is handled by 15 mx.n.shifen.com.</span><br><span class="line">baidu.com mail is handled by 20 jpmx.baidu.com.</span><br><span class="line">baidu.com mail is handled by 10 mx.maillb.baidu.com.</span><br><span class="line">baidu.com mail is handled by 20 mx50.baidu.com.</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">╰─$ host baidu.com<br>baidu.com has address 110.242.68.66<br>baidu.com has address 39.156.66.10<br>baidu.com mail is handled by 20 usmx01.baidu.com.<br>baidu.com mail is handled by 20 mx1.baidu.com.<br>baidu.com mail is handled by 15 mx.n.shifen.com.<br>baidu.com mail is handled by 20 jpmx.baidu.com.<br>baidu.com mail is handled by 10 mx.maillb.baidu.com.<br>baidu.com mail is handled by 20 mx50.baidu.com.<br></code></pre></td></tr></table></figure>
 
 <p><code>host</code>命令也可以用于逆向查询，即从IP地址查询域名，等同于<code>dig -x &lt;ip&gt;</code>。</p>
 </li>
 <li><p><code>nslookup</code></p>
 <p>用于互动式地查询域名记录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">╰─$ nslookup cyberzone.cloud                                                                                                1 ↵</span><br><span class="line">Server:		192.168.1.1</span><br><span class="line">Address:	192.168.1.1<span class="comment">#53</span></span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">Name:	cyberzone.cloud</span><br><span class="line">Address: 185.199.110.153</span><br><span class="line">Name:	cyberzone.cloud</span><br><span class="line">Address: 185.199.111.153</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">╰─$ nslookup cyberzone.cloud                                                                                                1 ↵<br>Server:		192.168.1.1<br>Address:	192.168.1.1<span class="hljs-comment">#53</span><br><br>Non-authoritative answer:<br>Name:	cyberzone.cloud<br>Address: 185.199.110.153<br>Name:	cyberzone.cloud<br>Address: 185.199.111.153<br></code></pre></td></tr></table></figure>
 </li>
 <li><p><code>whois</code></p>
 <p>用来查看域名的注册情况</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whois cyberzone.cloud</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">whois cyberzone.cloud<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="CND"><a href="#CND" class="headerlink" title="CND"></a>CND</h2><h3 id="1-什么是CND"><a href="#1-什么是CND" class="headerlink" title="1. 什么是CND"></a>1. 什么是CND</h3><p>CDN全称叫做“Content Delivery Network”，中文叫<strong>内容分发网络</strong>。</p>
 <p>将源站内容分发至最接近用户的节点，使用户可就近取得所需内容，提高用户访问的响应速度和成功率。解决因分布、带宽、服务器性能带来的访问延迟问题，适用于站点加速、点播、直播等场景。</p>
 <h3 id="2-原理分析"><a href="#2-原理分析" class="headerlink" title="2. 原理分析"></a>2. 原理分析</h3><p>如图</p>
-<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230505222258753.png" alt="CDN简单原理图"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230505222258753.png" srcset="/img/loading.gif" lazyload alt="CDN简单原理图"></p>
 <p>通过域名解析IP分析</p>
 <ol>
 <li>当用户点击网站页面上的内容URL，经过本地DNS系统解析，DNS 系统会最终将域名的解析权交给 <a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/CNAME_record">CNAME</a> 指向的 CDN 专用 DNS 服务器。</li>
@@ -311,12 +439,12 @@
 <p>比如当 <code>me@qq.com</code> 收到一份来自 <code>fake@163.com</code> 的邮件时，qq邮件服务器会查看邮件来源的 IP，根据 IP 进行反向解析，如果解析到的域名和 <code>163.com</code> 一致，则接收邮件，否则认为邮件来源 IP 伪造成了163服务器 IP ，则拒绝这封邮件。</p>
 <h3 id="3-rDNS过程"><a href="#3-rDNS过程" class="headerlink" title="3. rDNS过程"></a>3. rDNS过程</h3><p>由于正向 DNS 将主机名映射到 IP 地址，因此 rDNS 将服务器 IP 地址映射回主机名。使用 rDNS，可以将 IP 地址反转，然后将<code>in-addr.arpa</code>添加到末尾。这种 IP 地址进行反向 DNS 解析的方法用到的是 PTR 记录。</p>
 <p>使用dig 执行<code>rDNS</code>查找</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig  -x 185.199.110.153</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dig  -x 185.199.110.153<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; -x 185.199.110.153</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- <span class="string">opcode: QUERY, status: NOERROR, id: 19917</span></span><br><span class="line"><span class="string">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; QUESTION SECTION:</span></span><br><span class="line"><span class="string">;153.110.199.185.in-addr.arpa.	IN	PTR</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; ANSWER SECTION:</span></span><br><span class="line"><span class="string">153.110.199.185.in-addr.arpa. 3330 IN	PTR	cdn-185-199-110-153.github.com.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; Query time: 101 msec</span></span><br><span class="line"><span class="string">;; SERVER: 192.168.1.1#53(192.168.1.1)</span></span><br><span class="line"><span class="string">;; WHEN: Sat May 13 21:57:19 CST 2023</span></span><br><span class="line"><span class="string">;; MSG SIZE  rcvd: 90</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; -x 185.199.110.153<br>;; global options: +cmd<br>;; Got answer:<br>;; -&gt;&gt;HEADER&lt;&lt;- <span class="hljs-string">opcode: QUERY, status: NOERROR, id: 19917</span><br><span class="hljs-string">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0</span><br><span class="hljs-string"></span><br><span class="hljs-string">;; QUESTION SECTION:</span><br><span class="hljs-string">;153.110.199.185.in-addr.arpa.	IN	PTR</span><br><span class="hljs-string"></span><br><span class="hljs-string">;; ANSWER SECTION:</span><br><span class="hljs-string">153.110.199.185.in-addr.arpa. 3330 IN	PTR	cdn-185-199-110-153.github.com.</span><br><span class="hljs-string"></span><br><span class="hljs-string">;; Query time: 101 msec</span><br><span class="hljs-string">;; SERVER: 192.168.1.1#53(192.168.1.1)</span><br><span class="hljs-string">;; WHEN: Sat May 13 21:57:19 CST 2023</span><br><span class="hljs-string">;; MSG SIZE  rcvd: 90</span><br></code></pre></td></tr></table></figure>
 
 <p>可以在<strong>ANSWER SECTION</strong>看到完整的rDNS PTR记录的IP，返回子域名<code>cdn-185-199-110-153.github.com.</code>:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">153.110.199.185.in-addr.arpa. 3330 IN	PTR	cdn-185-199-110-153.github.com.</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">153.110.199.185.in-addr.arpa. 3330 IN	PTR	cdn-185-199-110-153.github.com.<br></code></pre></td></tr></table></figure>
 
 
 
@@ -324,7 +452,7 @@
 <p>这种举动在被封锁的站点与无害站点为同一个大型服务提供商时较为可行，例如由<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/CDN">内容分发网络</a>提供的服务。此时审查者通常很难区分被伪装流量与合法流量的特点，迫使审查者选择放行所有看似无害的流量，或者选择彻底封锁此域的流量。而彻底封锁可能带来显著的附加损害。</p>
 <p>简言之，利用该技术，可以让受控端以为程序是在和一个高信誉域名通信，但实际上却是在和C2服务器进行通信。</p>
 <h4 id="1-2-技术原理"><a href="#1-2-技术原理" class="headerlink" title="1.2 技术原理"></a>1.2 技术原理</h4><p>Domain Fronting 的技术原理图如下</p>
-<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230513221125910.png" alt="域前置技术原理"></p>
+<p><img src="/../img/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/image-20230513221125910.png" srcset="/img/loading.gif" lazyload alt="域前置技术原理"></p>
 <p>Domain Fronting 的核心技术是 <code>CDN</code>。</p>
 <p>一般情况下，1台 CDN 会同时负责多个网站的加速服务。</p>
 <p>如果访问的两个网站（a.com 和 b.com）都是由同1台 CDN 服务器（1.1.1.1）进行加速服务，那么当使用浏览器访问这两个域名时，浏览器实际上访问的都是 1.1.1.1 这台 CDN 服务器，但是在浏览器访问的域名有可能是 a.com 也可能是 b.com，所以必须要在和 1.1.1.1 这台 CDN 服务器通信时，在 HTTP 请求包的 Host 头中填入需要访问的域名，CDN 才会知道访问的是哪一个域名后才能返回对应域名的内容。</p>
@@ -333,143 +461,403 @@
 <p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-sg/%E5%9F%9F%E5%89%8D%E7%BD%AE">https://zh.wikipedia.org/zh-sg/域前置</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ConfusedChenSir/articles/16201785.html">https://www.cnblogs.com/ConfusedChenSir/articles/16201785.html</a></p>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/DNS-CDN/">#DNS CDN</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>DNS和CDN及其相关原理</div>
+      <div>https://suiyideali.github.io/2023/04/26/DNS和CDN及其相关原理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mochazz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月26日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年5月22日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
-</article>
 
 
 
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/28/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%89)/" title="Go语言基础学习(三)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Go语言基础学习(三)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/25/Python%E5%B8%B8%E7%94%A8%E6%A0%87%E5%87%86%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="Python常用标准库学习">
+                        <span class="hidden-mobile">Python常用标准库学习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">首页</a></li>
-        
-          <li><a href="/about/">关于</a></li>
-        
-          <li><a href="/archives/">归档</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.</span> <span class="toc-text">DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFDNS"><span class="toc-number">1.1.</span> <span class="toc-text">1. 什么是DNS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-DNS%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2. DNS查询过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9F%9F%E5%90%8D%E7%9A%84%E5%B1%82%E7%BA%A7"><span class="toc-number">1.3.</span> <span class="toc-text">3. 域名的层级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%A0%B9%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">4. 根域名服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-NS-%E8%AE%B0%E5%BD%95%E7%9A%84%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.5.</span> <span class="toc-text">5. NS 记录的查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-DNS%E7%9A%84%E8%AE%B0%E5%BD%95%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.6.</span> <span class="toc-text">6. DNS的记录类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%85%B6%E4%BB%96DNS%E5%B7%A5%E5%85%B7"><span class="toc-number">1.7.</span> <span class="toc-text">7. 其他DNS工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CND"><span class="toc-number">2.</span> <span class="toc-text">CND</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFCND"><span class="toc-number">2.1.</span> <span class="toc-text">1. 什么是CND</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">2.2.</span> <span class="toc-text">2. 原理分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rDNS"><span class="toc-number">3.</span> <span class="toc-text">rDNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%8F%8D%E5%90%91DNS"><span class="toc-number">3.1.</span> <span class="toc-text">1. 反向DNS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-rDNS%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">2. rDNS的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-rDNS%E8%BF%87%E7%A8%8B"><span class="toc-number">3.3.</span> <span class="toc-text">3. rDNS过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%9A%84%E5%AE%89%E5%85%A8%E6%94%BB%E5%87%BB"><span class="toc-number">4.</span> <span class="toc-text">相关的安全攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%9F%E5%89%8D%E7%BD%AE%EF%BC%88Domain-Fronting%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">1. 域前置（Domain Fronting）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9F%9F%E5%89%8D%E7%BD%AE"><span class="toc-number">4.1.1.</span> <span class="toc-text">1.1 什么是域前置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.2.</span> <span class="toc-text">1.2 技术原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
+            
+          </article>
+        </div>
       </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&text=DNS和CDN及其相关原理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&is_video=false&description=DNS和CDN及其相关原理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=DNS和CDN及其相关原理&body=Check out this article: https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&title=DNS和CDN及其相关原理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&name=DNS和CDN及其相关原理&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://suiyideali.github.io/2023/04/26/DNS%E5%92%8CCDN%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%8E%9F%E7%90%86/&t=DNS和CDN及其相关原理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
     </div>
 
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2016-2023
-    Mochazz
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
 
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
-    <!-- styles -->
+  </div>
+</div>
 
+    
 
+    
+  </main>
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
 
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
 
-<!-- Baidu Analytics -->
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
 
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

