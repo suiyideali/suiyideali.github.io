@@ -1,21 +1,11 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html lang=zh>
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
-  <link rel="icon" href="/img/fco.jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Mochazz">
-  <meta name="keywords" content="">
-  
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="一、起因今天在刷牙的时候看了一眼携程app上订的旅游的航班和高铁班次，发现不知什么时候携程把行程同步到日历的功能给下线了…  但对于我这种习惯了用日历或者提醒功能的人，行程没法通过日历主动提醒，就觉得缺了啥东西。 于是上网搜了搜如何把行程同步到日历上。 后来在知乎上看到了一个人把航班信息发给chatgpt，让它给我直接生成ics文件，然后用mac直接打开就能生成日历了。我也试了下，如下  打开日历">
 <meta property="og:type" content="article">
 <meta property="og:title" content="让Chatgpt帮我写代码(一)">
@@ -46,372 +36,254 @@
 <meta property="article:modified_time" content="2023-04-23T05:57:46.152Z">
 <meta property="article:author" content="Mochazz">
 <meta property="article:tag" content="chatgpt LLM">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://suiyideali.github.io/img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225021493.png">
-  
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
-  
-  
-  <title>让Chatgpt帮我写代码(一) - Mochazz&#39;blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>让Chatgpt帮我写代码(一)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+    <!-- Umami Analytics -->
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
 <meta name="generator" content="Hexo 6.3.0"></head>
 
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2023/04/23/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/04/21/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&text=让Chatgpt帮我写代码(一)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&is_video=false&description=让Chatgpt帮我写代码(一)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=让Chatgpt帮我写代码(一)&body=Check out this article: https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&name=让Chatgpt帮我写代码(一)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&t=让Chatgpt帮我写代码(一)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-<body>
-  
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">一、起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Chatgpt%E4%B8%8A%E5%9C%BA"><span class="toc-number">2.</span> <span class="toc-text">二、Chatgpt上场</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%88%AA%E7%8F%AD%E4%BF%A1%E6%81%AF"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 航班信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%AB%98%E9%93%81%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 高铁信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81-Claude"><span class="toc-number">3.</span> <span class="toc-text">三、 Claude</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E8%88%AA%E7%8F%AD%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 航班信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E9%AB%98%E9%93%81%E4%BF%A1%E6%81%AF"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 高铁信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94"><span class="toc-number">4.</span> <span class="toc-text">四、 效果对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%9C%80%E7%BB%88%E4%BB%A3%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 最终代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-Chatgpt"><span class="toc-number">4.1.1.</span> <span class="toc-text">4.1.1 Chatgpt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-Claude"><span class="toc-number">4.1.2.</span> <span class="toc-text">4.1.2 Claude</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E3%80%81-%E6%9C%80%E5%90%8E"><span class="toc-number">5.</span> <span class="toc-text">五 、 最后</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 一些小问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E4%BB%A3%E7%A0%81%E8%83%BD%E5%8A%9B%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 代码能力：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E6%B3%A8%E6%84%8F-%E2%9A%A0%EF%B8%8F"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 注意 ⚠️</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="toc-number">6.</span> <span class="toc-text">六、参考来源</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
 
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   <header>
     
+    <h1 class="posttitle p-name" itemprop="name headline">
+        让Chatgpt帮我写代码(一)
+    </h1>
 
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Mochazz&#39;blog</strong>
-    </a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Mochazz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-04-22T14:40:52.000Z" class="dt-published" itemprop="datePublished">2023-04-22</time>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于我</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/links/">
-                <i class="iconfont icon-link-fill"></i>
-                <span>友链</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+      
     </div>
-  </div>
-</nav>
 
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/chatgpt-LLM/" rel="tag">chatgpt LLM</a>
+    </div>
+
+
+    </div>
+  </header>
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="让Chatgpt帮我写代码(一)"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        Mochazz
-      </span>
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-22 22:40" pubdate>
-          2023年4月22日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          14k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          120 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">让Chatgpt帮我写代码(一)</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h2 id="一、起因"><a href="#一、起因" class="headerlink" title="一、起因"></a>一、起因</h2><p>今天在刷牙的时候看了一眼携程app上订的旅游的航班和高铁班次，发现不知什么时候携程把行程同步到日历的功能给下线了… </p>
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="一、起因"><a href="#一、起因" class="headerlink" title="一、起因"></a>一、起因</h2><p>今天在刷牙的时候看了一眼携程app上订的旅游的航班和高铁班次，发现不知什么时候携程把行程同步到日历的功能给下线了… </p>
 <p>但对于我这种习惯了用日历或者提醒功能的人，行程没法通过日历主动提醒，就觉得缺了啥东西。 于是上网搜了搜如何把行程同步到日历上。</p>
 <p>后来在知乎上看到了一个人把航班信息发给chatgpt，让它给我直接生成ics文件，然后用mac直接打开就能生成日历了。我也试了下，如下</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225021493.png" srcset="/img/loading.gif" lazyload alt="chatgpt将航班信息转化为ICS文件格式"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225021493.png" alt="chatgpt将航班信息转化为ICS文件格式"></p>
 <p>打开日历确实能够实现想要的效果，同样的手机上也正常显示。</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225145244.png" srcset="/img/loading.gif" lazyload alt="日历显示"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225145244.png" alt="日历显示"></p>
 <p>既然如此，那就可以直接让chatgpt帮我用写个脚本，下次直接填行程就行。 说干就干。</p>
 <h2 id="二、Chatgpt上场"><a href="#二、Chatgpt上场" class="headerlink" title="二、Chatgpt上场"></a>二、Chatgpt上场</h2><h3 id="2-1-航班信息"><a href="#2-1-航班信息" class="headerlink" title="2.1 航班信息"></a>2.1 航班信息</h3><p>我先重复了让它帮我生成ics的操作，然后再说出我的需求</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225543534.png" srcset="/img/loading.gif" lazyload alt="将需求告诉它"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225543534.png" alt="将需求告诉它"></p>
 <p>然后将代码放入代码编辑器中运行，果不其然报错了</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225728727.png" srcset="/img/loading.gif" lazyload alt="代码报错"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225728727.png" alt="代码报错"></p>
 <p>直接丢给chatgpt，让它给我优化（我懒）</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225909046.png" srcset="/img/loading.gif" lazyload alt="chatgpt给的排错建议"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225909046.png" alt="chatgpt给的排错建议"></p>
 <p>不出意外的已经把错误打印出来了</p>
 <p>ValueError: time data ‘2023&#x2F;05&#x2F;041 5:20’ does not match format ‘%Y&#x2F;%m&#x2F;%d %H:%M’</p>
 <p>这个错误提示表明时间格式不符合预期，可能是时间字符串中有一个多余的字符或者缺少一个字符。</p>
 <p>原来是为填写时间时候，出错了，把2023&#x2F;05&#x2F;04 15:20 写成 2023&#x2F;05&#x2F;041 5:20 了。</p>
 <p>最后查看result.ics打开验证是否能被日历功能正常读取。</p>
 <p>生成的代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime, timedelta<br><span class="hljs-keyword">import</span> re<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_flight_to_ics</span>(<span class="hljs-params">flight_info</span>):<br>    regex = <span class="hljs-string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+达到时间\s+(\S+\s+\S+)&quot;</span><br>    <span class="hljs-keyword">match</span> = re.search(regex, flight_info)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span> <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Error: failed to match flight information.&quot;</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>    airline, dep_airport, dep_time, arr_airport, arr_time = <span class="hljs-keyword">match</span>.groups()<br><br>    <span class="hljs-comment"># 生成ICS字符串</span><br>    start_time = datetime.strptime(dep_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)<br>    end_time = datetime.strptime(arr_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)<br>    uid = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;airline&#125;</span>-<span class="hljs-subst">&#123;start_time.date()&#125;</span>&#x27;</span><br>    ics_str = <span class="hljs-string">f&#x27;BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ChatGPT//Flight Schedule//EN\nBEGIN:VEVENT\nUID:<span class="hljs-subst">&#123;uid&#125;</span>\nDTSTAMP:<span class="hljs-subst">&#123;datetime.utcnow().strftime(<span class="hljs-string">&quot;%Y%m%dT%H%M%SZ&quot;</span>)&#125;</span>\nDTSTART;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;start_time.strftime(<span class="hljs-string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nDTEND;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;end_time.strftime(<span class="hljs-string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nSUMMARY:航班 <span class="hljs-subst">&#123;airline&#125;</span>\nLOCATION:<span class="hljs-subst">&#123;dep_airport&#125;</span>\nDESCRIPTION:<span class="hljs-subst">&#123;airline&#125;</span> 将于<span class="hljs-subst">&#123;dep_time&#125;</span>从<span class="hljs-subst">&#123;dep_airport&#125;</span>出发，预计于<span class="hljs-subst">&#123;arr_time&#125;</span>到达<span class="hljs-subst">&#123;arr_airport&#125;</span>。\nEND:VEVENT\nEND:VCALENDAR&#x27;</span><br><br>    <span class="hljs-keyword">return</span> ics_str<br><br><span class="hljs-comment"># 读取航班信息</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;Flight.txt&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    flight_info = f.read()<br><br><span class="hljs-comment"># 转换为ICS字符串</span><br>ics_str = convert_flight_to_ics(flight_info)<br><br><span class="hljs-comment"># 将ICS字符串写入文件</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;result.ics&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(ics_str)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;转换完成！请查看对应目录的result.ics文件&#x27;</span>)<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convert_flight_to_ics</span>(<span class="params">flight_info</span>):</span><br><span class="line">    regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+达到时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(regex, flight_info)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Error: failed to match flight information.&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    airline, dep_airport, dep_time, arr_airport, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 生成ICS字符串</span></span><br><span class="line">    start_time = datetime.strptime(dep_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    end_time = datetime.strptime(arr_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    uid = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span>-<span class="subst">&#123;start_time.date()&#125;</span>&#x27;</span></span><br><span class="line">    ics_str = <span class="string">f&#x27;BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ChatGPT//Flight Schedule//EN\nBEGIN:VEVENT\nUID:<span class="subst">&#123;uid&#125;</span>\nDTSTAMP:<span class="subst">&#123;datetime.utcnow().strftime(<span class="string">&quot;%Y%m%dT%H%M%SZ&quot;</span>)&#125;</span>\nDTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;start_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nDTEND;TZID=Asia/Shanghai:<span class="subst">&#123;end_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nSUMMARY:航班 <span class="subst">&#123;airline&#125;</span>\nLOCATION:<span class="subst">&#123;dep_airport&#125;</span>\nDESCRIPTION:<span class="subst">&#123;airline&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_airport&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_airport&#125;</span>。\nEND:VEVENT\nEND:VCALENDAR&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ics_str</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取航班信息</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;Flight.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    flight_info = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为ICS字符串</span></span><br><span class="line">ics_str = convert_flight_to_ics(flight_info)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将ICS字符串写入文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(ics_str)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;转换完成！请查看对应目录的result.ics文件&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h3 id="2-2-高铁信息"><a href="#2-2-高铁信息" class="headerlink" title="2.2 高铁信息"></a>2.2 高铁信息</h3><p>现在解决了航班信息，突然想到还有高铁信息也需要，本次目的是chatgpt帮我写代码，所以我将上面的代码发送给他，增加了需求</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422231858210.png" srcset="/img/loading.gif" lazyload alt="新增需求"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422231858210.png" alt="新增需求"></p>
 <p>生成的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime, timedelta<br><span class="hljs-keyword">import</span> re<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_to_ics</span>(<span class="hljs-params">travel_info</span>):<br>    regex = <span class="hljs-string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+达到时间\s+(\S+\s+\S+)&quot;</span><br>    train_regex = <span class="hljs-string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+到达时间\s+(\S+\s+\S+)&quot;</span><br>    <span class="hljs-keyword">match</span> = re.search(regex, travel_info)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span> <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">match</span> = re.search(train_regex, travel_info)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span> <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Error: failed to match travel information.&quot;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        travel_type = <span class="hljs-string">&quot;高铁/动车&quot;</span><br>        train_no, dep_station, dep_time, arr_station, arr_time = <span class="hljs-keyword">match</span>.groups()<br>    <span class="hljs-keyword">else</span>:<br>        travel_type = <span class="hljs-string">&quot;航班&quot;</span><br>        airline, dep_airport, dep_time, arr_airport, arr_time = <span class="hljs-keyword">match</span>.groups()<br><br>    <span class="hljs-comment"># 生成ICS字符串</span><br>    start_time = datetime.strptime(dep_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)<br>    end_time = datetime.strptime(arr_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)<br>    uid = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;travel_type&#125;</span>-<span class="hljs-subst">&#123;start_time.date()&#125;</span>&#x27;</span><br>    <span class="hljs-keyword">if</span> travel_type == <span class="hljs-string">&quot;航班&quot;</span>:<br>        summary = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;airline&#125;</span> <span class="hljs-subst">&#123;uid&#125;</span>&#x27;</span><br>        location = dep_airport<br>        description = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;airline&#125;</span> 将于<span class="hljs-subst">&#123;dep_time&#125;</span>从<span class="hljs-subst">&#123;dep_airport&#125;</span>出发，预计于<span class="hljs-subst">&#123;arr_time&#125;</span>到达<span class="hljs-subst">&#123;arr_airport&#125;</span>。&#x27;</span><br>    <span class="hljs-keyword">elif</span> travel_type == <span class="hljs-string">&quot;高铁/动车&quot;</span>:<br>        summary = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;train_no&#125;</span> <span class="hljs-subst">&#123;uid&#125;</span>&#x27;</span><br>        location = dep_station<br>        description = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;train_no&#125;</span> 将于<span class="hljs-subst">&#123;dep_time&#125;</span>从<span class="hljs-subst">&#123;dep_station&#125;</span>出发，预计于<span class="hljs-subst">&#123;arr_time&#125;</span>到达<span class="hljs-subst">&#123;arr_station&#125;</span>。&#x27;</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Unknown travel type.&quot;</span>)<br><br>    ics_str = <span class="hljs-string">f&#x27;BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ChatGPT//Travel Schedule//EN\nBEGIN:VEVENT\nUID:<span class="hljs-subst">&#123;uid&#125;</span>\nDTSTAMP:<span class="hljs-subst">&#123;datetime.utcnow().strftime(<span class="hljs-string">&quot;%Y%m%dT%H%M%SZ&quot;</span>)&#125;</span>\nDTSTART;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;start_time.strftime(<span class="hljs-string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nDTEND;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;end_time.strftime(<span class="hljs-string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nSUMMARY:<span class="hljs-subst">&#123;summary&#125;</span>\nLOCATION:<span class="hljs-subst">&#123;location&#125;</span>\nDESCRIPTION:<span class="hljs-subst">&#123;description&#125;</span>\nEND:VEVENT\nEND:VCALENDAR&#x27;</span><br><br>    <span class="hljs-keyword">return</span> ics_str<br><br><br><span class="hljs-comment"># 读取行程信息</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;Flight.txt&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    travel_info = f.read()<br><br><span class="hljs-comment"># 转换为ICS字符串</span><br>ics_str = convert_to_ics(travel_info)<br><br><span class="hljs-comment"># 将ICS字符串写入文件</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;result.ics&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(ics_str)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;转换完成！请查看对应目录的result.ics文件&#x27;</span>)<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convert_to_ics</span>(<span class="params">travel_info</span>):</span><br><span class="line">    regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+达到时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    train_regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+到达时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(regex, travel_info)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">match</span> = re.search(train_regex, travel_info)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Error: failed to match travel information.&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        travel_type = <span class="string">&quot;高铁/动车&quot;</span></span><br><span class="line">        train_no, dep_station, dep_time, arr_station, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        travel_type = <span class="string">&quot;航班&quot;</span></span><br><span class="line">        airline, dep_airport, dep_time, arr_airport, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 生成ICS字符串</span></span><br><span class="line">    start_time = datetime.strptime(dep_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    end_time = datetime.strptime(arr_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    uid = <span class="string">f&#x27;<span class="subst">&#123;travel_type&#125;</span>-<span class="subst">&#123;start_time.date()&#125;</span>&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> travel_type == <span class="string">&quot;航班&quot;</span>:</span><br><span class="line">        summary = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span> <span class="subst">&#123;uid&#125;</span>&#x27;</span></span><br><span class="line">        location = dep_airport</span><br><span class="line">        description = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_airport&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_airport&#125;</span>。&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> travel_type == <span class="string">&quot;高铁/动车&quot;</span>:</span><br><span class="line">        summary = <span class="string">f&#x27;<span class="subst">&#123;train_no&#125;</span> <span class="subst">&#123;uid&#125;</span>&#x27;</span></span><br><span class="line">        location = dep_station</span><br><span class="line">        description = <span class="string">f&#x27;<span class="subst">&#123;train_no&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_station&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_station&#125;</span>。&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;Unknown travel type.&quot;</span>)</span><br><span class="line"></span><br><span class="line">    ics_str = <span class="string">f&#x27;BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ChatGPT//Travel Schedule//EN\nBEGIN:VEVENT\nUID:<span class="subst">&#123;uid&#125;</span>\nDTSTAMP:<span class="subst">&#123;datetime.utcnow().strftime(<span class="string">&quot;%Y%m%dT%H%M%SZ&quot;</span>)&#125;</span>\nDTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;start_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nDTEND;TZID=Asia/Shanghai:<span class="subst">&#123;end_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nSUMMARY:<span class="subst">&#123;summary&#125;</span>\nLOCATION:<span class="subst">&#123;location&#125;</span>\nDESCRIPTION:<span class="subst">&#123;description&#125;</span>\nEND:VEVENT\nEND:VCALENDAR&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ics_str</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取行程信息</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;Flight.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    travel_info = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为ICS字符串</span></span><br><span class="line">ics_str = convert_to_ics(travel_info)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将ICS字符串写入文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(ics_str)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;转换完成！请查看对应目录的result.ics文件&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>根据代码最后生成的结果出了点小bug</p>
 <p>高铁信息最后在rusult.ics中为 UID:航班-2023-05-02，其中应为UID:高铁&#x2F;动车-2023-05-02</p>
 <p>将错误反馈给chatgpt，继续改～</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422235008815.png" srcset="/img/loading.gif" lazyload alt="chagpt排错"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422235008815.png" alt="chagpt排错"></p>
 <p>原来是我Flight.txt中的“到达时间”写成了“达到时间”，我的锅！ 错怪了你 chatgpt。</p>
 <p>修改后，就能正常生成了。</p>
 <h2 id="三、-Claude"><a href="#三、-Claude" class="headerlink" title="三、 Claude"></a>三、 <strong>Claude</strong></h2><h3 id="3-1-航班信息"><a href="#3-1-航班信息" class="headerlink" title="3.1 航班信息"></a>3.1 航班信息</h3><p>顺便试试Claude的代码能力。 告知他的需求</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423000312217.png" srcset="/img/loading.gif" lazyload alt="告知需求"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423000312217.png" alt="告知需求"></p>
 <p>最终生成的效果如下，未能识别</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423001749390.png" srcset="/img/loading.gif" lazyload alt="未能识别"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423001749390.png" alt="未能识别"></p>
 <p>将问题反馈给Claude</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423001828794.png" srcset="/img/loading.gif" lazyload alt="反馈排错"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423001828794.png" alt="反馈排错"></p>
 <p>继续跟它对话，可以按照它的操作来，也可以直接告诉它，把修改后的代码发给你</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423001942913.png" srcset="/img/loading.gif" lazyload alt="整理代码"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423001942913.png" alt="整理代码"></p>
 <p>使用修改后的代码继续尝试，还是没达到效果，将输出结果发给它，继续调整</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423002235114.png" srcset="/img/loading.gif" lazyload alt="继续优化代码"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423002235114.png" alt="继续优化代码"></p>
 <p>经过比多次调教，最终给出代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> logging<br><br>ics = <span class="hljs-string">&quot;BEGIN:VCALENDAR\n&quot;</span><br>ics += <span class="hljs-string">&quot;PRODID:flight\n&quot;</span><br>ics += <span class="hljs-string">&quot;VERSION:2.0\n&quot;</span><br>ics += <span class="hljs-string">&quot;CALSCALE:GREGORIAN\n&quot;</span><br><br>flight_info = []<br>event_count = <span class="hljs-number">0</span><br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;demo.txt&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    content = f.read().strip()<br>    flights = content.split(<span class="hljs-string">&quot;\n\n&quot;</span>)<br>    <span class="hljs-keyword">for</span> flight <span class="hljs-keyword">in</span> flights:<br>        flight_info = flight.split(<span class="hljs-string">&quot;\n&quot;</span>)<br><br>        <span class="hljs-comment"># 打印航班信息,确认是否准确</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;航班信息: <span class="hljs-subst">&#123;flight_info&#125;</span>&quot;</span>)<br><br>        name = flight_info[<span class="hljs-number">0</span>]<br>        <span class="hljs-comment"># 打印航班名称</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;name: <span class="hljs-subst">&#123;name&#125;</span>&quot;</span>)<br><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(flight_info) &lt; <span class="hljs-number">5</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;航班信息不完整!&quot;</span>)<br>            <span class="hljs-keyword">continue</span><br><br>        <span class="hljs-comment"># 解析出机场和时间信息</span><br>        airport = flight_info[<span class="hljs-number">1</span>].split(<span class="hljs-string">&#x27; &#x27;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;起飞机场: <span class="hljs-subst">&#123;airport[<span class="hljs-number">0</span>]&#125;</span>&quot;</span>)<br>        depart_airport = <span class="hljs-string">&#x27; &#x27;</span>.join(airport[:<span class="hljs-number">2</span>])<br><br>        depart_time = flight_info[<span class="hljs-number">2</span>]<br>        depart_time = datetime.datetime.strptime(depart_time, <span class="hljs-string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;起飞时间: <span class="hljs-subst">&#123;depart_time&#125;</span>&quot;</span>)<br><br>        airport = flight_info[<span class="hljs-number">3</span>].split(<span class="hljs-string">&#x27; &#x27;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;到达机场: <span class="hljs-subst">&#123;airport[<span class="hljs-number">0</span>]&#125;</span>&quot;</span>)<br>        arrive_airport = <span class="hljs-string">&#x27; &#x27;</span>.join(airport[:<span class="hljs-number">2</span>])<br><br>        arrive_time = flight_info[<span class="hljs-number">4</span>]<br>        arrive_time = datetime.datetime.strptime(arrive_time, <span class="hljs-string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;到达时间: <span class="hljs-subst">&#123;arrive_time&#125;</span>&quot;</span>)<br><br>        <span class="hljs-comment"># 生成VEVENT事件</span><br>        <span class="hljs-keyword">try</span>:<br>            ics += <span class="hljs-string">f&quot;BEGIN:VEVENT\n&quot;</span><br>            ics += <span class="hljs-string">f&quot;UID:<span class="hljs-subst">&#123;name&#125;</span>@<span class="hljs-subst">&#123;depart_airport&#125;</span>@<span class="hljs-subst">&#123;arrive_airport&#125;</span>\n&quot;</span><br>            ics += <span class="hljs-string">f&quot;DTSTART;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;depart_time.strftime(<span class="hljs-string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span><br>            ics += <span class="hljs-string">f&quot;DTEND;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;arrive_time.strftime(<span class="hljs-string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span><br>            ics += <span class="hljs-string">f&quot;SUMMARY:<span class="hljs-subst">&#123;name&#125;</span>\n&quot;</span><br>            ics += <span class="hljs-string">f&quot;LOCATION:<span class="hljs-subst">&#123;depart_airport&#125;</span> -&gt; <span class="hljs-subst">&#123;arrive_airport&#125;</span>\n&quot;</span><br>            ics += <span class="hljs-string">&quot;END:VEVENT\n&quot;</span><br><br>            event_count += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;生成VEVENT失败:<span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>            logging.exception(e)<br><br>ics += <span class="hljs-string">&quot;END:VCALENDAR&quot;</span><br><br><span class="hljs-comment"># 如果成功生成了至少一个事件，就写入文件</span><br><span class="hljs-keyword">if</span> event_count &gt; <span class="hljs-number">0</span>:<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;result.ics&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(ics)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;没有生成任何事件，无法写入到文件&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">ics = <span class="string">&quot;BEGIN:VCALENDAR\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;PRODID:flight\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;VERSION:2.0\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;CALSCALE:GREGORIAN\n&quot;</span></span><br><span class="line"></span><br><span class="line">flight_info = []</span><br><span class="line">event_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read().strip()</span><br><span class="line">    flights = content.split(<span class="string">&quot;\n\n&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> flight <span class="keyword">in</span> flights:</span><br><span class="line">        flight_info = flight.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 打印航班信息,确认是否准确</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;航班信息: <span class="subst">&#123;flight_info&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        name = flight_info[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># 打印航班名称</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;name: <span class="subst">&#123;name&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(flight_info) &lt; <span class="number">5</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;航班信息不完整!&quot;</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 解析出机场和时间信息</span></span><br><span class="line">        airport = flight_info[<span class="number">1</span>].split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;起飞机场: <span class="subst">&#123;airport[<span class="number">0</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        depart_airport = <span class="string">&#x27; &#x27;</span>.join(airport[:<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">        depart_time = flight_info[<span class="number">2</span>]</span><br><span class="line">        depart_time = datetime.datetime.strptime(depart_time, <span class="string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;起飞时间: <span class="subst">&#123;depart_time&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        airport = flight_info[<span class="number">3</span>].split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;到达机场: <span class="subst">&#123;airport[<span class="number">0</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        arrive_airport = <span class="string">&#x27; &#x27;</span>.join(airport[:<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">        arrive_time = flight_info[<span class="number">4</span>]</span><br><span class="line">        arrive_time = datetime.datetime.strptime(arrive_time, <span class="string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;到达时间: <span class="subst">&#123;arrive_time&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 生成VEVENT事件</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ics += <span class="string">f&quot;BEGIN:VEVENT\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;depart_airport&#125;</span>@<span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;DTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;depart_time.strftime(<span class="string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;DTEND;TZID=Asia/Shanghai:<span class="subst">&#123;arrive_time.strftime(<span class="string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;SUMMARY:<span class="subst">&#123;name&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;LOCATION:<span class="subst">&#123;depart_airport&#125;</span> -&gt; <span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">&quot;END:VEVENT\n&quot;</span></span><br><span class="line"></span><br><span class="line">            event_count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;生成VEVENT失败:<span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">            logging.exception(e)</span><br><span class="line"></span><br><span class="line">ics += <span class="string">&quot;END:VCALENDAR&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果成功生成了至少一个事件，就写入文件</span></span><br><span class="line"><span class="keyword">if</span> event_count &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(ics)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;没有生成任何事件，无法写入到文件&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="3-2-高铁信息"><a href="#3-2-高铁信息" class="headerlink" title="3.2 高铁信息"></a>3.2 高铁信息</h3><p>告知Claude，需要在原代码基础上添加识别高铁信息的功能。</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423132937903.png" srcset="/img/loading.gif" lazyload alt="添加识别高铁信息"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> logging<br><br>ics = <span class="hljs-string">&quot;BEGIN:VCALENDAR\n&quot;</span><br>ics += <span class="hljs-string">&quot;PRODID:transport\n&quot;</span>   <span class="hljs-comment"># 修改为transport</span><br>ics += <span class="hljs-string">&quot;VERSION:2.0\n&quot;</span><br>ics += <span class="hljs-string">&quot;CALSCALE:GREGORIAN\n&quot;</span><br><br>info = []  <br>event_count = <span class="hljs-number">0</span><br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;demo.txt&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    content = f.read().strip()<br>    transports = content.split(<span class="hljs-string">&quot;\n\n&quot;</span>)  <span class="hljs-comment"># 修改为transports</span><br>    <span class="hljs-keyword">for</span> transport <span class="hljs-keyword">in</span> transports:<br>        info = transport.split(<span class="hljs-string">&quot;\n&quot;</span>)<br>        <br>        <span class="hljs-comment"># 判断是航班还是高铁</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;高铁&#x27;</span> <span class="hljs-keyword">in</span> info[<span class="hljs-number">0</span>] <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;动车&#x27;</span> <span class="hljs-keyword">in</span> info[<span class="hljs-number">0</span>]:  <br>           <span class="hljs-comment"># 高铁信息  </span><br>           name = info[<span class="hljs-number">0</span>]<br>           <span class="hljs-comment"># 起始站</span><br>           start_station = info[<span class="hljs-number">1</span>] <br>           <span class="hljs-comment"># 出发时间  </span><br>           depart_time = info[<span class="hljs-number">2</span>]<br>           depart_time = datetime.datetime.strptime(depart_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)<br>           <span class="hljs-comment"># 终点站</span><br>           end_station = info[<span class="hljs-number">3</span>] <br>           <span class="hljs-comment"># 到达时间</span><br>           arrive_time = info[<span class="hljs-number">4</span>]<br>           arrive_time = datetime.datetime.strptime(arrive_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)           <br>           <br>        <span class="hljs-keyword">else</span>:<br>           <span class="hljs-comment"># 航班信息(代码省略)  </span><br>           ...<br>           <br>        <span class="hljs-comment"># 生成VEVENT事件</span><br>        <span class="hljs-keyword">try</span>:<br>            ics += <span class="hljs-string">f&quot;BEGIN:VEVENT\n&quot;</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;高铁&#x27;</span> <span class="hljs-keyword">in</span> name <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;动车&#x27;</span> <span class="hljs-keyword">in</span> name:  <span class="hljs-comment"># 判断是高铁还是航班</span><br>                ics += <span class="hljs-string">f&quot;UID:<span class="hljs-subst">&#123;name&#125;</span>@<span class="hljs-subst">&#123;start_station&#125;</span>@<span class="hljs-subst">&#123;end_station&#125;</span>\n&quot;</span>  <span class="hljs-comment"># 修改机场为站点          </span><br>            <span class="hljs-keyword">else</span>:<br>                ics += <span class="hljs-string">f&quot;UID:<span class="hljs-subst">&#123;name&#125;</span>@<span class="hljs-subst">&#123;depart_airport&#125;</span>@<span class="hljs-subst">&#123;arrive_airport&#125;</span>\n&quot;</span>  <br>            ...   <span class="hljs-comment"># 其他代码不变</span><br>           <br>            event_count += <span class="hljs-number">1</span>  <br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:  <br>            ...   <span class="hljs-comment"># 日志记录异常代码不变</span><br><br><span class="hljs-comment"># 后续代码不变 </span><br>...<br></code></pre></td></tr></table></figure>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423132937903.png" alt="添加识别高铁信息"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">ics = <span class="string">&quot;BEGIN:VCALENDAR\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;PRODID:transport\n&quot;</span>   <span class="comment"># 修改为transport</span></span><br><span class="line">ics += <span class="string">&quot;VERSION:2.0\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;CALSCALE:GREGORIAN\n&quot;</span></span><br><span class="line"></span><br><span class="line">info = []  </span><br><span class="line">event_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read().strip()</span><br><span class="line">    transports = content.split(<span class="string">&quot;\n\n&quot;</span>)  <span class="comment"># 修改为transports</span></span><br><span class="line">    <span class="keyword">for</span> transport <span class="keyword">in</span> transports:</span><br><span class="line">        info = transport.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 判断是航班还是高铁</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>] <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>]:  </span><br><span class="line">           <span class="comment"># 高铁信息  </span></span><br><span class="line">           name = info[<span class="number">0</span>]</span><br><span class="line">           <span class="comment"># 起始站</span></span><br><span class="line">           start_station = info[<span class="number">1</span>] </span><br><span class="line">           <span class="comment"># 出发时间  </span></span><br><span class="line">           depart_time = info[<span class="number">2</span>]</span><br><span class="line">           depart_time = datetime.datetime.strptime(depart_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">           <span class="comment"># 终点站</span></span><br><span class="line">           end_station = info[<span class="number">3</span>] </span><br><span class="line">           <span class="comment"># 到达时间</span></span><br><span class="line">           arrive_time = info[<span class="number">4</span>]</span><br><span class="line">           arrive_time = datetime.datetime.strptime(arrive_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)           </span><br><span class="line">           </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">           <span class="comment"># 航班信息(代码省略)  </span></span><br><span class="line">           ...</span><br><span class="line">           </span><br><span class="line">        <span class="comment"># 生成VEVENT事件</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ics += <span class="string">f&quot;BEGIN:VEVENT\n&quot;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> name:  <span class="comment"># 判断是高铁还是航班</span></span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;start_station&#125;</span>@<span class="subst">&#123;end_station&#125;</span>\n&quot;</span>  <span class="comment"># 修改机场为站点          </span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;depart_airport&#125;</span>@<span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span>  </span><br><span class="line">            ...   <span class="comment"># 其他代码不变</span></span><br><span class="line">           </span><br><span class="line">            event_count += <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:  </span><br><span class="line">            ...   <span class="comment"># 日志记录异常代码不变</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 后续代码不变 </span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 
 
 <p>但一眼看出它将原有的 <strong>ics +&#x3D; “PRODID:flight\n”</strong> 修改为了 <strong>ics +&#x3D; “PRODID:transport\n”</strong></p>
 <p>明显不符合我的要求，于是重新把我的需求告诉它，现在看上去是理解了我的需求了。</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423133500216.png" srcset="/img/loading.gif" lazyload alt="重新说明需求"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423133500216.png" alt="重新说明需求"></p>
 <p>给出代码后还给出了本次代码修改特点，可谓是很贴心了🤣</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423133600798.png" srcset="/img/loading.gif" lazyload alt="修改特点"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> logging<br><br>ics = <span class="hljs-string">&quot;BEGIN:VCALENDAR\n&quot;</span><br>ics += <span class="hljs-string">&quot;PRODID:transport\n&quot;</span>    <br>ics += <span class="hljs-string">&quot;VERSION:2.0\n&quot;</span><br>ics += <span class="hljs-string">&quot;CALSCALE:GREGORIAN\n&quot;</span><br><br>info = []  <br>event_count = <span class="hljs-number">0</span><br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;demo.txt&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    content = f.read().strip()<br>    transports = content.split(<span class="hljs-string">&quot;\n\n&quot;</span>)  <br><br>    <span class="hljs-keyword">for</span> transport <span class="hljs-keyword">in</span> transports:<br>        info = transport.split(<span class="hljs-string">&quot;\n&quot;</span>)<br>        <br>        <span class="hljs-comment"># 先判断是航班还是高铁,然后分别处理</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;高铁&#x27;</span> <span class="hljs-keyword">in</span> info[<span class="hljs-number">0</span>] <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;动车&#x27;</span> <span class="hljs-keyword">in</span> info[<span class="hljs-number">0</span>]:  <br>           <span class="hljs-comment"># 高铁信息  </span><br>           ... <br>        <span class="hljs-keyword">else</span>:<br>           <span class="hljs-comment"># 航班信息 </span><br>           ...  <br><br>        <span class="hljs-comment"># 生成VEVENT事件</span><br>        <span class="hljs-keyword">try</span>:<br>            ics += <span class="hljs-string">f&quot;BEGIN:VEVENT\n&quot;</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;高铁&#x27;</span> <span class="hljs-keyword">in</span> name <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;动车&#x27;</span> <span class="hljs-keyword">in</span> name:  <br>                ics += <span class="hljs-string">f&quot;UID:<span class="hljs-subst">&#123;name&#125;</span>@<span class="hljs-subst">&#123;start_station&#125;</span>@<span class="hljs-subst">&#123;end_station&#125;</span>\n&quot;</span>              <br>            <span class="hljs-keyword">else</span>:<br>                ics += <span class="hljs-string">f&quot;UID:<span class="hljs-subst">&#123;name&#125;</span>@<span class="hljs-subst">&#123;depart_airport&#125;</span>@<span class="hljs-subst">&#123;arrive_airport&#125;</span>\n&quot;</span>  <br>            ...   <span class="hljs-comment"># 其他代码不变</span><br>           <br>            event_count += <span class="hljs-number">1</span>  <br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:  <br>            ...   <span class="hljs-comment"># 日志记录异常代码不变</span><br><br><span class="hljs-comment"># 后续代码不变 </span><br>...<br></code></pre></td></tr></table></figure>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423133600798.png" alt="修改特点"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">ics = <span class="string">&quot;BEGIN:VCALENDAR\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;PRODID:transport\n&quot;</span>    </span><br><span class="line">ics += <span class="string">&quot;VERSION:2.0\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;CALSCALE:GREGORIAN\n&quot;</span></span><br><span class="line"></span><br><span class="line">info = []  </span><br><span class="line">event_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read().strip()</span><br><span class="line">    transports = content.split(<span class="string">&quot;\n\n&quot;</span>)  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> transport <span class="keyword">in</span> transports:</span><br><span class="line">        info = transport.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 先判断是航班还是高铁,然后分别处理</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>] <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>]:  </span><br><span class="line">           <span class="comment"># 高铁信息  </span></span><br><span class="line">           ... </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">           <span class="comment"># 航班信息 </span></span><br><span class="line">           ...  </span><br><span class="line"></span><br><span class="line">        <span class="comment"># 生成VEVENT事件</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ics += <span class="string">f&quot;BEGIN:VEVENT\n&quot;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> name:  </span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;start_station&#125;</span>@<span class="subst">&#123;end_station&#125;</span>\n&quot;</span>              </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;depart_airport&#125;</span>@<span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span>  </span><br><span class="line">            ...   <span class="comment"># 其他代码不变</span></span><br><span class="line">           </span><br><span class="line">            event_count += <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:  </span><br><span class="line">            ...   <span class="comment"># 日志记录异常代码不变</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 后续代码不变 </span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 
 
 <p>运行修正后的代码，成功生产ics文件</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423134407410.png" srcset="/img/loading.gif" lazyload alt="Claude生产的ics"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423134407410.png" alt="Claude生产的ics"></p>
 <h2 id="四、-效果对比"><a href="#四、-效果对比" class="headerlink" title="四、 效果对比"></a>四、 效果对比</h2><p>然后给出与chatgpt生成的ics对比</p>
 <ul>
 <li><p>Claude</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423114845740.png" srcset="/img/loading.gif" lazyload alt="Claude效果"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423114845740.png" alt="Claude效果"></p>
 </li>
 </ul>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423114918310.png" srcset="/img/loading.gif" lazyload alt="Chatgpt效果"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423114918310.png" alt="Chatgpt效果"></p>
 <h3 id="4-1-最终代码"><a href="#4-1-最终代码" class="headerlink" title="4.1 最终代码"></a>4.1 最终代码</h3><p>贴上Chatgpt和Claude生成的代码</p>
-<h4 id="4-1-1-Chatgpt"><a href="#4-1-1-Chatgpt" class="headerlink" title="4.1.1 Chatgpt"></a>4.1.1 Chatgpt</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime, timedelta<br><span class="hljs-keyword">import</span> re<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_to_ics</span>(<span class="hljs-params">travel_info</span>):<br>    regex = <span class="hljs-string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+达到时间\s+(\S+\s+\S+)&quot;</span><br>    train_regex = <span class="hljs-string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+到达时间\s+(\S+\s+\S+)&quot;</span><br>    <span class="hljs-keyword">match</span> = re.search(regex, travel_info)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span> <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">match</span> = re.search(train_regex, travel_info)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span> <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Error: failed to match travel information.&quot;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        travel_type = <span class="hljs-string">&quot;高铁/动车&quot;</span><br>        train_no, dep_station, dep_time, arr_station, arr_time = <span class="hljs-keyword">match</span>.groups()<br>    <span class="hljs-keyword">else</span>:<br>        travel_type = <span class="hljs-string">&quot;航班&quot;</span><br>        airline, dep_airport, dep_time, arr_airport, arr_time = <span class="hljs-keyword">match</span>.groups()<br><br>    <span class="hljs-comment"># 生成ICS字符串</span><br>    start_time = datetime.strptime(dep_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)<br>    end_time = datetime.strptime(arr_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)<br>    uid = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;travel_type&#125;</span>-<span class="hljs-subst">&#123;start_time.date()&#125;</span>&#x27;</span><br>    <span class="hljs-keyword">if</span> travel_type == <span class="hljs-string">&quot;航班&quot;</span>:<br>        summary = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;airline&#125;</span> <span class="hljs-subst">&#123;uid&#125;</span>&#x27;</span><br>        location = dep_airport<br>        description = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;airline&#125;</span> 将于<span class="hljs-subst">&#123;dep_time&#125;</span>从<span class="hljs-subst">&#123;dep_airport&#125;</span>出发，预计于<span class="hljs-subst">&#123;arr_time&#125;</span>到达<span class="hljs-subst">&#123;arr_airport&#125;</span>。&#x27;</span><br>    <span class="hljs-keyword">elif</span> travel_type == <span class="hljs-string">&quot;高铁/动车&quot;</span>:<br>        summary = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;train_no&#125;</span> <span class="hljs-subst">&#123;uid&#125;</span>&#x27;</span><br>        location = dep_station<br>        description = <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;train_no&#125;</span> 将于<span class="hljs-subst">&#123;dep_time&#125;</span>从<span class="hljs-subst">&#123;dep_station&#125;</span>出发，预计于<span class="hljs-subst">&#123;arr_time&#125;</span>到达<span class="hljs-subst">&#123;arr_station&#125;</span>。&#x27;</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Unknown travel type.&quot;</span>)<br><br>    ics_str = <span class="hljs-string">f&#x27;BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ChatGPT//Travel Schedule//EN\nBEGIN:VEVENT\nUID:<span class="hljs-subst">&#123;uid&#125;</span>\nDTSTAMP:<span class="hljs-subst">&#123;datetime.utcnow().strftime(<span class="hljs-string">&quot;%Y%m%dT%H%M%SZ&quot;</span>)&#125;</span>\nDTSTART;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;start_time.strftime(<span class="hljs-string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nDTEND;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;end_time.strftime(<span class="hljs-string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nSUMMARY:<span class="hljs-subst">&#123;summary&#125;</span>\nLOCATION:<span class="hljs-subst">&#123;location&#125;</span>\nDESCRIPTION:<span class="hljs-subst">&#123;description&#125;</span>\nEND:VEVENT\nEND:VCALENDAR&#x27;</span><br><br>    <span class="hljs-keyword">return</span> ics_str<br><br><br><span class="hljs-comment"># 读取行程信息</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;Flight.txt&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    travel_info = f.read()<br><br><span class="hljs-comment"># 转换为ICS字符串</span><br>ics_str = convert_to_ics(travel_info)<br><br><span class="hljs-comment"># 将ICS字符串写入文件</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;result.ics&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(ics_str)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;转换完成！请查看对应目录的result.ics文件&#x27;</span>)<br><br></code></pre></td></tr></table></figure>
+<h4 id="4-1-1-Chatgpt"><a href="#4-1-1-Chatgpt" class="headerlink" title="4.1.1 Chatgpt"></a>4.1.1 Chatgpt</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convert_to_ics</span>(<span class="params">travel_info</span>):</span><br><span class="line">    regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+达到时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    train_regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+到达时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(regex, travel_info)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">match</span> = re.search(train_regex, travel_info)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Error: failed to match travel information.&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        travel_type = <span class="string">&quot;高铁/动车&quot;</span></span><br><span class="line">        train_no, dep_station, dep_time, arr_station, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        travel_type = <span class="string">&quot;航班&quot;</span></span><br><span class="line">        airline, dep_airport, dep_time, arr_airport, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 生成ICS字符串</span></span><br><span class="line">    start_time = datetime.strptime(dep_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    end_time = datetime.strptime(arr_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    uid = <span class="string">f&#x27;<span class="subst">&#123;travel_type&#125;</span>-<span class="subst">&#123;start_time.date()&#125;</span>&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> travel_type == <span class="string">&quot;航班&quot;</span>:</span><br><span class="line">        summary = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span> <span class="subst">&#123;uid&#125;</span>&#x27;</span></span><br><span class="line">        location = dep_airport</span><br><span class="line">        description = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_airport&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_airport&#125;</span>。&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> travel_type == <span class="string">&quot;高铁/动车&quot;</span>:</span><br><span class="line">        summary = <span class="string">f&#x27;<span class="subst">&#123;train_no&#125;</span> <span class="subst">&#123;uid&#125;</span>&#x27;</span></span><br><span class="line">        location = dep_station</span><br><span class="line">        description = <span class="string">f&#x27;<span class="subst">&#123;train_no&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_station&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_station&#125;</span>。&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;Unknown travel type.&quot;</span>)</span><br><span class="line"></span><br><span class="line">    ics_str = <span class="string">f&#x27;BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ChatGPT//Travel Schedule//EN\nBEGIN:VEVENT\nUID:<span class="subst">&#123;uid&#125;</span>\nDTSTAMP:<span class="subst">&#123;datetime.utcnow().strftime(<span class="string">&quot;%Y%m%dT%H%M%SZ&quot;</span>)&#125;</span>\nDTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;start_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nDTEND;TZID=Asia/Shanghai:<span class="subst">&#123;end_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nSUMMARY:<span class="subst">&#123;summary&#125;</span>\nLOCATION:<span class="subst">&#123;location&#125;</span>\nDESCRIPTION:<span class="subst">&#123;description&#125;</span>\nEND:VEVENT\nEND:VCALENDAR&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ics_str</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取行程信息</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;Flight.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    travel_info = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为ICS字符串</span></span><br><span class="line">ics_str = convert_to_ics(travel_info)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将ICS字符串写入文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(ics_str)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;转换完成！请查看对应目录的result.ics文件&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>Flight.txt的格式</p>
 <ul>
 <li>航班信息</li>
 </ul>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">厦门航空 MF8415<br>杭州萧山机场T3<br>出发时间 <span class="hljs-number">2023</span><span class="hljs-regexp">/05/</span><span class="hljs-number">04</span> <span class="hljs-number">15</span>:<span class="hljs-number">20</span><br>重庆江北机场T3<br>到达时间 <span class="hljs-number">2023</span><span class="hljs-regexp">/05/</span><span class="hljs-number">04</span> <span class="hljs-number">17</span>:<span class="hljs-number">45</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">厦门航空 MF8415</span><br><span class="line">杭州萧山机场T3</span><br><span class="line">出发时间 2023/05/04 15:20</span><br><span class="line">重庆江北机场T3</span><br><span class="line">到达时间 2023/05/04 17:45</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>高铁信息</li>
 </ul>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">高铁/动车 G158<br>杭州东站<br>出发时间 <span class="hljs-number">2023</span><span class="hljs-regexp">/05/</span><span class="hljs-number">04</span> <span class="hljs-number">16</span>:<span class="hljs-number">13</span><br>上海虹桥站<br>到达时间 <span class="hljs-number">2023</span><span class="hljs-regexp">/05/</span><span class="hljs-number">04</span> <span class="hljs-number">17</span>:<span class="hljs-number">12</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">高铁/动车 G158</span><br><span class="line">杭州东站</span><br><span class="line">出发时间 2023/05/04 16:13</span><br><span class="line">上海虹桥站</span><br><span class="line">到达时间 2023/05/04 17:12</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="4-1-2-Claude"><a href="#4-1-2-Claude" class="headerlink" title="4.1.2 Claude"></a>4.1.2 Claude</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> logging<br><br>ics = <span class="hljs-string">&quot;BEGIN:VCALENDAR\n&quot;</span><br>ics += <span class="hljs-string">&quot;PRODID:transport\n&quot;</span><br>ics += <span class="hljs-string">&quot;VERSION:2.0\n&quot;</span><br>ics += <span class="hljs-string">&quot;CALSCALE:GREGORIAN\n&quot;</span><br><br>info = []<br>event_count = <span class="hljs-number">0</span><br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;demo.txt&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    content = f.read().strip()<br>    transports = content.split(<span class="hljs-string">&quot;\n\n&quot;</span>)<br><br>    <span class="hljs-keyword">for</span> transport <span class="hljs-keyword">in</span> transports:<br>        info = transport.split(<span class="hljs-string">&quot;\n&quot;</span>)<br><br>        <span class="hljs-comment"># 先判断是航班还是高铁,然后分别处理</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;高铁&#x27;</span> <span class="hljs-keyword">in</span> info[<span class="hljs-number">0</span>] <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;动车&#x27;</span> <span class="hljs-keyword">in</span> info[<span class="hljs-number">0</span>]:<br>            <span class="hljs-comment"># 高铁信息</span><br>            name = info[<span class="hljs-number">0</span>]<br>            <span class="hljs-comment"># 起始站</span><br>            start_station = info[<span class="hljs-number">1</span>]<br>            <span class="hljs-comment"># 出发时间</span><br>            depart_time = info[<span class="hljs-number">2</span>]<br>            depart_time = datetime.datetime.strptime(depart_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)<br>            <span class="hljs-comment"># 终点站</span><br>            end_station = info[<span class="hljs-number">3</span>]<br>            <span class="hljs-comment"># 到达时间</span><br>            arrive_time = info[<span class="hljs-number">4</span>]<br>            arrive_time = datetime.datetime.strptime(arrive_time, <span class="hljs-string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-comment"># 航班信息</span><br>            flight_info = transport.split(<span class="hljs-string">&quot;\n&quot;</span>)<br>            name = flight_info[<span class="hljs-number">0</span>]<br>            <span class="hljs-comment"># 解析出机场和时间信息</span><br>            airport = flight_info[<span class="hljs-number">1</span>].split(<span class="hljs-string">&#x27; &#x27;</span>)<br>            depart_airport = <span class="hljs-string">&#x27; &#x27;</span>.join(airport[:<span class="hljs-number">2</span>])<br><br>            depart_time = flight_info[<span class="hljs-number">2</span>]<br>            depart_time = datetime.datetime.strptime(depart_time, <span class="hljs-string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)<br><br>            airport = flight_info[<span class="hljs-number">3</span>].split(<span class="hljs-string">&#x27; &#x27;</span>)<br>            arrive_airport = <span class="hljs-string">&#x27; &#x27;</span>.join(airport[:<span class="hljs-number">2</span>])<br><br>            arrive_time = flight_info[<span class="hljs-number">4</span>]<br>            arrive_time = datetime.datetime.strptime(arrive_time, <span class="hljs-string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)<br><br>            <span class="hljs-comment"># 生成VEVENT事件</span><br>        <span class="hljs-keyword">try</span>:<br>            ics += <span class="hljs-string">f&quot;BEGIN:VEVENT\n&quot;</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;高铁&#x27;</span> <span class="hljs-keyword">in</span> name <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;动车&#x27;</span> <span class="hljs-keyword">in</span> name:<br>                ics += <span class="hljs-string">f&quot;UID:<span class="hljs-subst">&#123;name&#125;</span>@<span class="hljs-subst">&#123;start_station&#125;</span>@<span class="hljs-subst">&#123;end_station&#125;</span>\n&quot;</span><br>            <span class="hljs-keyword">else</span>:<br>                ics += <span class="hljs-string">f&quot;UID:<span class="hljs-subst">&#123;name&#125;</span>@<span class="hljs-subst">&#123;depart_airport&#125;</span>@<span class="hljs-subst">&#123;arrive_airport&#125;</span>\n&quot;</span><br>            ics += <span class="hljs-string">f&quot;DTSTART;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;depart_time.strftime(<span class="hljs-string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span><br>            ics += <span class="hljs-string">f&quot;DTEND;TZID=Asia/Shanghai:<span class="hljs-subst">&#123;arrive_time.strftime(<span class="hljs-string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span><br>            ics += <span class="hljs-string">f&quot;SUMMARY:<span class="hljs-subst">&#123;name&#125;</span>\n&quot;</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;高铁&#x27;</span> <span class="hljs-keyword">in</span> name <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;动车&#x27;</span> <span class="hljs-keyword">in</span> name:<br>                ics += <span class="hljs-string">f&quot;LOCATION:<span class="hljs-subst">&#123;start_station&#125;</span> -&gt; <span class="hljs-subst">&#123;end_station&#125;</span>\n&quot;</span><br>            <span class="hljs-keyword">else</span>:<br>                ics += <span class="hljs-string">f&quot;LOCATION:<span class="hljs-subst">&#123;depart_airport&#125;</span> -&gt; <span class="hljs-subst">&#123;arrive_airport&#125;</span>\n&quot;</span><br>            ics += <span class="hljs-string">&quot;END:VEVENT\n&quot;</span><br>            event_count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;生成VEVENT失败:<span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>            logging.exception(e)<br><br>ics += <span class="hljs-string">&quot;END:VCALENDAR&quot;</span><br><br><span class="hljs-comment"># 如果成功生成了至少一个事件,就写入文件</span><br><span class="hljs-keyword">if</span> event_count &gt; <span class="hljs-number">0</span>:<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;result.ics&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(ics)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;没有生成任何事件,无法写入到文件&quot;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="4-1-2-Claude"><a href="#4-1-2-Claude" class="headerlink" title="4.1.2 Claude"></a>4.1.2 Claude</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">ics = <span class="string">&quot;BEGIN:VCALENDAR\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;PRODID:transport\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;VERSION:2.0\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;CALSCALE:GREGORIAN\n&quot;</span></span><br><span class="line"></span><br><span class="line">info = []</span><br><span class="line">event_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read().strip()</span><br><span class="line">    transports = content.split(<span class="string">&quot;\n\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> transport <span class="keyword">in</span> transports:</span><br><span class="line">        info = transport.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 先判断是航班还是高铁,然后分别处理</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>] <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>]:</span><br><span class="line">            <span class="comment"># 高铁信息</span></span><br><span class="line">            name = info[<span class="number">0</span>]</span><br><span class="line">            <span class="comment"># 起始站</span></span><br><span class="line">            start_station = info[<span class="number">1</span>]</span><br><span class="line">            <span class="comment"># 出发时间</span></span><br><span class="line">            depart_time = info[<span class="number">2</span>]</span><br><span class="line">            depart_time = datetime.datetime.strptime(depart_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">            <span class="comment"># 终点站</span></span><br><span class="line">            end_station = info[<span class="number">3</span>]</span><br><span class="line">            <span class="comment"># 到达时间</span></span><br><span class="line">            arrive_time = info[<span class="number">4</span>]</span><br><span class="line">            arrive_time = datetime.datetime.strptime(arrive_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 航班信息</span></span><br><span class="line">            flight_info = transport.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">            name = flight_info[<span class="number">0</span>]</span><br><span class="line">            <span class="comment"># 解析出机场和时间信息</span></span><br><span class="line">            airport = flight_info[<span class="number">1</span>].split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            depart_airport = <span class="string">&#x27; &#x27;</span>.join(airport[:<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">            depart_time = flight_info[<span class="number">2</span>]</span><br><span class="line">            depart_time = datetime.datetime.strptime(depart_time, <span class="string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            airport = flight_info[<span class="number">3</span>].split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            arrive_airport = <span class="string">&#x27; &#x27;</span>.join(airport[:<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">            arrive_time = flight_info[<span class="number">4</span>]</span><br><span class="line">            arrive_time = datetime.datetime.strptime(arrive_time, <span class="string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 生成VEVENT事件</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ics += <span class="string">f&quot;BEGIN:VEVENT\n&quot;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> name:</span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;start_station&#125;</span>@<span class="subst">&#123;end_station&#125;</span>\n&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;depart_airport&#125;</span>@<span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;DTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;depart_time.strftime(<span class="string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;DTEND;TZID=Asia/Shanghai:<span class="subst">&#123;arrive_time.strftime(<span class="string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;SUMMARY:<span class="subst">&#123;name&#125;</span>\n&quot;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> name:</span><br><span class="line">                ics += <span class="string">f&quot;LOCATION:<span class="subst">&#123;start_station&#125;</span> -&gt; <span class="subst">&#123;end_station&#125;</span>\n&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ics += <span class="string">f&quot;LOCATION:<span class="subst">&#123;depart_airport&#125;</span> -&gt; <span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">&quot;END:VEVENT\n&quot;</span></span><br><span class="line">            event_count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;生成VEVENT失败:<span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">            logging.exception(e)</span><br><span class="line"></span><br><span class="line">ics += <span class="string">&quot;END:VCALENDAR&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果成功生成了至少一个事件,就写入文件</span></span><br><span class="line"><span class="keyword">if</span> event_count &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(ics)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;没有生成任何事件,无法写入到文件&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>Demo.txt 格式</p>
 <ul>
 <li>航班信息</li>
 </ul>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">厦门航空 MF8415<br>杭州萧山机场T3<br>2023-05-04 15:20<br>重庆江北机场T3<br>2023-05-04 17:45<br></code></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">厦门航空 MF8415</span><br><span class="line">杭州萧山机场T3</span><br><span class="line">2023-05-04 15:20</span><br><span class="line">重庆江北机场T3</span><br><span class="line">2023-05-04 17:45</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>高铁信息</li>
 </ul>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">高铁 G158<br>杭州东站<br><span class="hljs-number">2023</span><span class="hljs-regexp">/05/</span><span class="hljs-number">04</span> <span class="hljs-number">16</span>:<span class="hljs-number">13</span><br>上海虹桥站<br><span class="hljs-number">2023</span><span class="hljs-regexp">/05/</span><span class="hljs-number">04</span> <span class="hljs-number">17</span>:<span class="hljs-number">12</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">高铁 G158</span><br><span class="line">杭州东站</span><br><span class="line">2023/05/04 16:13</span><br><span class="line">上海虹桥站</span><br><span class="line">2023/05/04 17:12</span><br></pre></td></tr></table></figure>
 
 
 
@@ -422,7 +294,7 @@
 <h2 id="五-、-最后"><a href="#五-、-最后" class="headerlink" title="五 、 最后"></a>五 、 最后</h2><p>整个过程中因为我不想自己去手动调整代码，直接以命令口吻要求Chatgpt和Claude帮我写，如果报错或者输出结果不对，就把结果和错误发送回去，让它继续优化，直到达到自己想要的目的。 因为本人用的gpt3.5 和 Claude，编码能力不及gpt4.0；所以替我写好的代码需要重复调整，在这个上面花费的时间有点多（当然也有我自己写错配置的原因，比如<strong>到达</strong>写成<strong>达到</strong>，chatgpt第二次给我指正这个问题时候我才发现🤣）</p>
 <p>目前代码需要自己在txt文件中添加航班或者高铁信息，还有优化的空间。</p>
 <h3 id="5-1-一些小问题"><a href="#5-1-一些小问题" class="headerlink" title="5.1 一些小问题"></a>5.1 一些小问题</h3><p>在使用Keepchatgpt插件的时候，chatgpt发过来的代码还是会出现中断的情况，但是不会出现报错提示了。此时就需要提升chatgpt 代码没发完整，需要重新发。</p>
-<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423004643663.png" srcset="/img/loading.gif" lazyload alt="chatgpt回复出现中断"></p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423004643663.png" alt="chatgpt回复出现中断"></p>
 <h3 id="5-2-代码能力："><a href="#5-2-代码能力：" class="headerlink" title="5.2 代码能力："></a>5.2 <strong>代码能力</strong>：</h3><p>gpt 4.0 &gt;&gt; gpt 3.5 &gt; Claude</p>
 <h3 id="5-3-注意-⚠️"><a href="#5-3-注意-⚠️" class="headerlink" title="5.3 注意 ⚠️"></a>5.3 注意 ⚠️</h3><p>本次只是一个小脚本，信息就是个人的出行信息。不涉及敏感信息，但还是要强调一点：不要在chatgpt上发送有关企业内部代码和敏感涉密代码。信息安全是重中之重！！！</p>
 <p>想吐槽携程啥时候能把这个行程信息同步功能重新上线….😶‍🌫️</p>
@@ -431,403 +303,143 @@
 <li><a target="_blank" rel="noopener" href="https://app.slack.com/">https://app.slack.com</a></li>
 </ol>
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
+  </div>
+</article>
 
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
+
+
         
-  <a href="/categories/%E6%9D%82%E8%B0%88/" class="category-chain-item">杂谈</a>
-  
-  
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-      </span>
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+        
+      </ul>
+    </div>
+
     
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/chatgpt-LLM/">#chatgpt LLM</a>
-      
-    </div>
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>让Chatgpt帮我写代码(一)</div>
-      <div>https://suiyideali.github.io/2023/04/22/让Chatgpt帮我写代码(一)/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Mochazz</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2023年4月22日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2023年4月23日</div>
-        </div>
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/04/23/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/" title="Go语言基础学习(二)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Go语言基础学习(二)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/04/21/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/" title="Go语言基础学习(一)">
-                        <span class="hidden-mobile">Go语言基础学习(一)</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">一、起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Chatgpt%E4%B8%8A%E5%9C%BA"><span class="toc-number">2.</span> <span class="toc-text">二、Chatgpt上场</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%88%AA%E7%8F%AD%E4%BF%A1%E6%81%AF"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 航班信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%AB%98%E9%93%81%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 高铁信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81-Claude"><span class="toc-number">3.</span> <span class="toc-text">三、 Claude</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E8%88%AA%E7%8F%AD%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 航班信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E9%AB%98%E9%93%81%E4%BF%A1%E6%81%AF"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 高铁信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94"><span class="toc-number">4.</span> <span class="toc-text">四、 效果对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%9C%80%E7%BB%88%E4%BB%A3%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 最终代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-Chatgpt"><span class="toc-number">4.1.1.</span> <span class="toc-text">4.1.1 Chatgpt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-Claude"><span class="toc-number">4.1.2.</span> <span class="toc-text">4.1.2 Claude</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E3%80%81-%E6%9C%80%E5%90%8E"><span class="toc-number">5.</span> <span class="toc-text">五 、 最后</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 一些小问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E4%BB%A3%E7%A0%81%E8%83%BD%E5%8A%9B%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 代码能力：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E6%B3%A8%E6%84%8F-%E2%9A%A0%EF%B8%8F"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 注意 ⚠️</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="toc-number">6.</span> <span class="toc-text">六、参考来源</span></a></li></ol>
       </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&text=让Chatgpt帮我写代码(一)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&is_video=false&description=让Chatgpt帮我写代码(一)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=让Chatgpt帮我写代码(一)&body=Check out this article: https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&title=让Chatgpt帮我写代码(一)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&name=让Chatgpt帮我写代码(一)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/&t=让Chatgpt帮我写代码(一)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
 
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
     </div>
+
   </div>
 </div>
 
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-
     
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
+    2016-2023
+    Mochazz
   </div>
-</div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
 
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
-  
-  
-    <div class="statistics">
-  
-  
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
 
   
-    
-      <span id="busuanzi_container_site_pv" style="display: none">
-        总访问量 
-        <span id="busuanzi_value_site_pv"></span>
-         次
-      </span>
-    
-    
-      <span id="busuanzi_container_site_uv" style="display: none">
-        总访客数 
-        <span id="busuanzi_value_site_uv"></span>
-         人
-      </span>
-    
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
   
-</div>
-
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
     })
+  })
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
+<!-- utterances Comments -->
 
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
 </body>
 </html>
