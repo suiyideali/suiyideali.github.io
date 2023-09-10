@@ -1,0 +1,926 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mochazz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Go 语言中的错误和异常处理1.error 接口error 是系统自带的一个接口类型的自定义类型。 123type error interface &amp;#123;    Error() string&amp;#125;  2.errors 包errors 包中包含了一个实现 error 这个接口的结构体类型 errorString。可以直接使用包中的方法来自定义一些错误，从而返回希望被上层代码处理的错误信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言基础学习（五）">
+<meta property="og:url" content="https://suiyideali.github.io/2023/08/26/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/index.html">
+<meta property="og:site_name" content="Mochazz&#39;blog">
+<meta property="og:description" content="Go 语言中的错误和异常处理1.error 接口error 是系统自带的一个接口类型的自定义类型。 123type error interface &amp;#123;    Error() string&amp;#125;  2.errors 包errors 包中包含了一个实现 error 这个接口的结构体类型 errorString。可以直接使用包中的方法来自定义一些错误，从而返回希望被上层代码处理的错误信息">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137030.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137055.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137052.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137080.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137139.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137030.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137055.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137052.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137080.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137139.png">
+<meta property="article:published_time" content="2023-08-26T13:36:54.000Z">
+<meta property="article:modified_time" content="2023-09-10T20:30:31.080Z">
+<meta property="article:author" content="Mochazz">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137030.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Go语言基础学习（五） - Mochazz&#39;blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mochazz&#39;blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Go语言基础学习（五）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mochazz
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-26 21:36" pubdate>
+          2023年8月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          112 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Go语言基础学习（五）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Go-语言中的错误和异常处理"><a href="#Go-语言中的错误和异常处理" class="headerlink" title="Go 语言中的错误和异常处理"></a>Go 语言中的错误和异常处理</h1><h2 id="1-error-接口"><a href="#1-error-接口" class="headerlink" title="1.error 接口"></a>1.error 接口</h2><p>error 是<strong>系统自带</strong>的一个接口类型的自定义类型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> <span class="hljs-type">error</span> <span class="hljs-keyword">interface</span> &#123;<br>    Error() <span class="hljs-type">string</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-errors-包"><a href="#2-errors-包" class="headerlink" title="2.errors 包"></a>2.errors 包</h2><p>errors 包中包含了一个实现 error 这个接口的结构体类型 errorString。可以直接使用包中的方法来自定义一些错误，从而返回希望被上层代码处理的错误信息</p>
+<p>试例代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;errors&quot;</span><br>    <span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    t, err := divide(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>        fmt.Println(err)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        fmt.Println(t)<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">divide</span><span class="hljs-params">(a, b <span class="hljs-type">int</span>)</span></span> (<span class="hljs-type">int</span>, <span class="hljs-type">error</span>) &#123;<br>    <span class="hljs-keyword">if</span> b == <span class="hljs-number">0</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>, errors.New(<span class="hljs-string">&quot;除数不能为0&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">return</span> a / b, <span class="hljs-literal">nil</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-异常处理"><a href="#3-异常处理" class="headerlink" title="3.异常处理"></a>3.异常处理</h2><p>如果调用的方法的开发者不够仔细，并没有将所有的异常都考虑到并作为错误返回，那么程序可能就会<strong>被其影响而崩溃</strong>，GO 语言提供了一个叫<code>recover()</code>的函数，用于处理这种问题。一般常用于服务启动的入口函数，因为网络等外部因素，极有可能会导致程序异常，这些异常就需要这个函数来捕获。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        err := <span class="hljs-built_in">recover</span>()<br>        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>            fmt.Println(<span class="hljs-string">&quot;程序运行中出现异常：&quot;</span>, err)<br>        &#125;<br>    &#125;()<br>    t := divide(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>)<br>    fmt.Println(t)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">divide</span><span class="hljs-params">(a, b <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> a / b<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="Go-语言的并发"><a href="#Go-语言的并发" class="headerlink" title="Go 语言的并发"></a>Go 语言的并发</h1><p>Go 语言中的<strong>多线程操</strong>作是其语言的一大特色，它具有其它语言无法比拟的，可以近乎<strong>无限开启的线程</strong>。在 Go 语言中被称之为 <strong>goroutine</strong> ，它是线程的<strong>轻量级实现</strong>。</p>
+<h2 id="1-Go-语言的-goroutine"><a href="#1-Go-语言的-goroutine" class="headerlink" title="1.Go 语言的 goroutine"></a>1.Go 语言的 goroutine</h2><p>在 Go 语言中使用 <strong>go</strong> 关键字来创建 goroutine ，形如<code>go 函数名()</code>的形式去创建。<strong>每一个 goroutine 必须是一个函数，这个函数也可以是匿名函数</strong>。</p>
+<p>代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">//打印0到10的数字</span><br>    <span class="hljs-keyword">go</span> print0to10()<br>    <span class="hljs-comment">//打印A到Z的字符</span><br>    <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        <span class="hljs-keyword">for</span> i := <span class="hljs-string">&#x27;A&#x27;</span>; i &lt;= <span class="hljs-string">&#x27;K&#x27;</span>; i++ &#123;<br>            fmt.Println(<span class="hljs-string">&quot;printAtoK:&quot;</span>, <span class="hljs-type">string</span>(i))<br>            time.Sleep(time.Microsecond)<br>        &#125;<br>    &#125;()<br>    time.Sleep(time.Second)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">print0to10</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">10</span>; i++ &#123;<br>        fmt.Println(<span class="hljs-string">&quot;print0to10:&quot;</span>, i)<br>        time.Sleep(time.Microsecond)<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>执行结果<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137030.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>从执行结果中可以看出打印数字和打印字符的两个 goroutine 是并发执行的。执行顺序是由 cpu 来调度的，所以执行结果可能每次都不一样。</p>
+<h2 id="2-Go语言并发通讯"><a href="#2-Go语言并发通讯" class="headerlink" title="2.  Go语言并发通讯"></a>2.  Go语言并发通讯</h2><p>其它语言并发时进程中的通讯一般都是通过共享内存(全局变量)的方式来实现的，这样一来各个模块之间的耦合会变得非常紧密。所以后来提出了<strong>使用通讯来共享内存</strong>这一概念，来解耦合。在 Go 语言中就是使用 channel 的方式来达到这一目的的。</p>
+<p>代码实例</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-keyword">var</span> c1 <span class="hljs-keyword">chan</span> <span class="hljs-type">rune</span> = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">rune</span>, <span class="hljs-number">0</span>)<br><span class="hljs-keyword">var</span> c2 <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span> = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">0</span>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">//打印0到10的数字</span><br>    <span class="hljs-keyword">go</span> print0to10()<br>    <span class="hljs-comment">//打印A到Z的字符</span><br>    <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        c2 &lt;- <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">11</span>; i++ &#123;<br>            char := &lt;-c1<br>            fmt.Println(<span class="hljs-string">&quot;printAtoK:&quot;</span>, <span class="hljs-type">string</span>(char))<br>            c2 &lt;- i<br>        &#125;<br>    &#125;()<br>    time.Sleep(time.Second)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">print0to10</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-string">&#x27;A&#x27;</span>; i &lt;= <span class="hljs-string">&#x27;K&#x27;</span>; i++ &#123;<br>        num := &lt;-c2<br>        fmt.Println(<span class="hljs-string">&quot;print0to10:&quot;</span>, num)<br>        c1 &lt;- i<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>输出结果<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137055.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>和没用使用 channel 之前的代码不同，这次等同于使用 channel 实现了 goroutine 的调度，使其轮流执行。</p>
+<h1 id="Go语言进程锁"><a href="#Go语言进程锁" class="headerlink" title="Go语言进程锁"></a>Go语言进程锁</h1><p>之所以线程不安全是因为其内部实现机制中无法同时读写，若有两个 goroutine <strong>一个在读取 map 中的值，而另一个在更新 map 中的值</strong>，就会导致程序崩溃。</p>
+<p>代码示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    m := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">int</span>&#123;<span class="hljs-string">&quot;A&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;B&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;C&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;D&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;E&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;F&quot;</span>: <span class="hljs-number">3</span>&#125;<br>    <span class="hljs-comment">//创建100个goroutine对map进行读写</span><br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++ &#123;<br>        <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>            <span class="hljs-keyword">for</span> v := <span class="hljs-keyword">range</span> m &#123;<br>                m[v] = <span class="hljs-number">100</span><br>            &#125;<br>        &#125;()<br>    &#125;<br>    time.Sleep(time.Second)<br>    fmt.Println(m)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>执行上述代码有时会输出正确结果：</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137052.png" srcset="/img/loading.gif" lazyload alt="image-20230822201432973"></p>
+<p>但更多的时候会输出读写冲突，就是线程不安全的 map 不建议使用的原因，除了直接使用线程安全的 map 之外，还可以为这些 goruntine <strong>加上锁</strong>，使其无法同时对 map 进行读写操作，这样也可以保障各线程的安全。</p>
+<p>代码示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;sync&quot;</span><br>	<span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> lock sync.Mutex <span class="hljs-comment">//定义一个锁变量</span><br>	m := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">int</span>&#123;<span class="hljs-string">&quot;A&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;B&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;C&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;D&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;E&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;F&quot;</span>: <span class="hljs-number">3</span>&#125;<br>	<span class="hljs-comment">// 创建100个goroutine对map进行读写</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++ &#123;<br>		<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>			lock.Lock() <span class="hljs-comment">// 在读取map前锁定这个锁，使其它线程访问这个锁要阻塞</span><br>			<span class="hljs-keyword">for</span> v := <span class="hljs-keyword">range</span> m &#123;<br>				m[v] = <span class="hljs-number">100</span><br>			&#125;<br>			lock.Unlock() <span class="hljs-comment">//在读取map前释放这个锁</span><br>		&#125;()<br>	&#125;<br>	time.Sleep(time.Second)<br>	fmt.Println(m)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>加了锁之后，无论多少次的执行结果都是正确的。</p>
+<h1 id="Go语言的包"><a href="#Go语言的包" class="headerlink" title="Go语言的包"></a>Go语言的包</h1><p>和大部分语言一致，Go 语言也是支持调用其它文件中的 Go 代码的。<strong>Go 语言是现这一功能则是通过包来实现的</strong>。而实现包的功能则是通过关键字 <strong>package</strong> 来实现的，使用 <strong>package</strong> 来声明代码所在的包。</p>
+<h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><p>Go 语言中一般使用文件所在的<strong>文件名来命令自己的包名</strong>，这样层次清晰便于管理。其中包名定义的注意事项如下：</p>
+<ul>
+<li>包名一般都是<strong>全小写</strong></li>
+<li>包名不可以是路径</li>
+<li>一个文件夹下只能有一个包名</li>
+<li>每个程序的<strong>入口包名均为 main</strong> ，只有有main包，程序才可以执行</li>
+</ul>
+<h2 id="2-多行导入"><a href="#2-多行导入" class="headerlink" title="2. 多行导入"></a>2. 多行导入</h2><p>多行导入的方式有点类似于多个常量同时定义。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>    firstgo/packagetest1<br>    firstgo/packagetest2<br>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-使用规则"><a href="#3-使用规则" class="headerlink" title="3. 使用规则"></a>3. 使用规则</h2><p>在 Go 语言中，并不是直接导入了你写的一个包，你就可以直接使用包中的任何代码。这里有一个类似于Java和.NET的私有和公有的概念，你只可以使用导入的包中的<strong>公有的函数、变量以及自定义类型</strong>。Go 语言中区分公有私有的方法很简单，就是<strong>查看函数名、变量名以及自定义类型名的首字母是否为大写，大写的即为公有，小写的为私有</strong>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> packagetest1<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">//定义私有变量name</span><br><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;Test1&quot;</span><br><br><span class="hljs-comment">//PrintName 打印变量name</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">PrintName</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;packagetest1 Name:&quot;</span>, name)<br>&#125;<br><span class="hljs-keyword">package</span> packagetest2<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">//定义私有变量name</span><br><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;Test2&quot;</span><br><br><span class="hljs-comment">//PrintName 打印变量name</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">PrintName</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;packagetest2 Name:&quot;</span>, name)<br>&#125;<br><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;firstgo/packagetest1&quot;</span><br>    <span class="hljs-string">&quot;firstgo/packagetest2&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    packagetest1.PrintName()<span class="hljs-comment">//调用这个包中的PrintName()函数</span><br>    packagetest2.PrintName()<span class="hljs-comment">//调用这个包中的PrintName()函数</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="Go-语言-go-mod-包依赖管理工具"><a href="#Go-语言-go-mod-包依赖管理工具" class="headerlink" title="Go 语言 go mod 包依赖管理工具"></a>Go 语言 go mod 包依赖管理工具</h1><h2 id="1-指令介绍"><a href="#1-指令介绍" class="headerlink" title="1. 指令介绍"></a>1. 指令介绍</h2><p>控制台输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">go mod<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137080.png" srcset="/img/loading.gif" lazyload alt="image-20230826212609479"></p>
+<p>指令解析如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">指令</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">go mod download</td>
+<td align="left">下载依赖包到本地(默认下载目录为 $GOPATH&#x2F;pkg&#x2F;mod)</td>
+</tr>
+<tr>
+<td align="left">go mod edit</td>
+<td align="left">编辑 go.mod 文件(不常用)</td>
+</tr>
+<tr>
+<td align="left">go mod graph</td>
+<td align="left">输出go mod的依赖图</td>
+</tr>
+<tr>
+<td align="left">go mod init</td>
+<td align="left">初始化一个mod项目，即在包中示创建一个go.mod文件</td>
+</tr>
+<tr>
+<td align="left">go mod tidy</td>
+<td align="left">自动补全新增(删除减少)的依赖包</td>
+</tr>
+<tr>
+<td align="left">go mod verify</td>
+<td align="left">校验依赖包</td>
+</tr>
+<tr>
+<td align="left">go mod why</td>
+<td align="left">解释为什么要依赖，即显示这个包在哪里被导入了(不常用)</td>
+</tr>
+</tbody></table>
+<h2 id="2-go-mod-中使用-replace"><a href="#2-go-mod-中使用-replace" class="headerlink" title="2. go mod 中使用 replace"></a>2. go mod 中使用 replace</h2><p><strong>replace</strong> 是用于使用<strong>本地包来替换导入包的一个操作</strong>，毕竟并不是所有导入包都能够下载的到，也有一些是你自己开发，并未上传到网络中的代码，这时候如果要在 go mod 中导入就需要 <strong>replace</strong> 了。</p>
+<p>使用代码如下：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs arcade">module go_study<br><br>go <span class="hljs-number">1.20</span><br><br><span class="hljs-built_in">replace</span> (<br>    <span class="hljs-comment">//包导入名 =&gt; 本地包相对路径/绝对路径</span><br>    go_study/<span class="hljs-function"><span class="hljs-params">packagetest1</span> =&gt;</span> ./packagetest1<br>    go_study/<span class="hljs-function"><span class="hljs-params">packagetest2</span> =&gt;</span> ./packagetest2<br>)<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-在项目中使用"><a href="#3-在项目中使用" class="headerlink" title="3. 在项目中使用"></a>3. 在项目中使用</h2><p>在<strong>任意文件夹</strong>中创建Go文件，然后录入以下代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	r := gin.Default()<br>	r.GET(<span class="hljs-string">&quot;/ping&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>		c.JSON(<span class="hljs-number">200</span>, gin.H&#123;<br>			<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;Hello Codey!&quot;</span>,<br>		&#125;)<br>	&#125;)<br>	r.Run() <span class="hljs-comment">// listen and serve on 0.0.0.0:8080</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>打开控制台输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">go mod init<br>go mod tidy<br></code></pre></td></tr></table></figure>
+
+<p>这样就会开始下载依赖包</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137139.png" srcset="/img/loading.gif" lazyload alt="image-20230826213048786"></p>
+<p>最后项目文件夹里面会多出go.mod 和 go.sum ，其中 go.sum 不用在意，其中的内容为导入包的路径、版本和它的hash ，是自动生成自动更新的。</p>
+<p>查看 go.mod会发现文件如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs go">module go_study<br><br><span class="hljs-keyword">go</span> <span class="hljs-number">1.20</span><br><br>require github.com/gin-gonic/gin v1<span class="hljs-number">.9</span><span class="hljs-number">.1</span><br><br>require (<br>	github.com/bytedance/sonic v1<span class="hljs-number">.9</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>	github.com/chenzhuoyu/base64x v0<span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-number">-20221115062448</span>-fe3a3abad311 <span class="hljs-comment">// indirect</span><br>	github.com/gabriel-vasile/mimetype v1<span class="hljs-number">.4</span><span class="hljs-number">.2</span> <span class="hljs-comment">// indirect</span><br>	github.com/gin-contrib/sse v0<span class="hljs-number">.1</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	github.com/<span class="hljs-keyword">go</span>-playground/locales v0<span class="hljs-number">.14</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>	github.com/<span class="hljs-keyword">go</span>-playground/universal-translator v0<span class="hljs-number">.18</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>	github.com/<span class="hljs-keyword">go</span>-playground/validator/v10 v10<span class="hljs-number">.14</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	github.com/goccy/<span class="hljs-keyword">go</span>-json v0<span class="hljs-number">.10</span><span class="hljs-number">.2</span> <span class="hljs-comment">// indirect</span><br>	github.com/json-iterator/<span class="hljs-keyword">go</span> v1<span class="hljs-number">.1</span><span class="hljs-number">.12</span> <span class="hljs-comment">// indirect</span><br>	github.com/klauspost/cpuid/v2 v2<span class="hljs-number">.2</span><span class="hljs-number">.4</span> <span class="hljs-comment">// indirect</span><br>	github.com/leodido/<span class="hljs-keyword">go</span>-urn v1<span class="hljs-number">.2</span><span class="hljs-number">.4</span> <span class="hljs-comment">// indirect</span><br>	github.com/mattn/<span class="hljs-keyword">go</span>-isatty v0<span class="hljs-number">.0</span><span class="hljs-number">.19</span> <span class="hljs-comment">// indirect</span><br>	github.com/modern-<span class="hljs-keyword">go</span>/concurrent v0<span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-number">-20180306012644</span>-bacd9c7ef1dd <span class="hljs-comment">// indirect</span><br>	github.com/modern-<span class="hljs-keyword">go</span>/reflect2 v1<span class="hljs-number">.0</span><span class="hljs-number">.2</span> <span class="hljs-comment">// indirect</span><br>	github.com/pelletier/<span class="hljs-keyword">go</span>-toml/v2 v2<span class="hljs-number">.0</span><span class="hljs-number">.8</span> <span class="hljs-comment">// indirect</span><br>	github.com/twitchyliquid64/golang-asm v0<span class="hljs-number">.15</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>	github.com/ugorji/<span class="hljs-keyword">go</span>/codec v1<span class="hljs-number">.2</span><span class="hljs-number">.11</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/arch v0<span class="hljs-number">.3</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/crypto v0<span class="hljs-number">.9</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/net v0<span class="hljs-number">.10</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/sys v0<span class="hljs-number">.8</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/text v0<span class="hljs-number">.9</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	google.golang.org/protobuf v1<span class="hljs-number">.30</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	gopkg.in/yaml.v3 v3<span class="hljs-number">.0</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>自动记录了引用的包路径和版本</strong>。如果要修改使用版本，<strong>直接修改版本号即可</strong>。](&lt;—<br>​—<br>tag: [“Blog&#x2F;waiting”, “Go”]<br>genre: “博客”<br>​—</p>
+<hr>
+<h1 id="Go-语言中的错误和异常处理-1"><a href="#Go-语言中的错误和异常处理-1" class="headerlink" title="Go 语言中的错误和异常处理"></a>Go 语言中的错误和异常处理</h1><h2 id="1-error-接口-1"><a href="#1-error-接口-1" class="headerlink" title="1.error 接口"></a>1.error 接口</h2><p>error 是<strong>系统自带</strong>的一个接口类型的自定义类型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> <span class="hljs-type">error</span> <span class="hljs-keyword">interface</span> &#123;<br>    Error() <span class="hljs-type">string</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-errors-包-1"><a href="#2-errors-包-1" class="headerlink" title="2.errors 包"></a>2.errors 包</h2><p>errors 包中包含了一个实现 error 这个接口的结构体类型 errorString。可以直接使用包中的方法来自定义一些错误，从而返回希望被上层代码处理的错误信息</p>
+<p>试例代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;errors&quot;</span><br>    <span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    t, err := divide(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>        fmt.Println(err)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        fmt.Println(t)<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">divide</span><span class="hljs-params">(a, b <span class="hljs-type">int</span>)</span></span> (<span class="hljs-type">int</span>, <span class="hljs-type">error</span>) &#123;<br>    <span class="hljs-keyword">if</span> b == <span class="hljs-number">0</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>, errors.New(<span class="hljs-string">&quot;除数不能为0&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">return</span> a / b, <span class="hljs-literal">nil</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-异常处理-1"><a href="#3-异常处理-1" class="headerlink" title="3.异常处理"></a>3.异常处理</h2><p>如果调用的方法的开发者不够仔细，并没有将所有的异常都考虑到并作为错误返回，那么程序可能就会<strong>被其影响而崩溃</strong>，GO 语言提供了一个叫<code>recover()</code>的函数，用于处理这种问题。一般常用于服务启动的入口函数，因为网络等外部因素，极有可能会导致程序异常，这些异常就需要这个函数来捕获。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        err := <span class="hljs-built_in">recover</span>()<br>        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>            fmt.Println(<span class="hljs-string">&quot;程序运行中出现异常：&quot;</span>, err)<br>        &#125;<br>    &#125;()<br>    t := divide(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>)<br>    fmt.Println(t)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">divide</span><span class="hljs-params">(a, b <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> a / b<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="Go-语言的并发-1"><a href="#Go-语言的并发-1" class="headerlink" title="Go 语言的并发"></a>Go 语言的并发</h1><p>Go 语言中的<strong>多线程操</strong>作是其语言的一大特色，它具有其它语言无法比拟的，可以近乎<strong>无限开启的线程</strong>。在 Go 语言中被称之为 <strong>goroutine</strong> ，它是线程的<strong>轻量级实现</strong>。</p>
+<h2 id="1-Go-语言的-goroutine-1"><a href="#1-Go-语言的-goroutine-1" class="headerlink" title="1.Go 语言的 goroutine"></a>1.Go 语言的 goroutine</h2><p>在 Go 语言中使用 <strong>go</strong> 关键字来创建 goroutine ，形如<code>go 函数名()</code>的形式去创建。<strong>每一个 goroutine 必须是一个函数，这个函数也可以是匿名函数</strong>。</p>
+<p>代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">//打印0到10的数字</span><br>    <span class="hljs-keyword">go</span> print0to10()<br>    <span class="hljs-comment">//打印A到Z的字符</span><br>    <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        <span class="hljs-keyword">for</span> i := <span class="hljs-string">&#x27;A&#x27;</span>; i %<span class="hljs-number">3</span>C= <span class="hljs-string">&#x27;K&#x27;</span>; i++ &#123;<br>            fmt.Println(<span class="hljs-string">&quot;printAtoK:&quot;</span>, <span class="hljs-type">string</span>(i))<br>            time.Sleep(time.Microsecond)<br>        &#125;<br>    &#125;()<br>    time.Sleep(time.Second)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">print0to10</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">10</span>; i++ &#123;<br>        fmt.Println(<span class="hljs-string">&quot;print0to10:&quot;</span>, i)<br>        time.Sleep(time.Microsecond)<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>执行结果<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137030.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>从执行结果中可以看出打印数字和打印字符的两个 goroutine 是并发执行的。执行顺序是由 cpu 来调度的，所以执行结果可能每次都不一样。</p>
+<h2 id="2-Go语言并发通讯-1"><a href="#2-Go语言并发通讯-1" class="headerlink" title="2.  Go语言并发通讯"></a>2.  Go语言并发通讯</h2><p>其它语言并发时进程中的通讯一般都是通过共享内存(全局变量)的方式来实现的，这样一来各个模块之间的耦合会变得非常紧密。所以后来提出了<strong>使用通讯来共享内存</strong>这一概念，来解耦合。在 Go 语言中就是使用 channel 的方式来达到这一目的的。</p>
+<p>代码实例</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-keyword">var</span> c1 <span class="hljs-keyword">chan</span> <span class="hljs-type">rune</span> = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">rune</span>, <span class="hljs-number">0</span>)<br><span class="hljs-keyword">var</span> c2 <span class="hljs-keyword">chan</span> <span class="hljs-type">int</span> = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">0</span>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">//打印0到10的数字</span><br>    <span class="hljs-keyword">go</span> print0to10()<br>    <span class="hljs-comment">//打印A到Z的字符</span><br>    <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        c2 &lt;- <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">11</span>; i++ &#123;<br>            char := &lt;-c1<br>            fmt.Println(<span class="hljs-string">&quot;printAtoK:&quot;</span>, <span class="hljs-type">string</span>(char))<br>            c2 &lt;- i<br>        &#125;<br>    &#125;()<br>    time.Sleep(time.Second)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">print0to10</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-string">&#x27;A&#x27;</span>; i &lt;= <span class="hljs-string">&#x27;K&#x27;</span>; i++ &#123;<br>        num := &lt;-c2<br>        fmt.Println(<span class="hljs-string">&quot;print0to10:&quot;</span>, num)<br>        c1 &lt;- i<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>输出结果<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137055.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>和没用使用 channel 之前的代码不同，这次等同于使用 channel 实现了 goroutine 的调度，使其轮流执行。</p>
+<h1 id="Go语言进程锁-1"><a href="#Go语言进程锁-1" class="headerlink" title="Go语言进程锁"></a>Go语言进程锁</h1><p>之所以线程不安全是因为其内部实现机制中无法同时读写，若有两个 goroutine <strong>一个在读取 map 中的值，而另一个在更新 map 中的值</strong>，就会导致程序崩溃。</p>
+<p>代码示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    m := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">int</span>&#123;<span class="hljs-string">&quot;A&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;B&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;C&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;D&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;E&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;F&quot;</span>: <span class="hljs-number">3</span>&#125;<br>    <span class="hljs-comment">//创建100个goroutine对map进行读写</span><br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++ &#123;<br>        <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>            <span class="hljs-keyword">for</span> v := <span class="hljs-keyword">range</span> m &#123;<br>                m[v] = <span class="hljs-number">100</span><br>            &#125;<br>        &#125;()<br>    &#125;<br>    time.Sleep(time.Second)<br>    fmt.Println(m)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>执行上述代码有时会输出正确结果：</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137052.png" srcset="/img/loading.gif" lazyload alt="image-20230822201432973"></p>
+<p>但更多的时候会输出读写冲突，就是线程不安全的 map 不建议使用的原因，除了直接使用线程安全的 map 之外，还可以为这些 goruntine <strong>加上锁</strong>，使其无法同时对 map 进行读写操作，这样也可以保障各线程的安全。</p>
+<p>代码示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;sync&quot;</span><br>	<span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> lock sync.Mutex <span class="hljs-comment">//定义一个锁变量</span><br>	m := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">int</span>&#123;<span class="hljs-string">&quot;A&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;B&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;C&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;D&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;E&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;F&quot;</span>: <span class="hljs-number">3</span>&#125;<br>	<span class="hljs-comment">// 创建100个goroutine对map进行读写</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++ &#123;<br>		<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>			lock.Lock() <span class="hljs-comment">// 在读取map前锁定这个锁，使其它线程访问这个锁要阻塞</span><br>			<span class="hljs-keyword">for</span> v := <span class="hljs-keyword">range</span> m &#123;<br>				m[v] = <span class="hljs-number">100</span><br>			&#125;<br>			lock.Unlock() <span class="hljs-comment">//在读取map前释放这个锁</span><br>		&#125;()<br>	&#125;<br>	time.Sleep(time.Second)<br>	fmt.Println(m)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>加了锁之后，无论多少次的执行结果都是正确的。</p>
+<h1 id="Go语言的包-1"><a href="#Go语言的包-1" class="headerlink" title="Go语言的包"></a>Go语言的包</h1><p>和大部分语言一致，Go 语言也是支持调用其它文件中的 Go 代码的。<strong>Go 语言是现这一功能则是通过包来实现的</strong>。而实现包的功能则是通过关键字 <strong>package</strong> 来实现的，使用 <strong>package</strong> 来声明代码所在的包。</p>
+<h2 id="1-基本概念-1"><a href="#1-基本概念-1" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><p>Go 语言中一般使用文件所在的<strong>文件名来命令自己的包名</strong>，这样层次清晰便于管理。其中包名定义的注意事项如下：</p>
+<ul>
+<li>包名一般都是<strong>全小写</strong></li>
+<li>包名不可以是路径</li>
+<li>一个文件夹下只能有一个包名</li>
+<li>每个程序的<strong>入口包名均为 main</strong> ，只有有main包，程序才可以执行</li>
+</ul>
+<h2 id="2-多行导入-1"><a href="#2-多行导入-1" class="headerlink" title="2. 多行导入"></a>2. 多行导入</h2><p>多行导入的方式有点类似于多个常量同时定义。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>    firstgo/packagetest1<br>    firstgo/packagetest2<br>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-使用规则-1"><a href="#3-使用规则-1" class="headerlink" title="3. 使用规则"></a>3. 使用规则</h2><p>在 Go 语言中，并不是直接导入了你写的一个包，你就可以直接使用包中的任何代码。这里有一个类似于Java和.NET的私有和公有的概念，你只可以使用导入的包中的<strong>公有的函数、变量以及自定义类型</strong>。Go 语言中区分公有私有的方法很简单，就是<strong>查看函数名、变量名以及自定义类型名的首字母是否为大写，大写的即为公有，小写的为私有</strong>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> packagetest1<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">//定义私有变量name</span><br><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;Test1&quot;</span><br><br><span class="hljs-comment">//PrintName 打印变量name</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">PrintName</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;packagetest1 Name:&quot;</span>, name)<br>&#125;<br><span class="hljs-keyword">package</span> packagetest2<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-comment">//定义私有变量name</span><br><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;Test2&quot;</span><br><br><span class="hljs-comment">//PrintName 打印变量name</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">PrintName</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;packagetest2 Name:&quot;</span>, name)<br>&#125;<br><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;firstgo/packagetest1&quot;</span><br>    <span class="hljs-string">&quot;firstgo/packagetest2&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    packagetest1.PrintName()<span class="hljs-comment">//调用这个包中的PrintName()函数</span><br>    packagetest2.PrintName()<span class="hljs-comment">//调用这个包中的PrintName()函数</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="Go-语言-go-mod-包依赖管理工具-1"><a href="#Go-语言-go-mod-包依赖管理工具-1" class="headerlink" title="Go 语言 go mod 包依赖管理工具"></a>Go 语言 go mod 包依赖管理工具</h1><h2 id="1-指令介绍-1"><a href="#1-指令介绍-1" class="headerlink" title="1. 指令介绍"></a>1. 指令介绍</h2><p>控制台输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">go mod<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137080.png" srcset="/img/loading.gif" lazyload alt="image-20230826212609479"></p>
+<p>指令解析如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">指令</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">go mod download</td>
+<td align="left">下载依赖包到本地(默认下载目录为 $GOPATH&#x2F;pkg&#x2F;mod)</td>
+</tr>
+<tr>
+<td align="left">go mod edit</td>
+<td align="left">编辑 go.mod 文件(不常用)</td>
+</tr>
+<tr>
+<td align="left">go mod graph</td>
+<td align="left">输出go mod的依赖图</td>
+</tr>
+<tr>
+<td align="left">go mod init</td>
+<td align="left">初始化一个mod项目，即在包中示创建一个go.mod文件</td>
+</tr>
+<tr>
+<td align="left">go mod tidy</td>
+<td align="left">自动补全新增(删除减少)的依赖包</td>
+</tr>
+<tr>
+<td align="left">go mod verify</td>
+<td align="left">校验依赖包</td>
+</tr>
+<tr>
+<td align="left">go mod why</td>
+<td align="left">解释为什么要依赖，即显示这个包在哪里被导入了(不常用)</td>
+</tr>
+</tbody></table>
+<h2 id="2-go-mod-中使用-replace-1"><a href="#2-go-mod-中使用-replace-1" class="headerlink" title="2. go mod 中使用 replace"></a>2. go mod 中使用 replace</h2><p><strong>replace</strong> 是用于使用<strong>本地包来替换导入包的一个操作</strong>，毕竟并不是所有导入包都能够下载的到，也有一些是你自己开发，并未上传到网络中的代码，这时候如果要在 go mod 中导入就需要 <strong>replace</strong> 了。</p>
+<p>使用代码如下：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs arcade">module go_study<br><br>go <span class="hljs-number">1.20</span><br><br><span class="hljs-built_in">replace</span> (<br>    <span class="hljs-comment">//包导入名 =%3E 本地包相对路径/绝对路径</span><br>    go_study/<span class="hljs-function"><span class="hljs-params">packagetest1</span> =&gt;</span> ./packagetest1<br>    go_study/<span class="hljs-function"><span class="hljs-params">packagetest2</span> =&gt;</span> ./packagetest2<br>)<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-在项目中使用-1"><a href="#3-在项目中使用-1" class="headerlink" title="3. 在项目中使用"></a>3. 在项目中使用</h2><p>在<strong>任意文件夹</strong>中创建Go文件，然后录入以下代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	r := gin.Default()<br>	r.GET(<span class="hljs-string">&quot;/ping&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>		c.JSON(<span class="hljs-number">200</span>, gin.H&#123;<br>			<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;Hello Codey!&quot;</span>,<br>		&#125;)<br>	&#125;)<br>	r.Run() <span class="hljs-comment">// listen and serve on 0.0.0.0:8080</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>打开控制台输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">go mod init<br>go mod tidy<br></code></pre></td></tr></table></figure>
+
+<p>这样就会开始下载依赖包</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202308262137139.png" srcset="/img/loading.gif" lazyload alt="image-20230826213048786"></p>
+<p>最后项目文件夹里面会多出go.mod 和 go.sum ，其中 go.sum 不用在意，其中的内容为导入包的路径、版本和它的hash ，是自动生成自动更新的。</p>
+<p>查看 go.mod会发现文件如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs go">module go_study<br><br><span class="hljs-keyword">go</span> <span class="hljs-number">1.20</span><br><br>require github.com/gin-gonic/gin v1<span class="hljs-number">.9</span><span class="hljs-number">.1</span><br><br>require (<br>	github.com/bytedance/sonic v1<span class="hljs-number">.9</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>	github.com/chenzhuoyu/base64x v0<span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-number">-20221115062448</span>-fe3a3abad311 <span class="hljs-comment">// indirect</span><br>	github.com/gabriel-vasile/mimetype v1<span class="hljs-number">.4</span><span class="hljs-number">.2</span> <span class="hljs-comment">// indirect</span><br>	github.com/gin-contrib/sse v0<span class="hljs-number">.1</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	github.com/<span class="hljs-keyword">go</span>-playground/locales v0<span class="hljs-number">.14</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>	github.com/<span class="hljs-keyword">go</span>-playground/universal-translator v0<span class="hljs-number">.18</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>	github.com/<span class="hljs-keyword">go</span>-playground/validator/v10 v10<span class="hljs-number">.14</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	github.com/goccy/<span class="hljs-keyword">go</span>-json v0<span class="hljs-number">.10</span><span class="hljs-number">.2</span> <span class="hljs-comment">// indirect</span><br>	github.com/json-iterator/<span class="hljs-keyword">go</span> v1<span class="hljs-number">.1</span><span class="hljs-number">.12</span> <span class="hljs-comment">// indirect</span><br>	github.com/klauspost/cpuid/v2 v2<span class="hljs-number">.2</span><span class="hljs-number">.4</span> <span class="hljs-comment">// indirect</span><br>	github.com/leodido/<span class="hljs-keyword">go</span>-urn v1<span class="hljs-number">.2</span><span class="hljs-number">.4</span> <span class="hljs-comment">// indirect</span><br>	github.com/mattn/<span class="hljs-keyword">go</span>-isatty v0<span class="hljs-number">.0</span><span class="hljs-number">.19</span> <span class="hljs-comment">// indirect</span><br>	github.com/modern-<span class="hljs-keyword">go</span>/concurrent v0<span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-number">-20180306012644</span>-bacd9c7ef1dd <span class="hljs-comment">// indirect</span><br>	github.com/modern-<span class="hljs-keyword">go</span>/reflect2 v1<span class="hljs-number">.0</span><span class="hljs-number">.2</span> <span class="hljs-comment">// indirect</span><br>	github.com/pelletier/<span class="hljs-keyword">go</span>-toml/v2 v2<span class="hljs-number">.0</span><span class="hljs-number">.8</span> <span class="hljs-comment">// indirect</span><br>	github.com/twitchyliquid64/golang-asm v0<span class="hljs-number">.15</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>	github.com/ugorji/<span class="hljs-keyword">go</span>/codec v1<span class="hljs-number">.2</span><span class="hljs-number">.11</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/arch v0<span class="hljs-number">.3</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/crypto v0<span class="hljs-number">.9</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/net v0<span class="hljs-number">.10</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/sys v0<span class="hljs-number">.8</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	golang.org/x/text v0<span class="hljs-number">.9</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	google.golang.org/protobuf v1<span class="hljs-number">.30</span><span class="hljs-number">.0</span> <span class="hljs-comment">// indirect</span><br>	gopkg.in/yaml.v3 v3<span class="hljs-number">.0</span><span class="hljs-number">.1</span> <span class="hljs-comment">// indirect</span><br>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>自动记录了引用的包路径和版本</strong>。如果要修改使用版本，<strong>直接修改版本号即可</strong>。&gt;)</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/code/" class="category-chain-item">code</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Go/">#Go</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Go语言基础学习（五）</div>
+      <div>https://suiyideali.github.io/2023/08/26/Go语言基础学习（五）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mochazz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年8月26日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年9月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/29/%E5%BC%80%E6%BA%90WAF%E4%B8%8E%E8%9C%9C%E7%BD%90%E7%9A%84%E5%88%9D%E5%B0%9D%E8%AF%95/" title="开源WAF与蜜罐的初尝试">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">开源WAF与蜜罐的初尝试</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/25/hexo%E9%83%A8%E7%BD%B2%E5%90%8E%E6%98%AF%E7%A9%BA%E7%99%BD%E9%A1%B5%E7%9A%84%E7%8E%84%E5%AD%A6%E9%97%AE%E9%A2%98/" title="hexo部署后是空白页的玄学问题">
+                        <span class="hidden-mobile">hexo部署后是空白页的玄学问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
