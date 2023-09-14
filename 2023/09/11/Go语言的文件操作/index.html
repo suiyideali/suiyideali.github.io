@@ -1,0 +1,818 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mochazz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 文件句柄:os.FileGo语言的标准库os包下的File结构体表示一个文件句柄，获得了os.File，就可以对文件进行各种操作，有以下三种方式获得os.File文件句柄： 1.1 os.Create通过os.Create()函数传入一个文件名称可以创建并获得一个表示该文件的os.File结构体 1file,err :&#x3D; os.Create(&quot;.&#x2F;my.dat&quot;)  如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言的文件操作">
+<meta property="og:url" content="https://suiyideali.github.io/2023/09/11/Go%E8%AF%AD%E8%A8%80%E7%9A%84%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Mochazz&#39;blog">
+<meta property="og:description" content="1. 文件句柄:os.FileGo语言的标准库os包下的File结构体表示一个文件句柄，获得了os.File，就可以对文件进行各种操作，有以下三种方式获得os.File文件句柄： 1.1 os.Create通过os.Create()函数传入一个文件名称可以创建并获得一个表示该文件的os.File结构体 1file,err :&#x3D; os.Create(&quot;.&#x2F;my.dat&quot;)  如果">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-10T20:36:40.000Z">
+<meta property="article:modified_time" content="2023-09-14T21:46:22.114Z">
+<meta property="article:author" content="Mochazz">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Go语言的文件操作 - Mochazz&#39;blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mochazz&#39;blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Go语言的文件操作"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mochazz
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-11 04:36" pubdate>
+          2023年9月11日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          63 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Go语言的文件操作</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-文件句柄-os-File"><a href="#1-文件句柄-os-File" class="headerlink" title="1. 文件句柄:os.File"></a>1. 文件句柄:os.File</h1><p><code>Go</code>语言的标准库<code>os</code>包下的<code>File</code>结构体表示一个文件句柄，获得了<code>os.File</code>，就可以对文件进行各种操作，有以下三种方式获得<code>os.File</code>文件句柄：</p>
+<h2 id="1-1-os-Create"><a href="#1-1-os-Create" class="headerlink" title="1.1 os.Create"></a>1.1 os.Create</h2><p>通过<code>os.Create()</code>函数传入一个文件名称可以创建并获得一个表示该文件的<code>os.File</code>结构体</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">file,err := os.Create(<span class="hljs-string">&quot;./my.dat&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>如果指定的文件不存在，调用该函数后，会创建文件，如果文件已经存在，则只会清空文件的内容。</p>
+<h2 id="1-2-os-Open"><a href="#1-2-os-Open" class="headerlink" title="1.2 os.Open"></a>1.2 os.Open</h2><p>对于已经存在的文件，如果不想清空文件内容，只想打开该文件的话，可以用<code>os.Open()</code>函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">file, err := os.Open(<span class="hljs-string">&quot;./my.dat&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>用该函数打开一个文件句柄时，如果文件不存在，返回值<code>err</code>返回一个<code>error</code>类型的错误。</p>
+<h2 id="1-3-os-OpenFile"><a href="#1-3-os-OpenFile" class="headerlink" title="1.3 os.OpenFile"></a>1.3 os.OpenFile</h2><p>其实，<code>os.Create()</code>函数和<code>os.Open()</code>函数的底层都是调用<code>os.OpenFile()</code>函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Open</span><span class="hljs-params">(name <span class="hljs-type">string</span>)</span></span> (*File, <span class="hljs-type">error</span>) &#123;<br>	<span class="hljs-keyword">return</span> OpenFile(name, O_RDONLY, <span class="hljs-number">0</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Create</span><span class="hljs-params">(name <span class="hljs-type">string</span>)</span></span> (*File, <span class="hljs-type">error</span>) &#123;<br>	<span class="hljs-keyword">return</span> OpenFile(name, O_RDWR|O_CREATE|O_TRUNC, <span class="hljs-number">0666</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>os.OpenFile()</code>函数签名如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">OpenFile</span><span class="hljs-params">(name <span class="hljs-type">string</span>, flag <span class="hljs-type">int</span>, perm FileMode)</span></span> (*File, <span class="hljs-type">error</span>) <br></code></pre></td></tr></table></figure>
+
+<p>从函数签名可以看到调用<code>os.OpenFile</code>函数时要传入三个参数，其中<code>name</code>是表示要打开的文件名。</p>
+<p>而第二个参数<code>flag</code>表示打开文件的标志，比较常用有以下几种取值：</p>
+<ul>
+<li>O_RDONLY：只读</li>
+<li>O_WRONLY：只写</li>
+<li>O_RDWR：读写</li>
+<li>O_APPEND：以追加的方式写入</li>
+<li>O_CREATE：文件不存在时创建</li>
+<li>O_TRUNC：当文件存在时，将文件内容置空</li>
+</ul>
+<p>可以同时指定多个标志，多个标志用逻辑运算符<code>|</code>连接起来，比如<code>os.Create()</code>函数在调用<code>os.OpenFile</code>函数时就传入多个标志：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">OpenFile(name, O_RDWR|O_CREATE|O_TRUNC, <span class="hljs-number">0666</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<p>无论是用哪种方式打开的文件句柄，最终都要记得关闭以释放资源，比较标准的用法是用<code>defer</code>语句：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go">name := <span class="hljs-string">&quot;./my.dat&quot;</span><br>file,err := OpenFile(name, O_RDWR|O_CREATE|O_TRUNC, <span class="hljs-number">0755</span>) <br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span>&#123;<br>  <span class="hljs-built_in">panic</span>(err)<br>&#125;<br><span class="hljs-keyword">defer</span> file.Close()<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-读取文件"><a href="#2-读取文件" class="headerlink" title="2. 读取文件"></a>2. 读取文件</h1><p>要读取文件的内容，在获得文件句柄时，<code>OpenFile</code>函数的参数<code>flag</code>只需要传<code>O_RDONLY</code>就可以了,而参数<code>FileMode</code>可以为<code>0</code>:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">file, err := os.OpenFile(<span class="hljs-string">&quot;./my.dat&quot;</span>, os.O_RDONLY, <span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>os.File</code>有一个<code>Read()</code>方法，也就是说<code>os.File</code>实现<code>io.Reader</code>接口，Go标准库很多的包可以处理<code>io.Reader</code>接口，比如<code>ioutil</code>,<code>bufio</code>,<code>fmt</code>等，因此有很多种方式可以读取文件的内容。</p>
+<h2 id="2-1-直接读取"><a href="#2-1-直接读取" class="headerlink" title="2.1 直接读取"></a>2.1 直接读取</h2><p><code>os.File</code>的<code>Read</code>方法就可以直接将文件内容读取一个字节数组中，并返回读取的长度和一个用于判断是否出错的<code>error</code>类型：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;io&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	f, err := os.Open(<span class="hljs-string">&quot;./my.dat&quot;</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	 &#125;<br>	 <span class="hljs-keyword">defer</span> f.Close()<br>	 <span class="hljs-keyword">for</span> &#123;<br>		b := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">10</span>)<br>		n, err := f.Read(b) <span class="hljs-comment">//将文件内容读取到字节数组中</span><br>		<span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span> || err == io.EOF &#123;<br>			<span class="hljs-keyword">return</span><br>		 &#125;<br>		 fmt.Println(n, <span class="hljs-type">string</span>(b))<br>	  &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-使用bufio-包读取"><a href="#2-2-使用bufio-包读取" class="headerlink" title="2.2 使用bufio 包读取"></a>2.2 使用bufio 包读取</h2><p>当要用<code>bufio</code>包读取文件时，将调用<code>bufio.NewReader()</code>函数将<code>io.Reader</code>包装为一个<code>bufio.Reader</code>结构体，该结构体封装了很多更便捷读取文件的方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Reader)</span></span> Read(p []<span class="hljs-type">byte</span>) (n <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Reader)</span></span> ReadByte() (<span class="hljs-type">byte</span>, <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Reader)</span></span> ReadBytes(delim <span class="hljs-type">byte</span>) ([]<span class="hljs-type">byte</span>, <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Reader)</span></span> ReadLine() (line []<span class="hljs-type">byte</span>, isPrefix <span class="hljs-type">bool</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Reader)</span></span> ReadRune() (r <span class="hljs-type">rune</span>, size <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Reader)</span></span> ReadSlice(delim <span class="hljs-type">byte</span>) (line []<span class="hljs-type">byte</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Reader)</span></span> ReadString(delim <span class="hljs-type">byte</span>) (<span class="hljs-type">string</span>, <span class="hljs-type">error</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>ReadLine</code>方法的使用示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;bufio&quot;</span><br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;io&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	file, err := os.OpenFile(<span class="hljs-string">&quot;./my.dat&quot;</span>, os.O_RDWR, <span class="hljs-number">0666</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	&#125;<br>	<span class="hljs-keyword">defer</span> file.Close()<br>	reader := bufio.NewReader(file)<br>	<span class="hljs-keyword">for</span> &#123;<br>    <span class="hljs-comment">//按行读取</span><br>		b, _, err := reader.ReadLine() <br>		<span class="hljs-keyword">if</span> err == io.EOF &#123;<br>			<span class="hljs-keyword">break</span><br>		&#125;<br>		fmt.Println(<span class="hljs-type">string</span>(b))<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-3-使用fmt包读取文件"><a href="#2-3-使用fmt包读取文件" class="headerlink" title="2.3 使用fmt包读取文件"></a>2.3 使用fmt包读取文件</h2><p><code>fmt</code>包以<code>FScan...</code>开头的函数可以按一定的格式扫描读取文件里的内容：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fscan</span><span class="hljs-params">(r io.Reader, a ...any)</span></span> (n <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fscanf</span><span class="hljs-params">(r io.Reader, format <span class="hljs-type">string</span>, a ...any)</span></span> (n <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fscanln</span><span class="hljs-params">(r io.Reader, a ...any)</span></span> (n <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>Fscanln</code>方法的使用示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;io&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	file, err := os.OpenFile(<span class="hljs-string">&quot;./my.dat&quot;</span>, os.O_RDWR, <span class="hljs-number">0666</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	 &#125;<br>	 <span class="hljs-keyword">defer</span> file.Close()<br>	 <span class="hljs-keyword">for</span> &#123;<br>		<span class="hljs-keyword">var</span> a1, a2 <span class="hljs-type">string</span><br>		_, err := fmt.Fscanln(file, &amp;a1, &amp;a2)<br>		fmt.Println(a2, a2)<br>		<span class="hljs-keyword">if</span> err == io.EOF &#123;<br>			<span class="hljs-keyword">break</span><br>		 &#125;<br>	  &#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-使用ioutil包读取文件"><a href="#2-4-使用ioutil包读取文件" class="headerlink" title="2.4 使用ioutil包读取文件"></a>2.4 使用ioutil包读取文件</h2><p>标准库的<code>ioutil</code>包对读取文件做好封装，可以直接读取整个文件的数据：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go">f, err := os.Open(<span class="hljs-string">&quot;./my.dat&quot;</span>)<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>&#125;<br><span class="hljs-keyword">var</span> b []<span class="hljs-type">byte</span><br>b,err := ioutil.ReadAll(f)<br></code></pre></td></tr></table></figure>
+
+<p><code>ioutil</code>甚至封装了直接读取文件的函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> b []<span class="hljs-type">byte</span><br>b,err := ioutil.ReadFile(<span class="hljs-string">&quot;./my.dat&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-写入文件"><a href="#3-写入文件" class="headerlink" title="3. 写入文件"></a>3. 写入文件</h1><p>要向文件写入内容，在调用<code>OpenFile()</code>函数获得句柄时flag参数要传入<code>O_WRONLY</code>或者<code>O_RDWR</code>，如果是要往文件中以追加的形式在文件后面插入内容，还是需要<code>O_APPEND</code>:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">OpenFile(name, O_RDWR|O_CREATE|O_APPEND, <span class="hljs-number">0666</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>os.File</code>有<code>Write</code>方法，也就是说<code>os.File</code>也实现了<code>io.Writer</code>接口，所以同样可以调用<code>fmt</code>、<code>bufio</code>、<code>ioutil</code>包将数据写入到文件中。</p>
+<h2 id="3-1-直接写入"><a href="#3-1-直接写入" class="headerlink" title="3.1 直接写入"></a>3.1 直接写入</h2><p>写入文件最简单的方式就是调用<code>os.File</code>类型的<code>Write</code>方法写入一个字节数组：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;io&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)  <br>  <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br>	file, err := os.OpenFile(<span class="hljs-string">&quot;./my.dat&quot;</span>, os.O_RDWR|os.O_CREATE, <span class="hljs-number">0666</span>)  <br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br>		<span class="hljs-built_in">panic</span>(err)  <br>	&#125;  <br> 	<span class="hljs-keyword">defer</span> file.Close()  <br> 	file.WriteString(<span class="hljs-string">&quot;hello moka\n&quot;</span>)  <br> 	file.Seek(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br> 	<span class="hljs-keyword">for</span> &#123;  <br>		<span class="hljs-keyword">var</span> a1, a2 <span class="hljs-type">string</span>  <br>		_, err := fmt.Fscanln(file, &amp;a1, &amp;a2)  <br>		fmt.Println(a1, a2)<br>		<span class="hljs-keyword">if</span> err == io.EOF &#123;<br>			<span class="hljs-keyword">break</span><br>		&#125;  <br>	&#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2-使用bufio包写入文件"><a href="#3-2-使用bufio包写入文件" class="headerlink" title="3.2 使用bufio包写入文件"></a>3.2 使用bufio包写入文件</h2><p><code>bufio</code>包的<code>NewWriter</code>可以将一个<code>io.Writer</code>包装为<code>bufio.Writer</code>结构体,该结构体主要有以下几个方法可以将数据写入文件：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Writer)</span></span> Write(p []<span class="hljs-type">byte</span>) (nn <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Writer)</span></span> WriteByte(c <span class="hljs-type">byte</span>) <span class="hljs-type">error</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Writer)</span></span> WriteRune(r <span class="hljs-type">rune</span>) (size <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *Writer)</span></span> WriteString(s <span class="hljs-type">string</span>) (<span class="hljs-type">int</span>, <span class="hljs-type">error</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>bufio</code>包的写入是带有缓冲区的，也就是说当写入数据时，不是立刻写入到文件，而是写到内存缓冲区，最后调用<code>Flush</code>方法才将数据写入文件。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;bufio&quot;</span><br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;io&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	file, err:= os.OpenFile(<span class="hljs-string">&quot;./my.dat&quot;</span>, os.O_RDWR, <span class="hljs-number">0666</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	 &#125;<br>	 <span class="hljs-keyword">defer</span> file.Close()<br>	 writer := bufio.NewWriter(file)<br><br>	 writer.Write([]<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;hello mocha&quot;</span>))<br>	 writer.Flush()<br>	 file.Seek(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br> 	<span class="hljs-keyword">for</span> &#123;  <br>		<span class="hljs-keyword">var</span> a1, a2 <span class="hljs-type">string</span>  <br>		_, err := fmt.Fscanln(file, &amp;a1, &amp;a2)  <br>		fmt.Println(a1, a2)<br>		<span class="hljs-keyword">if</span> err == io.EOF &#123;<br>			<span class="hljs-keyword">break</span><br>		&#125;  <br>	&#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-使用fmt包写入文件"><a href="#3-3-使用fmt包写入文件" class="headerlink" title="3.3 使用fmt包写入文件"></a>3.3 使用fmt包写入文件</h2><p><code>fmt</code>包以下三个函数可以将格式化的数据写入到一个<code>io.Writer</code>:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fprint</span><span class="hljs-params">(w io.Writer, a ...any)</span></span> (n <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fprintf</span><span class="hljs-params">(w io.Writer, format <span class="hljs-type">string</span>, a ...any)</span></span> (n <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fprintln</span><span class="hljs-params">(w io.Writer, a ...any)</span></span> (n <span class="hljs-type">int</span>, err <span class="hljs-type">error</span>)<br></code></pre></td></tr></table></figure>
+
+<p>使用fmt写入文件的示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;io&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	file, err := os.OpenFile(<span class="hljs-string">&quot;./my.dat&quot;</span>, os.O_RDWR, <span class="hljs-number">0666</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	 &#125;<br>	<span class="hljs-keyword">defer</span> file.Close()<br>	fmt.Fprintf(file, <span class="hljs-string">&quot;%s:%s&quot;</span>, <span class="hljs-string">&quot;username&quot;</span>, <span class="hljs-string">&quot;moka&quot;</span>)<br>	file.Seek(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br>	<span class="hljs-keyword">for</span> &#123;  <br>	   <span class="hljs-keyword">var</span> a1, a2 <span class="hljs-type">string</span>  <br>	   _, err := fmt.Fscanln(file, &amp;a1, &amp;a2)  <br>	   fmt.Println(a1, a2)<br>	   <span class="hljs-keyword">if</span> err == io.EOF &#123;<br>		   <span class="hljs-keyword">break</span><br>	   &#125;  <br>	&#125;<br> &#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="4-判断是否为目录"><a href="#4-判断是否为目录" class="headerlink" title="4. 判断是否为目录"></a>4. 判断是否为目录</h1><p>要判断文件是否为目录，在获得<code>os.File</code>对象，可以调用该对象的<code>Stat</code>方法，该返回返回一个实现了<code>os.FileInfo</code>接口的对象：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> FileInfo <span class="hljs-keyword">interface</span> &#123;<br>	Name() <span class="hljs-type">string</span> <span class="hljs-comment">// 文件的基本名称</span><br>	Size() <span class="hljs-type">int64</span> <span class="hljs-comment">// 普通文件的字节长度；其他文件的系统相关长度</span><br>	Mode() FileMode <span class="hljs-comment">// 文件模式位</span><br>	ModTime() time.Time <span class="hljs-comment">// 修改时间</span><br>	IsDir() <span class="hljs-type">bool</span> <span class="hljs-comment">// Mode().IsDir()的缩写</span><br>	Sys() any <span class="hljs-comment">// 底层数据源（可以返回nil）</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>比如</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main  <br>  <br><span class="hljs-keyword">import</span> (  <br> <span class="hljs-string">&quot;fmt&quot;</span>  <br> <span class="hljs-string">&quot;os&quot;</span>  <br>)  <br>  <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;  <br> filePath := <span class="hljs-string">&quot;/path/to/file&quot;</span>  <br>  <br> <span class="hljs-comment">// 打开文件  </span><br> fileInfo, err := os.Stat(filePath)  <br> <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;  <br> fmt.Println(<span class="hljs-string">&quot;无法获取文件信息:&quot;</span>, err)  <br> <span class="hljs-keyword">return</span>  <br> &#125;  <br>  <br> <span class="hljs-comment">// 判断是否为目录  </span><br> <span class="hljs-keyword">if</span> fileInfo.IsDir() &#123;  <br> fmt.Println(<span class="hljs-string">&quot;文件是一个目录&quot;</span>)  <br> &#125; <span class="hljs-keyword">else</span> &#123;  <br> fmt.Println(<span class="hljs-string">&quot;文件不是一个目录&quot;</span>)  <br> &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="5-遍历目录"><a href="#5-遍历目录" class="headerlink" title="5. 遍历目录"></a>5. 遍历目录</h1><p>可以调用<code>os.ReadDir()</code>函数，该函数返回一个元素类型为<code>os.DirEntry</code>的切片:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *File)</span></span> ReadDir(n <span class="hljs-type">int</span>) ([]DirEntry, <span class="hljs-type">error</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>os.DirEntry</code>是一个接口，其定义如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> DirEntry <span class="hljs-keyword">interface</span> &#123;<br>	Name() <span class="hljs-type">string</span><br>	IsDir() <span class="hljs-type">bool</span><br>	Type() FileMode<br>	Info() (FileInfo, <span class="hljs-type">error</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>DirEntry</code>接口也有<code>IsDir()</code>方法，因为可以再往下遍历，下面是一个实现目录遍历的示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;log&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>)<br><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	base := <span class="hljs-string">&quot;./&quot;</span><br>	IterateFolder(base)<br> &#125;<br><br> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">IterateFolder</span><span class="hljs-params">(base <span class="hljs-type">string</span>)</span></span> &#123;<br>	dirEntry, err := os.ReadDir(base)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	 &#125;<br>	<span class="hljs-keyword">for</span> _, v := <span class="hljs-keyword">range</span> dirEntry &#123;<br>		<span class="hljs-keyword">if</span> v.IsDir() &#123;<br>			IterateFolder(base + <span class="hljs-string">&quot;/&quot;</span> + v.Name())<br>		 &#125; <span class="hljs-keyword">else</span> &#123;<br>			fmt.Println(v.Name())<br>		 &#125;<br>	 &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="6-修改文件名称"><a href="#6-修改文件名称" class="headerlink" title="6. 修改文件名称"></a>6. 修改文件名称</h1><p>修改文件名称用<code>os.Rename</code>函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">err := os.Rename(<span class="hljs-string">&quot;./demo1.txt&quot;</span>, <span class="hljs-string">&quot;./demo2.txt&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>os.Rename</code>函数也可以用于移动文件：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">err := os.Rename(<span class="hljs-string">&quot;./hello.txt&quot;</span>, <span class="hljs-string">&quot;./m/hello.txt&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h1 id="7-删除文件"><a href="#7-删除文件" class="headerlink" title="7. 删除文件"></a>7. 删除文件</h1><p>删除一个文件或者一个空目录，直接调用<code>os</code>包的<code>Remove()</code>函数即可：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go">fileName := <span class="hljs-string">&quot;./1.txt&quot;</span><br>os.Remove(fileName)<br></code></pre></td></tr></table></figure>
+
+<p>可以根据<code>error</code>的返回值是否为nil判断是否删除成功，比如我们删除一个不存在的文件或者删除一个非空的目录：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//m为当前目录下一个非空目录</span><br>err := os.Remove(<span class="hljs-string">&quot;./m&quot;</span>)<br>fmt.Println(err)<br></code></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">remove ./m: directory <span class="hljs-keyword">not</span> empty<br></code></pre></td></tr></table></figure>
+
+<p>对于非空目录，如果要删除，可以用<code>os</code>包的<code>RemoveAll</code>函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">err := os.RemoveAll(<span class="hljs-string">&quot;./m&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7264781288275394572">https://juejin.cn/post/7264781288275394572</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7260904509198762021?searchId=20230915030002D063C3D51EC1D87BE2B3#heading-0">https://juejin.cn/post/7260904509198762021?searchId=20230915030002D063C3D51EC1D87BE2B3#heading-0</a></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/code/" class="category-chain-item">code</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Go/">#Go</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Go语言的文件操作</div>
+      <div>https://suiyideali.github.io/2023/09/11/Go语言的文件操作/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mochazz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年9月15日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/05/%E7%94%A8Serverless%E9%83%A8%E7%BD%B2%E5%9F%BA%E4%BA%8E-gin-%E7%9A%84%E9%A3%9E%E4%B9%A6%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="用Serverless部署基于 gin 的飞书机器人">
+                        <span class="hidden-mobile">用Serverless部署基于 gin 的飞书机器人</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
