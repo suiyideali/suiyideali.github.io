@@ -23,16 +23,14 @@
 <meta property="og:site_name" content="Mochazz&#39;blog">
 <meta property="og:description" content="1. 前言今天在新的云服务器上使用xray 的时候，出现以下报错： 1xray_linux_amd64: error while loading shared libraries: libpcap.so.0.8: cannot open shared object file: No such file or directory  于是记录下解决方法，以后遇到相同问题可按照此方法解决 2. 解决方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311051411392.png">
-<meta property="og:image" content="c:/Users/10669/AppData/Roaming/Typora/typora-user-images/image-20231105141258268.png">
 <meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311051437436.png">
 <meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311051438297.png">
 <meta property="article:published_time" content="2023-11-05T06:00:47.000Z">
-<meta property="article:modified_time" content="2023-11-05T06:40:23.481Z">
+<meta property="article:modified_time" content="2023-11-05T07:38:56.389Z">
 <meta property="article:author" content="Mochazz">
 <meta property="article:tag" content="xray">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311051411392.png">
+<meta name="twitter:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311051437436.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -244,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1k 字
         
       </span>
     
@@ -303,8 +301,6 @@
 
 <p>于是记录下解决方法，以后遇到相同问题可按照此方法解决</p>
 <h2 id="2-解决方法"><a href="#2-解决方法" class="headerlink" title="2. 解决方法"></a>2. 解决方法</h2><p>这里的原因是运行时没找到相应的lib文件，但大多数时候并不是因为没有这个文件，而是没有配置好环境变量；</p>
-<p>问一下文心一言：<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311051411392.png" srcset="/img/loading.gif" lazyload alt="image-20231105141122333">、</p>
-<p>默认我使用的是Debian系统，但我用的是centos的，增加一个条件<img src="C:/Users/10669/AppData/Roaming/Typora/typora-user-images/image-20231105141258268.png" srcset="/img/loading.gif" lazyload alt="image-20231105141258268"></p>
 <p>安装 libpcap</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo yum install libpcap<br></code></pre></td></tr></table></figure>
 
