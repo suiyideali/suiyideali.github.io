@@ -32,8 +32,12 @@
 <meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291712676.png">
 <meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291713654.png">
 <meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291718568.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301719658.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301725831.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301729767.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301729691.png">
 <meta property="article:published_time" content="2023-11-29T04:17:42.000Z">
-<meta property="article:modified_time" content="2023-11-29T09:22:03.128Z">
+<meta property="article:modified_time" content="2023-11-30T09:30:17.343Z">
 <meta property="article:author" content="m0ch4z">
 <meta property="article:tag" content="Xray">
 <meta name="twitter:card" content="summary_large_image">
@@ -249,7 +253,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k 字
+          4.8k 字
         
       </span>
     
@@ -260,7 +264,7 @@
         
         
         
-          28 分钟
+          41 分钟
         
       </span>
     
@@ -381,6 +385,25 @@
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291718568.png" srcset="/img/loading.gif" lazyload alt="测试结果"></p>
 </li>
 </ol>
+<h2 id="对接飞书实现自动告警"><a href="#对接飞书实现自动告警" class="headerlink" title="对接飞书实现自动告警"></a>对接飞书实现自动告警</h2><p>这点官方文档上面写的是对接Server 酱 和 企业微信，博主喜欢用飞书，于是就在官方的demo上修修改改，对接了飞书自动告警</p>
+<p>效果如下：</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301719658.png" srcset="/img/loading.gif" lazyload alt="飞书机器人"></p>
+<p>参照官方文档的demo如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, request<br><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> logging<br><br>app = Flask(__name__)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">push_feishu_group</span>(<span class="hljs-params">content</span>):<br>    resp = requests.post(<br>        <span class="hljs-string">&quot;https://open.feishu.cn/open-apis/bot/v2/hook/&#123;飞书机器人webhook的token&#125;&quot;</span>,<br>        json=&#123;<br>            <span class="hljs-string">&quot;Content-Type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,<br>            <span class="hljs-string">&quot;Charset&quot;</span>: <span class="hljs-string">&quot;UTF-8&quot;</span>,<br>            <span class="hljs-string">&quot;msg_type&quot;</span>: <span class="hljs-string">&quot;text&quot;</span>,<br>            <span class="hljs-string">&quot;content&quot;</span>: &#123;<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">f&quot;xray 发现了新漏洞 \n<span class="hljs-subst">&#123;content&#125;</span>&quot;</span>&#125;,<br>        &#125;,<br>    )<br>    <span class="hljs-keyword">if</span> resp.json()[<span class="hljs-string">&quot;errno&quot;</span>] != <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;push wechat group failed, %s&quot;</span> % resp.text)<br><br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/webhook&quot;</span>, methods=[<span class="hljs-string">&quot;POST&quot;</span>]</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">xray_webhook</span>():<br>    data = request.json<br>    typed = data[<span class="hljs-string">&quot;type&quot;</span>]<br>    <span class="hljs-keyword">if</span> typed == <span class="hljs-string">&quot;web_statistic&quot;</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ok&quot;</span><br>    vuln = data[<span class="hljs-string">&quot;data&quot;</span>]<br>    content = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string">url: &#123;url&#125;</span><br><span class="hljs-string">plugin: &#123;plugin&#125;</span><br><span class="hljs-string">create_time: &#123;create_time&#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">&quot;&quot;&quot;</span>.<span class="hljs-built_in">format</span>(<br>        url=vuln[<span class="hljs-string">&quot;detail&quot;</span>][<span class="hljs-string">&quot;addr&quot;</span>],<br>        plugin=vuln[<span class="hljs-string">&quot;plugin&quot;</span>],<br>        create_time=<span class="hljs-built_in">str</span>(datetime.datetime.fromtimestamp(vuln[<span class="hljs-string">&quot;create_time&quot;</span>] / <span class="hljs-number">1000</span>)),<br>    )<br>    <span class="hljs-keyword">try</span>:<br>        push_feishu_group(content)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        logging.exception(e)<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ok&quot;</span><br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    app.run()<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>服务器启动一个screen</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">screen -S feishu<br></code></pre></td></tr></table></figure>
+
+<p>python 运行脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 feishu.pyt<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301725831.png" srcset="/img/loading.gif" lazyload alt="运行脚本"></p>
+<p>运行xray即可</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">.<span class="hljs-regexp">/xray_linux_amd64 ws -u http:/</span><span class="hljs-regexp">/testphp.vulnweb.com  --wo http:/</span><span class="hljs-regexp">/127.0.0.1:5000/</span>webhook<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301729767.png" srcset="/img/loading.gif" lazyload alt="漏洞结果"></p>
+<p>脚本也能看到请求</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301729691.png" srcset="/img/loading.gif" lazyload alt="脚本接收到的请求"></p>
 <h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://docs.xray.cool/#/scenario/reverse">https://docs.xray.cool/#/scenario/reverse</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ED4y1v7NK/?vd_source=1ce79553d9a3c0c79cf53797a5c70476">https://www.bilibili.com/video/BV1ED4y1v7NK/?vd_source=1ce79553d9a3c0c79cf53797a5c70476</a></li>
@@ -450,7 +473,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年11月29日</div>
+          <div>2023年11月30日</div>
         </div>
       
       
