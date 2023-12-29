@@ -1,26 +1,30 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
-  <link rel="icon" href="/img/fco.jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="m0ch4z">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="1. 前言为了顺应时代浪潮（怕被卷没了），开始使用chatgpt这种大语言模型（LLM）应用了，体验了Chatgpt、谷歌Bard、Claude等国外的LLM应用，主要国内也没获取到相关应用到内测资格 hhh 其中Chatgpt 和 Claude 算是目前本人的主力使用，对中文也很友好，而且能解决代码开发中的效率问题，妥妥生产力！ 2. 大语言模型（LLM）什么是大语言模型？  大语言模型（LLM">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. 前言为了顺应时代浪潮（怕被卷没了），开始使用chatgpt这种大语言模型（LLM）应用了，体验了Chatgpt、谷歌Bard、Claude等国外的LLM应用，主要国内也没获取到相关应用到内测资格 hhh 其中Chatgpt 和 Claude 算是目前本人的主力使用，对中文也很友好，而且能解决代码开发中的效率问题，妥妥生产力！ 2. 大语言模型（LLM）什么是大语言模型？  大语言模型（LLM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="chatgpt及其大语言模型(LLM)应用">
 <meta property="og:url" content="https://suiyideali.github.io/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/index.html">
-<meta property="og:site_name" content="m0ch4z&#39;blog">
+<meta property="og:site_name" content="Geek小黑板">
 <meta property="og:description" content="1. 前言为了顺应时代浪潮（怕被卷没了），开始使用chatgpt这种大语言模型（LLM）应用了，体验了Chatgpt、谷歌Bard、Claude等国外的LLM应用，主要国内也没获取到相关应用到内测资格 hhh 其中Chatgpt 和 Claude 算是目前本人的主力使用，对中文也很友好，而且能解决代码开发中的效率问题，妥妥生产力！ 2. 大语言模型（LLM）什么是大语言模型？  大语言模型（LLM">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://suiyideali.github.io/img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/chatgpt.png">
@@ -43,302 +47,183 @@
 <meta property="article:modified_time" content="2023-04-22T07:33:44.281Z">
 <meta property="article:author" content="m0ch4z">
 <meta property="article:tag" content="chatgpt LLM">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://suiyideali.github.io/img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/chatgpt.png">
-  
-  
-  
-  <title>chatgpt及其大语言模型(LLM)应用 - m0ch4z&#39;blog</title>
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+<link rel="canonical" href="https://suiyideali.github.io/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/">
 
 
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  <title>chatgpt及其大语言模型(LLM)应用 | Geek小黑板</title>
   
 
 
 
 
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"b4f763bdabe2c39a3ce1baaa04190ab5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"6Tp7ZllCJ1Q5Hr5Qx7QEnZoQ-MdYXbMMI","app_key":"hbnuiPd47pTbO5y5VU7X4yj7","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-  
-    <!-- Baidu Analytics -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b4f763bdabe2c39a3ce1baaa04190ab5";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-  
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body>
-  
+</head>
 
-  <header>
-    
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>m0ch4z&#39;blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于我</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/links/">
-                <i class="iconfont icon-link-fill"></i>
-                <span>友链</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Geek小黑板</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
 </nav>
 
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/suiyideali" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/">
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          chatgpt及其大语言模型(LLM)应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-20 23:38:06" itemprop="dateCreated datePublished" datetime="2023-04-20T23:38:06+08:00">2023-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-22 15:33:44" itemprop="dateModified" datetime="2023-04-22T15:33:44+08:00">2023-04-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
+                </span>
+            </span>
+
           
-            <span id="subtitle" data-typed-text="chatgpt及其大语言模型(LLM)应用"></span>
-          
+
         </div>
-
-        
-          
-  <div class="mt-3">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        m0ch4z
-      </span>
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-20 23:38" pubdate>
-          2023年4月20日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          2.8k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          23 分钟
-        
-      </span>
-    
+      </header>
 
     
     
-  </div>
-
-
-        
-      </div>
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">chatgpt及其大语言模型(LLM)应用</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>为了顺应时代浪潮（<del>怕被卷没了</del>），开始使用chatgpt这种大语言模型（LLM）应用了，体验了Chatgpt、谷歌Bard、Claude等国外的LLM应用，主要国内也没获取到相关应用到内测资格 hhh</p>
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>为了顺应时代浪潮（<del>怕被卷没了</del>），开始使用chatgpt这种大语言模型（LLM）应用了，体验了Chatgpt、谷歌Bard、Claude等国外的LLM应用，主要国内也没获取到相关应用到内测资格 hhh</p>
 <p>其中Chatgpt 和 Claude 算是目前本人的主力使用，对中文也很友好，而且能解决代码开发中的效率问题，妥妥生产力！</p>
 <h2 id="2-大语言模型（LLM）"><a href="#2-大语言模型（LLM）" class="headerlink" title="2. 大语言模型（LLM）"></a>2. 大语言模型（LLM）</h2><p>什么是大语言模型？</p>
 <blockquote>
@@ -370,30 +255,30 @@
 <p>———以上来自Claude</p>
 <h2 id="3-LLM的应用"><a href="#3-LLM的应用" class="headerlink" title="3. LLM的应用"></a>3. LLM的应用</h2><h3 id="3-1-Chatgpt-（🌟🌟🌟🌟🌟）"><a href="#3-1-Chatgpt-（🌟🌟🌟🌟🌟）" class="headerlink" title="3.1 Chatgpt （🌟🌟🌟🌟🌟）"></a>3.1 Chatgpt （🌟🌟🌟🌟🌟）</h3><p>官网：</p>
 <p><a target="_blank" rel="noopener" href="https://chat.openai.com/">https://chat.openai.com</a></p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/chatgpt.png" srcset="/img/loading.gif" lazyload alt="chatgpt"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/chatgpt.png" alt="chatgpt"></p>
 <p>至于怎么注册，网上很多了，这里就不赘述</p>
 <h3 id="3-2-Claude-（🌟🌟🌟🌟）"><a href="#3-2-Claude-（🌟🌟🌟🌟）" class="headerlink" title="3.2 Claude （🌟🌟🌟🌟）"></a>3.2 Claude （🌟🌟🌟🌟）</h3><p>“<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247663551&idx=1&sn=0b4d22152423c3977c0e81c19d7a2f32&chksm=e8dec8cddfa941db19bb816db380491ae809762479b77f6f4bb037ffb6396900fc26413c1ace&scene=21#wechat_redirect">ChatGPT最强竞品</a>”，Claude，并且在国内不需要爬墙，<strong>开箱即用</strong>。非常便捷。</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/640.png" srcset="/img/loading.gif" lazyload alt="Claude"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/640.png" alt="Claude"></p>
 <p>官网：<a target="_blank" rel="noopener" href="https://www.anthropic.com/claude-in-slack">https://www.anthropic.com/claude-in-slack</a></p>
 <p> 具体测评可看<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/QB85YPjh6DMBTPla4NDfXg">量子位</a>的文章，本文也不多赘述</p>
 <p>放一张使用截图</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230420235742231.png" srcset="/img/loading.gif" lazyload alt="Claude"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230420235742231.png" alt="Claude"></p>
 <p>并且，因为Claude是嵌入在slack里面的一个应用，slack的APP端也能在国内使用，同样做到了开箱即用，即便你没有机场也能正常使用，这也是我非常推荐Claude的原因。下面贴个app端的截图</p>
 <p>如果你在web端就是用了Claude就能在<strong>最近的应用</strong>找到它</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422151219622.png" srcset="/img/loading.gif" lazyload alt="app端的Claude"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422151219622.png" alt="app端的Claude"></p>
 <p>打开就能进行对话，开箱即用。</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422151452112.png" srcset="/img/loading.gif" lazyload alt="Claude对话"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422151452112.png" alt="Claude对话"></p>
 <h3 id="3-3-Bard-（🌟🌟）"><a href="#3-3-Bard-（🌟🌟）" class="headerlink" title="3.3 Bard （🌟🌟）"></a>3.3 Bard （🌟🌟）</h3><p>官网：<a target="_blank" rel="noopener" href="https://bard.google.com/">https://bard.google.com</a></p>
 <p>对中文不优化，不咋推荐。</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421000024812.png" srcset="/img/loading.gif" lazyload alt="Bard"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421000024812.png" alt="Bard"></p>
 <h2 id="4-依靠chatgpt开发的应用"><a href="#4-依靠chatgpt开发的应用" class="headerlink" title="4. 依靠chatgpt开发的应用"></a>4. 依靠chatgpt开发的应用</h2><h3 id="4-1-chatgpt-vercel"><a href="#4-1-chatgpt-vercel" class="headerlink" title="4.1 chatgpt-vercel"></a>4.1 <strong>chatgpt-vercel</strong></h3><p>开源的项目，基于 <a target="_blank" rel="noopener" href="https://github.com/ddiu8081/chatgpt-demo">chatgpt-demo</a> 开发，可以用<a target="_blank" rel="noopener" href="https://vercel.com/">vercel</a>一键搭建一个，绑定域名灵活使用。</p>
 <p>目前本人也搭建了一个，随手用。不定时更新内置key，</p>
 <p>链接：<a target="_blank" rel="noopener" href="https://www.mochazz.cloud/">https://www.mochazz.cloud/</a></p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421001329154.png" srcset="/img/loading.gif" lazyload alt="chatgpt-vercel"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421001329154.png" alt="chatgpt-vercel"></p>
 <h3 id="4-2-ChuanhuChatGPT"><a href="#4-2-ChuanhuChatGPT" class="headerlink" title="4.2 ChuanhuChatGPT"></a>4.2 ChuanhuChatGPT</h3><p>另外一个比较优质的开源项目</p>
 <p>为ChatGPT&#x2F;ChatGLM&#x2F;LLaMA等多种LLM提供了一个轻快好用的Web图形界面，也支持一件部署到huggingface上面。</p>
 <p>github地址： <a target="_blank" rel="noopener" href="https://github.com/GaiZhenbiao/ChuanhuChatGPT">https://github.com/GaiZhenbiao/ChuanhuChatGPT</a></p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421001747239.png" srcset="/img/loading.gif" lazyload alt="ChuanhuChatGPT"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421001747239.png" alt="ChuanhuChatGPT"></p>
 <h3 id="4-3-Feishu-OpenAI"><a href="#4-3-Feishu-OpenAI" class="headerlink" title="4.3 Feishu-OpenAI"></a>4.3 Feishu-OpenAI</h3><p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/ConnectAI-E/Feishu-OpenAI">https://github.com/ConnectAI-E/Feishu-OpenAI</a></p>
 <p>作者为 Connect-AI-E， 机器人功能又多又nice！让工作效率起飞！除了飞书以外的，还有钉钉的chatgpt机器人。具体可看项目。</p>
 <p>项目特点：</p>
@@ -404,9 +289,9 @@
 <li>🍋 基于<a target="_blank" rel="noopener" href="https://github.com/patrickmn/go-cache">goCache</a>内存键值对缓存</li>
 </ul>
 <p>项目部署的方式也很多</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421002244049.png" srcset="/img/loading.gif" lazyload alt="项目部署"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421002244049.png" alt="项目部署"></p>
 <h2 id="5-Chatgpt相关插件"><a href="#5-Chatgpt相关插件" class="headerlink" title="5.Chatgpt相关插件"></a>5.Chatgpt相关插件</h2><h3 id="5-1-KeepChatGPT"><a href="#5-1-KeepChatGPT" class="headerlink" title="5.1 KeepChatGPT"></a><strong>5.1 KeepChatGPT</strong></h3><p>一个插件，让你的 ChatGPT 不再报错</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422143858630.png" srcset="/img/loading.gif" lazyload alt="KeepChatGPT简介"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422143858630.png" alt="KeepChatGPT简介"></p>
 <h4 id="5-1-1-安装步骤"><a href="#5-1-1-安装步骤" class="headerlink" title="5.1.1 安装步骤"></a>5.1.1 安装步骤</h4><ul>
 <li>首先需要安装<strong>Tampermonkey</strong></li>
 </ul>
@@ -414,20 +299,20 @@
 <li><p>打开油猴脚本官网：<a target="_blank" rel="noopener" href="https://www.tampermonkey.net/">https://www.tampermonkey.net/</a></p>
 </li>
 <li><p>选择你当前的浏览器型号，跳转到浏览器商店安装：</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422144344712.png" srcset="/img/loading.gif" lazyload alt="Tampermonkey官网"></p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422144443061.png" srcset="/img/loading.gif" lazyload alt="安装"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422144344712.png" alt="Tampermonkey官网"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422144443061.png" alt="安装"></p>
 </li>
 </ol>
 <p>安装完成后会提示你已安装</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145144661.png" srcset="/img/loading.gif" lazyload alt="Tampermonkey成功安装"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145144661.png" alt="Tampermonkey成功安装"></p>
 <ul>
 <li>安装<strong>KeepChatGPT</strong></li>
 </ul>
 <p>插件安装成功后，打开 KeepChatGPT 脚本地址：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/462804-keepchatgpt">https://greasyfork.org/zh-CN/scripts/462804-keepchatgpt</a></p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145332001.png" srcset="/img/loading.gif" lazyload alt="点击安装KeepChatGPT"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145332001.png" alt="点击安装KeepChatGPT"></p>
 <p>安装完成后打开<a target="_blank" rel="noopener" href="https://chat.openai.com/">https://chat.openai.com/</a></p>
 <p>就能看到左上角出现 KeepChatGPT 的图标，则代表该插件已安装成功。</p>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145526977.png" srcset="/img/loading.gif" lazyload alt=" KeepChatGPT安装成功"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145526977.png" alt=" KeepChatGPT安装成功"></p>
 <h4 id="5-1-2-基本使用"><a href="#5-1-2-基本使用" class="headerlink" title="5.1.2 基本使用"></a>5.1.2 基本使用</h4><p>把鼠标移动到图标上，会出现 3 个选项。</p>
 <ul>
 <li><p><code>显示调试</code>：主要用于观测脚本的运行过程；</p>
@@ -437,7 +322,7 @@
 <li><p><code>取消审计</code>：让 ChatGPT 输出更多丰富的内容，尺度较大</p>
 </li>
 </ul>
-<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145741676.png" srcset="/img/loading.gif" lazyload alt="基本功能"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145741676.png" alt="基本功能"></p>
 <p>到此，KeepChatGPT就能正常使用了，解决掉因为网络导致 ChatGPT 报错这个问题。</p>
 <h2 id="6-后续"><a href="#6-后续" class="headerlink" title="6. 后续"></a>6. 后续</h2><p>后续会不定期更新一些非常不错的AI相关的应用，以及chatgpt相关插件、AIGC相关的内容。</p>
 <h2 id="7-参考来源"><a href="#7-参考来源" class="headerlink" title="7. 参考来源"></a>7. 参考来源</h2><ol>
@@ -452,436 +337,197 @@
 <li><a target="_blank" rel="noopener" href="https://www.tampermonkey.net/">https://www.tampermonkey.net/</a></li>
 </ol>
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
+    </div>
 
-<span class="category-chains">
-  
-  
     
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%9D%82%E8%B0%88/" class="category-chain-item">杂谈</a>
-  
-  
-
-      </span>
     
-  
-</span>
+    
 
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/chatgpt-LLM/">#chatgpt LLM</a>
-      
-    </div>
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>chatgpt及其大语言模型(LLM)应用</div>
-      <div>https://suiyideali.github.io/2023/04/20/chatgpt及其大语言模型(LLM)应用/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>m0ch4z</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2023年4月20日</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2023年4月22日</div>
-        </div>
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/chatgpt-LLM/" rel="tag"># chatgpt LLM</a>
           </div>
-        </div>
-      
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/" rel="prev" title="应急响应初探">
+      <i class="fa fa-chevron-left"></i> 应急响应初探
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/04/21/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/" rel="next" title="Go语言基础学习(一)">
+      Go语言基础学习(一) <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-    <div class="license-icon iconfont"></div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/04/21/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/" title="Go语言基础学习(一)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Go语言基础学习(一)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/" title="应急响应初探">
-                        <span class="hidden-mobile">应急响应初探</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-  
-  
-    <article id="comments" lazyload>
-      
-  <div id="waline"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#waline', function() {
-      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
-      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
-        var options = Object.assign(
-          {"serverURL":"https://cyberzone-five.vercel.app","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
-          {
-            el: '#waline',
-            path: window.location.pathname
-          }
-        )
-        Waline.init(options);
-        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
-          var imgSelector = '#waline .vcontent img:not(.vemoji)';
-          Fluid.plugins.imageCaption(imgSelector);
-          Fluid.plugins.fancyBox(imgSelector);
-        })
-      });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
-
-
-    </article>
-  
-
-
-          </article>
-        </div>
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%88LLM%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">2. 大语言模型（LLM）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-LLM%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">3. LLM的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Chatgpt-%EF%BC%88%F0%9F%8C%9F%F0%9F%8C%9F%F0%9F%8C%9F%F0%9F%8C%9F%F0%9F%8C%9F%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Chatgpt （🌟🌟🌟🌟🌟）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Claude-%EF%BC%88%F0%9F%8C%9F%F0%9F%8C%9F%F0%9F%8C%9F%F0%9F%8C%9F%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Claude （🌟🌟🌟🌟）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Bard-%EF%BC%88%F0%9F%8C%9F%F0%9F%8C%9F%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 Bard （🌟🌟）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%BE%9D%E9%9D%A0chatgpt%E5%BC%80%E5%8F%91%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">4. 依靠chatgpt开发的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-chatgpt-vercel"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 chatgpt-vercel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-ChuanhuChatGPT"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 ChuanhuChatGPT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-Feishu-OpenAI"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 Feishu-OpenAI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Chatgpt%E7%9B%B8%E5%85%B3%E6%8F%92%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">5.Chatgpt相关插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-KeepChatGPT"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 KeepChatGPT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-1-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">5.1.1.</span> <span class="nav-text">5.1.1 安装步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-2-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">5.1.2.</span> <span class="nav-text">5.1.2 基本使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%90%8E%E7%BB%AD"><span class="nav-number">6.</span> <span class="nav-text">6. 后续</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="nav-number">7.</span> <span class="nav-text">7. 参考来源</span></a></li></ol></div>
       </div>
-    </div>
+      <!--/noindex-->
 
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">m0ch4z</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
 </div>
 
 
 
+      </div>
+
+    </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">m0ch4z</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
-</div>
 
-    
+        
 
-    
-  </main>
 
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-    <div class="statistics">
-  
-  
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
 
   
-    
-      <span id="leancloud-site-pv-container" style="display: none">
-        总访问量 
-        <span id="leancloud-site-pv"></span>
-         次
-      </span>
-    
-    
-      <span id="leancloud-site-uv-container" style="display: none">
-        总访客数 
-        <span id="leancloud-site-uv"></span>
-         人
-      </span>
-    
-    
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-  
-</div>
+<script src="/js/utils.js"></script>
 
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
+<script src="/js/motion.js"></script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script src="/js/schemes/muse.js"></script>
 
 
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script defer src="/js/leancloud.js" ></script>
-
-  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+
+
+
+
+
+
+
+
 
 
   
 
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+  
+
 </body>
 </html>

