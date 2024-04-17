@@ -66,7 +66,7 @@
 <meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140107007.png">
 <meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140109526.png">
 <meta property="article:published_time" content="2024-04-10T17:35:19.000Z">
-<meta property="article:modified_time" content="2024-04-17T06:59:07.280Z">
+<meta property="article:modified_time" content="2024-04-17T08:07:46.593Z">
 <meta property="article:author" content="m0ch4z">
 <meta property="article:tag" content="SOAR">
 <meta name="twitter:card" content="summary_large_image">
@@ -403,10 +403,10 @@
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122354944.png" srcset="/img/loading.gif" lazyload alt="剧本"></p>
 <p>APP</p>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122354863.png" srcset="/img/loading.gif" lazyload alt="APP"></p>
-<h2 id="3-5-剧本尝试"><a href="#3-5-剧本尝试" class="headerlink" title="3.5 剧本尝试"></a>3.5 剧本尝试</h2><p>导入了社区中的剧本，发现可以在“IP信息增强”剧本上今天调整更改</p>
+<h2 id="3-5-剧本尝试"><a href="#3-5-剧本尝试" class="headerlink" title="3.5 剧本尝试"></a>3.5 剧本尝试</h2><p>导入了社区中的剧本，发现可以在“IP信息增强”剧本上进行调整更改</p>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130229937.png" srcset="/img/loading.gif" lazyload alt="IP信息增强"></p>
 <p>笔者在原有的基础上添加了协同办公-钉钉，并且做了简单测试</p>
-<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130230524.png" srcset="/img/loading.gif" lazyload alt="添加了钉钉"></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130230524.png" srcset="/img/loading.gif" lazyload alt="添加钉钉通知"></p>
 <p>作战室执行结果</p>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130240615.png" srcset="/img/loading.gif" lazyload alt="作战室执行结果"></p>
 <p>钉钉接收到的测试消息</p>
@@ -421,9 +421,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">firewall-cmd --add-port=4433/tcp --permanent   <span class="hljs-comment">#（用于web界面启动）</span><br>firewall-cmd --add-port=4434/tcp --permanent   <span class="hljs-comment">#（用于节点与管理端通信）</span><br>firewall-cmd --reload<br></code></pre></td></tr></table></figure>
 
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404132133914.png" srcset="/img/loading.gif" lazyload alt="蜜罐web页面"></p>
-<p>思路：</p>
-<p>蜜罐获取到攻击IP通过syslog发送到SOAR，通过SOAR进行剧本编排发送给web防火墙</p>
-<h1 id="5-蜜罐-SOAR联动"><a href="#5-蜜罐-SOAR联动" class="headerlink" title="5. 蜜罐+SOAR联动"></a>5. 蜜罐+SOAR联动</h1><h2 id="5-1-流程图"><a href="#5-1-流程图" class="headerlink" title="5.1 流程图"></a>5.1 流程图</h2><p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404151821064.png" srcset="/img/loading.gif" lazyload alt="流程图"></p>
+<h1 id="5-蜜罐-SOAR联动"><a href="#5-蜜罐-SOAR联动" class="headerlink" title="5. 蜜罐+SOAR联动"></a>5. 蜜罐+SOAR联动</h1><p>思路：</p>
+<p>蜜罐获取到攻击IP通过syslog发送到SOAR，通过SOAR进行剧本编排发送到飞书</p>
+<h2 id="5-1-流程图"><a href="#5-1-流程图" class="headerlink" title="5.1 流程图"></a>5.1 流程图</h2><p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404151821064.png" srcset="/img/loading.gif" lazyload alt="流程图"></p>
 <h2 id="5-2-开启四个web蜜罐"><a href="#5-2-开启四个web蜜罐" class="headerlink" title="5.2 开启四个web蜜罐"></a>5.2 开启四个web蜜罐</h2><ol>
 <li>Coremail仿真登陆蜜罐</li>
 <li>通达OA系统仿真登陆蜜罐</li>
@@ -444,18 +444,20 @@
 <li>服务器：172.19.129.151:9092</li>
 </ul>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162141817.png" srcset="/img/loading.gif" lazyload alt="事件接入添加"></p>
-<h3 id="5-4-2-示例事件"><a href="#5-4-2-示例事件" class="headerlink" title="5.4.2 示例事件"></a>5.4.2 示例事件</h3><p>选择Grok正则表达式方式识别。在输入框填写一段日志样本，样本来自于蜜罐【系统配置】| 【通知配置】中【syslog告警示例】：</p>
+<h3 id="5-4-2-示例事件"><a href="#5-4-2-示例事件" class="headerlink" title="5.4.2 示例事件"></a>5.4.2 示例事件</h3><p>选择Grok正则表达式方式识别。在输入框填写一段日志样本，样本可以选择来自于蜜罐【系统配置】| 【通知配置】中【syslog告警示例】：</p>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162144232.png" srcset="/img/loading.gif" lazyload alt="syslog告警示例"></p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-section">&lt;12&gt;</span><span class="hljs-attribute">2024</span>-<span class="hljs-number">04</span>-<span class="hljs-number">16</span>T14:<span class="hljs-number">50</span>:<span class="hljs-number">44</span>Z mochazz HFish[<span class="hljs-number">12</span>]:title: HFish Threat Alert | client: linux64测试机 | client_ip: <span class="hljs-number">192.168.110.110</span> | class: 基础服务 | type: SSH | name: SSH蜜罐 | src_ip: <span class="hljs-number">141.98.81.141</span> | src_port: <span class="hljs-number">35635</span> | dst_ip: <span class="hljs-number">192.168.110.110</span> | dst_port: <span class="hljs-number">22</span> | geo: 美国/加州/堪萨斯 | labels: Scanner,Botnet | time: <span class="hljs-number">2021</span>-<span class="hljs-number">10</span>-<span class="hljs-number">16</span> <span class="hljs-number">13</span>:<span class="hljs-number">37</span>:<span class="hljs-number">15</span> | info: root&amp;&amp;<span class="hljs-number">123456</span><br></code></pre></td></tr></table></figure>
 
-<p>注意：</p>
+
+
+<p>当然也可以选择kafka收到的告警日志。</p>
 <h3 id="5-4-3-事件字段提取与映射"><a href="#5-4-3-事件字段提取与映射" class="headerlink" title="5.4.3 事件字段提取与映射"></a>5.4.3 事件字段提取与映射</h3><p>点击【下一步】进入Grok正则匹配和字段映射，为了快速看到效果，此处选择【手动编辑】。根据本条告警事件类型所需要关注的信息字段。这里可以自己自定义提取。笔者手动用鼠标选取一个或多个值新建字段。具体操作可以查看官方的wiki。</p>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171130271.png" srcset="/img/loading.gif" lazyload alt="提取规则"></p>
 <h3 id="5-4-4-关联事件类型"><a href="#5-4-4-关联事件类型" class="headerlink" title="5.4.4 关联事件类型"></a>5.4.4 关联事件类型</h3><p>进入规则设置页面，此处针对已经格式化后的事件信息字段进行规则判断，以确定事件对应的事件类型。点击【新建关联规则】</p>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162207126.png" srcset="/img/loading.gif" lazyload alt="新建关联规则"></p>
 <ol>
 <li>设置条件</li>
-<li>执行结果的事件类型名称设置为<strong>SIEM告警的蜜罐攻击事件</strong>，剧本所需字段需要选择日志字段中的src_ip</li>
+<li>执行结果的事件类型名称设置为<strong>SIEM告警的蜜罐攻击事件</strong>，剧本所需字段需要选择日志字段中的Attacklp</li>
 </ol>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171131458.png" srcset="/img/loading.gif" lazyload alt="编辑规则"></p>
 <h3 id="5-4-5-蜜罐告警的测试"><a href="#5-4-5-蜜罐告警的测试" class="headerlink" title="5.4.5 蜜罐告警的测试"></a>5.4.5 蜜罐告警的测试</h3><p>在蜜罐发送一个端口测试：</p>
@@ -489,7 +491,7 @@
 </li>
 <li><p>这里是仅免费使用云防火墙，阿里云waf需要购买…就没使用</p>
 </li>
-<li><p>官方社区没有做云防火墙的APP，所以没办法使用到…</p>
+<li><p>官方社区没有发布云防火墙的APP，所以没办法使用到…</p>
 </li>
 </ol>
 <h2 id="7-2-雷池（社区版）-SOAR"><a href="#7-2-雷池（社区版）-SOAR" class="headerlink" title="7.2 雷池（社区版）+ SOAR"></a>7.2 雷池（社区版）+ SOAR</h2><p>根据<a target="_blank" rel="noopener" href="https://waf-ce.chaitin.cn/docs/">雷池官方文档</a>安装即可</p>
@@ -529,7 +531,7 @@
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140023424.png" srcset="/img/loading.gif" lazyload alt="syslog服务器配置"></p>
 <p>查看服务器上的syslog日志，也能看到蜜罐的测试消息</p>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140024182.png" srcset="/img/loading.gif" lazyload alt="蜜罐测试消息"></p>
-<h3 id="7-3-3-添加告警策略"><a href="#7-3-3-添加告警策略" class="headerlink" title="7.3.3 添加告警策略"></a>7.3.3 添加告警策略</h3><p>然后在系统配置-告警策略处添加将威胁告警发送到syslog服务器。</p>
+<h3 id="7-3-3-添加告警策略"><a href="#7-3-3-添加告警策略" class="headerlink" title="7.3.3 添加告警策略"></a>7.3.3 添加告警策略</h3><p>在系统配置-告警策略处添加将威胁告警发送到syslog服务器。</p>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140029004.png" srcset="/img/loading.gif" lazyload alt="添加策略"></p>
 <h3 id="7-3-4-测试攻击看看效果"><a href="#7-3-4-测试攻击看看效果" class="headerlink" title="7.3.4 测试攻击看看效果"></a>7.3.4 测试攻击看看效果</h3><p>蜜罐识别到攻击</p>
 <p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140039564.png" srcset="/img/loading.gif" lazyload alt="蜜罐识别到攻击"></p>
