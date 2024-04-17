@@ -1,0 +1,998 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="m0ch4z">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.前言最近工作涉及安全运营方面，工作中了解到SOAR，恰巧又看到了OctoMation SOAR，于是想着在网上搭建一套自己捣鼓下。 参加阿里云高校计划，领了300无门栏优惠券，就有了这篇博客。  直接白嫖一个月  2. 准备工作 Welcome to the OctoMation wiki! 雷池 WAF 社区版 | 下一代 Web 应用防火墙 | 免费使用 反制溯源欺骗防御主动防御-HFis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源SOAR的初探">
+<meta property="og:url" content="https://suiyideali.github.io/2024/04/11/%E5%BC%80%E6%BA%90SOAR%E7%9A%84%E5%88%9D%E6%8E%A2/index.html">
+<meta property="og:site_name" content="Geek小黑板">
+<meta property="og:description" content="1.前言最近工作涉及安全运营方面，工作中了解到SOAR，恰巧又看到了OctoMation SOAR，于是想着在网上搭建一套自己捣鼓下。 参加阿里云高校计划，领了300无门栏优惠券，就有了这篇博客。  直接白嫖一个月  2. 准备工作 Welcome to the OctoMation wiki! 雷池 WAF 社区版 | 下一代 Web 应用防火墙 | 免费使用 反制溯源欺骗防御主动防御-HFis">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404110138324.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404110139895.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404112031772.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404112033336.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122332285.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122354944.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122354863.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130229937.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130230524.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130240615.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130241546.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130226769.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404132133914.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404151821064.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404150404309.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162130227.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162141817.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162144232.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171130271.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162207126.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171131458.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162252575.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162252934.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171118190.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171125605.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171127002.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171128147.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122323776.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122335275.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404110232879.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404110239480.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404150351736.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140017673.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140023424.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140024182.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140029004.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140039564.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140041894.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130117339.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130122797.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140107007.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140109526.png">
+<meta property="article:published_time" content="2024-04-10T17:35:19.000Z">
+<meta property="article:modified_time" content="2024-04-17T03:37:04.451Z">
+<meta property="article:author" content="m0ch4z">
+<meta property="article:tag" content="SOAR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404110138324.png">
+  
+  
+  
+  <title>开源SOAR的初探 - Geek小黑板</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"7cd98299138062575c89a6accc17381e","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"6Tp7ZllCJ1Q5Hr5Qx7QEnZoQ-MdYXbMMI","app_key":"hbnuiPd47pTbO5y5VU7X4yj7","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?7cd98299138062575c89a6accc17381e";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Geek小黑板</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="开源SOAR的初探"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        m0ch4z
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-11 01:35" pubdate>
+          2024年4月11日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">开源SOAR的初探</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h1><p>最近工作涉及安全运营方面，工作中了解到SOAR，恰巧又看到了<a target="_blank" rel="noopener" href="https://github.com/flagify-com/OctoMation">OctoMation</a> SOAR，于是想着在网上搭建一套自己捣鼓下。</p>
+<p>参加阿里云高校计划，领了300无门栏优惠券，就有了这篇博客。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404110138324.png" srcset="/img/loading.gif" lazyload alt="300元无门槛优惠券"></p>
+<p>直接白嫖一个月</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404110139895.png" srcset="/img/loading.gif" lazyload alt="0元付"></p>
+<h1 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2. 准备工作"></a>2. 准备工作</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/flagify-com/OctoMation/wiki">Welcome to the OctoMation wiki!</a></li>
+<li><a target="_blank" rel="noopener" href="https://waf-ce.chaitin.cn/">雷池 WAF 社区版 | 下一代 Web 应用防火墙 | 免费使用</a></li>
+<li><a target="_blank" rel="noopener" href="https://hfish.net/#/">反制溯源<em>欺骗防御</em>主动防御-HFish免费蜜罐平台</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.aliyun.com/minisite/goods?userCode=ul6lrvey">阿里云服务器</a></li>
+<li>rsyslog</li>
+<li>kafka</li>
+</ol>
+<h1 id="3-SOAR-搭建"><a href="#3-SOAR-搭建" class="headerlink" title="3. SOAR 搭建"></a>3. SOAR 搭建</h1><p>参考<a target="_blank" rel="noopener" href="https://github.com/flagify-com/OctoMation/wiki/OctoMation%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C">OctoMation安装部署手册</a>进行搭建</p>
+<h2 id="3-1-操作系统及软件要求"><a href="#3-1-操作系统及软件要求" class="headerlink" title="3.1 操作系统及软件要求"></a>3.1 操作系统及软件要求</h2><ul>
+<li>操作系统：<strong>Redhat&#x2F;Centos 7.8+&#x2F;8+(9以下) OpencloudOS7&#x2F;8</strong></li>
+<li>Docker版本：不低于20.10.12</li>
+<li>Docker-compose版本：1.29.2（最优）</li>
+<li><code>swap</code>分区空间不少于8GB</li>
+<li>系统防火墙<code>firewalld</code>需要处于运行状态</li>
+<li><strong>系统umask必须为022</strong></li>
+</ul>
+<h2 id="3-2-安装方式"><a href="#3-2-安装方式" class="headerlink" title="3.2 安装方式"></a>3.2 安装方式</h2><p>笔者这里使用的大文件，离线安装（这也是官方推荐的安装方法）</p>
+<p>下载安装文件后，然后以<code>root</code>身份执行离线安装脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 以root身份执行离线安装脚本</span><br><span class="hljs-built_in">chmod</span> +x octomation_community_docker_install_offline_&lt;VERSION&gt;.sh<br>./octomation_community_docker_install_offline_&lt;VERSION&gt;.sh<br></code></pre></td></tr></table></figure>
+
+<p>这里安装时间比较长，可以使用screen，安装完毕如下</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404112031772.png" srcset="/img/loading.gif" lazyload alt="安装完成"></p>
+<h2 id="3-3-登录web管理界面"><a href="#3-3-登录web管理界面" class="headerlink" title="3.3 登录web管理界面"></a>3.3 登录web管理界面</h2><p>安装完成后，使用web浏览器访问https:&#x2F;&#x2F;<OCTOMATION_SERVER_IP> 进行登录，登录页面如下所示：</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404112033336.png" srcset="/img/loading.gif" lazyload alt="web登录页面"></p>
+<h2 id="3-4-剧本Playbook"><a href="#3-4-剧本Playbook" class="headerlink" title="3.4 剧本Playbook"></a>3.4 剧本Playbook</h2><p>官方项目上有相关的OctoMation剧本包 ➡️<a target="_blank" rel="noopener" href="https://github.com/flagify-com/OctoMation/blob/main/Playbook%20Packages/PlaybookPackages.md">OctoMation剧本包</a></p>
+<p>以及 APP包</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122332285.png" srcset="/img/loading.gif" lazyload alt="社区Playbook"></p>
+<p>导入社区剧本和APP</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122354944.png" srcset="/img/loading.gif" lazyload alt="剧本"></p>
+<p>APP</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122354863.png" srcset="/img/loading.gif" lazyload alt="APP"></p>
+<h2 id="3-5-剧本尝试"><a href="#3-5-剧本尝试" class="headerlink" title="3.5 剧本尝试"></a>3.5 剧本尝试</h2><p>导入了社区中的剧本，发现可以在“IP信息增强”剧本上今天调整更改</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130229937.png" srcset="/img/loading.gif" lazyload alt="IP信息增强"></p>
+<p>笔者在原有的基础上添加了协同办公-钉钉，并且做了简单测试</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130230524.png" srcset="/img/loading.gif" lazyload alt="添加了钉钉"></p>
+<p>作战室执行结果</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130240615.png" srcset="/img/loading.gif" lazyload alt="作战室执行结果"></p>
+<p>钉钉接收到的测试消息</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130241546.png" srcset="/img/loading.gif" lazyload alt="钉钉消息"></p>
+<h1 id="4-蜜罐搭建"><a href="#4-蜜罐搭建" class="headerlink" title="4. 蜜罐搭建"></a>4. 蜜罐搭建</h1><p>笔者这里为了方便，试用docker安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -itd --name hfish \<br>-v /usr/share/hfish:/usr/share/hfish \<br>--network host \<br>--privileged=<span class="hljs-literal">true</span> \<br>threatbook/hfish-server:latest<br><br></code></pre></td></tr></table></figure>
+
+<p>正常情况下返回如下内容</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130226769.png" srcset="/img/loading.gif" lazyload alt="docker方式安装hfish"></p>
+<p>以root权限运行以下命令，确保配置防火墙开启TCP&#x2F;4433、TCP&#x2F;4434</p>
+<p>⚠️ 笔者踩的坑，没有在防火墙开启端口，所以一直无法访问到web界面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">firewall-cmd --add-port=4433/tcp --permanent   <span class="hljs-comment">#（用于web界面启动）</span><br>firewall-cmd --add-port=4434/tcp --permanent   <span class="hljs-comment">#（用于节点与管理端通信）</span><br>firewall-cmd --reload<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404132133914.png" srcset="/img/loading.gif" lazyload alt="蜜罐web页面"></p>
+<p>思路：</p>
+<p>蜜罐获取到攻击IP通过syslog发送到SOAR，通过SOAR进行剧本编排发送给web防火墙</p>
+<h1 id="5-蜜罐-SOAR联动"><a href="#5-蜜罐-SOAR联动" class="headerlink" title="5. 蜜罐+SOAR联动"></a>5. 蜜罐+SOAR联动</h1><h2 id="5-1-流程图"><a href="#5-1-流程图" class="headerlink" title="5.1 流程图"></a>5.1 流程图</h2><p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404151821064.png" srcset="/img/loading.gif" lazyload alt="流程图"></p>
+<h2 id="5-2-开启四个web蜜罐"><a href="#5-2-开启四个web蜜罐" class="headerlink" title="5.2 开启四个web蜜罐"></a>5.2 开启四个web蜜罐</h2><ol>
+<li>Coremail仿真登陆蜜罐</li>
+<li>通达OA系统仿真登陆蜜罐</li>
+<li>齐治堡垒机仿真登陆蜜罐</li>
+<li>Weblogic蜜罐</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404150404309.png" srcset="/img/loading.gif" lazyload alt="开启web蜜罐"></p>
+<h2 id="5-3-新建一个事件类型"><a href="#5-3-新建一个事件类型" class="headerlink" title="5.3 新建一个事件类型"></a>5.3 新建一个事件类型</h2><p>登录OctoMation后台，访问到【事件管理】｜【事件类型】，点击【新建】即可创建新的事件类型。勾选【是否自动执行剧本】，选择【IP信息增强】</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162130227.png" srcset="/img/loading.gif" lazyload alt="新建事件类型"></p>
+<h2 id="5-4-通过Kafka接收外部事件"><a href="#5-4-通过Kafka接收外部事件" class="headerlink" title="5.4 通过Kafka接收外部事件"></a>5.4 通过Kafka接收外部事件</h2><h3 id="5-4-1-事件接入添加"><a href="#5-4-1-事件接入添加" class="headerlink" title="5.4.1 事件接入添加"></a>5.4.1 事件接入添加</h3><p>登录OctoMation后台，进入【事件管理】｜【事件接入】菜单，新建接入规则。填写勾选基础信息，包括：</p>
+<ul>
+<li>配置名：HONEYPOT_SIEM_ALERT</li>
+<li>描述：SIEM蜜罐事件接入</li>
+<li>接入方式：SYSLOG</li>
+<li>协议：31514（这里的端口和蜜罐syslog服务器配置的端口一致）</li>
+<li>勾选转发到KAFKA</li>
+<li>消息队列：SIEM_HONEYPOT_ALERT</li>
+<li>服务器：172.19.129.151:9092</li>
+</ul>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162141817.png" srcset="/img/loading.gif" lazyload alt="事件接入添加"></p>
+<h3 id="5-4-2-示例事件"><a href="#5-4-2-示例事件" class="headerlink" title="5.4.2 示例事件"></a>5.4.2 示例事件</h3><p>选择Grok正则表达式方式识别。在输入框填写一段日志样本，样本来自于蜜罐【系统配置】| 【通知配置】中【syslog告警示例】：</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162144232.png" srcset="/img/loading.gif" lazyload alt="syslog告警示例"></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-section">&lt;12&gt;</span><span class="hljs-attribute">2024</span>-<span class="hljs-number">04</span>-<span class="hljs-number">16</span>T14:<span class="hljs-number">50</span>:<span class="hljs-number">44</span>Z mochazz HFish[<span class="hljs-number">12</span>]:title: HFish Threat Alert | client: linux64测试机 | client_ip: <span class="hljs-number">192.168.110.110</span> | class: 基础服务 | type: SSH | name: SSH蜜罐 | src_ip: <span class="hljs-number">141.98.81.141</span> | src_port: <span class="hljs-number">35635</span> | dst_ip: <span class="hljs-number">192.168.110.110</span> | dst_port: <span class="hljs-number">22</span> | geo: 美国/加州/堪萨斯 | labels: Scanner,Botnet | time: <span class="hljs-number">2021</span>-<span class="hljs-number">10</span>-<span class="hljs-number">16</span> <span class="hljs-number">13</span>:<span class="hljs-number">37</span>:<span class="hljs-number">15</span> | info: root&amp;&amp;<span class="hljs-number">123456</span><br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<h3 id="5-4-3-事件字段提取与映射"><a href="#5-4-3-事件字段提取与映射" class="headerlink" title="5.4.3 事件字段提取与映射"></a>5.4.3 事件字段提取与映射</h3><p>点击【下一步】进入Grok正则匹配和字段映射，为了快速看到效果，此处选择【手动编辑】。根据本条告警事件类型所需要关注的信息字段。这里可以自己自定义提取。笔者手动用鼠标选取一个或多个值新建字段。具体操作可以查看官方的wiki。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171130271.png" srcset="/img/loading.gif" lazyload alt="提取规则"></p>
+<h3 id="5-4-5-关联事件类型"><a href="#5-4-5-关联事件类型" class="headerlink" title="5.4.5 关联事件类型"></a>5.4.5 关联事件类型</h3><p>进入规则设置页面，此处针对已经格式化后的事件信息字段进行规则判断，以确定事件对应的事件类型。点击【新建关联规则】</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162207126.png" srcset="/img/loading.gif" lazyload alt="新建关联规则"></p>
+<ol>
+<li>设置条件</li>
+<li>执行结果的事件类型名称设置为<strong>SIEM告警的蜜罐攻击事件</strong>，剧本所需字段需要选择日志字段中的src_ip</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171131458.png" srcset="/img/loading.gif" lazyload alt="编辑规则"></p>
+<h3 id="5-4-5-蜜罐告警的测试"><a href="#5-4-5-蜜罐告警的测试" class="headerlink" title="5.4.5 蜜罐告警的测试"></a>5.4.5 蜜罐告警的测试</h3><p>在蜜罐发送一个端口测试：</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162252575.png" srcset="/img/loading.gif" lazyload alt="端口测试"></p>
+<p>查看【事件列表】发现测试的事件已经生效。说明syslog和kafka接受日志都正常。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404162252934.png" srcset="/img/loading.gif" lazyload alt="测试事件"></p>
+<p>如果发现事件列表无数据，可能需要排查下kafka是否有接收到日志</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171118190.png" srcset="/img/loading.gif" lazyload alt="kafka日志"></p>
+<h3 id="5-4-6-模拟一个蜜罐攻击看效果"><a href="#5-4-6-模拟一个蜜罐攻击看效果" class="headerlink" title="5.4.6 模拟一个蜜罐攻击看效果"></a>5.4.6 模拟一个蜜罐攻击看效果</h3><ol>
+<li><p>访问web蜜罐，如weblogic管理界面</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171125605.png" srcset="/img/loading.gif" lazyload alt="weblogic蜜罐"></p>
+</li>
+<li><p>查看事件列表</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171127002.png" srcset="/img/loading.gif" lazyload alt="事件列表"></p>
+</li>
+<li><p>查看飞书告警</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404171128147.png" srcset="/img/loading.gif" lazyload alt="飞书告警"></p>
+</li>
+</ol>
+<h1 id="6-踩坑点的总结"><a href="#6-踩坑点的总结" class="headerlink" title="6. 踩坑点的总结"></a>6. 踩坑点的总结</h1><ol>
+<li>OctoMation已经自带了kafka和syslog了，不用自己再安装了。笔者看wiki的时候没注意，花了一段时间捣鼓kafka和syslog。不过还算是熟悉了下kafka和syslog的基本使用了</li>
+<li>蜜罐在配置通知处的syslog服务器配置修改端口后，一定记得在告警策略一定记得勾选Syslog服务器，一定记得！！ 因为更换端口后，告警策略处的☑️syslog服务器的位置会默认取消掉！为此我花了1个小时排查，最开始以为是syslog和kafka出问题了，后来发现更改端口后，会自动取消勾选！！很多时候不经意的改动，最后排查起来会话费成倍的时间！</li>
+<li>遇到问题，弄不明白的时候一定记得记得看官方的文档wiki….而且要仔细看和推敲。不仅能提高效率还能走避免走好多弯路。</li>
+</ol>
+<h1 id="7-番外记录"><a href="#7-番外记录" class="headerlink" title="7. 番外记录"></a>7. 番外记录</h1><p>以下内容中的配置因为部分原因在SOAR的应用中没有使用到，具体原因相应位置有写明。 仅本次blog的记录。</p>
+<h2 id="7-1-SOAR-阿里云云防火墙实现自动封禁"><a href="#7-1-SOAR-阿里云云防火墙实现自动封禁" class="headerlink" title="7.1 SOAR+阿里云云防火墙实现自动封禁"></a>7.1 SOAR+阿里云云防火墙实现自动封禁</h2><p>直接试用 云防火墙 500元 1000GB</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122323776.png" srcset="/img/loading.gif" lazyload alt="阿里云WAF试用"></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404122335275.png" srcset="/img/loading.gif" lazyload alt="试用云防火墙"></p>
+<h3 id="7-1-1-放弃的原因"><a href="#7-1-1-放弃的原因" class="headerlink" title="7.1.1  放弃的原因"></a>7.1.1  放弃的原因</h3><ol>
+<li><p>阿里云云防火墙（简称云防火墙）和阿里云web应用防火墙（简称阿里云waf）是不同的产品</p>
+</li>
+<li><p>这里是仅免费使用云防火墙，阿里云waf需要购买…就没使用</p>
+</li>
+<li><p>官方社区没有做云防火墙的APP，所以没办法使用到…</p>
+</li>
+</ol>
+<h2 id="7-2-雷池（社区版）-SOAR"><a href="#7-2-雷池（社区版）-SOAR" class="headerlink" title="7.2 雷池（社区版）+ SOAR"></a>7.2 雷池（社区版）+ SOAR</h2><p>根据<a target="_blank" rel="noopener" href="https://waf-ce.chaitin.cn/docs/">雷池官方文档</a>安装即可</p>
+<p>安装后如下</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404110232879.png" srcset="/img/loading.gif" lazyload alt="雷池"></p>
+<p>将站点添加到雷池，并测试防护效果</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404110239480.png" srcset="/img/loading.gif" lazyload alt="防护效果"></p>
+<h3 id="7-2-1-放弃的原因"><a href="#7-2-1-放弃的原因" class="headerlink" title="7.2.1 放弃的原因"></a>7.2.1 放弃的原因</h3><p>雷池的攻击告警和Syslog需要使用到专业版…我的社区版本无法使用syslog发给SOAR，于是放弃。</p>
+<p>下面的截图是雷池官方的demo网站。笔者的社区版已经卸载掉了，懒得重新装上去截图….</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404150351736.png" srcset="/img/loading.gif" lazyload alt="雷池系统配置"></p>
+<h2 id="7-3-Rsyslog转发日志到Kafka-（⚠️：这里不需要用户安装，系统自带的有syslog和kafka，这就是不认真看官方说明文档的后果…-）"><a href="#7-3-Rsyslog转发日志到Kafka-（⚠️：这里不需要用户安装，系统自带的有syslog和kafka，这就是不认真看官方说明文档的后果…-）" class="headerlink" title="7.3 Rsyslog转发日志到Kafka （⚠️：这里不需要用户安装，系统自带的有syslog和kafka，这就是不认真看官方说明文档的后果….）"></a>7.3 Rsyslog转发日志到Kafka （⚠️：这里不需要用户安装，系统自带的有syslog和kafka，这就是不认真看官方说明文档的后果….）</h2><p>笔者这里选择了rsyslog。因为目前只需要基本的日志收集和转发,rsyslog将是一个较为轻量级的方案,对服务器资源要求较低。</p>
+<ol>
+<li><p>安装rsysylog</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install rsyslog -y<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改rsyslog的配置文件&#x2F;etc&#x2F;rsyslog.conf,启用接收日志的模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$ModLoad</span> imudp  <br><span class="hljs-variable">$UDPServerRun</span> 514 <span class="hljs-comment"># 开启UDP 514端口接收日志</span><br><span class="hljs-variable">$ModLoad</span> imtcp<br><span class="hljs-variable">$InputTCPServerRun</span> 514 <span class="hljs-comment"># 开启TCP 514端口接收日志</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>配置日志文件存储路径,例如: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$template</span> RemoteHost,<span class="hljs-string">&quot;/data/syslog/%<span class="hljs-variable">$YEAR</span>%-%<span class="hljs-variable">$MONTH</span>%-%<span class="hljs-variable">$DAY</span>%/%FROMHOST-IP%.log&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>重启rsyslog服务使配置生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl restart rsyslog<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看rsyslog的运行状态</p>
+</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140017673.png" srcset="/img/loading.gif" lazyload alt="rsyslog启动成功"></p>
+<h3 id="7-3-1-配置rsyslog"><a href="#7-3-1-配置rsyslog" class="headerlink" title="7.3.1 配置rsyslog"></a>7.3.1 配置rsyslog</h3><ol>
+<li><p>编辑<code>/etc/rsyslog.conf</code>文件,添加以下内容:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs tex"><span class="hljs-params">#</span> 加载Kafka输出模块<br>module(load=&quot;omkafka&quot;)<br><br><span class="hljs-params">#</span> 设置Kafka代理地址和Topic<br>main<span class="hljs-built_in">_</span>kafka.topic=&quot;rsyslog&quot; <br>main<span class="hljs-built_in">_</span>kafka.broker=&quot;locahost:9092&quot;<br>main<span class="hljs-built_in">_</span>kafka.confParam=[<span class="hljs-keyword">\&quot;</span>compression.codec=snappy<span class="hljs-keyword">\&quot;</span>]<br><br><span class="hljs-params">#</span> 发送所有日志到Kafka<br>*.* action(type=&quot;omkafka&quot; topic=&quot;rsyslog&quot; broker=&quot;locahost:9092&quot; confParam=[<span class="hljs-keyword">\&quot;</span>compression.codec=snappy<span class="hljs-keyword">\&quot;</span>])<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>重启rsyslog服务: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl restart rsyslog<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="7-3-2-设置syslog服务器配置并测试"><a href="#7-3-2-设置syslog服务器配置并测试" class="headerlink" title="7.3.2 设置syslog服务器配置并测试"></a>7.3.2 设置syslog服务器配置并测试</h3><p>在服务器安装好rsyslog后，在蜜罐通知配置处填写服务器的syslog地址，并测试成功</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140023424.png" srcset="/img/loading.gif" lazyload alt="syslog服务器配置"></p>
+<p>查看服务器上的syslog日志，也能看到蜜罐的测试消息</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140024182.png" srcset="/img/loading.gif" lazyload alt="蜜罐测试消息"></p>
+<h3 id="7-3-3-添加告警策略"><a href="#7-3-3-添加告警策略" class="headerlink" title="7.3.3 添加告警策略"></a>7.3.3 添加告警策略</h3><p>然后在系统配置-告警策略处添加将威胁告警发送到syslog服务器。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140029004.png" srcset="/img/loading.gif" lazyload alt="添加策略"></p>
+<h3 id="7-3-4-测试攻击看看效果"><a href="#7-3-4-测试攻击看看效果" class="headerlink" title="7.3.4 测试攻击看看效果"></a>7.3.4 测试攻击看看效果</h3><p>蜜罐识别到攻击</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140039564.png" srcset="/img/loading.gif" lazyload alt="蜜罐识别到攻击"></p>
+<p>rsyslog收到消息，其中src_ip即攻击源IP。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140041894.png" srcset="/img/loading.gif" lazyload alt="rsyslog收到消息"></p>
+<h2 id="7-4-kafka"><a href="#7-4-kafka" class="headerlink" title="7.4 kafka"></a>7.4 kafka</h2><p>笔者为了方便测试，安装的是docker版本，并且是单节点部署。</p>
+<p>这里安装Kafka是为了接收外部事件。</p>
+<ol>
+<li><p>安装并启动Zookeeper容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run --name zookeeper -p 2181:2181 -d zookeeper<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130117339.png" srcset="/img/loading.gif" lazyload alt="安装Zookeeper容器"></p>
+<ol start="2">
+<li><p>拉取Kafka镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull wurstmeister/kafka<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404130122797.png" srcset="/img/loading.gif" lazyload alt="拉取Kafka镜像"></p>
+<ol start="3">
+<li><p>启动Kafka容器并链接Zookeeper</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-built_in">run</span> -d --name kafka --link zookeeper \<br>    -p 9092:9092 \<br>    -e <span class="hljs-attribute">KAFKA_ZOOKEEPER_CONNECT</span>=zookeeper:2181 \<br>    -e <span class="hljs-attribute">KAFKA_ADVERTISED_HOST_NAME</span>=&lt;主机IP&gt; \<br>    -e <span class="hljs-attribute">KAFKA_ADVERTISED_PORT</span>=9092 \<br>    wurstmeister/kafka<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>​	其中需要替换<code>&lt;主机IP&gt;</code>为实际主机IP。这将启动一个Kafka容器,并将其9092端口映射到主机。</p>
+<ol start="4">
+<li><p>验证Kafka版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker <span class="hljs-built_in">exec</span> -it &lt;kafka容器名&gt; /opt/kafka/bin/kafka-topics.sh --version<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>进入kafka容器创建一个Topic用于接收日志数据</p>
+<p>请将<code>&lt;kafka_broker_host&gt;:&lt;kafka_broker_port&gt;</code>替换为你的Kafka代理的主机名和端口号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">kafka-topics.sh --bootstrap-server &lt;kafka_broker_host&gt;:&lt;kafka_broker_port&gt; --create --topic rsyslog --partitions 1 --replication-factor 1<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140107007.png" srcset="/img/loading.gif" lazyload alt="创建一个Topic"></p>
+</li>
+<li><p>验证Topic是否创建成功</p>
+<p>发现rsyslog成功创建</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">kafka-topics.sh --bootstrap-server &lt;kafka_broker_host&gt;:&lt;kafka_broker_port&gt; --list<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202404140109526.png" srcset="/img/loading.gif" lazyload alt="Topic成功创建"></p>
+</li>
+</ol>
+<h3 id="7-4-1-放弃的原因"><a href="#7-4-1-放弃的原因" class="headerlink" title="7.4.1 放弃的原因"></a>7.4.1 放弃的原因</h3><p>OctoMation已经自带了kafka和syslog了，不用自己再安装了…直接在SOAR上配置就好了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE/" class="category-chain-item">企业安全建设</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SOAR/">#SOAR</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>开源SOAR的初探</div>
+      <div>https://suiyideali.github.io/2024/04/11/开源SOAR的初探/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>m0ch4z</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年4月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年4月17日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/03/Go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%83%E4%B9%A0%E9%A2%98/" title="Go语言的一些练习题">
+                        <span class="hidden-mobile">Go语言的一些练习题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://cyberzone-five.vercel.app","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>m0ch4z</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
