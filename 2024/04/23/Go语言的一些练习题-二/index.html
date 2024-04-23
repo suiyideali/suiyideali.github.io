@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="m0ch4z">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Go语言练习题第二弹，数组、切片排序的相关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言的一些练习题(二)">
+<meta property="og:url" content="https://suiyideali.github.io/2024/04/23/Go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%83%E4%B9%A0%E9%A2%98-%E4%BA%8C/index.html">
+<meta property="og:site_name" content="Geek小黑板">
+<meta property="og:description" content="Go语言练习题第二弹，数组、切片排序的相关">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-23T11:11:52.000Z">
+<meta property="article:modified_time" content="2024-04-23T11:18:27.700Z">
+<meta property="article:author" content="m0ch4z">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Go语言的一些练习题(二) - Geek小黑板</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"7cd98299138062575c89a6accc17381e","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"6Tp7ZllCJ1Q5Hr5Qx7QEnZoQ-MdYXbMMI","app_key":"hbnuiPd47pTbO5y5VU7X4yj7","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?7cd98299138062575c89a6accc17381e";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Geek小黑板</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Go语言的一些练习题(二)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        m0ch4z
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-23 19:11" pubdate>
+          2024年4月23日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          110 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Go语言的一些练习题(二)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h1><p>随机生成10个整数(1_100的范围)保存到数组，并倒序打印以及求平均值、求最大值和最大值的下标、并查找里面是否有55</p>
+<p>思路：</p>
+<ol>
+<li>使用rand</li>
+<li>使用冒泡排序，倒序</li>
+<li>求平均值、最大值为第一个、第一个的下标就是最大值的下标</li>
+<li>使用二分法查找55</li>
+</ol>
+<p><strong>自己写的代码</strong>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;math/rand&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ReverseOrder</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>)</span></span> &#123;<br>	temp := <span class="hljs-number">0</span> <span class="hljs-comment">//临时变量用于交换</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(*arr); i++ &#123;<br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-built_in">len</span>(*arr) - i - <span class="hljs-number">1</span>; j ++ &#123;<br>			<span class="hljs-keyword">if</span> (*arr)[j] &lt; (*arr)[j+<span class="hljs-number">1</span>] &#123;<br>				<span class="hljs-comment">// 交换</span><br>				temp = (*arr)[j]<br>				(*arr)[j] = (*arr)[j+<span class="hljs-number">1</span>]<br>				(*arr)[j+<span class="hljs-number">1</span>] = temp<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-comment">// 找出最大值和下标</span><br>	maxVal := (*arr)[<span class="hljs-number">0</span>]<br>	maxIndex := <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> i, val := <span class="hljs-keyword">range</span> *arr &#123;<br>		<span class="hljs-keyword">if</span> val &gt; maxVal &#123;<br>			maxVal = val<br>			maxIndex = i<br>		&#125;<br>	&#125;<br>	fmt.Println(<span class="hljs-string">&quot;倒序排列后的数组:&quot;</span>, *arr)<br>	fmt.Println(<span class="hljs-string">&quot;最大值:&quot;</span>, maxVal)<br>    fmt.Println(<span class="hljs-string">&quot;最大值的下标:&quot;</span>, maxIndex)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Average</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>)</span></span> &#123;<br>	<span class="hljs-comment">// 遍历数组求平均值</span><br>	sum := <span class="hljs-number">0.0</span> <br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(*arr); i++ &#123;<br>		sum += <span class="hljs-type">float64</span>((*arr)[i])<br>	&#125;<br>	fmt.Println(<span class="hljs-string">&quot;平均值为：&quot;</span>, sum/<span class="hljs-type">float64</span>(<span class="hljs-built_in">len</span>(*arr)))<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">BinarySearch</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>, findval, leftIndex, rightIndex <span class="hljs-type">int</span>)</span></span> &#123;<br>	<span class="hljs-comment">//判断leftIndex &gt; rightIndex，则没有找到</span><br>	<span class="hljs-keyword">if</span> leftIndex &gt; rightIndex &#123;<br>		fmt.Println(<span class="hljs-string">&quot;没有找到目标数字&quot;</span>)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	<span class="hljs-comment">// 先找到中间的下标</span><br>	midIndex := (leftIndex + rightIndex) / <span class="hljs-number">2</span><br>	<span class="hljs-keyword">if</span> (*arr)[midIndex] &gt; findval &#123;<br>		<span class="hljs-comment">// 向左查找</span><br>		BinarySearch(arr, findval, leftIndex, midIndex - <span class="hljs-number">1</span>)<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*arr)[midIndex] &lt; findval &#123;<br>		<span class="hljs-comment">// 向右查找</span><br>		BinarySearch(arr, findval, midIndex + <span class="hljs-number">1</span>, rightIndex)<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;找到下标为：&quot;</span>, midIndex)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 随机生成10个1-100的整数</span><br>	<span class="hljs-keyword">var</span> nums [<span class="hljs-number">10</span>]<span class="hljs-type">int</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(nums); i++ &#123;<br>		nums[i] = rand.Intn(<span class="hljs-number">100</span>) + <span class="hljs-number">1</span><br>	&#125;<br>	ReverseOrder(&amp;nums)<br>	Average(&amp;nums)<br>	BinarySearch(&amp;nums, <span class="hljs-number">55</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(nums) - <span class="hljs-number">1</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p> <strong>代码优化：</strong></p>
+<ol>
+<li>修改 BinarySearch 函数，使其返回找到的目标值下标（若找到），而不是递归调用。移除了不必要的参数 leftIndex 和 rightIndex，并在函数内部初始化。</li>
+<li>在 main() 函数中，调用 BinarySearch 函数查找55，并根据返回值决定是否输出找到的下标。将原来的递归调用替换为直接使用返回值。</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;math/rand&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ReverseOrder</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>)</span></span> &#123;<br>	temp := <span class="hljs-number">0</span> <span class="hljs-comment">//临时变量用于交换</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(*arr); i++ &#123;<br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-built_in">len</span>(*arr) - i - <span class="hljs-number">1</span>; j ++ &#123;<br>			<span class="hljs-keyword">if</span> (*arr)[j] &lt; (*arr)[j+<span class="hljs-number">1</span>] &#123;<br>				<span class="hljs-comment">// 交换</span><br>				temp = (*arr)[j]<br>				(*arr)[j] = (*arr)[j+<span class="hljs-number">1</span>]<br>				(*arr)[j+<span class="hljs-number">1</span>] = temp<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-comment">// 找出最大值和下标</span><br>	maxVal := (*arr)[<span class="hljs-number">0</span>]<br>	maxIndex := <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> i, val := <span class="hljs-keyword">range</span> *arr &#123;<br>		<span class="hljs-keyword">if</span> val &gt; maxVal &#123;<br>			maxVal = val<br>			maxIndex = i<br>		&#125;<br>	&#125;<br>	fmt.Println(<span class="hljs-string">&quot;倒序排列后的数组:&quot;</span>, *arr)<br>	fmt.Println(<span class="hljs-string">&quot;最大值:&quot;</span>, maxVal)<br>    fmt.Println(<span class="hljs-string">&quot;最大值的下标:&quot;</span>, maxIndex)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Average</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>)</span></span> &#123;<br>	<span class="hljs-comment">// 遍历数组求平均值</span><br>	sum := <span class="hljs-number">0.0</span><br>	<span class="hljs-keyword">for</span> _, val := <span class="hljs-keyword">range</span> *arr &#123;<br>		sum += <span class="hljs-type">float64</span>(val)<br>	&#125;<br>	fmt.Println(<span class="hljs-string">&quot;平均值为：&quot;</span>, sum/<span class="hljs-type">float64</span>(<span class="hljs-built_in">len</span>(*arr)))<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">BinarySearch</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>, findval <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>	leftIndex, rightIndex := <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(*arr)<span class="hljs-number">-1</span><br><br>	<span class="hljs-comment">// 二分查找</span><br>	<span class="hljs-keyword">for</span> leftIndex &lt;= rightIndex &#123;<br>		midIndex := (leftIndex + rightIndex) / <span class="hljs-number">2</span><br>		<span class="hljs-keyword">if</span> (*arr)[midIndex] == findval &#123;<br>			<span class="hljs-keyword">return</span> midIndex<br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*arr)[midIndex] &lt; findval &#123;<br>			leftIndex = midIndex + <span class="hljs-number">1</span><br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			rightIndex = midIndex - <span class="hljs-number">1</span><br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">// 没有找到目标值</span><br>	fmt.Println(<span class="hljs-string">&quot;没有找到目标数字&quot;</span>)<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 随机生成10个1-100的整数</span><br>	<span class="hljs-keyword">var</span> nums [<span class="hljs-number">10</span>]<span class="hljs-type">int</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(nums); i++ &#123;<br>		nums[i] = rand.Intn(<span class="hljs-number">100</span>) + <span class="hljs-number">1</span><br>	&#125;<br>	ReverseOrder(&amp;nums)<br>	Average(&amp;nums)<br>	index := BinarySearch(&amp;nums, <span class="hljs-number">55</span>)<br>	<span class="hljs-keyword">if</span> index != <span class="hljs-number">-1</span> &#123;<br>		fmt.Printf(<span class="hljs-string">&quot;找到下标为：%d\n&quot;</span>, index)<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h1><p>已知有个排序好（升序）的数组，要求插入一个元素，最后打印该数组，顺序依然是升序</p>
+<p>思路：</p>
+<ol>
+<li>先输出升序的数组</li>
+<li>将数组变为切片</li>
+<li>然后再随机插入一个数字，进行升序</li>
+</ol>
+<p><strong>自己写的代码：</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;math/rand&quot;</span><br>	<span class="hljs-string">&quot;sort&quot;</span><br>)<br><br><span class="hljs-comment">// 升序数组</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ascendingArray</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>)</span></span> &#123;<br>	temp := <span class="hljs-number">0</span> <span class="hljs-comment">//临时变量用于交换</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(*arr); i++ &#123;<br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-built_in">len</span>(*arr)-i<span class="hljs-number">-1</span>; j++ &#123;<br>			<span class="hljs-keyword">if</span> (*arr)[j] &gt; (*arr)[j+<span class="hljs-number">1</span>] &#123;<br>				<span class="hljs-comment">//交换</span><br>				temp = (*arr)[j]<br>				(*arr)[j] = (*arr)[j+<span class="hljs-number">1</span>]<br>				(*arr)[j+<span class="hljs-number">1</span>] = temp<br>			&#125;<br>		&#125;<br>	&#125;<br>	fmt.Println(<span class="hljs-string">&quot;原本的升序数组:&quot;</span>, (*arr))<br>&#125;<br><br><span class="hljs-comment">// 将数组转化为切片,并随机增加一个数</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">arrayToSlice</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>)</span></span> []<span class="hljs-type">int</span> &#123;<br>	<span class="hljs-keyword">var</span> slice []<span class="hljs-type">int</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(*arr); i++ &#123;<br>		slice = <span class="hljs-built_in">append</span>(slice, (*arr)[i])<br>	&#125;<br>	slice = <span class="hljs-built_in">append</span>(slice, randNum())<br>	<span class="hljs-keyword">return</span> slice<br>&#125;<br><br><span class="hljs-comment">// 生成一个100以内的随机数</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">randNum</span><span class="hljs-params">()</span></span> <span class="hljs-type">int</span> &#123;<br>	<span class="hljs-keyword">return</span> rand.Intn(<span class="hljs-number">100</span>) + <span class="hljs-number">1</span><br>&#125;<br><br><span class="hljs-comment">// 切片排序</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sliceSort</span><span class="hljs-params">(slice []<span class="hljs-type">int</span>)</span></span> &#123;<br>	sort.Slice(slice, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i, j <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">bool</span> &#123;<br>		<span class="hljs-keyword">return</span> slice[i] &lt; slice[j] <span class="hljs-comment">// 升序排序</span><br>	&#125;)<br>	fmt.Println(<span class="hljs-string">&quot;新的切片排序:&quot;</span>, slice)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> nums [<span class="hljs-number">10</span>]<span class="hljs-type">int</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(nums); i++ &#123;<br>		nums[i] = rand.Intn(<span class="hljs-number">100</span>) + <span class="hljs-number">1</span><br>	&#125;<br>	ascendingArray(&amp;nums)<br>	arrayToSlice(&amp;nums)<br>	sliceSort(arrayToSlice(&amp;nums))<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<h3 id="潜在问题和风险"><a href="#潜在问题和风险" class="headerlink" title="潜在问题和风险"></a>潜在问题和风险</h3><ol>
+<li><strong>代码安全性</strong>：在arrayToSlice函数中，你对原始数组进行了操作，并返回了一个新的切片。这里没有直接的问题，但是值得注意的是，如果对切片进行了修改，而原始数组没有被预期地更新，这可能会导致一些不容易发现的bug。需要确保在文档中明确这种行为，或者考虑使用不可变对象。</li>
+<li><strong>边界条件</strong>：在ascendingArray函数中，你使用了嵌套的for循环进行冒泡排序，但是没有对数组为空或者只有一个元素的情况进行特殊处理。尽管在这种情况下代码仍然有效，但是添加对这些边界条件的检查可以让代码更加健壮。</li>
+<li><strong>异常处理</strong>：Go语言中处理错误的方式与许多其他语言不同，需要显式地进行错误检查。虽然在这段代码中没有显式的错误处理需求，但在涉及到随机数生成、排序等可能失败的操作时，应考虑如何优雅地处理潜在的异常情况。</li>
+</ol>
+<h3 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h3><ol>
+<li><strong>性能效率</strong>：</li>
+</ol>
+<ul>
+<li>在ascendingArray函数中，冒泡排序的效率在大型数据集上可能较差。考虑对于较大数组使用更高效的排序算法，如快速排序、归并排序等。</li>
+<li>当arrayToSlice函数中的数组已知大小为10时，可以预先为切片分配足够的空间，这样append操作将更加高效。即使用slice &#x3D; make([]int, 0, len(*arr)+1)初始化切片。</li>
+</ul>
+<ol>
+<li><strong>可维护性</strong>：</li>
+</ol>
+<ul>
+<li>考虑将随机数生成的功能抽象到一个独立的函数中，这样可以提高代码的可读性和可维护性。你已经做到了这一点，这是一个好习惯。</li>
+<li>函数命名应清晰表达其功能。例如，ascendingArray实际上是在对数组进行排序，而不是创建一个升序数组。建议更改为sortArrayAscending或其他更能准确描述功能的名称。</li>
+<li>注释非常重要，但应确保其准确且有用。例如，在ascendingArray函数中，你对交换过程进行了注释，这是好的。不过，对整个函数的功能和算法的简短说明也会很有帮助。</li>
+</ul>
+<ol>
+<li><strong>代码整洁</strong>：</li>
+</ol>
+<ul>
+<li>在main函数中，你初始化了一个[10]int类型的数组并填充了随机数，然后将其传递给不同的函数进行操作。这个过程很清晰，但是将初始化和填充数组的代码封装到一个独立的函数中，可以提高代码的可读性和重用性。</li>
+</ul>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;math/rand&quot;</span><br>    <span class="hljs-string">&quot;sort&quot;</span><br>)<br><br><span class="hljs-comment">// 升序数组</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sortArrayAscending</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>)</span></span> &#123;<br>    <span class="hljs-comment">// 特殊处理:数组为空或只有一个元素时,无需排序,直接返回</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(*arr) &lt;= <span class="hljs-number">1</span> &#123;<br>        fmt.Printf(<span class="hljs-string">&quot;数组长度小于等于1，无需排序: %v\n&quot;</span>, (*arr))<br>        <span class="hljs-keyword">return</span><br>    &#125;<br><br>    temp := <span class="hljs-number">0</span> <span class="hljs-comment">//临时变量用于交换</span><br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(*arr); i++ &#123;<br>        <span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-built_in">len</span>(*arr)-i<span class="hljs-number">-1</span>; j++ &#123;<br>            <span class="hljs-keyword">if</span> (*arr)[j] &gt; (*arr)[j+<span class="hljs-number">1</span>] &#123;<br>                <span class="hljs-comment">//交换</span><br>                temp = (*arr)[j]<br>                (*arr)[j] = (*arr)[j+<span class="hljs-number">1</span>]<br>                (*arr)[j+<span class="hljs-number">1</span>] = temp<br>            &#125;<br>        &#125;<br>    &#125;<br>    fmt.Println(<span class="hljs-string">&quot;原本的升序数组:&quot;</span>, (*arr))<br>&#125;<br><br><span class="hljs-comment">// 将数组转化为切片,并随机增加一个数</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">arrayToSlice</span><span class="hljs-params">(arr *[10]<span class="hljs-type">int</span>)</span></span> []<span class="hljs-type">int</span> &#123;<br>    <span class="hljs-comment">// 预先分配足够的空间</span><br>    slice := <span class="hljs-built_in">make</span>([]<span class="hljs-type">int</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(*arr)+<span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(*arr); i++ &#123;<br>        slice = <span class="hljs-built_in">append</span>(slice, (*arr)[i])<br>    &#125;<br>    slice = <span class="hljs-built_in">append</span>(slice, randNum())<br>    <span class="hljs-keyword">return</span> slice<br>&#125;<br><br><span class="hljs-comment">// 生成一个100以内的随机数</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">randNum</span><span class="hljs-params">()</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">return</span> rand.Intn(<span class="hljs-number">100</span>) + <span class="hljs-number">1</span><br>&#125;<br><br><span class="hljs-comment">// 切片排序</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sliceSort</span><span class="hljs-params">(slice []<span class="hljs-type">int</span>)</span></span> &#123;<br>    sort.Slice(slice, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i, j <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">bool</span> &#123;<br>        <span class="hljs-keyword">return</span> slice[i] &lt; slice[j] <span class="hljs-comment">// 升序排序</span><br>    &#125;)<br>    fmt.Println(<span class="hljs-string">&quot;新的切片排序:&quot;</span>, slice)<br>&#125;<br><br><span class="hljs-comment">// 初始化并填充一个长度为10的随机数数组</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">initRandomArray</span><span class="hljs-params">()</span></span> [<span class="hljs-number">10</span>]<span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">var</span> nums [<span class="hljs-number">10</span>]<span class="hljs-type">int</span><br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(nums); i++ &#123;<br>        nums[i] = rand.Intn(<span class="hljs-number">100</span>) + <span class="hljs-number">1</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> nums<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    nums := initRandomArray()<br>    sortArrayAscending(&amp;nums)<br>    slice := arrayToSlice(&amp;nums)<br>    sliceSort(slice)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="题目3"><a href="#题目3" class="headerlink" title="题目3"></a>题目3</h1><p>定义一个3行4列的二维数组，逐个从键盘输入值，编写程序将四周的数据清0</p>
+<p><strong>原始的代码</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 定义一个3行4列的二维数组</span><br>	<span class="hljs-keyword">var</span> matrix [<span class="hljs-number">3</span>][<span class="hljs-number">4</span>]<span class="hljs-type">int</span><br><br>	<span class="hljs-comment">// 从键盘读取12个数字填充到二维数组中</span><br>	fmt.Println(<span class="hljs-string">&quot;请输入12个数字填充到3x4的二维数组中:&quot;</span>)<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++ &#123;<br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">4</span>; j++ &#123;<br>			fmt.Printf(<span class="hljs-string">&quot;请输入第%d行第%d列的值: &quot;</span>, i+<span class="hljs-number">1</span>, j+<span class="hljs-number">1</span>)<br>			fmt.Scan(&amp;matrix[i][j])<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">// 打印原始数组</span><br>	fmt.Println(<span class="hljs-string">&quot;\n原始数组:&quot;</span>)<br>	displayMatrix(matrix)<br><br>	<span class="hljs-comment">// 清除四周的数据（即第一行、最后一行、第一列、最后一列）</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++ &#123;<br>		matrix[i][<span class="hljs-number">0</span>], matrix[i][<span class="hljs-number">3</span>] = <span class="hljs-number">0</span>, <span class="hljs-number">0</span> <span class="hljs-comment">// 清空第一列和最后一列</span><br>	&#125;<br>	matrix[<span class="hljs-number">0</span>], matrix[<span class="hljs-number">2</span>] = [<span class="hljs-number">4</span>]<span class="hljs-type">int</span>&#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;, [<span class="hljs-number">4</span>]<span class="hljs-type">int</span>&#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125; <span class="hljs-comment">// 清空第一行和最后一行</span><br><br>	<span class="hljs-comment">// 打印修改后的数组</span><br>	fmt.Println(<span class="hljs-string">&quot;\n清除四周数据后的数组:&quot;</span>)<br>	displayMatrix(matrix)<br>&#125;<br><br><span class="hljs-comment">// displayMatrix 打印二维数组</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">displayMatrix</span><span class="hljs-params">(matrix [3][4]<span class="hljs-type">int</span>)</span></span> &#123;<br>	<span class="hljs-keyword">for</span> _, row := <span class="hljs-keyword">range</span> matrix &#123;<br>		<span class="hljs-keyword">for</span> _, val := <span class="hljs-keyword">range</span> row &#123;<br>			fmt.Printf(<span class="hljs-string">&quot;%d\t&quot;</span>, val)<br>		&#125;<br>		fmt.Println()<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<h3 id="潜在问题"><a href="#潜在问题" class="headerlink" title="潜在问题"></a>潜在问题</h3><ol>
+<li><strong>异常处理</strong>：当前代码缺乏对用户输入的异常处理。例如，如果用户输入的不是数字，fmt.Scan()将会失败，但程序不会对此做出任何反应或处理。考虑增加错误处理逻辑，确保程序的健壮性。</li>
+<li><strong>输入校验</strong>：程序没有校验用户输入的数字是否在合理的范围内。对于本例来说，虽然范围没有明确限制，但如果程序逻辑更复杂，可能需要考虑输入值的合法性（例如，是否为负数等）。</li>
+<li><strong>边界条件处理</strong>：在清除数组四周元素的逻辑中，直接将元素赋值为0。这种方式在处理具有特定边界条件要求的数据时可能会不够安全，尤其是在其他上下文中使用该数组时。</li>
+</ol>
+<h3 id="优化方向-1"><a href="#优化方向-1" class="headerlink" title="优化方向"></a>优化方向</h3><ol>
+<li><strong>代码重构</strong>：清除数组四周元素的逻辑略显冗余，可以考虑封装成一个单独的函数以提高代码的可读性和可维护性。例如，可以创建一个函数来处理特定行列的清零操作。</li>
+<li><strong>性能考虑</strong>：虽然对于一个3x4的数组来说性能不是问题，但如果处理更大的数组，可以考虑优化数据结构或算法，以减少不必要的操作，比如在清除四周元素时，避免对已清零的元素重复操作。</li>
+<li><strong>输入方式优化</strong>：当前通过嵌套循环和多次调用fmt.Scan()来读取输入，这种方式虽然简单但不够高效。考虑使用bufio.Scanner等工具来改善输入效率和用户体验。</li>
+<li><strong>增强交互性</strong>：对于需要从用户处获取输入的程序，考虑增加更友好的交互元素，比如输入提示、输入验证消息等，以提升程序的易用性。</li>
+<li><strong>使用更现代的Go特性</strong>：Go语言在不断发展，新的语言特性可能会提供更简洁、高效的解决方案。比如使用fmt.Printf(“%d\t”, matrix[i][j])直接在displayMatrix函数中打印矩阵，减少中间变量的使用。</li>
+</ol>
+</blockquote>
+<p><strong>优化后的代码</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;bufio&quot;</span><br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>	<span class="hljs-string">&quot;unicode&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 定义一个3行4列的二维数组</span><br>	<span class="hljs-keyword">var</span> matrix [<span class="hljs-number">3</span>][<span class="hljs-number">4</span>]<span class="hljs-type">int</span><br><br>	<span class="hljs-comment">// 从键盘读取12个数字填充到二维数组中</span><br>	fmt.Println(<span class="hljs-string">&quot;请输入12个数字填充到3x4的二维数组中:&quot;</span>)<br>	scanner := bufio.NewScanner(os.Stdin)<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++ &#123;<br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">4</span>; j++ &#123;<br>			fmt.Printf(<span class="hljs-string">&quot;请输入第%d行第%d列的值: &quot;</span>, i+<span class="hljs-number">1</span>, j+<span class="hljs-number">1</span>)<br>			<span class="hljs-keyword">if</span> scanner.Scan() &#123;<br>				<span class="hljs-keyword">if</span> unicode.IsDigit(<span class="hljs-type">rune</span>(scanner.Text()[<span class="hljs-number">0</span>])) &#123;<br>					_, err := fmt.Sscanf(scanner.Text(), <span class="hljs-string">&quot;%d&quot;</span>, &amp;matrix[i][j])<br>					<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>						fmt.Println(<span class="hljs-string">&quot;输入错误，请确保输入一个整数。&quot;</span>)<br>						i--<br>						<span class="hljs-keyword">continue</span><br>					&#125;<br>				&#125; <span class="hljs-keyword">else</span> &#123;<br>					fmt.Println(<span class="hljs-string">&quot;输入错误，请确保输入一个整数。&quot;</span>)<br>					i--<br>					<span class="hljs-keyword">continue</span><br>				&#125;<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				fmt.Println(<span class="hljs-string">&quot;读取输入失败。&quot;</span>)<br>				<span class="hljs-keyword">return</span><br>			&#125;<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">// 打印原始数组</span><br>	fmt.Println(<span class="hljs-string">&quot;\n原始数组:&quot;</span>)<br>	displayMatrix(matrix)<br><br>	<span class="hljs-comment">// 清除四周的数据</span><br>	zeroOutSides(&amp;matrix)<br><br>	<span class="hljs-comment">// 打印修改后的数组</span><br>	fmt.Println(<span class="hljs-string">&quot;\n清除四周数据后的数组:&quot;</span>)<br>	displayMatrix(matrix)<br>&#125;<br><br><span class="hljs-comment">// displayMatrix 打印二维数组</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">displayMatrix</span><span class="hljs-params">(matrix [3][4]<span class="hljs-type">int</span>)</span></span> &#123;<br>	<span class="hljs-keyword">for</span> _, row := <span class="hljs-keyword">range</span> matrix &#123;<br>		<span class="hljs-keyword">for</span> _, val := <span class="hljs-keyword">range</span> row &#123;<br>			fmt.Printf(<span class="hljs-string">&quot;%d\t&quot;</span>, val)<br>		&#125;<br>		fmt.Println()<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">// zeroOutSides 清除二维数组的四周元素</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">zeroOutSides</span><span class="hljs-params">(matrix *[3][4]<span class="hljs-type">int</span>)</span></span> &#123;<br>	<span class="hljs-comment">// Clear first and last columns</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++ &#123;<br>		matrix[i][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>		matrix[i][<span class="hljs-number">3</span>] = <span class="hljs-number">0</span><br>	&#125;<br><br>	<span class="hljs-comment">// Clear first and last rows</span><br>	<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">4</span>; j++ &#123;<br>		matrix[<span class="hljs-number">0</span>][j] = <span class="hljs-number">0</span><br>		matrix[<span class="hljs-number">2</span>][j] = <span class="hljs-number">0</span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="题目4"><a href="#题目4" class="headerlink" title="题目4"></a>题目4</h1><p>定义一个4行4列的二维数组，逐个从键盘输入值，然后将第1行和第4行的数据进行交换，将第2行和第3行的数据进行交换</p>
+<p>提示：可以尝试使用地址交换</p>
+<p><strong>最初自己写的代码</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;bufio&quot;</span><br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;os&quot;</span><br>	<span class="hljs-string">&quot;unicode&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 定义一个4行4列的二维数组</span><br>	<span class="hljs-keyword">var</span> matrix [<span class="hljs-number">4</span>][<span class="hljs-number">4</span>]<span class="hljs-type">int</span><br><br>	<span class="hljs-comment">// 从键盘读取12个数字填充到二维数组中</span><br>	fmt.Println(<span class="hljs-string">&quot;请输入12个数字填充到4x4的二维数组中:&quot;</span>)<br>	scanner := bufio.NewScanner(os.Stdin)<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++ &#123;<br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">4</span>; j++ &#123;<br>			fmt.Printf(<span class="hljs-string">&quot;请输入第%d行第%d列的值: &quot;</span>, i+<span class="hljs-number">1</span>, j+<span class="hljs-number">1</span>)<br>			<span class="hljs-keyword">if</span> scanner.Scan() &#123;<br>				<span class="hljs-keyword">if</span> unicode.IsDigit(<span class="hljs-type">rune</span>(scanner.Text()[<span class="hljs-number">0</span>])) &#123;<br>					_, err := fmt.Sscanf(scanner.Text(), <span class="hljs-string">&quot;%d&quot;</span>, &amp;matrix[i][j])<br>					<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>						fmt.Println(<span class="hljs-string">&quot;输入错误，请确保输入一个整数。&quot;</span>)<br>						i--<br>						<span class="hljs-keyword">continue</span><br>					&#125;<br>				&#125; <span class="hljs-keyword">else</span> &#123;<br>					fmt.Println(<span class="hljs-string">&quot;输入错误，请确保输入一个整数。&quot;</span>)<br>					i--<br>					<span class="hljs-keyword">continue</span><br>				&#125;<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				fmt.Println(<span class="hljs-string">&quot;读取输入失败。&quot;</span>)<br>				<span class="hljs-keyword">return</span><br>			&#125;<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">// 打印原始数组</span><br>	fmt.Println(<span class="hljs-string">&quot;\n原始数组:&quot;</span>)<br>	displayMatrix(matrix)<br><br>	<span class="hljs-comment">// 交换</span><br>	swapRows(&amp;matrix, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>)<br>	swapRows(&amp;matrix, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><br>	fmt.Println(<span class="hljs-string">&quot;\n交换后数组:&quot;</span>)<br>	displayMatrix(matrix)<br>&#125;<br><br><span class="hljs-comment">// displayMatrix 打印二维数组</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">displayMatrix</span><span class="hljs-params">(matrix [4][4]<span class="hljs-type">int</span>)</span></span> &#123;<br>	<span class="hljs-keyword">for</span> _, row := <span class="hljs-keyword">range</span> matrix &#123;<br>		<span class="hljs-keyword">for</span> _, val := <span class="hljs-keyword">range</span> row &#123;<br>			fmt.Printf(<span class="hljs-string">&quot;%d\t&quot;</span>, val)<br>		&#125;<br>		fmt.Println()<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">// 交换两行的函数</span><br><span class="hljs-comment">// 使用指针的方法</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">swapRows</span><span class="hljs-params">(matrix *[4][4]<span class="hljs-type">int</span>, i, j <span class="hljs-type">int</span>)</span></span> &#123;<br>	<span class="hljs-comment">//这两行代码分别将矩阵中索引为i和j的两行存储到局部变量oldRowI和oldRowJ中。</span><br>	<span class="hljs-comment">//由于matrix是数组指针，所以需要使用(*matrix)来访问其元素。</span><br>	oldRowI := (*matrix)[i]<br>	oldRowJ := (*matrix)[j]<br>	(*matrix)[i] = oldRowJ<br>	(*matrix)[j] = oldRowI<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<h3 id="潜在问题和风险-1"><a href="#潜在问题和风险-1" class="headerlink" title="潜在问题和风险"></a>潜在问题和风险</h3><ol>
+<li><strong>输入校验不够严格</strong>：虽然代码对输入进行了是否为数字的判断，但并未校验输入的整数是否在合理的范围内（例如，负数或超出数组索引范围的值）。这可能会导致逻辑错误或运行时panic。</li>
+<li><strong>错误处理不够优雅</strong>：当输入格式错误或读取失败时，程序会直接通过fmt.Println输出错误信息并进行一些逻辑处理（如i–），这样的处理方式较为简单，不利于构建更加健壮和用户友好的程序。</li>
+<li><strong>边界条件处理存在潜在风险</strong>：在处理输入错误时通过i–来重试当前循环，这可能会导致死循环或逻辑错误，尤其是当输入一直错误时。</li>
+</ol>
+<h3 id="优化建议"><a href="#优化建议" class="headerlink" title="优化建议"></a>优化建议</h3><ol>
+<li><strong>增强输入校验</strong>：除了检查输入字符是否为数字外，还应该检查扫描后的整数是否在预期的范围内（例如，0到100，或者更具体的范围，根据实际需求确定）。</li>
+<li><strong>改进错误处理</strong>：考虑使用更结构化的错误处理方式，例如定义错误类型或使用错误返回值来通知上层调用者发生了什么错误，而不是直接在底层输出错误信息。</li>
+<li>*<em>避免使用</em>***i–**<strong>进行错误处理</strong>：当输入错误时，应该考虑更安全的处理方式，比如使用一个额外的循环来专门处理输入校验失败的情况，避免影响主逻辑的索引计数。</li>
+<li><strong>代码可读性优化</strong>：虽然代码逻辑清晰，但在一些地方加入注释（比如swapRows函数的工作原理）可以进一步提高代码的可读性。</li>
+<li><strong>性能考虑</strong>：虽然这段程序的性能瓶颈不明显，但在处理大量数据或更复杂的逻辑时，需要注意循环、函数调用等可能的性能开销，考虑是否有必要优化这些方面。</li>
+<li><strong>异常处理</strong>：scanner.Scan()可能因为多种原因失败，除了打印错误信息外，考虑是否有更恰当的异常处理或恢复策略，以确保程序的健壮性。</li>
+</ol>
+</blockquote>
+<p><strong>调整后的代码</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;bufio&quot;</span><br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;os&quot;</span><br>    <span class="hljs-string">&quot;unicode&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">// 定义一个4行4列的二维数组</span><br>    <span class="hljs-keyword">var</span> matrix [<span class="hljs-number">4</span>][<span class="hljs-number">4</span>]<span class="hljs-type">int</span><br><br>    <span class="hljs-comment">// 从键盘读取12个数字填充到二维数组中</span><br>    fmt.Println(<span class="hljs-string">&quot;请输入12个数字填充到4x4的二维数组中:&quot;</span>)<br>    scanner := bufio.NewScanner(os.Stdin)<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++ &#123;<br>        <span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">4</span>; j++ &#123;<br>            <span class="hljs-keyword">var</span> validInput <span class="hljs-type">bool</span><br>            <span class="hljs-keyword">for</span> !validInput &#123;<br>                fmt.Printf(<span class="hljs-string">&quot;请输入第%d行第%d列的值: &quot;</span>, i+<span class="hljs-number">1</span>, j+<span class="hljs-number">1</span>)<br>                <span class="hljs-keyword">if</span> scanner.Scan() &#123;<br>                    input := scanner.Text()<br>                    <span class="hljs-keyword">if</span> unicode.IsDigit(<span class="hljs-type">rune</span>(input[<span class="hljs-number">0</span>])) &#123;<br>                        <span class="hljs-keyword">var</span> num <span class="hljs-type">int</span><br>                        _, err := fmt.Sscanf(input, <span class="hljs-string">&quot;%d&quot;</span>, &amp;num)<br>                        <span class="hljs-keyword">if</span> err == <span class="hljs-literal">nil</span> &amp;&amp; num &gt;= <span class="hljs-number">0</span> &amp;&amp; num &lt;= <span class="hljs-number">100</span> &#123;<br>                            matrix[i][j] = num<br>                            validInput = <span class="hljs-literal">true</span><br>                        &#125; <span class="hljs-keyword">else</span> &#123;<br>                            fmt.Println(<span class="hljs-string">&quot;输入错误，请确保输入一个0到100之间的整数。&quot;</span>)<br>                        &#125;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        fmt.Println(<span class="hljs-string">&quot;输入错误，请确保输入一个整数。&quot;</span>)<br>                    &#125;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    fmt.Println(<span class="hljs-string">&quot;读取输入失败。&quot;</span>)<br>                    <span class="hljs-keyword">return</span><br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 打印原始数组</span><br>    fmt.Println(<span class="hljs-string">&quot;\n原始数组:&quot;</span>)<br>    displayMatrix(matrix)<br><br>    <span class="hljs-comment">// 交换</span><br>    swapRows(&amp;matrix, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>)<br>    swapRows(&amp;matrix, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><br>    fmt.Println(<span class="hljs-string">&quot;\n交换后数组:&quot;</span>)<br>    displayMatrix(matrix)<br>&#125;<br><br><span class="hljs-comment">// displayMatrix 打印二维数组</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">displayMatrix</span><span class="hljs-params">(matrix [4][4]<span class="hljs-type">int</span>)</span></span> &#123;<br>    <span class="hljs-keyword">for</span> _, row := <span class="hljs-keyword">range</span> matrix &#123;<br>        <span class="hljs-keyword">for</span> _, val := <span class="hljs-keyword">range</span> row &#123;<br>            fmt.Printf(<span class="hljs-string">&quot;%d\t&quot;</span>, val)<br>        &#125;<br>        fmt.Println()<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// 交换两行的函数</span><br><span class="hljs-comment">// 使用指针的方法</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">swapRows</span><span class="hljs-params">(matrix *[4][4]<span class="hljs-type">int</span>, i, j <span class="hljs-type">int</span>)</span></span> &#123;<br>    <span class="hljs-comment">//这两行代码分别将矩阵中索引为i和j的两行存储到局部变量oldRowI和oldRowJ中。</span><br>    <span class="hljs-comment">//由于matrix是数组指针，所以需要使用(*matrix)来访问其元素。</span><br>    oldRowI := (*matrix)[i]<br>    oldRowJ := (*matrix)[j]<br>    (*matrix)[i] = oldRowJ<br>    (*matrix)[j] = oldRowI<br>&#125;<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/code/" class="category-chain-item">code</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Go/">#Go</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Go语言的一些练习题(二)</div>
+      <div>https://suiyideali.github.io/2024/04/23/Go语言的一些练习题-二/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>m0ch4z</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年4月23日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年4月23日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/11/%E5%BC%80%E6%BA%90SOAR%E7%9A%84%E5%88%9D%E6%8E%A2/" title="开源SOAR的初探">
+                        <span class="hidden-mobile">开源SOAR的初探</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://cyberzone-five.vercel.app","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>m0ch4z</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
