@@ -1,0 +1,884 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fco.jpg">
+  <link rel="icon" href="/img/fco.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="m0ch4z">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="此篇博文记录博主学习Github工作流的过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub工作流学习">
+<meta property="og:url" content="https://suiyideali.github.io/2025/04/02/GitHub%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Geek小黑板">
+<meta property="og:description" content="此篇博文记录博主学习Github工作流的过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246346.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246411.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246432.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246442.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246426.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246416.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246309.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246361.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246422.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246485.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246571.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246611.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246797.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246962.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246201.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246855.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246236.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246287.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246326.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246352.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246531.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246621.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246680.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246703.png">
+<meta property="og:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246841.png">
+<meta property="article:published_time" content="2025-04-02T14:43:32.000Z">
+<meta property="article:modified_time" content="2025-04-02T14:48:24.066Z">
+<meta property="article:author" content="m0ch4z">
+<meta property="article:tag" content="code">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246346.png">
+  
+  
+  
+  <title>GitHub工作流学习 - Geek小黑板</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"suiyideali.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"7cd98299138062575c89a6accc17381e","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"6Tp7ZllCJ1Q5Hr5Qx7QEnZoQ-MdYXbMMI","app_key":"hbnuiPd47pTbO5y5VU7X4yj7","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?7cd98299138062575c89a6accc17381e";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Geek小黑板</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于我</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Background.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="GitHub工作流学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        m0ch4z
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-02 22:43" pubdate>
+          2025年4月2日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">GitHub工作流学习</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第一步：克隆远程仓库"><a href="#第一步：克隆远程仓库" class="headerlink" title="第一步：克隆远程仓库"></a>第一步：克隆远程仓库</h1><p>使用 <strong>git clone</strong> 命令将远程仓库克隆到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github/example/example.git<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246346.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><strong>Remote</strong>：表示远程的仓库</p>
+<p><strong>Local</strong>：表示本地的仓库</p>
+<p><strong>Disk</strong>：是源文件真正在磁盘的样子，也是编辑器打开源文件的状态。</p>
+<p>在刚进行完 <strong>git clone</strong> 的时候，<strong>Remote</strong>、<strong>Local</strong>、<strong>Disk</strong> 中的内容是一样的。</p>
+<h1 id="第二步：建立新的-feature-branch"><a href="#第二步：建立新的-feature-branch" class="headerlink" title="第二步：建立新的 feature branch"></a>第二步：建立新的 feature branch</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout -b my-feature<br></code></pre></td></tr></table></figure>
+
+<p>建立一个新的<strong>feature branch</strong>。这会复制一份当前 <strong>branch</strong> 到新 <strong>branch</strong>上，相当于把当前main branch复制到了<strong>my-feature</strong>上。因此现在在 <strong>Local</strong> 上有 <strong>main</strong> 和 <strong>my-feature</strong> 两个<strong>branch</strong>。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246411.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>建立<strong>feature branch</strong>而不直接往 <strong>main</strong> 上 <strong>push</strong> 代码的好处是，这样不会导致主分支无法正常工作，有利于多人合作开发项目。</p>
+<p>其中”<strong>my-feature</strong>“就是<strong>branch</strong>的名字。这里<strong>branch</strong>根据实际命名</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246432.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第三步：修改代码"><a href="#第三步：修改代码" class="headerlink" title="第三步：修改代码"></a>第三步：修改代码</h1><p>当在本地修改代码并保存后，硬盘上的文件是有所变化的，但是git是一无所知的，可以使用下面的命令查看现在硬盘和git保存的分支有什么区别。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git diff<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246442.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>当决定想把修改的文件告知 <strong>git</strong> 的时候，可以使用 <strong>git add</strong>  命令放入暂存区。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git add &lt;changed_file&gt;<br></code></pre></td></tr></table></figure>
+
+<p>或者使用下面的命令将所有修改的文件放入暂存区。现在git就知道了有一些代码想要 <strong>commit</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git add .<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246426.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在进行 <strong>git add</strong> 添加想修改的文件后，可以使用 <strong>git commit</strong> 把修改真正的提交给git，此时可以使用<strong>git commit</strong> 命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git commit<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246416.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在<strong>Disk git</strong> 执行了 <strong>git commit</strong> 后，<strong>Local git</strong> 就会新增一个 <strong>commit</strong></p>
+<h1 id="第四步：git-push"><a href="#第四步：git-push" class="headerlink" title="第四步：git push"></a>第四步：git push</h1><p>接下来将<strong>Local git</strong> 的变化告知 <strong>GitHub</strong>，使用<strong>git push origin my-feature</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push origin my-feature<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246309.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>那么现在<strong>github</strong>就会多出一个新的<strong>branch</strong>，是<strong>my-feature</strong> 保存着修改后的代码。</p>
+<h1 id="第五步：更新合并代码"><a href="#第五步：更新合并代码" class="headerlink" title="第五步：更新合并代码"></a>第五步：更新合并代码</h1><p>这一步就需要把更新好的代码合并到<strong>main branch</strong>中，这个过程称为：<strong>pull request</strong></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246361.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><strong>pull request</strong>的含义为：<strong>request</strong>当前项目的所有者将新的分支的改变给pull到项目中。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246422.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>然后<strong>main branch</strong> 的维护者审查代码后，会使用 <strong>squash and merge</strong>  </p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246485.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246571.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246611.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>GitHub 使用 <strong>Squash and Merge</strong> 的主要作用是将功能分支的多个提交压缩为一个单独的提交后合并到目标分支（如 <strong><code>main</code></strong> 或 **<code>master</code>**），从而保持目标分支的提交历史简洁。</p>
+<p>在<strong>pull request</strong> 被 <strong>merge</strong> 后，一般情况后会把远端 <strong>my-feature branch</strong> 删掉</p>
+<p>然后更改 <strong>Local git</strong>  上的 <strong>branch</strong>。</p>
+<ol>
+<li>切换到 <strong>main  branch</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout main<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246797.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ol>
+<li>删除 <strong>my-feature</strong></li>
+</ol>
+<p>在<strong>Local branch</strong>中删掉my-feature</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch -D my-feature<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246962.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246201.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ol>
+<li>把最新的更新拉取到<strong>Local</strong> 的 <strong>main branch</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git pull origin main<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246855.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在进行一系列操作后，<strong>Local、Disk</strong> 就和 <strong>Remote</strong> 一致了</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246236.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="例外情况：在push后如果main更新了"><a href="#例外情况：在push后如果main更新了" class="headerlink" title="例外情况：在push后如果main更新了"></a>例外情况：在push后如果main更新了</h1><p>在把改动<strong>Push</strong>到<strong>my-feature</strong>后，可能<strong>main(master)<strong>分支已经更新了。因此需要确认</strong>my-feature</strong>在<strong>mian branch update</strong>是否仍然可用，所以要把<strong>main</strong>分支的更新同步到<strong>my-feature</strong>分支中。</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246287.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>下面将<strong>main branch</strong>的更新同步到my-feature里。</p>
+<ol>
+<li>首先更新 <strong>Local branch</strong>，此时可以看到当前<strong>local branch</strong>中的<strong>main</strong> 和 <strong>Remote branch</strong>的<strong>main</strong>是不一样的</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246326.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>切换到 <strong>main branch</strong>中，使用 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout main<br></code></pre></td></tr></table></figure>
+
+<p>这时候硬盘中源代码就是Init状态，就不是刚刚修改的状态</p>
+<p>然后运行下面命令，将远端的代码同步到<strong>Local</strong>的<strong>main</strong>中，这个时候<strong>Local</strong> 和 <strong>Disk</strong> 中的<strong>branch</strong>就和<strong>Remote</strong>一样了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git pull origin main<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246352.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246531.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ol>
+<li><p>回到 <strong>my-feature</strong> 中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout my-feature<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246621.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+</li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246680.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>当前<strong>my-feature</strong>的代码就是有修改后<strong>f-commit</strong>的变化，但是没有<strong>Remote update</strong>的变化，现在需要同<strong>Remote update</strong>的变化，使用下面命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git rebase main<br></code></pre></td></tr></table></figure>
+
+<p><strong>git rebase main</strong> 含义的意思是：先把本地修改放一边，把<strong>main</strong>最新修改更新后然后再讲本地修改的<strong>commit</strong>尝试更新。在这个过程中有可能会有 <strong>rebase conflict</strong>，那么就需要手动选择到底要哪一段代码。</p>
+<p>在命令执行成功后，<strong>my-feature branch</strong>就变成下面的样子</p>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246703.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ol>
+<li><p>在更新完<strong>my-feature branch</strong>之后，需要<strong>git push origin my-feature</strong>，把<strong>Local branch  push</strong>到<strong>github</strong>上。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git push -f  origin my-feature<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="https://ob-typora.oss-cn-shanghai.aliyuncs.com/images/202504022246841.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li>【十分钟学会正确的github工作流，和开源作者们使用同一套流程】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19e4y1q7JJ/?share_source=copy_web&vd_source=83ecb40e0aba9eb1808acef2324b7653">https://www.bilibili.com/video/BV19e4y1q7JJ/?share_source&#x3D;copy_web&amp;vd_source&#x3D;83ecb40e0aba9eb1808acef2324b7653</a></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Github/" class="category-chain-item">Github</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/code/">#code</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>GitHub工作流学习</div>
+      <div>https://suiyideali.github.io/2025/04/02/GitHub工作流学习/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>m0ch4z</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年4月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/23/Go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%83%E4%B9%A0%E9%A2%98-%E4%BA%8C/" title="Go语言的一些练习题(二)">
+                        <span class="hidden-mobile">Go语言的一些练习题(二)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://cyberzone-five.vercel.app","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>m0ch4z</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
